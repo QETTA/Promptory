@@ -7,6 +7,7 @@ import { animation } from './tokens';
  */
 
 // 페이드 인 애니메이션
+// @deprecated - Unused (0 references). Use fadeInUp instead.
 export const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -47,6 +48,7 @@ export const fadeInUp: Variants = {
 };
 
 // 페이드 인 + 스케일 애니메이션
+// @deprecated - Unused (0 references). Use panel or fadeInUp instead.
 export const fadeInScale: Variants = {
   hidden: { opacity: 0, scale: 0.95 },
   visible: {
@@ -132,6 +134,7 @@ export const bottomSheet: Variants = {
 };
 
 // 스태거 컨테이너
+// @deprecated - Unused (0 references). Remove if not needed in 3 months.
 export const staggerContainer: Variants = {
   hidden: { opacity: 0 },
   visible: {
@@ -144,6 +147,7 @@ export const staggerContainer: Variants = {
 };
 
 // 스태거 아이템
+// @deprecated - Unused (0 references). Paired with staggerContainer.
 export const staggerItem: Variants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
@@ -169,6 +173,7 @@ export const spin: Variants = {
 };
 
 // 스트리밍 인디케이터 도트 애니메이션
+// @deprecated - Unused (0 references). StreamingIndicator uses inline animation.
 export const streamingDot = (index: number): Variants => ({
   animate: {
     scale: [1, 1.5, 1],
@@ -183,6 +188,7 @@ export const streamingDot = (index: number): Variants => ({
 });
 
 // 탭 하이라이트 애니메이션
+// @deprecated - Unused (0 references). Remove if tabs not implemented.
 export const tabHighlight: Variants = {
   initial: { scaleX: 0 },
   animate: {
@@ -203,6 +209,7 @@ export const buttonTap = {
 };
 
 // 카드 호버 애니메이션
+// @deprecated - Unused (0 references). Framer motion's whileHover is preferred.
 export const cardHover = {
   scale: 1.02,
   y: -4,

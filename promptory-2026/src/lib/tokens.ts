@@ -159,6 +159,8 @@ export const statusColors = {
 
 // =====================================================
 // Spacing Tokens
+// @deprecated - Currently unused (1 reference only).
+// Tailwind default spacing is sufficient.
 // =====================================================
 export const spacing = {
   xs: "0.25rem",    // 4px
@@ -219,6 +221,9 @@ export const animation = {
 
 // =====================================================
 // Typography Tokens
+// @deprecated - Currently unused (1 reference only). 
+// Kept for future design system expansion.
+// Consider removing if not used within 3 months.
 // =====================================================
 export const typography = {
   fontFamily: {
