@@ -158,23 +158,6 @@ export const statusColors = {
 } as const;
 
 // =====================================================
-// Spacing Tokens
-// @deprecated - Currently unused (1 reference only).
-// Tailwind default spacing is sufficient.
-// =====================================================
-export const spacing = {
-  xs: "0.25rem",    // 4px
-  sm: "0.5rem",     // 8px
-  md: "0.75rem",    // 12px
-  base: "1rem",     // 16px
-  lg: "1.25rem",    // 20px
-  xl: "1.5rem",     // 24px
-  "2xl": "2rem",    // 32px
-  "3xl": "2.5rem",  // 40px
-  "4xl": "3rem",    // 48px
-} as const;
-
-// =====================================================
 // Layout Tokens
 // =====================================================
 export const layout = {
@@ -216,34 +199,6 @@ export const animation = {
     fast: 0.05,
     base: 0.1,
     slow: 0.15,
-  },
-} as const;
-
-// =====================================================
-// Typography Tokens
-// @deprecated - Currently unused (1 reference only). 
-// Kept for future design system expansion.
-// Consider removing if not used within 3 months.
-// =====================================================
-export const typography = {
-  fontFamily: {
-    display: "var(--font-mona-sans)",
-    body: "var(--font-inter)",
-    mono: "var(--font-jetbrains-mono)",
-  },
-  fontSize: {
-    xs: "0.75rem",
-    sm: "0.875rem",
-    base: "1rem",
-    lg: "1.125rem",
-    xl: "1.25rem",
-    "2xl": "1.5rem",
-  },
-  fontWeight: {
-    normal: "400",
-    medium: "500",
-    semibold: "600",
-    bold: "700",
   },
 } as const;
 
