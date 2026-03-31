@@ -1,0 +1,89 @@
+.root {
+  display: grid;
+  gap: 1rem;
+}
+
+.tabList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tabButton {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  padding: 0.625rem 0.95rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--slate-700);
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease,
+    border-color 150ms ease,
+    transform 150ms ease;
+}
+
+.tabButton:hover {
+  transform: translateY(-1px);
+  border-color: var(--line-strong);
+}
+
+.tabButtonActive {
+  border-color: var(--brand-600);
+  background: var(--brand-600);
+  color: white;
+}
+
+.panel {
+  border: 1px solid var(--line-strong);
+  border-radius: 1.5rem;
+  background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+  box-shadow: 0 16px 36px -28px rgba(15, 23, 42, 0.16);
+  padding: 1.25rem;
+}
+
+.label {
+  color: var(--brand-700);
+}
+
+.title {
+  margin: 0.625rem 0 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.body {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--slate-700);
+}
+
+.bulletList {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.bulletItem {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: white;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.cta {
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .panel {
+    padding: 1.5rem;
+  }
+}

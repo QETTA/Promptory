@@ -1,0 +1,167 @@
+.card {
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.eyebrow {
+  color: var(--brand-700);
+}
+
+.title {
+  margin-top: 0.5rem;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.description {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.messageList {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.messageListLimit2 > :nth-child(n + 3) {
+  display: none;
+}
+
+.messageListLimit3 > :nth-child(n + 4) {
+  display: none;
+}
+
+.messageListLimit4 > :nth-child(n + 5) {
+  display: none;
+}
+
+.messageRow {
+  display: flex;
+}
+
+.messageRowUser {
+  justify-content: flex-end;
+}
+
+.messageRowAssistant {
+  justify-content: flex-start;
+}
+
+.bubble {
+  max-width: 92%;
+  border-radius: 1.25rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  box-shadow: 0 14px 30px -26px rgba(15, 23, 42, 0.18);
+}
+
+.bubbleUser {
+  border: 1px solid rgba(34, 80, 221, 0.12);
+  background: linear-gradient(180deg, #f5f8ff 0%, #ebf2ff 100%);
+  color: var(--slate-950);
+}
+
+.bubbleAssistant {
+  border: 1px solid var(--line);
+  background: white;
+  color: var(--slate-700);
+}
+
+.speaker {
+  margin-bottom: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--slate-500);
+}
+
+.status {
+  margin-top: 1rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface-2);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--slate-700);
+}
+
+.statusMobileHidden {
+  display: none;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 639px) {
+  .card {
+    padding: 0.9rem;
+  }
+
+  .title {
+    font-size: 1.02rem;
+    line-height: 1.28;
+  }
+
+  .description {
+    font-size: 0.86rem;
+    line-height: 1.55;
+  }
+
+  .messageList {
+    gap: 0.625rem;
+    margin-top: 0.85rem;
+  }
+
+  .bubble {
+    max-width: 90%;
+    border-radius: 1.1rem;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+
+  .speaker {
+    margin-bottom: 0.2rem;
+    font-size: 0.625rem;
+  }
+
+  .actions {
+    gap: 0.45rem;
+    margin-top: 0.85rem;
+  }
+
+  .actions > * {
+    min-height: 2.25rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .card {
+    padding: 1.25rem;
+  }
+
+  .title {
+    font-size: 1.18rem;
+  }
+
+  .messageListLimit2 > :nth-child(n + 3),
+  .messageListLimit3 > :nth-child(n + 4),
+  .messageListLimit4 > :nth-child(n + 5) {
+    display: flex;
+  }
+
+  .statusMobileHidden {
+    display: block;
+  }
+}

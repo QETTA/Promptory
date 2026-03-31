@@ -1,0 +1,188 @@
+import { Hero } from "@/components/marketplace/hero";
+import { Section } from "@/components/marketplace/section";
+import { EmptyState } from "@/components/ui/empty-state";
+import { SetupCallout } from "@/components/ui/setup-callout";
+import { CTAButton } from "@/components/ui/cta-button";
+import { DashboardCard } from "@/components/ui/dashboard-card";
+import { formatKrw } from "@/lib/currency";
+import { getPublicEnvStatus } from "@/lib/env/public";
+import { getPaymentsMode, getServerEnvStatus } from "@/lib/env/server";
+import { formatDate } from "@/lib/format";
+import { getPromptoryCheckoutCapability } from "@/lib/payments-capability";
+import { getCategoryLabel, getOrderStatusLabel } from "@/lib/promptory-display";
+import { requireUser } from "@/lib/server/auth";
+import { getBuyerOrders } from "@/lib/server/orders";
+
+export default async function OrdersPage({
+  searchParams,
+}: {
+  searchParams?: Promise<{ created?: string | string[]; orderId?: string | string[] }>;
+}) {
+  const publicStatus = getPublicEnvStatus();
+  const serverStatus = getServerEnvStatus();
+  const paymentMode = getPaymentsMode();
+  const params = (await searchParams) ?? {};
+  const created = Array.isArray(params.created) ? params.created[0] : params.created;
+  const orderId = Array.isArray(params.orderId) ? params.orderId[0] : params.orderId;
+  const currentQuery = new URLSearchParams(
+    Object.entries({
+      created,
+      orderId,
+    }).filter((entry): entry is [string, string] => typeof entry[1] === "string"),
+  );
+  const currentPath = currentQuery.size > 0 ? `/orders?${currentQuery.toString()}` : "/orders";
+
+  if (!publicStatus.hasPublicEnv) {
+    return (
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+        <SetupCallout
+          title="주문 내역을 보려면 공개 Supabase 연결이 필요합니다."
+          body="주문 내역 조회에는 공개 환경 변수가 필요합니다. 먼저 /setup에서 연결 상태를 확인해 주세요."
+        />
+      </div>
+    );
+  }
+
+  const user = await requireUser(currentPath);
+  const orders = await getBuyerOrders(user.id);
+  const pendingOrders = orders.filter((order) => order.status === "pending_payment");
+  const historyOrders = orders.filter((order) => order.status !== "pending_payment");
+  const checkoutCapability = getPromptoryCheckoutCapability({ publicStatus, serverStatus });
+  const canOpenCheckout = checkoutCapability.canCheckout;
+
+  return (
+    <div className="pb-16">
+      <Hero
+        eyebrow="결제 진행"
+        theme="orders"
+        title="주문 상태와 다음 액션을 먼저 봅니다"
+        body={
+          paymentMode === "dev_stub"
+            ? "개발용 결제 완료와 라이브러리 이동 흐름을 같은 주문면에서 확인할 수 있습니다."
+            : paymentMode === "toss"
+              ? "결제가 남은 주문만 빠르게 확인하도록 정리했습니다."
+              : "주문 접수와 상태 확인만 남은 단계입니다."
+        }
+        aside={
+          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+            <DashboardCard caption="전체 주문" value={orders.length} />
+            <DashboardCard caption="결제 대기" value={pendingOrders.length} />
+            <DashboardCard
+              caption="현재 상태"
+              value={canOpenCheckout ? (paymentMode === "toss" ? "결제 가능" : "흐름 검증 가능") : "설정 확인 필요"}
+            />
+          </div>
+        }
+      />
+
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        {created === "1" ? (
+          <div className="mt-6 rounded-[1rem] border border-[var(--brand-300)] bg-[var(--brand-50)] p-4 text-sm leading-6 text-[var(--brand-700)]">
+            주문이 생성되었습니다. {orderId ? `주문 번호 ${orderId} · ` : ""}
+            {paymentMode === "toss"
+              ? "이제 checkout에서 결제를 진행하면 됩니다."
+              : paymentMode === "dev_stub"
+                ? "이제 checkout에서 개발용 결제 완료와 구매 후 흐름을 확인할 수 있습니다."
+                : "현재는 주문 상태만 확인할 수 있습니다."}
+          </div>
+        ) : null}
+
+        <Section
+          eyebrow="처리 우선"
+          title="지금 멈춰 있는 주문만 먼저 처리합니다"
+          description="결제가 남은 주문을 위에 두고, 지난 주문은 아래로 내려서 스캔 속도를 높였습니다."
+          actions={
+            <>
+              <CTAButton href="/products" variant="outline" size="sm">
+                실행 팩 찾기
+              </CTAButton>
+              <CTAButton href="/library" variant="outline" size="sm">
+                라이브러리 보기
+              </CTAButton>
+            </>
+          }
+        >
+          {orders.length === 0 ? (
+            <EmptyState
+              title="아직 주문 내역이 없습니다."
+              body="실행 팩 상세에서 연결하기를 누르면 주문이 생성됩니다."
+              ctaHref="/products"
+              ctaLabel="실행 팩 둘러보기"
+            />
+          ) : pendingOrders.length === 0 ? (
+            <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] p-5 text-sm leading-7 text-[var(--slate-600)]">
+              지금 바로 처리할 결제 대기 주문은 없습니다.
+            </div>
+          ) : (
+            <div className="grid gap-4">
+              {pendingOrders.map((order) => (
+                <div key={order.id} className="rounded-[1rem] border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
+                  <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_220px]">
+                    <div>
+                      <div className="flex flex-wrap gap-2 text-xs font-medium text-[var(--slate-500)]">
+                        <span>{paymentMode === "toss" ? "결제 대기" : "구매 흐름 확인"}</span>
+                        <span>·</span>
+                        <span>{getCategoryLabel(order.product?.category ?? "실행 팩")}</span>
+                      </div>
+                      <h2 className="mt-2 text-[1.15rem] font-semibold text-[var(--slate-950)]">
+                        {order.product?.title ?? "실행 팩 정보를 찾을 수 없습니다."}
+                      </h2>
+                      <p className="mt-2 text-sm leading-6 text-[var(--slate-600)]">
+                        {formatKrw(order.amount_krw)} · 주문일 {formatDate(order.created_at)}
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-3 lg:items-end">
+                      {canOpenCheckout ? (
+                        <CTAButton href={`/checkout/${order.id}`} size="default">
+                          {paymentMode === "dev_stub" ? "checkout 열기" : "결제 진행하기"}
+                        </CTAButton>
+                      ) : null}
+                      {order.product?.slug ? (
+                        <CTAButton href={`/products/${order.product.slug}`} variant="outline" size="sm">
+                          실행 팩 보기
+                        </CTAButton>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </Section>
+
+        {historyOrders.length > 0 ? (
+          <Section eyebrow="주문 기록" title="지난 주문은 아래에서 다시 봅니다" className="pt-0">
+            <div className="grid gap-4">
+              {historyOrders.map((order) => (
+                <div key={order.id} className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] p-5">
+                  <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_200px]">
+                    <div>
+                      <div className="flex flex-wrap gap-2 text-xs font-medium text-[var(--slate-500)]">
+                        <span>{getOrderStatusLabel(order.status)}</span>
+                        <span>·</span>
+                        <span>{getCategoryLabel(order.product?.category ?? "실행 팩")}</span>
+                      </div>
+                      <h2 className="mt-2 text-[1.1rem] font-semibold text-[var(--slate-950)]">
+                        {order.product?.title ?? "실행 팩 정보를 찾을 수 없습니다."}
+                      </h2>
+                      <p className="mt-2 text-sm leading-6 text-[var(--slate-600)]">
+                        {formatKrw(order.amount_krw)} · 주문일 {formatDate(order.created_at)}
+                      </p>
+                    </div>
+                    <div className="flex flex-col gap-3 lg:items-end">
+                      {order.product?.slug ? (
+                        <CTAButton href={`/products/${order.product.slug}`} variant="outline" size="sm">
+                          실행 팩 보기
+                        </CTAButton>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Section>
+        ) : null}
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,56 @@
+.grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.card {
+  padding: 0.875rem;
+}
+
+.accent {
+  border-color: var(--brand-200);
+  background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
+}
+
+.default {
+  border-color: var(--line-strong);
+  background: #ffffff;
+}
+
+.muted {
+  border-color: var(--line);
+  background: var(--surface-2);
+}
+
+.label {
+  color: var(--slate-500);
+}
+
+.value {
+  margin: 0.5rem 0 0;
+  color: var(--slate-950);
+  font-family: var(--font-display, inherit);
+  font-size: clamp(1.2rem, 2.3vw, 1.85rem);
+  font-weight: 600;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+
+.body {
+  margin: 0.375rem 0 0;
+  color: var(--slate-600);
+  font-size: 12.5px;
+  line-height: 1.7;
+}
+
+@media (min-width: 640px) {
+  .card {
+    padding: 1.125rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

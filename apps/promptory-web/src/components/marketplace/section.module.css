@@ -1,0 +1,88 @@
+.section {
+  position: relative;
+  padding: 1.25rem 0;
+}
+
+.compact {
+  padding: 1rem 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.compactHeader {
+  margin-bottom: 0.875rem;
+}
+
+.copy {
+  max-width: 48rem;
+}
+
+.eyebrow {
+  color: var(--slate-500);
+}
+
+.title {
+  margin: 0.5rem 0 0;
+  color: var(--slate-950);
+}
+
+.compactTitle {
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+
+.description {
+  max-width: 40rem;
+  color: var(--slate-600);
+}
+
+.compactDescription {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.68;
+}
+
+.defaultDescription {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  line-height: 1.68;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .section {
+    padding: 1.75rem 0;
+  }
+
+  .compact {
+    padding: 1.5rem 0;
+  }
+
+  .compactHeader {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .actions {
+    padding-top: 0.25rem;
+  }
+}

@@ -1,0 +1,116 @@
+.card {
+  padding: 1.25rem;
+}
+
+.topRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.copy {
+  max-width: 48rem;
+}
+
+.eyebrow {
+  color: var(--brand-700);
+}
+
+.title {
+  margin: 0.5rem 0 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--slate-950);
+}
+
+.body {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.openLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  border: 1px solid var(--brand-600);
+  border-radius: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--brand-700);
+}
+
+.memo {
+  margin-top: 1rem;
+  white-space: pre-wrap;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface-2);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-950);
+}
+
+.stepGrid,
+.reviewGrid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.stepCard,
+.reviewCard {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface-1);
+  padding: 0.75rem 1rem;
+}
+
+.cardLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--slate-500);
+}
+
+.cardEmphasis {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.cardBody {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+@media (min-width: 640px) {
+  .card {
+    padding: 1.5rem;
+  }
+
+  .stepGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .reviewGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  .stepGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,240 @@
+.root {
+  overflow: hidden;
+  padding: 1rem;
+}
+
+@media (min-width: 640px) {
+  .root {
+    padding: 1.25rem;
+  }
+}
+
+.headerCard {
+  border: 1px solid rgba(34, 80, 221, 0.12);
+  border-radius: 1.5rem;
+  background-image: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(242, 247, 255, 0.98) 100%
+  );
+  box-shadow: 0 20px 40px -30px rgba(34, 80, 221, 0.26);
+  padding: 1rem;
+}
+
+.headerTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.titleKicker {
+  margin: 0;
+  color: var(--brand-700);
+}
+
+.summaryBody {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: var(--slate-600);
+}
+
+.headerCardWorkspace {
+  padding: 0.875rem;
+}
+
+.headerCardCompact {
+  padding: 0.75rem;
+}
+
+.headerCardDefault {
+  padding: 1rem;
+}
+
+.title {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--slate-950);
+}
+
+.titleCompact,
+.titleDefault {
+  font-size: 1.25rem;
+}
+
+.titleCompact {
+  font-size: 1.05rem;
+}
+
+.countChip {
+  display: inline-block;
+  border-radius: 9999px;
+  border: 1px solid rgba(34, 80, 221, 0.12);
+  background-color: white;
+  padding: 0.25rem 0.75rem;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--brand-700);
+}
+
+.supportChip {
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 1rem;
+  background-color: rgba(255, 255, 255, 0.86);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--slate-700);
+  box-shadow: 0 10px 20px -22px rgba(15, 23, 42, 0.22);
+}
+
+.supportGrid {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .supportGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.urlInputCard {
+  border: 1px solid var(--line-strong);
+  border-radius: 1.4rem;
+  background-color: white;
+  padding: 0.5rem;
+  box-shadow: 0 18px 36px -28px rgba(15, 23, 42, 0.18);
+}
+
+.urlInputRow {
+  display: grid;
+  gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+  .urlInputRow {
+    grid-template-columns: minmax(0, 1fr) 132px;
+  }
+}
+
+.urlInput {
+  height: 3rem;
+  border: 1px solid transparent;
+  box-shadow: none;
+}
+
+.flowHintRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  border-radius: 1.1rem;
+  border: 1px solid var(--line);
+  background-color: rgba(248, 250, 252, 0.9);
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  color: var(--slate-600);
+}
+
+.flowHintLabel {
+  font-weight: 600;
+  color: var(--slate-700);
+}
+
+.intakeForm {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.submitButton {
+  height: 3rem;
+  width: 100%;
+}
+
+.afterInputHint {
+  margin-top: 0.75rem;
+  border-radius: 1rem;
+  border: 1px solid var(--line);
+  background-color: var(--surface-2);
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: var(--slate-700);
+}
+
+.detailedSteps {
+  margin-top: 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.stepItem {
+  border-radius: 1.05rem;
+  border: 1px solid var(--line);
+  background-color: var(--surface-2);
+  padding: 0.625rem 0.75rem;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: var(--slate-700);
+}
+
+.sectionLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--slate-500);
+}
+
+.exampleChip {
+  display: inline-flex;
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  background-color: white;
+  padding: 0.375rem 0.75rem;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--slate-700);
+  box-shadow: 0 10px 22px -20px rgba(15, 23, 42, 0.16);
+  transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.exampleChip:hover {
+  transform: translateY(-1px);
+  border-color: var(--line-strong);
+  background-color: var(--surface-2);
+  color: var(--slate-950);
+}
+
+.exampleSection {
+  margin-top: 1rem;
+}
+
+.exampleLinkSection {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.resultCard {
+  margin-top: 1rem;
+  border-radius: 1.25rem;
+  padding: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--slate-700);
+}
+
+.resultTitle {
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--slate-700);
+}

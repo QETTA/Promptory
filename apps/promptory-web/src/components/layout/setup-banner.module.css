@@ -1,0 +1,54 @@
+.root {
+  border-bottom: 1px solid var(--line);
+  background: var(--brand-50);
+}
+
+.inner {
+  width: min(100%, 72rem);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.375rem 1rem;
+  font-size: 0.78rem;
+  color: var(--brand-700);
+}
+
+.copy {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.copyDesktop {
+  display: none;
+}
+
+.link {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--brand-700);
+  text-underline-offset: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .inner {
+    padding-inline: 1.5rem;
+  }
+
+  .copyMobile {
+    display: none;
+  }
+
+  .copyDesktop {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-inline: 2rem;
+  }
+}

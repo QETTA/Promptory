@@ -1,0 +1,96 @@
+.shell {
+  width: 100%;
+  max-width: 28rem;
+  margin: 0 auto;
+  border-radius: 1.75rem;
+  padding: 1.5rem;
+}
+
+.eyebrow {
+  color: var(--slate-500);
+}
+
+.title {
+  margin: 0.5rem 0 0;
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--slate-950);
+}
+
+.body {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--slate-600);
+}
+
+.callout {
+  margin-top: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 1.2rem;
+  background: var(--surface-2);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.form {
+  margin-top: 1.5rem;
+  display: grid;
+  gap: 1.25rem;
+}
+
+.fieldError,
+.serverError {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #e11d48;
+}
+
+.serverError {
+  margin-top: 0;
+  font-size: 0.9rem;
+}
+
+.submit {
+  width: 100%;
+}
+
+.switch {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--line);
+  padding-top: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--slate-500);
+}
+
+.switchLink,
+.backLink {
+  font-weight: 700;
+  color: var(--brand-700);
+}
+
+.verificationActions {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.verificationEmail {
+  font-weight: 700;
+  color: var(--slate-900);
+}
+
+.centerLink {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 640px) {
+  .shell {
+    padding: 1.75rem;
+  }
+}

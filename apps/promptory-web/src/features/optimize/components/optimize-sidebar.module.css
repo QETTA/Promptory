@@ -1,0 +1,150 @@
+.mobileWrap {
+  position: fixed;
+  left: 0.625rem;
+  right: 0.625rem;
+  bottom: 0.625rem;
+  z-index: 40;
+}
+
+.mobileCard {
+  border-color: var(--line-strong);
+  background: rgba(255, 255, 255, 0.96);
+  padding: 0.75rem;
+  box-shadow: 0 24px 45px -30px rgba(15, 23, 42, 0.32);
+  backdrop-filter: blur(20px);
+}
+
+.mobileTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.625rem;
+}
+
+.mobileEyebrow {
+  color: var(--brand-700);
+}
+
+.mobileTitle {
+  margin-top: 0.125rem;
+  font-size: 0.84rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--slate-950);
+}
+
+.mobileChip {
+  border: 1px solid var(--line);
+  border-radius: 0.9rem;
+  background: var(--surface-2);
+  max-width: 9rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.625rem;
+  font-weight: 700;
+  line-height: 1.3;
+  text-align: center;
+  color: var(--slate-700);
+}
+
+.mobileActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.375rem;
+  margin-top: 0.625rem;
+}
+
+.desktopWrap {
+  display: none;
+}
+
+.panelCard,
+.saveCard,
+.truthCard {
+  padding: 1.25rem;
+}
+
+.panelEyebrow {
+  color: var(--brand-700);
+}
+
+.panelTitle,
+.saveTitle {
+  margin: 0.5rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.itemList,
+.truthList,
+.savedRuns {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.savedRuns {
+  gap: 1rem;
+  margin-top: 0;
+}
+
+.itemCard,
+.truthItem {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: white;
+  padding: 0.75rem 0.95rem;
+}
+
+.itemLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--slate-500);
+}
+
+.itemBody {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.panelActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.railTextCard {
+  padding: 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--slate-700);
+}
+
+.saveBody {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--slate-700);
+}
+
+.truthItem {
+  font-size: 0.9rem;
+  color: var(--slate-700);
+}
+
+@media (min-width: 1280px) {
+  .mobileWrap {
+    display: none;
+  }
+
+  .desktopWrap {
+    position: sticky;
+    top: 6rem;
+    align-self: start;
+    display: grid;
+    gap: 1rem;
+  }
+}

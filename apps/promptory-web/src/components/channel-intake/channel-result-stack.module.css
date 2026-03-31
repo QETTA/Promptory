@@ -1,0 +1,209 @@
+.root {
+  display: grid;
+  gap: 1rem;
+}
+
+.summaryCard {
+  overflow: hidden;
+  padding: 1.25rem;
+}
+
+.summaryTop {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summaryCopy {
+  max-width: 48rem;
+}
+
+.eyebrow {
+  color: var(--brand-700);
+}
+
+.headline {
+  margin: 0.5rem 0 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--slate-950);
+}
+
+.body {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.columns {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.columnCard {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.columnWhite {
+  background: white;
+}
+
+.columnMuted {
+  background: var(--surface-2);
+}
+
+.columnLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--slate-500);
+}
+
+.stackList {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.stackItem {
+  border: 1px solid var(--line);
+  border-radius: 0.875rem;
+  background: white;
+  padding: 0.75rem;
+}
+
+.stackTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.stackTitle {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.stackBody {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.stackMetaLabel {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--slate-500);
+}
+
+.railCard {
+  padding: 1.25rem;
+}
+
+.railGrid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 0.75rem;
+}
+
+.railTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.railBody {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.railBadges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.railActions {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.details {
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: var(--surface-1);
+  padding: 1rem 1.25rem;
+}
+
+.detailsSummary {
+  list-style: none;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.detailsSummary::-webkit-details-marker {
+  display: none;
+}
+
+.productsGrid {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.emptyRail {
+  padding: 1.25rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+@media (min-width: 640px) {
+  .summaryCard,
+  .railCard,
+  .emptyRail {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .summaryTop {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .railGrid {
+    grid-template-columns: minmax(0, 1fr) 16.25rem;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1280px) {
+  .columns {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .productsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

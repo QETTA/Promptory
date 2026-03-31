@@ -1,0 +1,20 @@
+.wrap {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.button {
+  width: 100%;
+}
+
+.helper {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--slate-500);
+}
+
+.error {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: #e11d48;
+}

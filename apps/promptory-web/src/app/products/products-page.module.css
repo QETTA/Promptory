@@ -1,0 +1,178 @@
+.page {
+  padding-bottom: 4rem;
+}
+
+.heroActionDesktop {
+  display: none;
+}
+
+.heroAsideCard {
+  padding: 0.875rem;
+}
+
+.searchForm {
+  display: grid;
+}
+
+.searchLabel {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.searchInput {
+  width: 100%;
+  height: 2.75rem;
+  margin-top: 0.625rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  background: white;
+  padding: 0 1rem;
+  font-size: 0.9rem;
+  color: var(--slate-950);
+}
+
+.searchInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.22);
+}
+
+.searchButton {
+  width: 100%;
+  height: 2.5rem;
+  margin-top: 0.625rem;
+  border: 0;
+  border-radius: 999px;
+  background: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--slate-950);
+  cursor: pointer;
+}
+
+.content {
+  width: min(100%, 72rem);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.summarySection {
+  padding: 1rem 0 1.5rem;
+}
+
+.summaryCard {
+  padding: 0.875rem;
+}
+
+.summaryBadges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.summaryBadge {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: white;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  color: var(--slate-600);
+}
+
+.summaryBadgePrimary {
+  border-color: var(--brand-200);
+  color: var(--brand-700);
+}
+
+.summaryTitle {
+  margin: 0.625rem 0 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.summaryBody {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.summaryActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.hiddenOnMobile {
+  display: none;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.setupWrap {
+  max-width: 40rem;
+  margin-bottom: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .heroActionDesktop {
+    display: inline-flex;
+  }
+
+  .heroAsideCard {
+    padding: 1rem;
+  }
+
+  .content {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .summarySection {
+    padding: 1.5rem 0;
+  }
+
+  .summaryCard {
+    padding: 1.25rem;
+  }
+
+  .summaryTitle {
+    font-size: 1.15rem;
+  }
+
+  .hiddenOnMobile {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .content {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

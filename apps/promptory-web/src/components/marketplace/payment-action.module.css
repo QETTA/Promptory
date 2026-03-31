@@ -1,0 +1,22 @@
+.root {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.button {
+  width: 100%;
+}
+
+.hint {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.65;
+  color: var(--slate-500);
+}
+
+.error {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: #e11d48;
+}

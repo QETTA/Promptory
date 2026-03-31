@@ -1,0 +1,59 @@
+.footer {
+  margin-top: 4rem;
+  border-top: 1px solid var(--line);
+  background: var(--surface-2);
+}
+
+.inner {
+  width: min(100%, 72rem);
+  margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
+  padding: 2.5rem 1rem;
+}
+
+.copyBlock {
+  min-width: 0;
+}
+
+.title {
+  margin: 1rem 0 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.body {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--slate-600);
+}
+
+.statusCard {
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: var(--surface-1);
+  padding: 1.25rem;
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: var(--slate-600);
+}
+
+@media (min-width: 640px) {
+  .inner {
+    padding-inline: 1.5rem;
+  }
+
+  .statusCard {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr) 20rem;
+    align-items: start;
+    padding-inline: 2rem;
+  }
+}

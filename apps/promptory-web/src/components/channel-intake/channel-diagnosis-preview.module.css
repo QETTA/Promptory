@@ -1,0 +1,137 @@
+.root {
+  display: grid;
+  gap: 1rem;
+}
+
+.heroCard,
+.listCard,
+.surfaceCard {
+  padding: 1.25rem;
+}
+
+.topRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.copy {
+  max-width: 48rem;
+}
+
+.eyebrow {
+  color: var(--brand-700);
+}
+
+.state {
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--slate-500);
+}
+
+.headline {
+  margin-top: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--slate-950);
+}
+
+.body {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.cardGrid,
+.listGrid,
+.surfaceGrid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.diagnosisCard,
+.surfaceItem {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface-1);
+  padding: 1rem;
+}
+
+.surfaceItem {
+  background: white;
+}
+
+.cardLabel,
+.surfaceLabel,
+.listEyebrow {
+  color: var(--slate-500);
+}
+
+.cardEmphasis {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.cardBody,
+.surfaceBody {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.pointList {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.pointItem {
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.dotBrand,
+.dotSlate {
+  width: 0.375rem;
+  height: 0.375rem;
+  margin-top: 0.65rem;
+  flex-shrink: 0;
+  border-radius: 999px;
+}
+
+.dotBrand {
+  background: var(--brand-500);
+}
+
+.dotSlate {
+  background: var(--slate-400);
+}
+
+@media (min-width: 640px) {
+  .heroCard,
+  .listCard,
+  .surfaceCard {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .cardGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .listGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,122 @@
+.root {
+  padding: 1.25rem;
+}
+
+.topRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.copy {
+  max-width: 48rem;
+}
+
+.eyebrow {
+  color: var(--slate-500);
+}
+
+.body {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.mainGrid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.headlineCard,
+.signalCard,
+.notesCard,
+.followupCard {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.headlineCard,
+.notesCard {
+  background: var(--surface-1);
+}
+
+.signalCard,
+.followupCard {
+  background: var(--surface-2);
+}
+
+.cardLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--slate-500);
+}
+
+.brandLabel {
+  color: var(--brand-700);
+}
+
+.headline {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.description {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.signalList,
+.noteList,
+.followupList {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.signalItem,
+.followupItem {
+  border: 1px solid var(--line);
+  border-radius: 0.85rem;
+  background: white;
+  padding: 0.625rem 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.noteItem {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.bottomGrid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+  .root {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .mainGrid {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+  }
+
+  .bottomGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,42 @@
+.details {
+  border: 1px solid var(--line);
+  border-radius: 1.25rem;
+  background: var(--surface-1);
+  padding: 1rem 1.25rem;
+}
+
+.summary {
+  list-style: none;
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summaryInner {
+  cursor: pointer;
+}
+
+.eyebrow {
+  color: var(--slate-500);
+}
+
+.title {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.body {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-600);
+}
+
+.content {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1rem;
+}

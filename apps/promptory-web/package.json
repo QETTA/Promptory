@@ -1,0 +1,40 @@
+{
+  "name": "@govdoc/promptory-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "dev:webpack": "next dev --webpack",
+    "prebuild": "node -e \"try { require('node:fs').rmSync('.next', { recursive: true, force: true }); } catch {}\"",
+    "build": "next build",
+    "check:supabase": "node scripts/check-supabase.mjs",
+    "check:all": "npm run typecheck && npm run test:unit && npm run test:smoke && npm run build",
+    "sync:storage": "node scripts/sync-storage-buckets.mjs",
+    "test:smoke": "node --import ./scripts/register-test-css-loader.mjs --import tsx --test src/app/setup-mode.test.ts src/app/api/events/route.test.ts src/lib/optimization-engine/index.test.ts",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "node --import ./scripts/register-test-css-loader.mjs --import tsx --test src/**/*.test.ts src/**/*.test.tsx"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "@supabase/ssr": "^0.9.0",
+    "@supabase/supabase-js": "^2.99.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "next": "16.1.6",
+    "react": "19.2.0",
+    "react-dom": "19.2.0",
+    "react-hook-form": "^7.71.2",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.2",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.2.2",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "postcss": "^8.5.3",
+    "tsx": "^4.20.6",
+    "typescript": "^5.8.2"
+  }
+}

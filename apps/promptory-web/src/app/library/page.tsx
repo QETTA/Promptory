@@ -1,0 +1,168 @@
+import { DownloadButton } from "@/components/account/download-button";
+import { OptimizationRunCard } from "@/components/channel-intake/optimization-run-card";
+import { Hero } from "@/components/marketplace/hero";
+import { Section } from "@/components/marketplace/section";
+import { EmptyState } from "@/components/ui/empty-state";
+import { SetupCallout } from "@/components/ui/setup-callout";
+import { CTAButton } from "@/components/ui/cta-button";
+import { DashboardCard } from "@/components/ui/dashboard-card";
+import { getPublicEnvStatus } from "@/lib/env/public";
+import { getServerEnvStatus } from "@/lib/env/server";
+import { formatDate } from "@/lib/format";
+import { requireUser } from "@/lib/server/auth";
+import { getSavedOptimizationRuns } from "@/lib/server/optimization-runs";
+import { getPaidLibrary } from "@/lib/server/orders";
+
+export default async function LibraryPage() {
+  const publicStatus = getPublicEnvStatus();
+  const serverStatus = getServerEnvStatus();
+
+  if (!publicStatus.hasPublicEnv) {
+    return (
+      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+        <SetupCallout
+          title="라이브러리를 보려면 Supabase 연결이 필요합니다"
+          body="로그인과 구매 내역 조회에는 공개 Supabase 환경 변수가 필요합니다. 먼저 /setup에서 환경 상태를 확인해 주세요."
+        />
+      </div>
+    );
+  }
+
+  const user = await requireUser("/library");
+  const savedRuns = await getSavedOptimizationRuns(user.id, 6);
+  const library = serverStatus.hasSupabaseServiceRole ? await getPaidLibrary(user.id) : [];
+  const readyDownloads = library.filter((order) => Boolean(order.product?.file_path));
+  const waitingDownloads = library.filter((order) => !order.product?.file_path);
+
+  return (
+    <div className="pb-16">
+      <Hero
+        eyebrow="Continuation Hub"
+        theme="library"
+        title="저장한 진단과 구매한 팩을 다시 여는 공간"
+        body="보관함은 저장한 URL 진단을 다시 열고, 구매한 실행 팩을 바로 이어서 확인하는 재진입면입니다."
+        aside={
+          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+            <DashboardCard caption="저장한 진단" value={savedRuns.length} />
+            <DashboardCard caption="보관된 실행 팩" value={library.length} />
+            <DashboardCard caption="즉시 실행 가능" value={readyDownloads.length} />
+            <DashboardCard caption="파일 준비 중" value={waitingDownloads.length} />
+          </div>
+        }
+      />
+
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <Section
+          eyebrow="저장한 진단"
+          title="저장한 진단부터 다시 엽니다"
+          description="같은 계정에서 진단 상태를 다시 열고, 필요한 경우 바로 실행 공간으로 이어갑니다."
+          actions={
+            <CTAButton href="/optimize" variant="outline" size="sm">
+              새 진단 시작
+            </CTAButton>
+          }
+        >
+          {savedRuns.length > 0 ? (
+            <div className="grid gap-4 md:grid-cols-2">
+              {savedRuns.map((run) => (
+                <OptimizationRunCard key={run.id} run={run} />
+              ))}
+            </div>
+          ) : (
+            <EmptyState
+              title="아직 저장한 진단이 없습니다."
+              body="URL 진단을 한 번 저장해 두면, 다음에는 같은 상태로 바로 다시 열 수 있습니다."
+              ctaHref="/optimize"
+              ctaLabel="첫 진단 시작"
+            />
+          )}
+        </Section>
+
+        <Section
+          eyebrow="구매한 실행 팩"
+          title="구매한 팩과 다운로드 상태를 확인합니다"
+          description="즉시 열 수 있는 팩은 바로 받고, 파일이 아직 없는 팩은 준비 상태만 확인합니다."
+          actions={
+            <>
+              <CTAButton href="/orders" variant="outline" size="sm">
+                주문 내역 보기
+              </CTAButton>
+              <CTAButton href="/optimize" variant="outline" size="sm">
+                진단으로 돌아가기
+              </CTAButton>
+            </>
+          }
+        >
+          {!serverStatus.hasSupabaseServiceRole ? (
+            <div className="mb-4 max-w-3xl">
+              <SetupCallout
+                title="다운로드 권한을 확인하려면 서버 설정이 더 필요합니다"
+                body="저장한 진단은 지금 그대로 다시 열 수 있지만, signed URL 다운로드를 쓰려면 SUPABASE_SERVICE_ROLE_KEY가 필요합니다. /setup에서 서버 환경 상태를 확인해 주세요."
+              />
+            </div>
+          ) : null}
+          {serverStatus.hasSupabaseServiceRole && library.length === 0 ? (
+            <EmptyState
+              title="아직 보관된 실행 팩이 없습니다."
+              body="먼저 URL 진단을 시작해 필요한 실행 팩을 정한 뒤, 구매가 끝나면 여기에서 다시 열 수 있습니다."
+              ctaHref="/optimize"
+              ctaLabel="먼저 진단 시작"
+            />
+          ) : null}
+        </Section>
+
+        {readyDownloads.length > 0 ? (
+          <Section eyebrow="즉시 실행 가능" title="지금 바로 열 수 있는 팩" className="pt-0">
+            <div className="grid gap-4">
+              {readyDownloads.map((order) => (
+                <div key={order.id} className="rounded-[1.25rem] border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
+                  <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+                    <div className="space-y-2">
+                      <p className="text-[1.1rem] font-semibold text-[var(--slate-950)]">{order.product?.title}</p>
+                      <p className="text-sm leading-6 text-[var(--slate-600)]">
+                        주문일 {formatDate(order.created_at)} · 업데이트 {order.product ? formatDate(order.product.updated_at) : "-"}
+                      </p>
+                      <p className="text-sm leading-6 text-[var(--slate-700)]">
+                        가이드를 다시 보고, 실행 파일을 받아 바로 시작할 수 있습니다.
+                      </p>
+                    </div>
+                    <div className="flex w-full flex-col gap-3 lg:w-[220px]">
+                      <DownloadButton orderId={order.id} />
+                      {order.product?.slug ? (
+                        <CTAButton href={`/products/${order.product.slug}`} variant="outline">
+                          실행 팩 보기
+                        </CTAButton>
+                      ) : null}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Section>
+        ) : null}
+
+        {waitingDownloads.length > 0 ? (
+          <Section eyebrow="파일 준비 중" title="준비를 기다리는 팩" className="pt-0">
+            <div className="grid gap-4">
+              {waitingDownloads.map((order) => (
+                <div key={order.id} className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--surface-2)] p-5">
+                  <p className="text-[1.1rem] font-semibold text-[var(--slate-950)]">{order.product?.title}</p>
+                  <p className="mt-2 text-sm leading-6 text-[var(--slate-600)]">
+                    주문일 {formatDate(order.created_at)} · 아직 파일이 올라오지 않았습니다.
+                  </p>
+                  {order.product?.slug ? (
+                    <div className="mt-4">
+                      <CTAButton href={`/products/${order.product.slug}`} variant="outline">
+                        실행 팩 다시 보기
+                      </CTAButton>
+                    </div>
+                  ) : null}
+                </div>
+              ))}
+            </div>
+          </Section>
+        ) : null}
+      </div>
+    </div>
+  );
+}

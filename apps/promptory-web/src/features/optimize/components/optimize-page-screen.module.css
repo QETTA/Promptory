@@ -1,0 +1,150 @@
+.page {
+  padding-bottom: 4rem;
+}
+
+.content {
+  width: min(100%, 72rem);
+  margin: 0 auto;
+  padding: 1rem 1rem 0;
+}
+
+.emptyGrid {
+  display: grid;
+  gap: 0.875rem;
+}
+
+.supportedCard {
+  padding: 1rem;
+}
+
+.supportedList {
+  display: grid;
+  gap: 0.625rem;
+  margin-top: 0.875rem;
+}
+
+.supportedEyebrow {
+  color: var(--brand-700);
+}
+
+.supportedItem {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: white;
+  padding: 0.875rem;
+}
+
+.supportedItemTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.supportedItemBody {
+  margin-top: 0.375rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--slate-700);
+}
+
+.invalidCard {
+  padding: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--slate-700);
+}
+
+.invalidHint {
+  margin-top: 0.5rem;
+}
+
+.workspaceStack {
+  display: grid;
+  gap: 0.875rem;
+  padding-bottom: 5.5rem;
+}
+
+.mobileSidebar {
+  display: block;
+}
+
+.workspaceGrid {
+  display: grid;
+  gap: 0.875rem;
+}
+
+.mainColumn {
+  display: grid;
+  gap: 0.875rem;
+}
+
+.stage {
+  display: grid;
+  gap: 0.625rem;
+}
+
+.stageTitle {
+  margin: 0.375rem 0 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--slate-950);
+}
+
+.stageEyebrow {
+  color: var(--brand-700);
+}
+
+@media (min-width: 640px) {
+  .content {
+    padding-top: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .supportedCard,
+  .invalidCard {
+    padding: 1.5rem;
+  }
+
+  .emptyGrid,
+  .workspaceGrid,
+  .mainColumn,
+  .workspaceStack {
+    gap: 1rem;
+  }
+
+  .stage {
+    gap: 0.75rem;
+  }
+
+  .stageTitle {
+    margin-top: 0.5rem;
+    font-size: 1.05rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .content {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .emptyGrid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(18.75rem, 0.8fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .workspaceStack {
+    padding-bottom: 0;
+  }
+
+  .mobileSidebar {
+    display: none;
+  }
+
+  .workspaceGrid {
+    grid-template-columns: minmax(0, 1fr) 20rem;
+  }
+}

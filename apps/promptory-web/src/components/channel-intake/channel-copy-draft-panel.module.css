@@ -1,0 +1,150 @@
+.root {
+  display: grid;
+  gap: 1rem;
+}
+
+.headerCard {
+  padding: 1.25rem;
+}
+
+.headerRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.copy {
+  max-width: 48rem;
+}
+
+.eyebrow {
+  color: var(--brand-700);
+}
+
+.title {
+  margin: 0.5rem 0 0;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--slate-950);
+}
+
+.body {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.draftGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.draftCard {
+  border: 1px solid var(--line);
+  border-radius: 1.15rem;
+  background: var(--surface-1);
+  padding: 1rem;
+}
+
+.draftHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.draftLabel {
+  color: var(--slate-500);
+}
+
+.draftBody {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.variantGrid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.variantCard,
+.variantCardMuted {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 0.75rem 1rem;
+}
+
+.variantCard {
+  background: white;
+}
+
+.variantCardMuted {
+  background: var(--surface-2);
+}
+
+.variantHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.variantTitle {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--brand-700);
+}
+
+.variantText,
+.variantTextStrong {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.65;
+}
+
+.variantText {
+  color: var(--slate-950);
+}
+
+.variantTextStrong {
+  color: var(--slate-900);
+}
+
+.metaGrid {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.metaLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--slate-500);
+}
+
+.metaBody {
+  margin-top: 0.25rem;
+}
+
+@media (min-width: 640px) {
+  .headerCard {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .draftGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

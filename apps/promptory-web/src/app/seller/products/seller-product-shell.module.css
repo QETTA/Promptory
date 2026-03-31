@@ -1,0 +1,31 @@
+.setupWrap {
+  margin: 0 auto;
+  max-width: 80rem;
+  padding: 2.5rem 1rem;
+}
+
+.pageShell {
+  padding-bottom: 4rem;
+}
+
+.contentWrap {
+  margin: 0 auto;
+  max-width: 96rem;
+  padding: 2rem 1rem 0;
+}
+
+@media (min-width: 640px) {
+  .setupWrap,
+  .contentWrap {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .setupWrap,
+  .contentWrap {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}

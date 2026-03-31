@@ -1,0 +1,337 @@
+.page {
+  padding-bottom: 4rem;
+}
+
+.setupWrap {
+  width: min(100%, 72rem);
+  margin: 0 auto;
+  padding: 1.5rem 1rem 0;
+}
+
+.heroPreview {
+  max-width: 34rem;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.content {
+  width: min(100%, 72rem);
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.section {
+  padding: 1.75rem 0;
+}
+
+.sectionHeader {
+  max-width: 48rem;
+  margin-bottom: 1rem;
+}
+
+.sectionEyebrow {
+  color: var(--slate-500);
+}
+
+.sectionTitle {
+  margin: 0.5rem 0 0;
+  color: var(--slate-950);
+}
+
+.sectionBody {
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--slate-600);
+}
+
+.startGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.inputColumn {
+  display: grid;
+  gap: 1rem;
+}
+
+.summaryCard {
+  padding: 1.25rem;
+}
+
+.summaryEyebrow {
+  color: var(--brand-700);
+}
+
+.summaryTitle {
+  margin: 0.5rem 0 0;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.summaryBody {
+  margin-top: 0.75rem;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.summaryList {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.summaryItem {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: white;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.howGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.howCard {
+  padding: 1.25rem;
+}
+
+.howEyebrow {
+  color: var(--brand-700);
+}
+
+.howTitle {
+  margin: 0.5rem 0 0;
+  font-size: 1.04rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.howBody {
+  margin-top: 0.75rem;
+  font-size: 0.92rem;
+  line-height: 1.68;
+  color: var(--slate-700);
+}
+
+.bento {
+  display: grid;
+  gap: 1rem;
+}
+
+.bentoCard {
+  min-height: 11rem;
+  padding: 1.25rem;
+}
+
+.bentoCardAccent {
+  border-color: var(--brand-200);
+  background: linear-gradient(180deg, #ffffff 0%, #f4f8ff 100%);
+}
+
+.bentoTitle {
+  font-size: 1.04rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.bentoBody {
+  margin-top: 0.75rem;
+  font-size: 0.92rem;
+  line-height: 1.68;
+  color: var(--slate-700);
+}
+
+.useCaseGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.useCaseCard {
+  padding: 1.25rem;
+}
+
+.useCaseEyebrow {
+  color: var(--brand-700);
+}
+
+.useCaseTitle {
+  margin: 0.5rem 0 0;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.useCaseBody {
+  margin-top: 0.75rem;
+  font-size: 0.92rem;
+  line-height: 1.68;
+  color: var(--slate-700);
+}
+
+.useCasePoints {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.useCasePoint {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface-2);
+  padding: 0.75rem 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.trustCard {
+  padding: 1.25rem;
+}
+
+.trustGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.trustEyebrow {
+  color: var(--brand-700);
+}
+
+.trustTitle {
+  margin: 0.5rem 0 0;
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.trustList {
+  display: grid;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.trustItem {
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: white;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--slate-700);
+}
+
+.ctaCard {
+  padding: 1.5rem;
+}
+
+.ctaTitle {
+  margin: 0.5rem 0 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.ctaBody {
+  margin-top: 0.75rem;
+  max-width: 42rem;
+  font-size: 0.95rem;
+  line-height: 1.72;
+  color: var(--slate-700);
+}
+
+.ctaActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.faqGrid {
+  display: grid;
+  gap: 1rem;
+}
+
+.faqCard {
+  padding: 1.25rem;
+}
+
+.faqQuestion {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--slate-950);
+}
+
+.faqAnswer {
+  margin-top: 0.75rem;
+  font-size: 0.92rem;
+  line-height: 1.68;
+  color: var(--slate-700);
+}
+
+@media (min-width: 640px) {
+  .setupWrap,
+  .content {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .section {
+    padding: 2.25rem 0;
+  }
+
+  .summaryCard,
+  .howCard,
+  .bentoCard,
+  .useCaseCard,
+  .trustCard,
+  .faqCard {
+    padding: 1.5rem;
+  }
+
+  .ctaCard {
+    padding: 1.75rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .howGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .useCaseGrid,
+  .faqGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .content {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .startGrid {
+    grid-template-columns: minmax(0, 1.04fr) minmax(20rem, 0.96fr);
+    align-items: start;
+  }
+
+  .bento {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .trustGrid {
+    grid-template-columns: minmax(0, 1fr) 14rem;
+    align-items: start;
+  }
+}
