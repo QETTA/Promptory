@@ -10,12 +10,12 @@ export function PriceBadge({ price, setupPrice, className }: PriceBadgeProps) {
   return (
     <div className={cn("flex flex-col gap-1", className)}>
       <div className="flex items-baseline gap-2">
-        <span className="text-lg font-bold text-slate-950">{price}</span>
+        <span className="card-display text-[var(--slate-950)]">{price}</span>
         {setupPrice && (
-          <span className="text-xs text-slate-500">{setupPrice}</span>
+          <span className="body-copy-xs text-[var(--slate-500)]">{setupPrice}</span>
         )}
       </div>
-      <p className="text-[10px] text-slate-400">
+      <p className="body-copy-xs text-[var(--slate-400)]">
         Core Package 기준 (Add-on 별도)
       </p>
     </div>

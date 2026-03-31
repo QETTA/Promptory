@@ -22,9 +22,9 @@ type ToastContextValue = {
 };
 
 const toastToneClass: Record<ToastTone, string> = {
-  error: "border-rose-200 bg-white text-rose-950 shadow-[0_22px_45px_rgba(190,24,93,0.16)]",
-  info: "border-[var(--line)] bg-white text-[var(--slate-950)] shadow-[0_22px_45px_rgba(15,23,42,0.12)]",
-  success: "border-[rgba(14,116,144,0.18)] bg-[var(--brand-50)] text-[var(--slate-950)] shadow-[0_22px_45px_rgba(14,116,144,0.16)]",
+  error: "ui-toast-error",
+  info: "ui-toast-info",
+  success: "ui-toast-success",
 };
 
 const ToastContext = createContext<ToastContextValue | null>(null);
@@ -59,7 +59,7 @@ export function ToastProvider({ children }: { children: ReactNode }) {
           <div
             key={item.id}
             className={cn(
-              "pointer-events-auto rounded-[1.35rem] border px-4 py-3 backdrop-blur",
+              "pointer-events-auto px-4 py-3",
               toastToneClass[item.tone],
             )}
           >

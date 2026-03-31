@@ -21,20 +21,20 @@ export function AccordionItem({
   return (
     <div
       className={cn(
-        "rounded-[1.25rem] border border-[var(--line)] bg-[var(--surface-1)] overflow-hidden transition-all duration-300",
-        isOpen && "border-[var(--line-strong)] shadow-[0_14px_28px_-26px_rgba(15,23,42,0.16)]",
+        "overflow-hidden rounded-[1.25rem] border border-[var(--line)] bg-[var(--surface-1)] transition-all duration-300",
+        isOpen && "border-[var(--line-strong)] shadow-[var(--shadow-lg)]",
         className
       )}
     >
       <button
         onClick={onToggle}
-        className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-[var(--surface-2)] transition-colors"
+        className="flex w-full items-center justify-between px-5 py-4 text-left transition-colors hover:bg-[var(--surface-2)]"
       >
-        <span className="font-semibold text-slate-950 pr-4">{title}</span>
+        <span className="pr-4 font-semibold text-[var(--slate-950)]">{title}</span>
         <span
           className={cn(
-            "flex-shrink-0 w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 transition-transform duration-300",
-            isOpen && "rotate-180 bg-blue-100 text-blue-600"
+            "flex h-5 w-5 flex-shrink-0 items-center justify-center rounded-full bg-[var(--surface-2)] text-[var(--slate-500)] transition-transform duration-300",
+            isOpen && "rotate-180 bg-[var(--brand-50)] text-[var(--brand-600)]"
           )}
         >
           <svg
@@ -61,7 +61,7 @@ export function AccordionItem({
         )}
       >
         <div className="px-5 pb-5">
-          <div className="pt-2 text-sm leading-6 text-slate-600">{children}</div>
+          <div className="pt-2 text-sm leading-6 text-[var(--slate-600)]">{children}</div>
         </div>
       </div>
     </div>

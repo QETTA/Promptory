@@ -8,6 +8,11 @@ import { contactFormSchema, type ContactFormInput } from "@/lib/contact-schema";
 import { teamTypeOptions, painPointOptions } from "@/lib/contact-options";
 import { submitContactRequest } from "@/app/contact/actions";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/cn";
 
 interface ContactFormProps {
   inquiryType?: string;
@@ -76,10 +81,14 @@ export function ContactForm({ inquiryType = "demo", packageSlug, planType }: Con
     });
   };
 
+  function choiceCardClass(selected: boolean) {
+    return cn("ui-choice-card px-4 py-3 text-sm", selected && "ui-choice-card-selected");
+  }
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="rounded-3xl border border-zinc-200 bg-white p-8"
+      className="ui-panel-elevated rounded-[2rem] p-8"
     >
       {/* Inquiry Type Badge */}
       <div className="flex flex-wrap gap-2">
@@ -101,102 +110,98 @@ export function ContactForm({ inquiryType = "demo", packageSlug, planType }: Con
       <div className="grid gap-6">
         {/* 팀 이름 */}
         <div>
-          <label className="mb-2 block text-sm font-medium text-zinc-900">
-            팀 이름 <span className="text-red-500">*</span>
-          </label>
-          <input
+          <Label htmlFor="teamName">
+            팀 이름 <span className="text-[var(--error)]">*</span>
+          </Label>
+          <Input
+            id="teamName"
             {...register("teamName")}
             placeholder="예: 마케팅팀, 사업기획팀, Korea Marketing"
-            className="w-full rounded-2xl border border-zinc-300 px-4 py-3 text-sm outline-none transition-colors focus:border-zinc-950"
           />
           {errors.teamName && (
-            <p className="mt-2 text-sm text-red-600">{errors.teamName.message}</p>
+            <p className="mt-2 text-sm text-rose-600">{errors.teamName.message}</p>
           )}
         </div>
 
         {/* 담당자 이름 */}
         <div>
-          <label className="mb-2 block text-sm font-medium text-zinc-900">
-            담당자 이름 <span className="text-red-500">*</span>
-          </label>
-          <input
+          <Label htmlFor="contactName">
+            담당자 이름 <span className="text-[var(--error)]">*</span>
+          </Label>
+          <Input
+            id="contactName"
             {...register("contactName")}
             placeholder="이름"
-            className="w-full rounded-2xl border border-zinc-300 px-4 py-3 text-sm outline-none transition-colors focus:border-zinc-950"
           />
           {errors.contactName && (
-            <p className="mt-2 text-sm text-red-600">{errors.contactName.message}</p>
+            <p className="mt-2 text-sm text-rose-600">{errors.contactName.message}</p>
           )}
         </div>
 
         {/* 이메일 */}
         <div>
-          <label className="mb-2 block text-sm font-medium text-zinc-900">
-            업무용 이메일 <span className="text-red-500">*</span>
-          </label>
-          <input
+          <Label htmlFor="email">
+            업무용 이메일 <span className="text-[var(--error)]">*</span>
+          </Label>
+          <Input
+            id="email"
             {...register("email")}
             type="email"
             placeholder="name@company.com"
-            className="w-full rounded-2xl border border-zinc-300 px-4 py-3 text-sm outline-none transition-colors focus:border-zinc-950"
           />
           {errors.email && (
-            <p className="mt-2 text-sm text-red-600">{errors.email.message}</p>
+            <p className="mt-2 text-sm text-rose-600">{errors.email.message}</p>
           )}
         </div>
 
         {/* 팀 유형 */}
         <fieldset>
-          <legend className="mb-3 block text-sm font-medium text-zinc-900">
-            팀 유형 <span className="text-red-500">*</span>
+          <legend className="mb-3 block text-sm font-medium text-[var(--slate-700)]">
+            팀 유형 <span className="text-[var(--error)]">*</span>
           </legend>
           <div className="grid gap-3">
             {teamTypeOptions.map((option) => (
               <label
                 key={option.value}
-                className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm transition-colors ${
-                  selectedTeamType === option.value
-                    ? "border-zinc-950 bg-zinc-50 text-zinc-950"
-                    : "border-zinc-300 text-zinc-800 hover:border-zinc-400"
-                }`}
+                className={choiceCardClass(selectedTeamType === option.value)}
               >
                 <input
                   type="radio"
                   value={option.value}
                   {...register("teamType")}
-                  className="h-4 w-4 accent-zinc-950"
+                  className="h-4 w-4 accent-[var(--brand-700)]"
                 />
                 {option.label}
               </label>
             ))}
           </div>
           {errors.teamType && (
-            <p className="mt-2 text-sm text-red-600">{errors.teamType.message}</p>
+            <p className="mt-2 text-sm text-rose-600">{errors.teamType.message}</p>
           )}
         </fieldset>
 
         {/* 회사 URL */}
         <div>
-          <label className="mb-2 block text-sm font-medium text-zinc-900">
-            회사 사이트 또는 채널 URL <span className="text-red-500">*</span>
-          </label>
-          <input
+          <Label htmlFor="companyUrl">
+            회사 사이트 또는 채널 URL <span className="text-[var(--error)]">*</span>
+          </Label>
+          <Input
+            id="companyUrl"
             {...register("companyUrl")}
             placeholder="https://company-site.com"
-            className="w-full rounded-2xl border border-zinc-300 px-4 py-3 text-sm outline-none transition-colors focus:border-zinc-950"
           />
-          <p className="mt-2 text-xs text-zinc-500">
+          <p className="mt-2 text-xs text-[var(--slate-500)]">
             홈페이지, 랜딩, 유튜브, 채널 페이지 중 대표 URL 1개면 충분합니다
           </p>
           {errors.companyUrl && (
-            <p className="mt-2 text-sm text-red-600">{errors.companyUrl.message}</p>
+            <p className="mt-2 text-sm text-rose-600">{errors.companyUrl.message}</p>
           )}
         </div>
 
         {/* 밀리는 작업 */}
         <fieldset>
-          <legend className="mb-3 block text-sm font-medium text-zinc-900">
-            지금 가장 밀리는 작업 <span className="text-red-500">*</span>
+          <legend className="mb-3 block text-sm font-medium text-[var(--slate-700)]">
+            지금 가장 밀리는 작업 <span className="text-[var(--error)]">*</span>
           </legend>
           <div className="grid gap-3 sm:grid-cols-2">
             {painPointOptions.map((option) => {
@@ -206,18 +211,14 @@ export function ContactForm({ inquiryType = "demo", packageSlug, planType }: Con
               return (
                 <label
                   key={option.value}
-                  className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm transition-colors ${
-                    isSelected
-                      ? "border-zinc-950 bg-zinc-50 text-zinc-950"
-                      : "border-zinc-300 text-zinc-800 hover:border-zinc-400"
-                  }`}
+                  className={choiceCardClass(isSelected)}
                 >
                   <input
                     type="checkbox"
                     value={option.value}
                     checked={isSelected}
                     onChange={() => togglePainPoint(option.value)}
-                    className="h-4 w-4 accent-zinc-950"
+                    className="h-4 w-4 accent-[var(--brand-700)]"
                   />
                   {option.label}
                 </label>
@@ -225,13 +226,13 @@ export function ContactForm({ inquiryType = "demo", packageSlug, planType }: Con
             })}
           </div>
           {errors.painPoints && (
-            <p className="mt-2 text-sm text-red-600">{errors.painPoints.message}</p>
+            <p className="mt-2 text-sm text-rose-600">{errors.painPoints.message}</p>
           )}
         </fieldset>
 
         {/* 회사 규모 */}
         <fieldset>
-          <legend className="mb-3 block text-sm font-medium text-zinc-900">
+          <legend className="mb-3 block text-sm font-medium text-[var(--slate-700)]">
             회사 규모
           </legend>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -243,11 +244,7 @@ export function ContactForm({ inquiryType = "demo", packageSlug, planType }: Con
             ].map((option) => (
               <label
                 key={option.value}
-                className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm transition-colors ${
-                  selectedCompanySize === option.value
-                    ? "border-zinc-950 bg-zinc-50 text-zinc-950"
-                    : "border-zinc-300 text-zinc-800 hover:border-zinc-400"
-                }`}
+                className={choiceCardClass(selectedCompanySize === option.value)}
               >
                 <input
                   type="radio"
@@ -255,7 +252,7 @@ export function ContactForm({ inquiryType = "demo", packageSlug, planType }: Con
                   value={option.value}
                   checked={selectedCompanySize === option.value}
                   onChange={() => setSelectedCompanySize(option.value)}
-                  className="h-4 w-4 accent-zinc-950"
+                  className="h-4 w-4 accent-[var(--brand-700)]"
                 />
                 {option.label}
               </label>
@@ -265,7 +262,7 @@ export function ContactForm({ inquiryType = "demo", packageSlug, planType }: Con
 
         {/* 도입 희망 시기 */}
         <fieldset>
-          <legend className="mb-3 block text-sm font-medium text-zinc-900">
+          <legend className="mb-3 block text-sm font-medium text-[var(--slate-700)]">
             도입 희망 시기
           </legend>
           <div className="grid gap-3 sm:grid-cols-2">
@@ -277,11 +274,7 @@ export function ContactForm({ inquiryType = "demo", packageSlug, planType }: Con
             ].map((option) => (
               <label
                 key={option.value}
-                className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm transition-colors ${
-                  selectedTimeline === option.value
-                    ? "border-zinc-950 bg-zinc-50 text-zinc-950"
-                    : "border-zinc-300 text-zinc-800 hover:border-zinc-400"
-                }`}
+                className={choiceCardClass(selectedTimeline === option.value)}
               >
                 <input
                   type="radio"
@@ -289,7 +282,7 @@ export function ContactForm({ inquiryType = "demo", packageSlug, planType }: Con
                   value={option.value}
                   checked={selectedTimeline === option.value}
                   onChange={() => setSelectedTimeline(option.value)}
-                  className="h-4 w-4 accent-zinc-950"
+                  className="h-4 w-4 accent-[var(--brand-700)]"
                 />
                 {option.label}
               </label>
@@ -299,10 +292,9 @@ export function ContactForm({ inquiryType = "demo", packageSlug, planType }: Con
 
         {/* 상황 설명 */}
         <div>
-          <label className="mb-2 block text-sm font-medium text-zinc-900">
-            지금 설명해주고 싶은 상황
-          </label>
-          <textarea
+          <Label htmlFor="contextNote">지금 설명해주고 싶은 상황</Label>
+          <Textarea
+            id="contextNote"
             {...register("contextNote")}
             rows={6}
             placeholder={inquiryType === "quick_audit" 
@@ -316,26 +308,27 @@ Quick Audit로 확인하고 싶은 부분을 알려주세요.`
 홈페이지는 있는데 문의 전환이 약합니다.
 대표 보고용으로 경쟁사 비교와 CTA 초안이 같이 필요합니다.
 Slack 안에서 바로 공유할 수 있는 흐름이면 좋겠습니다.`}
-            className="w-full rounded-2xl border border-zinc-300 px-4 py-3 text-sm outline-none transition-colors focus:border-zinc-950 resize-none"
+            className="resize-none"
           />
           {errors.contextNote && (
-            <p className="mt-2 text-sm text-red-600">{errors.contextNote.message}</p>
+            <p className="mt-2 text-sm text-rose-600">{errors.contextNote.message}</p>
           )}
         </div>
 
         {/* 서버 에러 */}
         {serverError && (
-          <div className="rounded-2xl bg-red-50 px-4 py-3">
-            <p className="text-sm text-red-700">{serverError}</p>
+          <div className="rounded-[1rem] border border-[color-mix(in_srgb,var(--color-error)_18%,white)] bg-[var(--color-error-bg)] px-4 py-3">
+            <p className="text-sm text-rose-700">{serverError}</p>
           </div>
         )}
 
         {/* 제출 버튼 */}
         <div className="pt-2">
-          <button
+          <Button
             type="submit"
             disabled={isPending}
-            className="inline-flex w-full items-center justify-center rounded-full bg-zinc-950 px-6 py-4 text-base font-semibold text-white transition-all hover:bg-zinc-800 disabled:opacity-60 disabled:cursor-not-allowed sm:w-auto"
+            size="lg"
+            className="w-full sm:w-auto"
           >
             {isPending ? (
               <>
@@ -363,8 +356,8 @@ Slack 안에서 바로 공유할 수 있는 흐름이면 좋겠습니다.`}
             ) : (
               "우리 팀 기준 데모 요청하기"
             )}
-          </button>
-          <p className="mt-3 text-sm text-zinc-500">
+          </Button>
+          <p className="mt-3 text-sm text-[var(--slate-500)]">
             보내주신 내용으로 Slack 대화 흐름과 결과 예시를 준비합니다
           </p>
         </div>

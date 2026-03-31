@@ -220,20 +220,20 @@ export default function WebsiteDiagnosisAgentPage() {
             <Card variant="strong" className="p-6 shadow-lg">
               <div className="space-y-6">
                 <div className="flex gap-3 animate-slide-in">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center text-sm font-bold text-slate-700 shadow-sm">U</div>
+                  <div className="slack-user-avatar flex h-10 w-10 items-center justify-center text-sm font-bold">U</div>
                   <div className="flex-1">
                     <p className="text-sm font-bold text-slate-900">사용자</p>
-                    <p className="text-sm text-slate-600 mt-1 bg-slate-50 rounded-lg px-3 py-2 inline-block">
+                    <p className="slack-message-bubble mt-1 px-3 py-2 text-sm">
                       <span className="text-blue-600 underline">https://회사사이트URL</span>
                     </p>
                   </div>
                 </div>
 
                 <div className="flex gap-3 animate-slide-in" style={{ animationDelay: "100ms" }}>
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#4A154B] to-[#611f63] flex items-center justify-center text-sm font-bold text-white shadow-sm">P</div>
+                  <div className="slack-agent-avatar flex h-10 w-10 items-center justify-center text-sm font-bold">P</div>
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-[#4A154B]">Promptory Agent</p>
-                    <p className="text-sm text-slate-600 mt-1 bg-slate-50 rounded-lg px-3 py-2 inline-block">
+                    <p className="slack-agent-name text-sm font-bold">Promptory Agent</p>
+                    <p className="slack-message-bubble mt-1 px-3 py-2 text-sm">
                       사이트로 인식했어요.<br />
                       지금은 유입보다 문의 전환 장치가 약합니다.<br />
                       문의 기준으로 다시 볼까요?
@@ -242,24 +242,24 @@ export default function WebsiteDiagnosisAgentPage() {
                 </div>
 
                 <div className="flex gap-3 animate-slide-in" style={{ animationDelay: "200ms" }}>
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center text-sm font-bold text-slate-700 shadow-sm">U</div>
+                  <div className="slack-user-avatar flex h-10 w-10 items-center justify-center text-sm font-bold">U</div>
                   <div className="flex-1">
                     <p className="text-sm font-bold text-slate-900">사용자</p>
-                    <p className="text-sm text-slate-600 mt-1 bg-slate-50 rounded-lg px-3 py-2 inline-block">네, 문의가 목표예요.</p>
+                    <p className="slack-message-bubble mt-1 px-3 py-2 text-sm">네, 문의가 목표예요.</p>
                   </div>
                 </div>
 
                 <div className="flex gap-3 animate-slide-in" style={{ animationDelay: "300ms" }}>
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#4A154B] to-[#611f63] flex items-center justify-center text-sm font-bold text-white shadow-sm">P</div>
+                  <div className="slack-agent-avatar flex h-10 w-10 items-center justify-center text-sm font-bold">P</div>
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-[#4A154B]">Promptory Agent</p>
-                    <p className="text-sm text-slate-600 mt-1 bg-slate-50 rounded-lg px-3 py-2 inline-block">
+                    <p className="slack-agent-name text-sm font-bold">Promptory Agent</p>
+                    <p className="slack-message-bubble mt-1 px-3 py-2 text-sm">
                       좋아요.<br />
                       현재 병목은 상단 신뢰 요소 부족, CTA 위치 문제, 메시지 분산입니다.
                     </p>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {["경쟁사 비교", "CTA 초안", "보고용 요약"].map((btn) => (
-                        <span key={btn} className="px-3 py-1.5 bg-white border border-slate-300 rounded-md text-xs font-medium text-slate-700 hover:bg-slate-50 hover:shadow-sm transition-all cursor-pointer">
+                        <span key={btn} className="slack-action-chip cursor-pointer px-3 py-1.5 text-xs font-medium">
                           {btn}
                         </span>
                       ))}

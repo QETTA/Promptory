@@ -66,7 +66,7 @@ node e2e/screenshot-test.mjs
 TEST_URL=https://your-url.com node e2e/screenshot-test.mjs
 ```
 
-결과는 `e2e/screenshots/` 디렉토리에 저장됩니다.
+결과는 `e2e/screenshots/` 디렉토리에 생성되며, 이 산출물은 버전 관리 대상이 아닙니다.
 
 ## CI/CD 통합
 

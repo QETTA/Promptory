@@ -8,6 +8,10 @@ The current product direction is:
 - primary surfaces: `/` and `/optimize`
 - support rails: `/products`, `/library`, `/orders`, `/seller/products`
 
+Business and product guardrails live in:
+
+- `docs/BUSINESS_PRODUCT_FOUNDATION.md`
+
 ## Stack
 
 - Next.js 16

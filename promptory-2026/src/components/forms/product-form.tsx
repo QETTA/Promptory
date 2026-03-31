@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/cn";
 import { getProductEditorChecklist } from "@/lib/product-editor";
 import type { ProductRow } from "@/lib/supabase/types";
 import {
@@ -56,7 +57,7 @@ function FormSection({
   title: string;
   }) {
   return (
-    <section className="rounded-[1.4rem] border border-[var(--line-strong)] bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-5 shadow-[0_14px_32px_-24px_rgba(15,23,42,0.16)] sm:p-6">
+    <section className="ui-panel-soft p-5 sm:p-6">
       {eyebrow ? <p className="section-kicker text-[var(--brand-700)]">{eyebrow}</p> : null}
       <h2 className="mt-2 text-[1.05rem] font-semibold tracking-tight text-[var(--slate-950)]">{title}</h2>
       {description ? <p className="mt-2 text-sm leading-7 text-[var(--slate-600)]">{description}</p> : null}
@@ -199,16 +200,12 @@ export function ProductForm({ mode, product }: ProductFormProps) {
   return (
     <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_352px]">
       <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-        <div className="rounded-[1.4rem] border border-[var(--line-strong)] bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] p-3 shadow-[0_14px_32px_-26px_rgba(15,23,42,0.16)]">
+        <div className="ui-panel-soft p-3">
           <div className="grid gap-3 md:grid-cols-3">
           {stageItems.map((item, index) => (
             <div
               key={item.label}
-              className={`rounded-[1.05rem] border px-4 py-4 ${
-                index === 0
-                  ? "border-[rgba(34,80,221,0.18)] bg-[linear-gradient(180deg,#ffffff_0%,#eef4ff_100%)] shadow-[0_12px_28px_-24px_rgba(34,80,221,0.3)]"
-                  : "border-[var(--line)] bg-white/90"
-              }`}
+              className={cn(index === 0 ? "ui-panel-highlight" : "ui-panel-muted bg-white/90", "px-4 py-4")}
             >
               <p className="section-kicker text-[var(--brand-700)]">
                 {index + 1}. {item.label}
@@ -363,7 +360,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
       </form>
 
       <div className="space-y-5 xl:sticky xl:top-24 xl:self-start">
-        <div className="overflow-hidden rounded-[1.4rem] border border-[var(--line-strong)] bg-white shadow-[0_14px_32px_-26px_rgba(15,23,42,0.16)]">
+        <div className="ui-panel-elevated overflow-hidden rounded-[1.4rem]">
           <div className="border-b border-[var(--line)] bg-[linear-gradient(180deg,#f8fbff_0%,#ffffff_100%)] px-5 py-5">
             <p className="section-kicker text-[var(--brand-700)]">Readiness</p>
             <div className="mt-3 flex items-start justify-between gap-3">
@@ -376,20 +373,20 @@ export function ProductForm({ mode, product }: ProductFormProps) {
           </div>
 
           <div className="px-5 py-5">
-            <div className={`rounded-[1rem] border px-4 py-3 text-sm leading-7 ${readinessAccentClass}`}>
+            <div className={cn("rounded-[1rem] border px-4 py-3 text-sm leading-7", readinessAccentClass)}>
               {checklist.ruleText}
             </div>
             <div className="mt-4 grid gap-2 text-sm leading-6 text-[var(--slate-600)]">
               {checklist.items.map((item) => (
                 <div
                   key={item.id}
-                  className={`rounded-[0.95rem] border px-3 py-3 ${
+                  className={cn("rounded-[0.95rem] border px-3 py-3", 
                     item.done
                       ? "border-emerald-200 bg-emerald-50/70 text-emerald-800"
                       : item.tone === "required"
                         ? "border-rose-200 bg-rose-50 text-rose-800"
                         : "border-[var(--line)] bg-[var(--surface-2)] text-[var(--slate-700)]"
-                  }`}
+                  )}
                 >
                   <p className="text-xs font-semibold">
                     {item.done ? "완료" : item.tone === "required" ? "필수" : "권장"}
@@ -401,7 +398,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
           </div>
         </div>
 
-        <div className="overflow-hidden rounded-[1.25rem] border border-[var(--line-strong)] bg-white shadow-[0_10px_30px_rgba(15,23,42,0.05)]">
+        <div className="ui-panel-elevated overflow-hidden">
           <div className="border-b border-[var(--line)] bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] px-5 py-5">
             <div className="flex items-start justify-between gap-3">
               <div>
@@ -424,7 +421,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
           </div>
 
           <div className="px-5 py-5">
-            <div className="rounded-[1rem] border border-[var(--line)] bg-[linear-gradient(180deg,#ffffff_0%,#f5f8fc_100%)] px-4 py-4">
+            <div className="ui-panel-muted bg-[linear-gradient(180deg,#ffffff_0%,#f5f8fc_100%)] px-4 py-4">
               <div className="flex items-center justify-between gap-3">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[var(--slate-500)]">Price</p>
                 <Badge variant="neutral">즉시 노출</Badge>
@@ -435,7 +432,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
             <div className="mt-4 grid gap-2">
               {previewPoints.length > 0 ? (
                 previewPoints.map((point) => (
-                  <div key={point} className="rounded-[0.9rem] border border-[var(--line)] bg-[rgba(248,250,252,0.95)] px-3 py-3 text-sm leading-6 text-[var(--slate-700)]">
+                  <div key={point} className="ui-panel-muted bg-[rgba(248,250,252,0.95)] px-3 py-3 text-sm leading-6 text-[var(--slate-700)]">
                     {point}
                   </div>
                 ))
@@ -447,11 +444,11 @@ export function ProductForm({ mode, product }: ProductFormProps) {
             </div>
 
             <div className="mt-4 grid gap-2 sm:grid-cols-2">
-              <div className="rounded-[0.9rem] border border-[var(--line)] bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] px-3 py-3 text-sm leading-6 text-[var(--slate-700)]">
+              <div className="ui-panel-muted bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] px-3 py-3 text-sm leading-6 text-[var(--slate-700)]">
                 <p className="text-xs font-semibold text-[var(--slate-500)]">썸네일</p>
                 <p className="mt-1">{hasThumbnail ? "준비됨" : "없음"}</p>
               </div>
-              <div className="rounded-[0.9rem] border border-[var(--line)] bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] px-3 py-3 text-sm leading-6 text-[var(--slate-700)]">
+              <div className="ui-panel-muted bg-[linear-gradient(180deg,#ffffff_0%,#f8fbff_100%)] px-3 py-3 text-sm leading-6 text-[var(--slate-700)]">
                 <p className="text-xs font-semibold text-[var(--slate-500)]">실행 팩 파일</p>
                 <p className="mt-1">{hasProductFile ? "준비됨" : "필수"}</p>
               </div>
@@ -459,7 +456,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
           </div>
         </div>
 
-        <div className="rounded-[1.25rem] border border-[var(--line)] bg-[linear-gradient(180deg,#fbfdff_0%,#f4f8ff_100%)] p-5">
+        <div className="ui-panel-muted rounded-[1.25rem] bg-[linear-gradient(180deg,#fbfdff_0%,#f4f8ff_100%)] p-5">
           <p className="section-kicker text-[var(--slate-500)]">Release Notes</p>
           <div className="mt-3 grid gap-2 text-sm leading-7 text-[var(--slate-700)]">
             <p>공개 전환의 필수 조건은 실제 실행 팩 파일입니다.</p>

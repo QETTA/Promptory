@@ -28,7 +28,7 @@ export function Hero({
       className={cn(
         isDark
           ? [fullBleedHeroClass, heroToneClass[theme]]
-          : "relative overflow-hidden border-b border-[var(--line)] bg-[linear-gradient(180deg,#fcfdff_0%,#f4f8ff_48%,#eff4fb_100%)] text-[var(--slate-950)]",
+          : "relative overflow-hidden border-b border-[var(--line)] bg-gradient-hero text-[var(--slate-950)]",
       )}
     >
       <div
@@ -53,7 +53,7 @@ export function Hero({
             "max-w-3xl",
             isDark
               ? ""
-              : "rounded-[1.9rem] border border-[var(--line)] bg-[linear-gradient(180deg,#ffffff_0%,#f7faff_100%)] px-5 py-5 shadow-[0_24px_60px_-40px_rgba(15,23,42,0.16)] sm:px-7 sm:py-7",
+              : "ui-card-hero-bright rounded-[1.9rem] px-5 py-5 sm:px-7 sm:py-7",
           )}
         >
           {eyebrow ? (
@@ -75,7 +75,7 @@ export function Hero({
               ].map(([label, value]) => (
                 <div
                   key={label}
-                  className="rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3 shadow-[0_12px_30px_-28px_rgba(15,23,42,0.18)]"
+                  className="ui-card-default rounded-[1rem] px-4 py-3"
                 >
                   <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--slate-500)]">{label}</p>
                   <p className="mt-2 text-sm font-semibold text-[var(--slate-950)]">{value}</p>

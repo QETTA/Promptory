@@ -65,16 +65,16 @@ export default function PackagesPage() {
   return (
     <div className="pb-16">
       {/* Hero */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-slate-50 via-blue-50/20 to-indigo-50/10">
+      <section className="bg-gradient-to-br from-slate-50 via-brand-50/20 to-indigo-50/10 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center max-w-3xl mx-auto">
-            <p className="text-sm font-semibold text-blue-600 mb-2">Slack Agent Packages</p>
-            <h1 className="text-3xl font-bold text-slate-950 sm:text-4xl lg:text-5xl">
+          <AnimatedSection className="mx-auto max-w-3xl text-center">
+            <p className="section-kicker mb-2 text-[var(--brand-600)]">Slack Agent Packages</p>
+            <h1 className="poster-title text-[var(--slate-950)]">
               반복되는 진단, 비교, 초안 작업을
               <br />
               <span className="gradient-text">패키지로 붙입니다</span>
             </h1>
-            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+            <p className="body-copy-xl mt-4 text-[var(--slate-600)]">
               프롬프토리는 범용 챗봇을 파는 게 아니라
               팀의 실무 흐름에 맞춘 Slack agent 패키지를 제안합니다
             </p>
@@ -88,20 +88,20 @@ export default function PackagesPage() {
           <AnimatedSection delay={0.2}>
             <div className="flex flex-wrap gap-6">
               <div>
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Use case</p>
+                <p className="section-kicker mb-2 text-[var(--slate-500)]">Use case</p>
                 <div className="flex flex-wrap gap-2">
                   {useCases.map((uc) => (
-                    <Badge key={uc.value} variant="neutral" className="cursor-pointer hover:bg-blue-50 hover:border-blue-200 transition-colors">
+                    <Badge key={uc.value} variant="neutral" className="cursor-pointer transition-colors hover:border-[var(--brand-200)] hover:bg-[var(--brand-50)]">
                       {uc.label}
                     </Badge>
                   ))}
                 </div>
               </div>
               <div>
-                <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Team type</p>
+                <p className="section-kicker mb-2 text-[var(--slate-500)]">Team type</p>
                 <div className="flex flex-wrap gap-2">
                   {teamTypes.map((tt) => (
-                    <Badge key={tt.value} variant="neutral" className="cursor-pointer hover:bg-blue-50 hover:border-blue-200 transition-colors">
+                    <Badge key={tt.value} variant="neutral" className="cursor-pointer transition-colors hover:border-[var(--brand-200)] hover:bg-[var(--brand-50)]">
                       {tt.label}
                     </Badge>
                   ))}
@@ -125,17 +125,17 @@ export default function PackagesPage() {
                   </div>
                   <div className="flex items-center gap-3 mb-3">
                     <span className="text-3xl group-hover:scale-110 transition-transform">{pkg.icon}</span>
-                    <h2 className="text-lg font-semibold text-slate-950">{pkg.title}</h2>
+                    <h2 className="text-lg font-semibold text-[var(--slate-950)]">{pkg.title}</h2>
                   </div>
-                  <p className="mt-3 text-sm leading-6 text-slate-600 flex-1">{pkg.description}</p>
+                  <p className="mt-3 flex-1 text-sm leading-6 text-[var(--slate-600)]">{pkg.description}</p>
                   
                   {/* Price Badge */}
                   <div className="mt-4">
                     <PriceBadge price={pkg.price} setupPrice={pkg.setupPrice} />
                   </div>
                   
-                  <p className="mt-3 text-xs text-slate-500">{pkg.footer}</p>
-                  <div className="mt-4 pt-4 border-t border-slate-100 space-y-2">
+                  <p className="body-copy-xs mt-3 text-[var(--slate-500)]">{pkg.footer}</p>
+                  <div className="mt-4 space-y-2 border-t border-[var(--line)] pt-4">
                     <CTAButton 
                       href={`/packages/${pkg.slug}`} 
                       variant="outline" 
@@ -146,16 +146,15 @@ export default function PackagesPage() {
                     </CTAButton>
                     <CTAButton 
                       href={`/contact?type=package&slug=${pkg.slug}`}
-                      variant="default"
                       size="sm"
-                      className="w-full bg-slate-950 hover:bg-slate-800 btn-shine"
+                      className="btn-shine w-full"
                       telemetryEventName="package_estimate_clicked"
                       telemetryPayload={{ package: pkg.slug }}
                     >
                       견적 요청하기
                     </CTAButton>
                   </div>
-                  <p className="mt-3 text-[10px] text-slate-400 text-center">
+                  <p className="body-copy-xs mt-3 text-center text-[var(--slate-400)]">
                     맞춤 세팅 포함 · Slack DM/채널/모달 지원 · 저장 후 이어보기
                   </p>
                 </Card>
@@ -170,10 +169,10 @@ export default function PackagesPage() {
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection delay={0.3}>
             <Card variant="tint" className="p-8 card-hover">
-              <h2 className="text-xl font-bold text-slate-950">
+              <h2 className="text-xl font-bold text-[var(--slate-950)]">
                 어떤 패키지가 우리 팀에 맞을지 unsure하신가요?
               </h2>
-              <p className="mt-2 text-sm text-slate-600">
+              <p className="mt-2 text-sm text-[var(--slate-600)]">
                 회사 URL이나 현재 업무 상황을 보내주시면 적합한 패키지를 추천해드립니다
               </p>
               <div className="mt-6">

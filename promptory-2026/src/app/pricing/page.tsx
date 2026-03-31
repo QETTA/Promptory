@@ -119,16 +119,16 @@ export default function PricingPage() {
   return (
     <div className="pb-16">
       {/* Hero Section */}
-      <section className="py-16 sm:py-20 bg-gradient-to-br from-slate-50 via-blue-50/20 to-indigo-50/10">
+      <section className="bg-gradient-to-br from-slate-50 via-brand-50/20 to-indigo-50/10 py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center max-w-3xl mx-auto">
+          <AnimatedSection className="mx-auto max-w-3xl text-center">
             <Badge className="mb-4">Transparent Pricing</Badge>
-            <h1 className="text-3xl font-bold text-slate-950 sm:text-4xl lg:text-5xl">
+            <h1 className="poster-title text-[var(--slate-950)]">
               팀 규모와 필요에 맞는
               <br />
               <span className="gradient-text">맞춤형 패키지</span>
             </h1>
-            <p className="mt-4 text-base leading-7 text-slate-600 sm:text-lg">
+            <p className="body-copy-xl mt-4 text-[var(--slate-600)]">
               Quick Audit으로 시작해서 Core Package로 확장하세요.
               <br />
               투명한 가격, 확실한 가치.
@@ -146,7 +146,7 @@ export default function PricingPage() {
                 <Card
                   variant={tier.highlighted ? "heroBright" : "strong"}
                   className={`p-6 sm:p-8 flex flex-col h-full relative ${
-                    tier.highlighted ? "ring-2 ring-blue-500 ring-offset-2" : ""
+                    tier.highlighted ? "ring-2 ring-[var(--brand-500)] ring-offset-2" : ""
                   }`}
                 >
                   {/* Badge */}
@@ -155,26 +155,26 @@ export default function PricingPage() {
                       {tier.badge}
                     </Badge>
                     {tier.highlighted && (
-                      <span className="text-xs font-medium text-blue-600 bg-blue-50 px-2 py-1 rounded-full">
+                      <span className="rounded-full bg-[var(--brand-50)] px-2 py-1 text-xs font-medium text-[var(--brand-600)]">
                         Most Popular
                       </span>
                     )}
                   </div>
 
                   {/* Header */}
-                  <h2 className="text-xl font-bold text-slate-950">{tier.name}</h2>
-                  <p className="mt-2 text-sm text-slate-600">{tier.description}</p>
+                  <h2 className="text-xl font-bold text-[var(--slate-950)]">{tier.name}</h2>
+                  <p className="mt-2 text-sm text-[var(--slate-600)]">{tier.description}</p>
 
                   {/* Price */}
                   <div className="mt-6">
                     <div className="flex items-baseline gap-1">
-                      <span className="text-3xl sm:text-4xl font-bold text-slate-950">
+                      <span className="text-3xl font-bold text-[var(--slate-950)] sm:text-4xl">
                         ₩{tier.priceRange}
                       </span>
-                      <span className="text-sm text-slate-500">{tier.period}</span>
+                      <span className="text-sm text-[var(--slate-500)]">{tier.period}</span>
                     </div>
                     {tier.setup && (
-                      <p className="mt-1 text-xs text-slate-500">{tier.setup}</p>
+                      <p className="mt-1 text-xs text-[var(--slate-500)]">{tier.setup}</p>
                     )}
                   </div>
 
@@ -183,11 +183,7 @@ export default function PricingPage() {
                     <CTAButton
                       href={tier.href}
                       variant={tier.highlighted ? "default" : "outline"}
-                      className={`w-full ${
-                        tier.highlighted
-                          ? "bg-slate-950 hover:bg-slate-800 btn-shine"
-                          : "hover:bg-slate-50"
-                      }`}
+                      className={tier.highlighted ? "btn-shine w-full" : "w-full hover:bg-[var(--surface-2)]"}
                       telemetryEventName="pricing_cta_clicked"
                       telemetryPayload={{ tier: tier.name }}
                     >
@@ -196,18 +192,18 @@ export default function PricingPage() {
                   </div>
 
                   {/* Divider */}
-                  <div className="my-6 border-t border-slate-200" />
+                  <div className="my-6 border-t border-[var(--line)]" />
 
                   {/* Features */}
                   <div className="flex-1">
-                    <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3">
+                    <p className="section-kicker mb-3 text-[var(--slate-500)]">
                       포함 사항
                     </p>
                     <ul className="space-y-2">
                       {tier.features.map((feature) => (
                         <li key={feature} className="flex items-start gap-2">
-                          <Check className="w-4 h-4 text-blue-500 mt-0.5 shrink-0" />
-                          <span className="text-sm text-slate-600">{feature}</span>
+                          <Check className="mt-0.5 h-4 w-4 shrink-0 text-[var(--brand-500)]" />
+                          <span className="text-sm text-[var(--slate-600)]">{feature}</span>
                         </li>
                       ))}
                     </ul>
@@ -223,8 +219,8 @@ export default function PricingPage() {
       <section className="py-12 sm:py-16 bg-slate-50">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-slate-950">Add-on Packages</h2>
-            <p className="mt-2 text-sm text-slate-600">
+            <h2 className="section-title text-[var(--slate-950)]">Add-on Packages</h2>
+            <p className="mt-2 text-sm text-[var(--slate-600)]">
               필요에 따라 추가하는 확장 옵션
             </p>
           </AnimatedSection>
@@ -233,9 +229,9 @@ export default function PricingPage() {
             {addons.map((addon, index) => (
               <AnimatedSection key={addon.name} delay={index * 0.1}>
                 <Card variant="tint" className="p-5 card-hover h-full">
-                  <h3 className="font-semibold text-slate-950">{addon.name}</h3>
-                  <p className="mt-1 text-sm font-medium text-blue-600">{addon.price}</p>
-                  <p className="mt-2 text-xs text-slate-600">{addon.description}</p>
+                  <h3 className="font-semibold text-[var(--slate-950)]">{addon.name}</h3>
+                  <p className="mt-1 text-sm font-medium text-[var(--brand-600)]">{addon.price}</p>
+                  <p className="mt-2 text-xs text-[var(--slate-600)]">{addon.description}</p>
                 </Card>
               </AnimatedSection>
             ))}
@@ -247,8 +243,8 @@ export default function PricingPage() {
       <section className="py-12 sm:py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-slate-950">도입 흐름</h2>
-            <p className="mt-2 text-sm text-slate-600">
+            <h2 className="section-title text-[var(--slate-950)]">도입 흐름</h2>
+            <p className="mt-2 text-sm text-[var(--slate-600)]">
               Quick Audit으로 검증하고, Core Package로 확장하는 3단계 접근
             </p>
           </AnimatedSection>
@@ -276,10 +272,10 @@ export default function PricingPage() {
             ].map((item, index) => (
               <AnimatedSection key={item.step} delay={index * 0.15}>
                 <Card variant="strong" className="p-5 text-center card-hover">
-                  <span className="text-2xl font-bold text-blue-200">{item.step}</span>
-                  <h3 className="mt-2 font-semibold text-slate-950">{item.title}</h3>
-                  <p className="mt-1 text-sm text-slate-600">{item.desc}</p>
-                  <p className="mt-2 text-xs font-medium text-blue-600">{item.price}</p>
+                  <span className="text-2xl font-bold text-brand-200">{item.step}</span>
+                  <h3 className="mt-2 font-semibold text-[var(--slate-950)]">{item.title}</h3>
+                  <p className="mt-1 text-sm text-[var(--slate-600)]">{item.desc}</p>
+                  <p className="mt-2 text-xs font-medium text-[var(--brand-600)]">{item.price}</p>
                 </Card>
               </AnimatedSection>
             ))}
@@ -291,15 +287,15 @@ export default function PricingPage() {
       <section className="py-12 sm:py-16 bg-slate-50">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="text-center mb-10">
-            <h2 className="text-2xl font-bold text-slate-950">자주 묻는 질문</h2>
+            <h2 className="section-title text-[var(--slate-950)]">자주 묻는 질문</h2>
           </AnimatedSection>
 
           <div className="space-y-3">
             {faqs.map((faq, index) => (
               <AnimatedSection key={index} delay={index * 0.08}>
                 <Card variant="tint" className="p-5 card-hover">
-                  <h3 className="font-semibold text-slate-950 text-sm">{faq.q}</h3>
-                  <p className="mt-2 text-sm text-slate-600 leading-relaxed">{faq.a}</p>
+                  <h3 className="text-sm font-semibold text-[var(--slate-950)]">{faq.q}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[var(--slate-600)]">{faq.a}</p>
                 </Card>
               </AnimatedSection>
             ))}
@@ -309,13 +305,13 @@ export default function PricingPage() {
 
       {/* CTA Section */}
       <section className="py-16 sm:py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-slate-50 to-indigo-50/50" />
-        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-50/50 via-slate-50 to-indigo-50/50" />
+        <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <AnimatedSection>
-            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">
+            <h2 className="section-title text-[var(--slate-950)] sm:text-3xl">
               아직 어떤 패키지가 적합한지 unsure하신가요?
             </h2>
-            <p className="mt-4 text-base text-slate-600 max-w-2xl mx-auto">
+            <p className="body-copy-lg mx-auto mt-4 max-w-2xl text-[var(--slate-600)]">
               Quick Audit으로 시작해서 직접 경험해보세요.
               <br />
               회사 URL만으로 진단 예시를 무료로 받아보실 수 있습니다.

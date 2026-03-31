@@ -29,7 +29,7 @@ export function ProductCard({ actionMode = "detail", matchNote, product, variant
   return (
     <article
       className={cn(
-        "flex h-full flex-col overflow-hidden rounded-[1.35rem] border border-[var(--line)] bg-[linear-gradient(180deg,#ffffff_0%,#f7faff_100%)] shadow-[0_14px_34px_-28px_rgba(15,23,42,0.18)]",
+        "ui-card-default flex h-full flex-col overflow-hidden rounded-[1.35rem]",
         compact ? "p-3.5" : "p-4 sm:p-5",
       )}
     >

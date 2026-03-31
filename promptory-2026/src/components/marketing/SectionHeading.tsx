@@ -46,7 +46,7 @@ export function SectionHeading({
       )}
       <h2
         className={cn(
-          "text-2xl font-bold text-slate-950 sm:text-3xl",
+          "section-title text-[var(--slate-950)]",
           titleClassName
         )}
       >
@@ -55,7 +55,7 @@ export function SectionHeading({
       {body && (
         <p
           className={cn(
-            "mt-4 text-base text-slate-600 max-w-2xl",
+            "body-copy-xl mt-4 max-w-2xl text-[var(--slate-600)]",
             align === "center" && "mx-auto",
             bodyClassName
           )}
@@ -87,7 +87,7 @@ export function SectionHeadingSimple({
   return (
     <h2
       className={cn(
-        "text-2xl font-bold text-slate-950 sm:text-3xl",
+        "section-title text-[var(--slate-950)]",
         alignClasses[align],
         className
       )}

@@ -9,7 +9,6 @@ import { ChannelSurfaceReadPanel } from "@/components/channel-intake/channel-sur
 import { OptimizationBriefBuilder } from "@/components/channel-intake/optimization-brief-builder";
 import { SaveOptimizationRunButton } from "@/components/channel-intake/save-optimization-run-button";
 import { Hero } from "@/components/marketplace/hero";
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { CTAButton } from "@/components/ui/cta-button";
 import { buildLoginHref } from "@/lib/auth-redirect";
@@ -250,11 +249,7 @@ export default async function OptimizePage({
                 {stackStoryItems.map((item, index) => (
                   <div
                     key={item.title}
-                    className={`rounded-[1.15rem] border px-4 py-4 ${
-                      index === 0
-                        ? "border-[rgba(34,80,221,0.18)] bg-[linear-gradient(180deg,#ffffff_0%,#eef4ff_100%)]"
-                        : "border-[var(--line)] bg-white"
-                    }`}
+                    className={`${index === 0 ? "ui-panel-highlight" : "ui-panel-elevated"} px-4 py-4`}
                   >
                     <p className="section-kicker text-[var(--brand-700)]">{item.eyebrow}</p>
                     <p className="mt-2 text-sm font-semibold text-[var(--slate-950)]">{item.title}</p>
@@ -268,7 +263,7 @@ export default async function OptimizePage({
               <p className="section-kicker text-[var(--brand-700)]">Supported Channels</p>
               <div className="mt-4 grid gap-3">
               {supportedChannelCatalog.map((item) => (
-                <div key={item.kind} className="rounded-[1rem] border border-[var(--line)] bg-white px-4 py-4">
+                <div key={item.kind} className="ui-panel-elevated px-4 py-4">
                   <p className="text-base font-semibold text-[var(--slate-950)]">{item.label}</p>
                   <p className="mt-2 text-sm leading-6 text-[var(--slate-700)]">{item.summary}</p>
                 </div>
@@ -288,7 +283,7 @@ export default async function OptimizePage({
                 <p className="section-kicker text-[var(--brand-700)]">Workspace Summary</p>
                 <div className="mt-4 grid gap-2">
                   {rightRailCards.map((item) => (
-                    <div key={item.title} className="rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3">
+                    <div key={item.title} className="ui-panel-elevated px-4 py-3">
                       <p className="text-xs font-semibold text-[var(--slate-500)]">{item.title}</p>
                       <p className="mt-1 text-sm font-semibold text-[var(--slate-950)]">{item.body}</p>
                     </div>
@@ -385,7 +380,7 @@ export default async function OptimizePage({
                   <p className="section-kicker text-[var(--brand-700)]">Workspace Context</p>
                   <div className="mt-4 grid gap-2">
                     {rightRailCards.map((item) => (
-                      <div key={item.title} className="rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3">
+                      <div key={item.title} className="ui-panel-elevated px-4 py-3">
                         <p className="text-xs font-semibold text-[var(--slate-500)]">{item.title}</p>
                         <p className="mt-1 text-sm font-semibold text-[var(--slate-950)]">{item.body}</p>
                       </div>
@@ -471,7 +466,7 @@ export default async function OptimizePage({
                       "질문형 플래닝",
                       "저장 / 주문 / 라이브러리 연결",
                     ].map((item) => (
-                      <div key={item} className="rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3 text-sm text-[var(--slate-700)]">
+                      <div key={item} className="ui-panel-elevated px-4 py-3 text-sm text-[var(--slate-700)]">
                         {item}
                       </div>
                     ))}

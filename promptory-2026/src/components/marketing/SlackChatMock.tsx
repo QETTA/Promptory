@@ -51,16 +51,16 @@ export function SlackChatMock({
   return (
     <div
       className={cn(
-        "w-full max-w-md rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden",
+        "slack-shell w-full max-w-md",
         className
       )}
     >
       {/* Slack Header */}
-      <div className="bg-[#1a1d21] px-4 py-3 border-b border-slate-800 flex items-center gap-2">
+      <div className="slack-header px-4 py-3">
         <div className="flex gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-          <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
-          <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+          <div className="slack-window-dot slack-window-dot-red" />
+          <div className="slack-window-dot slack-window-dot-yellow" />
+          <div className="slack-window-dot slack-window-dot-green" />
         </div>
         <span className="text-xs text-slate-400 ml-2 font-medium">{title}</span>
       </div>
@@ -83,10 +83,8 @@ export function SlackChatMock({
             {/* Avatar */}
             <div
               className={cn(
-                "w-9 h-9 rounded-lg flex-shrink-0 flex items-center justify-center text-xs font-bold shadow-sm",
-                message.type === "user"
-                  ? "bg-gradient-to-br from-slate-200 to-slate-300 text-slate-700"
-                  : "bg-gradient-to-br from-[#4A154B] to-[#611f63] text-white"
+                "h-9 w-9 flex-shrink-0 text-xs font-bold",
+                message.type === "user" ? "slack-user-avatar" : "slack-agent-avatar"
               )}
             >
               {message.type === "user" ? "U" : "P"}
@@ -98,7 +96,7 @@ export function SlackChatMock({
                 <span
                   className={cn(
                     "text-sm font-bold",
-                    message.type === "user" ? "text-slate-900" : "text-[#4A154B]"
+                    message.type === "user" ? "text-slate-900" : "slack-agent-name"
                   )}
                 >
                   {message.type === "user" ? "사용자" : "Promptory Agent"}
@@ -106,7 +104,7 @@ export function SlackChatMock({
                 <span className="text-xs text-slate-400">오늘</span>
               </div>
 
-              <div className="mt-1.5 text-sm text-slate-700 leading-relaxed bg-slate-50 rounded-lg px-3 py-2 inline-block whitespace-pre-line">
+              <div className="slack-message-bubble mt-1.5 px-3 py-2 text-sm leading-relaxed whitespace-pre-line">
                 {message.content}
               </div>
 
@@ -116,7 +114,7 @@ export function SlackChatMock({
                   {message.buttons.map((button, btnIndex) => (
                     <button
                       key={btnIndex}
-                      className="px-3 py-1.5 bg-white border border-slate-300 rounded-md text-xs font-medium text-slate-700 hover:bg-slate-50 hover:border-slate-400 hover:shadow-sm transition-all"
+                      className="slack-action-chip px-3 py-1.5 text-xs font-medium"
                     >
                       {button}
                     </button>
@@ -130,12 +128,12 @@ export function SlackChatMock({
         {/* Typing indicator */}
         {showTyping && (
           <div className="flex gap-3">
-            <div className="w-9 h-9 rounded-lg flex-shrink-0 flex items-center justify-center text-xs font-bold bg-gradient-to-br from-[#4A154B] to-[#611f63] text-white shadow-sm">
+            <div className="slack-agent-avatar h-9 w-9 flex-shrink-0 text-xs font-bold">
               P
             </div>
             <div className="flex-1">
-              <span className="text-sm font-bold text-[#4A154B]">Promptory Agent</span>
-              <div className="mt-1.5 bg-slate-50 rounded-lg px-3 py-3 inline-flex items-center gap-1">
+              <span className="slack-agent-name text-sm font-bold">Promptory Agent</span>
+              <div className="slack-message-bubble mt-1.5 inline-flex items-center gap-1 px-3 py-3">
                 <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
                 <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
                 <span className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
@@ -148,12 +146,12 @@ export function SlackChatMock({
       {/* Input */}
       {showInput && (
         <div className="px-4 py-3 border-t border-slate-200 bg-slate-50">
-          <div className="flex items-center gap-2 px-3 py-2 bg-white rounded-lg border border-slate-300 shadow-sm">
+          <div className="slack-input-shell px-3 py-2">
             <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
             </svg>
             <span className="text-slate-400 text-sm">URL이나 문서를 입력하세요...</span>
-            <button className="ml-auto p-1.5 bg-blue-600 rounded text-white hover:bg-blue-700 transition-colors">
+            <button className="slack-send-button ml-auto p-1.5">
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
               </svg>

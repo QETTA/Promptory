@@ -15,13 +15,13 @@ export function SiteFooter() {
   ];
 
   return (
-    <footer className="border-t border-slate-200/60 bg-white">
+    <footer className="border-t border-[var(--line)] bg-[var(--surface-1)]">
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
         <div className="grid gap-8 md:grid-cols-3">
           {/* Brand */}
           <div className="flex flex-col gap-3">
             <PromptoryLogo />
-            <p className="text-sm text-slate-500 leading-relaxed">
+            <p className="text-sm leading-relaxed text-[var(--slate-500)]">
               Slack에 URL을내면,
               <br />
               진단부터 실행 초안까지 팀 대화 안에서 끝납니다.
@@ -30,13 +30,13 @@ export function SiteFooter() {
 
           {/* Navigation */}
           <div className="flex flex-col gap-3">
-            <p className="text-sm font-semibold text-slate-900">메뉴</p>
+            <p className="text-sm font-semibold text-[var(--slate-900)]">메뉴</p>
             <ul className="flex flex-col gap-2">
               {footerLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-slate-500 transition-colors duration-150 hover:text-blue-600"
+                    className="text-sm text-[var(--slate-500)] transition-colors duration-150 hover:text-[var(--brand-700)]"
                   >
                     {link.label}
                   </Link>
@@ -47,13 +47,13 @@ export function SiteFooter() {
 
           {/* Packages */}
           <div className="flex flex-col gap-3">
-            <p className="text-sm font-semibold text-slate-900">패키지</p>
+            <p className="text-sm font-semibold text-[var(--slate-900)]">패키지</p>
             <ul className="flex flex-col gap-2">
               {packageLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-slate-500 transition-colors duration-150 hover:text-blue-600"
+                    className="text-sm text-[var(--slate-500)] transition-colors duration-150 hover:text-[var(--brand-700)]"
                   >
                     {link.label}
                   </Link>
@@ -64,13 +64,13 @@ export function SiteFooter() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-slate-200/60 pt-6 sm:flex-row">
-          <p className="text-xs text-slate-400">
+        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-[var(--line)] pt-6 sm:flex-row">
+          <p className="text-xs text-[var(--slate-400)]">
             © 2026 Promptory. All rights reserved.
           </p>
           <a
             href="mailto:hello@promptory.kr"
-            className="text-xs text-slate-400 transition-colors duration-150 hover:text-blue-600"
+            className="text-xs text-[var(--slate-400)] transition-colors duration-150 hover:text-[var(--brand-700)]"
           >
             hello@promptory.kr
           </a>

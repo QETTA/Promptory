@@ -6,6 +6,7 @@
 
 # Testing
 /coverage
+/e2e/screenshots/
 
 # Next.js
 /.next/
@@ -23,6 +24,7 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.codex-logs/
 
 # Local env files
 .env*.local

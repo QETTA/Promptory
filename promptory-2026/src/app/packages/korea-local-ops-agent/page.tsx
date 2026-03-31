@@ -253,18 +253,18 @@ export default function KoreaLocalOpsAgentPage() {
             <Card variant="strong" className="p-6 shadow-lg">
               <div className="space-y-6">
                 <div className="flex gap-3 animate-slide-in">
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center text-sm font-bold text-slate-700 shadow-sm">U</div>
+                  <div className="slack-user-avatar flex h-10 w-10 items-center justify-center text-sm font-bold">U</div>
                   <div className="flex-1">
                     <p className="text-sm font-bold text-slate-900">사용자</p>
-                    <p className="text-sm text-slate-600 mt-1 bg-slate-50 rounded-lg px-3 py-2 inline-block">한국 사이트 URL 보낼게요</p>
+                    <p className="slack-message-bubble mt-1 px-3 py-2 text-sm">한국 사이트 URL 보낼게요</p>
                   </div>
                 </div>
 
                 <div className="flex gap-3 animate-slide-in" style={{ animationDelay: "100ms" }}>
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#4A154B] to-[#611f63] flex items-center justify-center text-sm font-bold text-white shadow-sm">P</div>
+                  <div className="slack-agent-avatar flex h-10 w-10 items-center justify-center text-sm font-bold">P</div>
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-[#4A154B]">Promptory Agent</p>
-                    <p className="text-sm text-slate-600 mt-1 bg-slate-50 rounded-lg px-3 py-2 inline-block">
+                    <p className="slack-agent-name text-sm font-bold">Promptory Agent</p>
+                    <p className="slack-message-bubble mt-1 px-3 py-2 text-sm">
                       사이트를 확인했어요.<br />
                       제품 정보는 충분하지만 한국 시장용 메시지와 CTA는 약한 편입니다.<br />
                       HQ 보고용 요약도 같이 만들까요?
@@ -273,25 +273,25 @@ export default function KoreaLocalOpsAgentPage() {
                 </div>
 
                 <div className="flex gap-3 animate-slide-in" style={{ animationDelay: "200ms" }}>
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-slate-200 to-slate-300 flex items-center justify-center text-sm font-bold text-slate-700 shadow-sm">U</div>
+                  <div className="slack-user-avatar flex h-10 w-10 items-center justify-center text-sm font-bold">U</div>
                   <div className="flex-1">
                     <p className="text-sm font-bold text-slate-900">사용자</p>
-                    <p className="text-sm text-slate-600 mt-1 bg-slate-50 rounded-lg px-3 py-2 inline-block">네, KR/EN 둘 다 필요해요.</p>
+                    <p className="slack-message-bubble mt-1 px-3 py-2 text-sm">네, KR/EN 둘 다 필요해요.</p>
                   </div>
                 </div>
 
                 <div className="flex gap-3 animate-slide-in" style={{ animationDelay: "300ms" }}>
-                  <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-[#4A154B] to-[#611f63] flex items-center justify-center text-sm font-bold text-white shadow-sm">P</div>
+                  <div className="slack-agent-avatar flex h-10 w-10 items-center justify-center text-sm font-bold">P</div>
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-[#4A154B]">Promptory Agent</p>
-                    <p className="text-sm text-slate-600 mt-1 bg-slate-50 rounded-lg px-3 py-2 inline-block">
+                    <p className="slack-agent-name text-sm font-bold">Promptory Agent</p>
+                    <p className="slack-message-bubble mt-1 px-3 py-2 text-sm">
                       좋아요.<br />
                       한국 채널 기준 진단과 경쟁사 스캔을 먼저 정리한 뒤<br />
                       KR/EN summary로 이어서 만들게요.
                     </p>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {["Korea scan", "KR summary", "EN summary"].map((btn) => (
-                        <span key={btn} className="px-3 py-1.5 bg-white border border-slate-300 rounded-md text-xs font-medium text-slate-700 hover:bg-slate-50 hover:shadow-sm transition-all cursor-pointer">
+                        <span key={btn} className="slack-action-chip cursor-pointer px-3 py-1.5 text-xs font-medium">
                           {btn}
                         </span>
                       ))}

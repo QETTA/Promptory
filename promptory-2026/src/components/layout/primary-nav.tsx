@@ -43,11 +43,11 @@ export function PrimaryNav({
                 : "relative text-sm font-medium transition-all duration-300",
               mobile
                 ? isActive
-                  ? "border-blue-600 bg-blue-600 text-white shadow-md"
-                  : "border-slate-200 bg-slate-50 text-slate-700 hover:border-blue-400 hover:bg-white hover:shadow-sm"
+                  ? "border-[var(--brand-600)] bg-[var(--brand-600)] text-white shadow-[var(--shadow-md)]"
+                  : "border-[var(--line)] bg-[var(--surface-2)] text-[var(--slate-700)] hover:border-[var(--brand-300)] hover:bg-[var(--surface-1)] hover:shadow-[var(--shadow-sm)]"
                 : isActive
-                  ? "text-slate-900"
-                  : "text-slate-600 hover:text-slate-900",
+                  ? "text-[var(--slate-900)]"
+                  : "text-[var(--slate-600)] hover:text-[var(--slate-900)]",
               !mobile && "py-1 px-1 hover:-translate-y-0.5 hover:shadow-sm"
             )}
           >
@@ -55,7 +55,7 @@ export function PrimaryNav({
             {!mobile && (
               <span
                 className={cn(
-                  "absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-blue-500 transition-all duration-300",
+                  "absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-[var(--brand-500)] transition-all duration-300",
                   isActive ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
                 )}
               />

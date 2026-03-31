@@ -1,4 +1,5 @@
 import { CTAButton } from "@/components/ui/cta-button";
+import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -73,24 +74,24 @@ function AskChoices<T extends string>({
             key={option.value}
             href={renderHref(option.value)}
             className={cn(
-              "block rounded-[1rem] border px-4 py-3 text-left transition",
+              "ui-choice-card flex-col items-start px-4 py-3 text-left transition",
               active
-                ? "border-[var(--brand-600)] bg-[var(--brand-50)] shadow-[0_8px_20px_rgba(37,99,235,0.08)]"
-                : "border-[var(--line)] bg-white hover:border-[var(--line-strong)] hover:bg-[var(--surface-2)]",
+                ? "ui-choice-card-selected"
+                : "border-[var(--line)] bg-white",
             )}
           >
             <div className="flex items-center justify-between gap-3">
               <p className="text-sm font-semibold text-[var(--slate-950)]">{option.label}</p>
               <div className="flex items-center gap-2">
                 {recommended ? (
-                  <span className="inline-flex rounded-full border border-[var(--brand-300)] bg-[var(--brand-50)] px-2 py-1 text-[11px] font-medium text-[var(--brand-700)]">
+                  <Badge className="px-2 py-1 text-[11px] font-medium">
                     추천
-                  </span>
+                  </Badge>
                 ) : null}
                 {active ? (
-                  <span className="inline-flex rounded-full border border-[var(--line-strong)] bg-white px-2 py-1 text-[11px] font-medium text-[var(--slate-700)]">
+                  <Badge variant="neutral" className="bg-white px-2 py-1 text-[11px] font-medium">
                     선택
-                  </span>
+                  </Badge>
                 ) : null}
               </div>
             </div>
@@ -205,10 +206,10 @@ export function OptimizationBriefBuilder({
           <div
             key={step.label}
             className={cn(
-              "rounded-[1rem] border px-4 py-3 text-sm",
+              "px-4 py-3 text-sm",
               step.state === "current"
-                ? "border-[var(--brand-600)] bg-[var(--brand-50)] text-[var(--brand-800)]"
-                : "border-[var(--line)] bg-[var(--surface-1)] text-[var(--slate-600)]",
+                ? "ui-panel-highlight text-[var(--brand-800)]"
+                : "ui-panel-muted bg-[var(--surface-1)] text-[var(--slate-600)]",
             )}
           >
             <p className="font-semibold text-[var(--slate-950)]">{step.label}</p>
@@ -244,7 +245,7 @@ export function OptimizationBriefBuilder({
             </div>
           </div>
 
-          <div className="mt-5 rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] p-4">
+          <div className="ui-panel-muted mt-5 p-4">
             <div className="flex items-center justify-between gap-3">
               <div>
                 <p className="section-kicker text-[var(--slate-500)]">Progress</p>
@@ -257,8 +258,8 @@ export function OptimizationBriefBuilder({
               <p className="text-sm font-semibold text-[var(--slate-950)]">{completion}%</p>
             </div>
 
-            <div className="mt-3 h-2 overflow-hidden rounded-full bg-[var(--line)]">
-              <div className="h-full rounded-full bg-[var(--brand-600)] transition-all" style={{ width: `${completion}%` }} />
+            <div className="ui-progress-track mt-3">
+              <div className="ui-progress-fill" style={{ width: `${completion}%` }} />
             </div>
           </div>
 
@@ -281,12 +282,12 @@ export function OptimizationBriefBuilder({
                     constraint: brief.constraint,
                   })}
                   className={cn(
-                    "rounded-[1rem] border px-3 py-3 text-left text-sm transition",
+                    "px-3 py-3 text-left text-sm transition",
                     isActive
-                      ? "border-[var(--brand-600)] bg-[var(--brand-50)] text-[var(--brand-800)]"
+                      ? "ui-panel-highlight text-[var(--brand-800)]"
                       : isDone
-                        ? "border-[var(--line-strong)] bg-white text-[var(--slate-700)]"
-                        : "border-[var(--line)] bg-[var(--surface-2)] text-[var(--slate-500)]",
+                        ? "ui-panel-elevated text-[var(--slate-700)]"
+                        : "ui-panel-muted text-[var(--slate-500)]",
                   )}
                 >
                   <p className="font-semibold">
@@ -307,15 +308,15 @@ export function OptimizationBriefBuilder({
             <input type="hidden" name="tone" value={brief.tone ?? ""} />
             <input type="hidden" name="conversion" value={brief.conversion ?? ""} />
 
-            <div className="rounded-[1.1rem] border border-[var(--line)] bg-white p-4 sm:p-5">
+            <div className="ui-panel-elevated rounded-[1.1rem] p-4 sm:p-5">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <p className="section-kicker text-[var(--brand-700)]">{activeStep.label}</p>
                   <h4 className="mt-1 text-base font-semibold text-[var(--slate-950)]">{activeStep.question}</h4>
                 </div>
-                <span className="inline-flex rounded-full border border-[var(--brand-200)] bg-[var(--brand-50)] px-2.5 py-1 text-[11px] font-medium text-[var(--brand-700)]">
+                <Badge className="px-2.5 py-1 text-[11px] font-medium">
                   현재 질문
-                </span>
+                </Badge>
               </div>
 
               <div className="mt-4">
@@ -337,7 +338,7 @@ export function OptimizationBriefBuilder({
                 />
               </div>
 
-              <div className="mt-4 rounded-[1rem] border border-[var(--brand-200)] bg-[var(--brand-50)] px-4 py-3 text-sm leading-6 text-[var(--brand-800)]">
+              <div className="ui-panel-highlight mt-4 px-4 py-3 text-sm leading-6 text-[var(--brand-800)]">
                 <p className="text-xs font-semibold text-[var(--brand-700)]">Surface Read</p>
                 <p className="mt-1">{activeStep.recommendedReason}</p>
               </div>
@@ -345,7 +346,7 @@ export function OptimizationBriefBuilder({
 
             <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
               {steps.map((step) => (
-                <div key={step.key} className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
+                <div key={step.key} className="ui-panel-muted px-4 py-3">
                   <div className="flex items-center justify-between gap-3">
                     <p className="text-sm font-semibold text-[var(--slate-950)]">{step.label}</p>
                     <a
@@ -371,7 +372,7 @@ export function OptimizationBriefBuilder({
               ))}
             </div>
 
-            <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] p-4">
+            <div className="ui-panel-elevated rounded-[1rem] p-4">
               <Label htmlFor="constraint">Constraint Note</Label>
               <Textarea
                 id="constraint"
@@ -399,7 +400,7 @@ export function OptimizationBriefBuilder({
 
             <div className="mt-4 grid gap-3">
               {summary.directionPoints.slice(0, 3).map((point) => (
-                <div key={point} className="flex gap-3 rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3">
+                <div key={point} className="ui-panel-elevated flex gap-3 px-4 py-3">
                   <span className="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--brand-500)]" />
                   <p className="text-sm leading-6 text-[var(--slate-700)]">{point}</p>
                 </div>
@@ -444,12 +445,12 @@ export function OptimizationBriefBuilder({
 
         <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {summary.recommendedModules.map((module, index) => (
-            <div key={module.title} className="rounded-[1.1rem] border border-[var(--line)] bg-[var(--surface-1)] p-4">
+            <div key={module.title} className="ui-panel-elevated rounded-[1.1rem] p-4">
               <div className="flex items-center justify-between gap-3">
                 <p className="text-sm font-semibold text-[var(--slate-950)]">{module.title}</p>
-                <span className="inline-flex rounded-full border border-[var(--line)] bg-white px-2 py-1 text-[11px] font-medium text-[var(--slate-600)]">
+                <Badge variant="neutral" className="bg-white px-2 py-1 text-[11px] font-medium">
                   {index + 1}
-                </span>
+                </Badge>
               </div>
               <p className="mt-2 text-sm leading-6 text-[var(--slate-700)]">{module.body}</p>
               {moduleCategory ? (

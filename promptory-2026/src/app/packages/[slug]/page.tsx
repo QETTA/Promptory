@@ -45,22 +45,22 @@ export async function generateStaticParams() {
 // Color theme configurations
 const colorThemes = {
   blue: {
-    badge: "bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/20",
-    gradient: "from-slate-50 via-blue-50/30 to-indigo-50/20",
-    accent: "text-blue-600",
-    bgLight: "bg-blue-50",
-    bgLighter: "bg-blue-100",
-    textLight: "text-blue-600",
+    badge: "bg-[var(--brand-600)] hover:bg-[var(--brand-700)] shadow-[var(--shadow-glow)]",
+    gradient: "from-slate-50 via-brand-50/30 to-indigo-50/20",
+    accent: "text-[var(--brand-600)]",
+    bgLight: "bg-brand-50",
+    bgLighter: "bg-brand-100",
+    textLight: "text-[var(--brand-600)]",
     gradientText: "gradient-text",
-    ctaButton: "bg-blue-600 hover:bg-blue-700",
-    border: "border-blue-200",
-    hoverBorder: "hover:border-blue-300",
-    numberBg: "bg-blue-100 text-blue-600",
-    icon: "text-blue-500",
-    stepNumber: "text-blue-200",
+    ctaButton: "bg-[var(--brand-600)] hover:bg-[var(--brand-700)]",
+    border: "border-brand-200",
+    hoverBorder: "hover:border-brand-300",
+    numberBg: "bg-brand-100 text-[var(--brand-600)]",
+    icon: "text-brand-500",
+    stepNumber: "text-brand-200",
   },
   emerald: {
-    badge: "bg-emerald-600 hover:bg-emerald-700 shadow-lg shadow-emerald-600/20",
+    badge: "bg-emerald-600 hover:bg-emerald-700 shadow-[var(--shadow-glow-emerald)]",
     gradient: "from-slate-50 via-emerald-50/30 to-teal-50/20",
     accent: "text-emerald-600",
     bgLight: "bg-emerald-50",
@@ -75,7 +75,7 @@ const colorThemes = {
     stepNumber: "text-emerald-200",
   },
   indigo: {
-    badge: "bg-indigo-600 hover:bg-indigo-700 shadow-lg shadow-indigo-600/20",
+    badge: "bg-indigo-600 hover:bg-indigo-700 shadow-[var(--shadow-glow-indigo)]",
     gradient: "from-slate-50 via-indigo-50/30 to-purple-50/20",
     accent: "text-indigo-600",
     bgLight: "bg-indigo-50",
@@ -135,7 +135,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
           <div className="grid gap-12 lg:grid-cols-2 items-center">
             <AnimatedSection direction="left" className="flex flex-col gap-6">
               <Badge className={cn("w-fit", theme.badge)}>{pkg.badge}</Badge>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+              <h1 className="poster-title text-[var(--slate-950)]">
                 {pkg.heroTitle.line1}
                 <br />
                 <span className={theme.gradientText}>{pkg.heroTitle.highlight}</span>
@@ -146,7 +146,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
                   </>
                 )}
               </h1>
-              <p className="text-base leading-7 text-slate-600 sm:text-lg">{pkg.heroBody}</p>
+              <p className="body-copy-xl text-[var(--slate-600)]">{pkg.heroBody}</p>
               <div className="flex flex-wrap gap-3 pt-2">
                 <CTAButton
                   href="/contact"
@@ -162,12 +162,12 @@ export default async function PackageDetailPage({ params }: PageProps) {
                   href="/demo/slack"
                   variant="outline"
                   size="lg"
-                  className={cn("hover-lift", theme.border, theme.bgLight)}
+                  className={cn("hover-lift", theme.border, "hover:bg-[var(--surface-2)]")}
                 >
                   샘플 대화 보기
                 </CTAButton>
               </div>
-              <p className="text-xs text-slate-500 pt-2">{pkg.microCopy}</p>
+              <p className="body-copy-xs pt-2 text-[var(--slate-500)]">{pkg.microCopy}</p>
             </AnimatedSection>
 
             <AnimatedSection
@@ -330,10 +330,8 @@ export default async function PackageDetailPage({ params }: PageProps) {
                   >
                     <div
                       className={cn(
-                        "w-10 h-10 rounded-lg flex-shrink-0 flex items-center justify-center text-sm font-bold shadow-sm",
-                        message.type === "user"
-                          ? "bg-gradient-to-br from-slate-200 to-slate-300 text-slate-700"
-                          : "bg-gradient-to-br from-[#4A154B] to-[#611f63] text-white"
+                        "flex h-10 w-10 flex-shrink-0 items-center justify-center text-sm font-bold",
+                        message.type === "user" ? "slack-user-avatar" : "slack-agent-avatar"
                       )}
                     >
                       {message.type === "user" ? "U" : "P"}
@@ -342,12 +340,12 @@ export default async function PackageDetailPage({ params }: PageProps) {
                       <p
                         className={cn(
                           "text-sm font-bold",
-                          message.type === "user" ? "text-slate-900" : "text-[#4A154B]"
+                          message.type === "user" ? "text-slate-900" : "slack-agent-name"
                         )}
                       >
                         {message.type === "user" ? "사용자" : "Promptory Agent"}
                       </p>
-                      <p className="text-sm text-slate-600 mt-1 bg-slate-50 rounded-lg px-3 py-2 inline-block whitespace-pre-line">
+                      <p className="slack-message-bubble mt-1 px-3 py-2 text-sm whitespace-pre-line">
                         {message.content}
                       </p>
                       {message.buttons && message.buttons.length > 0 && (
@@ -355,7 +353,7 @@ export default async function PackageDetailPage({ params }: PageProps) {
                           {message.buttons.map((btn, btnIndex) => (
                             <span
                               key={btnIndex}
-                              className="px-3 py-1.5 bg-white border border-slate-300 rounded-md text-xs font-medium text-slate-700 hover:bg-slate-50 hover:shadow-sm transition-all cursor-pointer"
+                              className="slack-action-chip cursor-pointer px-3 py-1.5 text-xs font-medium"
                             >
                               {btn}
                             </span>
