@@ -19,7 +19,7 @@ export function AnimatedSection({
   className,
   delay = 0,
   direction = "up",
-  duration = 0.6,
+  duration = 0.7,
 }: AnimatedSectionProps) {
   const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -49,6 +49,10 @@ export function AnimatedSection({
     right: { x: -30 },
   };
 
+  // Use CSS custom properties for spring easing
+  const easeSpring = "cubic-bezier(0.34, 1.56, 0.64, 1)";
+  const easeOutExpo = "cubic-bezier(0.16, 1, 0.3, 1)";
+
   return (
     <div
       ref={ref}
@@ -58,7 +62,7 @@ export function AnimatedSection({
         transform: isVisible
           ? "translate(0, 0)"
           : `translate(${directionStyles[direction].x || 0}px, ${directionStyles[direction].y || 0}px)`,
-        transition: `opacity ${duration}s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s, transform ${duration}s cubic-bezier(0.4, 0, 0.2, 1) ${delay}s`,
+        transition: `opacity ${duration}s ${easeOutExpo} ${delay}s, transform ${duration}s ${easeSpring} ${delay}s`,
         willChange: "opacity, transform",
       }}
     >
@@ -99,6 +103,9 @@ export function StaggerContainer({
     return () => observer.disconnect();
   }, []);
 
+  const easeSpring = "cubic-bezier(0.34, 1.56, 0.64, 1)";
+  const easeOutExpo = "cubic-bezier(0.16, 1, 0.3, 1)";
+
   return (
     <div ref={ref} className={cn(className)}>
       {Array.isArray(children)
@@ -107,8 +114,8 @@ export function StaggerContainer({
               key={index}
               style={{
                 opacity: isVisible ? 1 : 0,
-                transform: isVisible ? "translateY(0)" : "translateY(20px)",
-                transition: `opacity 0.5s ease-out ${index * staggerDelay}s, transform 0.5s ease-out ${index * staggerDelay}s`,
+                transform: isVisible ? "translateY(0)" : "translateY(24px)",
+                transition: `opacity 0.6s ${easeOutExpo} ${index * staggerDelay}s, transform 0.6s ${easeSpring} ${index * staggerDelay}s`,
               }}
             >
               {child}
@@ -153,13 +160,15 @@ export function FadeIn({
     return () => observer.disconnect();
   }, []);
 
+  const easeOutExpo = "cubic-bezier(0.16, 1, 0.3, 1)";
+
   return (
     <div
       ref={ref}
       className={cn(className)}
       style={{
         opacity: isVisible ? 1 : 0,
-        transition: `opacity ${duration}s ease-out ${delay}s`,
+        transition: `opacity ${duration}s ${easeOutExpo} ${delay}s`,
       }}
     >
       {children}
@@ -199,6 +208,8 @@ export function ScaleIn({
     return () => observer.disconnect();
   }, []);
 
+  const easeSpring = "cubic-bezier(0.34, 1.56, 0.64, 1)";
+
   return (
     <div
       ref={ref}
@@ -206,7 +217,123 @@ export function ScaleIn({
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? "scale(1)" : "scale(0.95)",
-        transition: `opacity 0.5s ease-out ${delay}s, transform 0.5s ease-out ${delay}s`,
+        transition: `opacity 0.5s ease-out ${delay}s, transform 0.5s ${easeSpring} ${delay}s`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+// New: Slide In from specific direction with spring physics
+interface SlideInProps {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  direction?: "left" | "right" | "up" | "down";
+  distance?: number;
+}
+
+export function SlideIn({
+  children,
+  className,
+  delay = 0,
+  direction = "up",
+  distance = 40,
+}: SlideInProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const getTransform = () => {
+    switch (direction) {
+      case "left": return `translateX(-${distance}px)`;
+      case "right": return `translateX(${distance}px)`;
+      case "up": return `translateY(${distance}px)`;
+      case "down": return `translateY(-${distance}px)`;
+    }
+  };
+
+  const easeSpring = "cubic-bezier(0.34, 1.56, 0.64, 1)";
+  const easeOutExpo = "cubic-bezier(0.16, 1, 0.3, 1)";
+
+  return (
+    <div
+      ref={ref}
+      className={cn(className)}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "translate(0, 0)" : getTransform(),
+        transition: `opacity 0.6s ${easeOutExpo} ${delay}s, transform 0.6s ${easeSpring} ${delay}s`,
+        willChange: "opacity, transform",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+// New: Bounce In animation for emphasis
+interface BounceInProps {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+}
+
+export function BounceIn({
+  children,
+  className,
+  delay = 0,
+}: BounceInProps) {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const easeElastic = "cubic-bezier(0.68, -0.55, 0.265, 1.55)";
+
+  return (
+    <div
+      ref={ref}
+      className={cn(className)}
+      style={{
+        opacity: isVisible ? 1 : 0,
+        transform: isVisible ? "scale(1)" : "scale(0.3)",
+        transition: `opacity 0.4s ease-out ${delay}s, transform 0.6s ${easeElastic} ${delay}s`,
+        willChange: "opacity, transform",
       }}
     >
       {children}

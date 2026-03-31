@@ -6,13 +6,13 @@ import { cn } from "@/lib/cn";
 const cardVariants = cva("", {
   variants: {
     variant: {
-      default: "rounded-[1.5rem] border border-[var(--line)] bg-[var(--surface-1)] shadow-[0_14px_30px_-26px_rgba(15,23,42,0.14)]",
+      default: "rounded-3xl border border-slate-200/60 bg-white shadow-[0_14px_30px_-26px_rgba(15,23,42,0.14)]",
       heroBright:
-        "rounded-[1.75rem] border border-[rgba(34,80,221,0.12)] bg-[linear-gradient(180deg,#ffffff_0%,#f5f8ff_100%)] text-[var(--slate-950)] shadow-[0_18px_40px_-30px_rgba(34,80,221,0.16)]",
+        "rounded-[1.75rem] border border-blue-500/10 bg-gradient-to-b from-white to-blue-50/80 text-slate-950 shadow-[0_18px_40px_-30px_rgba(34,80,221,0.16)]",
       heroGlass:
-        "rounded-[1.5rem] border border-white/20 bg-white/10 text-white shadow-[0_20px_40px_-28px_rgba(2,6,23,0.36)] backdrop-blur-xl",
-      strong: "rounded-[1.5rem] border border-[var(--line-strong)] bg-[var(--surface-1)] shadow-[0_14px_28px_-26px_rgba(15,23,42,0.16)]",
-      tint: "rounded-[1.5rem] border border-[var(--line)] bg-[var(--surface-2)] shadow-none",
+        "rounded-3xl border border-white/20 bg-white/10 text-white shadow-[0_20px_40px_-28px_rgba(2,6,23,0.36)] backdrop-blur-xl",
+      strong: "rounded-3xl border border-slate-200 bg-white shadow-[0_14px_28px_-26px_rgba(15,23,42,0.16)]",
+      tint: "rounded-3xl border border-slate-200/60 bg-slate-50 shadow-none",
     },
   },
   defaultVariants: {
