@@ -21,10 +21,18 @@ export function AnimatedSection({
   direction = "up",
   duration = 0.7,
 }: AnimatedSectionProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  // FIX: Start with true to prevent content from being invisible on load
+  const [isVisible, setIsVisible] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Check if user prefers reduced motion
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -82,10 +90,17 @@ export function StaggerContainer({
   className,
   staggerDelay = 0.1,
 }: StaggerContainerProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  // FIX: Start with true to prevent content from being invisible on load
+  const [isVisible, setIsVisible] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -139,10 +154,17 @@ export function FadeIn({
   delay = 0,
   duration = 0.5,
 }: FadeInProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  // FIX: Start with true to prevent content from being invisible on load
+  const [isVisible, setIsVisible] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -187,10 +209,17 @@ export function ScaleIn({
   className,
   delay = 0,
 }: ScaleInProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  // FIX: Start with true to prevent content from being invisible on load
+  const [isVisible, setIsVisible] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -241,10 +270,17 @@ export function SlideIn({
   direction = "up",
   distance = 40,
 }: SlideInProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  // FIX: Start with true to prevent content from being invisible on load
+  const [isVisible, setIsVisible] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -302,10 +338,17 @@ export function BounceIn({
   className,
   delay = 0,
 }: BounceInProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  // FIX: Start with true to prevent content from being invisible on load
+  const [isVisible, setIsVisible] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {

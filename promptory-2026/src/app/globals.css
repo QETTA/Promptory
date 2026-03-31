@@ -1,7 +1,8 @@
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════════════════════════════
-   PROMTORY DESIGN TOKENS v3.0 - 2026 TREND EDITION
+   PROMTORY DESIGN TOKENS v3.1 - FIXED FOR TAILWIND v4
+   - Converted @theme block to :root variables for compatibility
    - Enhanced glassmorphism with border gradients
    - Bento grid layouts
    - Micro-interactions & press states
@@ -10,8 +11,9 @@
    - Spring physics animations
    ═══════════════════════════════════════════════════════════════ */
 
-@theme {
-  /* ── Brand Palette (Blue-based, Tech/AI) ── */
+/* ── CSS Variables in :root for maximum compatibility ── */
+:root {
+  /* Brand Palette (Blue-based, Tech/AI) */
   --color-brand-50: #eef5ff;
   --color-brand-100: #dfeaff;
   --color-brand-200: #c9dbff;
@@ -23,7 +25,7 @@
   --color-brand-800: #132f7f;
   --color-brand-900: #1e3a8a;
 
-  /* ── Neutral Palette (Refined Slate) ── */
+  /* Neutral Palette (Refined Slate) */
   --color-slate-50: #f8fafc;
   --color-slate-100: #f1f5f9;
   --color-slate-200: #e2e8f0;
@@ -36,7 +38,7 @@
   --color-slate-900: #0f172a;
   --color-slate-950: #020617;
 
-  /* ── Semantic Surface System (2026 Layered Surfaces) ── */
+  /* Semantic Surface System */
   --color-page: #f8fafc;
   --color-page-elevated: #ffffff;
   --color-surface: #ffffff;
@@ -45,21 +47,21 @@
   --color-surface-elevated: #ffffff;
   --color-surface-pressed: #f1f5f9;
   --color-surface-muted: #e2e8f0;
-  
-  /* ── Text Colors (Ink System) ── */
+
+  /* Text Colors (Ink System) - FIXED: High contrast colors */
   --color-ink: #0f172a;
   --color-ink-primary: #0f172a;
-  --color-ink-secondary: #475569;
-  --color-ink-tertiary: #64748b;
+  --color-ink-secondary: #334155;
+  --color-ink-tertiary: #475569;
   --color-ink-soft: rgba(15, 23, 42, 0.72);
-  
-  /* ── Border & Line System ── */
-  --color-line: rgba(15, 23, 42, 0.06);
-  --color-line-strong: rgba(15, 23, 42, 0.12);
-  --color-line-hover: rgba(15, 23, 42, 0.18);
+
+  /* Border & Line System */
+  --color-line: rgba(15, 23, 42, 0.08);
+  --color-line-strong: rgba(15, 23, 42, 0.15);
+  --color-line-hover: rgba(15, 23, 42, 0.22);
   --color-line-focus: rgba(34, 80, 221, 0.5);
 
-  /* ── Status Colors (Refined) ── */
+  /* Status Colors */
   --color-success: #10b981;
   --color-success-light: #d1fae5;
   --color-success-bg: rgba(16, 185, 129, 0.1);
@@ -73,12 +75,12 @@
   --color-info-light: #dbeafe;
   --color-info-bg: rgba(59, 130, 246, 0.1);
 
-  /* ── Typography ── */
+  /* Typography */
   --font-sans: "Aptos", "Segoe UI", "Malgun Gothic", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: "Aptos Display", Bahnschrift, "Segoe UI", sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
 
-  /* ── Font Sizes (2026 Fluid Scale) ── */
+  /* Font Sizes */
   --text-2xs: 0.625rem;
   --text-xs: 0.75rem;
   --text-sm: 0.875rem;
@@ -92,7 +94,7 @@
   --text-6xl: 3rem;
   --text-7xl: 3.5rem;
 
-  /* ── Line Heights ── */
+  /* Line Heights */
   --leading-none: 1;
   --leading-tight: 1.08;
   --leading-snug: 1.25;
@@ -100,7 +102,7 @@
   --leading-relaxed: 1.68;
   --leading-loose: 1.8;
 
-  /* ── Spacing (8px Grid System) ── */
+  /* Spacing (8px Grid) */
   --spacing-px: 1px;
   --spacing-0: 0;
   --spacing-1: 0.25rem;
@@ -116,7 +118,7 @@
   --spacing-20: 5rem;
   --spacing-24: 6rem;
 
-  /* ── Radii (2026 Smooth Corners) ── */
+  /* Radii */
   --radius-none: 0;
   --radius-sm: 0.375rem;
   --radius-md: 0.5rem;
@@ -128,7 +130,7 @@
   --radius-5xl: 2.5rem;
   --radius-full: 9999px;
 
-  /* ── Layered Shadows (2026 Depth System) ── */
+  /* Layered Shadows */
   --shadow-xs: 0 1px 2px 0 rgb(15 23 42 / 0.03);
   --shadow-sm: 0 1px 2px -1px rgb(15 23 42 / 0.04), 0 1px 3px 0 rgb(15 23 42 / 0.03);
   --shadow-md: 0 4px 6px -1px rgb(15 23 42 / 0.04), 0 2px 4px -2px rgb(15 23 42 / 0.02);
@@ -138,13 +140,13 @@
   --shadow-glow: 0 0 20px rgb(56 113 255 / 0.25);
   --shadow-glow-emerald: 0 0 20px rgb(16 185 129 / 0.25);
   --shadow-glow-indigo: 0 0 20px rgb(99 102 241 / 0.25);
-  
-  /* ── Inner Shadows ── */
+
+  /* Inner Shadows */
   --shadow-inner-sm: inset 0 1px 2px 0 rgb(15 23 42 / 0.05);
   --shadow-inner-md: inset 0 2px 4px 0 rgb(15 23 42 / 0.06);
   --shadow-inner-glow: inset 0 1px 0 0 rgba(255, 255, 255, 0.6);
 
-  /* ── Easing Functions (2026 Spring Physics) ── */
+  /* Easing Functions */
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-spring-soft: cubic-bezier(0.4, 0.0, 0.2, 1.2);
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -154,7 +156,7 @@
   --ease-exit: cubic-bezier(0.35, 0, 1, 1);
   --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-  /* ── Durations ── */
+  /* Durations */
   --duration-instant: 50ms;
   --duration-fast: 100ms;
   --duration-normal: 150ms;
@@ -163,7 +165,7 @@
   --duration-slowest: 500ms;
   --duration-emphasis: 800ms;
 
-  /* ── Z-Index Scale ── */
+  /* Z-Index Scale */
   --z-hide: -1;
   --z-base: 0;
   --z-docked: 10;
@@ -178,8 +180,42 @@
   --z-tooltip: 1800;
 }
 
+@theme {
+  /* Map CSS variables to Tailwind v4 theme keys */
+  --color-brand-50: var(--color-brand-50);
+  --color-brand-100: var(--color-brand-100);
+  --color-brand-200: var(--color-brand-200);
+  --color-brand-300: var(--color-brand-300);
+  --color-brand-400: var(--color-brand-400);
+  --color-brand-500: var(--color-brand-500);
+  --color-brand-600: var(--color-brand-600);
+  --color-brand-700: var(--color-brand-700);
+  --color-brand-800: var(--color-brand-800);
+  --color-brand-900: var(--color-brand-900);
+
+  --color-slate-50: var(--color-slate-50);
+  --color-slate-100: var(--color-slate-100);
+  --color-slate-200: var(--color-slate-200);
+  --color-slate-300: var(--color-slate-300);
+  --color-slate-400: var(--color-slate-400);
+  --color-slate-500: var(--color-slate-500);
+  --color-slate-600: var(--color-slate-600);
+  --color-slate-700: var(--color-slate-700);
+  --color-slate-800: var(--color-slate-800);
+  --color-slate-900: var(--color-slate-900);
+  --color-slate-950: var(--color-slate-950);
+
+  --color-page: var(--color-page);
+  --color-surface: var(--color-surface);
+  --color-ink: var(--color-ink);
+
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+  --font-mono: var(--font-mono);
+}
+
 /* ═══════════════════════════════════════════════════════════════
-   BASE STYLES
+   BASE STYLES - FIXED
    ═══════════════════════════════════════════════════════════════ */
 
 *, *::before, *::after {
@@ -198,7 +234,7 @@ html {
 
 body {
   min-height: 100vh;
-  background: var(--color-page);
+  background-color: var(--color-page);
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: var(--text-base);
@@ -211,7 +247,7 @@ body {
   color: var(--color-brand-700);
 }
 
-/* ── Focus Visible (2026 Enhanced) ── */
+/* ── Focus Visible ── */
 :focus-visible {
   outline: 2px solid var(--color-brand-500);
   outline-offset: 2px;
@@ -229,7 +265,7 @@ a:hover {
   color: var(--color-brand-600);
 }
 
-/* ── Skip Link (2026 Enhanced) ── */
+/* ── Skip Link ── */
 .skip-link {
   position: fixed;
   top: 1rem;
@@ -253,21 +289,58 @@ a:hover {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   TYPOGRAPHY UTILITIES
+   UTILITY CLASSES
    ═══════════════════════════════════════════════════════════════ */
 
+/* High contrast text utilities */
+.text-ink { color: var(--color-ink); }
+.text-ink-primary { color: var(--color-ink-primary); }
+.text-ink-secondary { color: var(--color-ink-secondary); }
+.text-ink-tertiary { color: var(--color-ink-tertiary); }
+
+/* Surface backgrounds */
+.bg-page { background-color: var(--color-page); }
+.bg-surface { background-color: var(--color-surface); }
+.bg-surface-2 { background-color: var(--color-surface-2); }
+.bg-surface-3 { background-color: var(--color-surface-3); }
+
+/* Brand colors */
+.text-brand-50 { color: var(--color-brand-50); }
+.text-brand-100 { color: var(--color-brand-100); }
+.text-brand-200 { color: var(--color-brand-200); }
+.text-brand-300 { color: var(--color-brand-300); }
+.text-brand-400 { color: var(--color-brand-400); }
+.text-brand-500 { color: var(--color-brand-500); }
+.text-brand-600 { color: var(--color-brand-600); }
+.text-brand-700 { color: var(--color-brand-700); }
+.text-brand-800 { color: var(--color-brand-800); }
+.text-brand-900 { color: var(--color-brand-900); }
+
+.bg-brand-50 { background-color: var(--color-brand-50); }
+.bg-brand-100 { background-color: var(--color-brand-100); }
+.bg-brand-200 { background-color: var(--color-brand-200); }
+.bg-brand-300 { background-color: var(--color-brand-300); }
+.bg-brand-400 { background-color: var(--color-brand-400); }
+.bg-brand-500 { background-color: var(--color-brand-500); }
+.bg-brand-600 { background-color: var(--color-brand-600); }
+.bg-brand-700 { background-color: var(--color-brand-700); }
+.bg-brand-800 { background-color: var(--color-brand-800); }
+.bg-brand-900 { background-color: var(--color-brand-900); }
+
+/* Typography utilities */
 .font-display {
   font-family: var(--font-display);
   letter-spacing: -0.04em;
 }
 
-/* ── Display Text (2026 Fluid sizing) ── */
+/* Display Text */
 .hero-display {
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 4rem);
   line-height: 1.05;
   letter-spacing: -0.03em;
   font-weight: 700;
+  color: var(--color-ink-primary);
 }
 
 .section-display {
@@ -276,6 +349,7 @@ a:hover {
   line-height: 1.1;
   letter-spacing: -0.02em;
   font-weight: 700;
+  color: var(--color-ink-primary);
 }
 
 .feature-display {
@@ -284,6 +358,7 @@ a:hover {
   line-height: 1.15;
   letter-spacing: -0.02em;
   font-weight: 600;
+  color: var(--color-ink-primary);
 }
 
 .metric-display {
@@ -292,6 +367,7 @@ a:hover {
   line-height: 1;
   letter-spacing: -0.02em;
   font-weight: 700;
+  color: var(--color-ink-primary);
 }
 
 .card-display {
@@ -300,9 +376,10 @@ a:hover {
   line-height: 1.2;
   letter-spacing: -0.01em;
   font-weight: 600;
+  color: var(--color-ink-primary);
 }
 
-/* ── Body Text (2026 Refined) ── */
+/* Body Text */
 .body-copy-xl {
   font-size: clamp(1rem, 1.1vw, 1.125rem);
   line-height: 1.7;
@@ -333,7 +410,7 @@ a:hover {
   color: var(--color-ink-tertiary);
 }
 
-/* ── Labels (2026 Enhanced) ── */
+/* Labels */
 .eyebrow-label {
   display: inline-flex;
   align-items: center;
@@ -370,7 +447,7 @@ a:hover {
   backdrop-filter: blur(12px) saturate(180%);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 
+  box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.6) inset,
     var(--shadow-lg);
 }
@@ -380,7 +457,7 @@ a:hover {
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.6);
-  box-shadow: 
+  box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.8) inset,
     var(--shadow-xl);
 }
@@ -390,12 +467,11 @@ a:hover {
   backdrop-filter: blur(12px) saturate(180%);
   -webkit-backdrop-filter: blur(12px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 
+  box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.1) inset,
     var(--shadow-lg);
 }
 
-/* ── Glass Card Variants ── */
 .glass-card {
   background: linear-gradient(
     180deg,
@@ -405,14 +481,14 @@ a:hover {
   backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: var(--radius-2xl);
-  box-shadow: 
+  box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.9) inset,
     0 22px 50px -34px rgba(15, 23, 42, 0.15),
     0 8px 20px -8px rgba(15, 23, 42, 0.08);
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   SURFACE & CARD STYLES (2026 Bento System)
+   SURFACE & CARD STYLES
    ═══════════════════════════════════════════════════════════════ */
 
 .surface-elevated {
@@ -420,7 +496,7 @@ a:hover {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-sm);
-  transition: 
+  transition:
     box-shadow var(--duration-slower) var(--ease-spring),
     border-color var(--duration-slower) var(--ease-spring),
     transform var(--duration-slower) var(--ease-spring);
@@ -442,7 +518,7 @@ a:hover {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-2xl);
   padding: var(--spacing-6);
-  transition: 
+  transition:
     transform var(--duration-slower) var(--ease-spring),
     box-shadow var(--duration-slower) var(--ease-spring);
   box-shadow: var(--shadow-sm);
@@ -464,7 +540,7 @@ a:hover {
   border: 1px solid var(--color-line);
   border-radius: var(--radius-2xl);
   box-shadow: var(--shadow-sm);
-  transition: 
+  transition:
     transform var(--duration-slower) var(--ease-spring),
     box-shadow var(--duration-slower) var(--ease-spring);
 }
@@ -476,7 +552,7 @@ a:hover {
 }
 
 .card-hover {
-  transition: 
+  transition:
     all var(--duration-slower) var(--ease-spring),
     transform var(--duration-normal) var(--ease-spring);
 }
@@ -525,7 +601,7 @@ a:hover {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   GLOW EFFECTS (2026 Enhanced)
+   GLOW EFFECTS
    ═══════════════════════════════════════════════════════════════ */
 
 .glow-blue {
@@ -549,7 +625,7 @@ a:hover {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   GRADIENT TEXT & BACKGROUNDS (2026 Refined)
+   GRADIENT TEXT & BACKGROUNDS
    ═══════════════════════════════════════════════════════════════ */
 
 .gradient-text {
@@ -573,9 +649,9 @@ a:hover {
   background-clip: text;
 }
 
-/* ── Mesh Gradient Backgrounds ── */
+/* Mesh Gradient Backgrounds */
 .bg-gradient-mesh {
-  background: 
+  background:
     radial-gradient(at 20% 0%, rgba(56, 113, 255, 0.12) 0px, transparent 40%),
     radial-gradient(at 80% 100%, rgba(16, 185, 129, 0.08) 0px, transparent 40%),
     radial-gradient(at 0% 100%, rgba(99, 102, 241, 0.06) 0px, transparent 40%),
@@ -583,7 +659,7 @@ a:hover {
 }
 
 .bg-gradient-hero {
-  background: 
+  background:
     radial-gradient(circle at 50% 0%, rgba(201, 219, 255, 0.5) 0%, transparent 50%),
     linear-gradient(180deg, #f8fafc 0%, #f1f5f9 50%, #e2e8f0 100%);
 }
@@ -593,7 +669,7 @@ a:hover {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   ANIMATIONS (2026 Spring Physics)
+   ANIMATIONS
    ═══════════════════════════════════════════════════════════════ */
 
 @keyframes riseIn {
@@ -754,7 +830,7 @@ a:hover {
   100% { transform: scale(1); }
 }
 
-/* ── Animation Utilities (with spring easing) ── */
+/* Animation Utilities */
 .animate-rise {
   animation: riseIn 0.7s var(--ease-out-expo) both;
 }
@@ -821,7 +897,7 @@ a:hover {
   animation: elastic-scale 0.4s var(--ease-elastic);
 }
 
-/* ── Stagger Animation Delays ── */
+/* Stagger Delays */
 .stagger-1 { animation-delay: 0.1s; }
 .stagger-2 { animation-delay: 0.2s; }
 .stagger-3 { animation-delay: 0.3s; }
@@ -829,11 +905,11 @@ a:hover {
 .stagger-5 { animation-delay: 0.5s; }
 
 /* ═══════════════════════════════════════════════════════════════
-   2026 INTERACTIVE STATES (Micro-interactions)
+   INTERACTIVE STATES
    ═══════════════════════════════════════════════════════════════ */
 
 .hover-lift {
-  transition: 
+  transition:
     transform var(--duration-slower) var(--ease-spring),
     box-shadow var(--duration-slower) var(--ease-spring);
 }
@@ -876,7 +952,7 @@ a:hover {
   transform: scale(0.96);
 }
 
-/* ── Button Effects (2026 Enhanced) ── */
+/* Button Effects */
 .btn-shine {
   position: relative;
   overflow: hidden;
@@ -906,7 +982,7 @@ a:hover {
   transform: scale(0.98);
 }
 
-/* ── Ripple Effect Base ── */
+/* Ripple Effect */
 .ripple {
   position: relative;
   overflow: hidden;
@@ -931,7 +1007,7 @@ a:hover {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   FORM STYLES (2026 Enhanced)
+   FORM STYLES
    ═══════════════════════════════════════════════════════════════ */
 
 .form-input {
@@ -943,7 +1019,7 @@ a:hover {
   border-radius: var(--radius-lg);
   font-size: var(--text-sm);
   color: var(--color-ink);
-  transition: 
+  transition:
     border-color var(--duration-fast) var(--ease-micro),
     box-shadow var(--duration-fast) var(--ease-micro),
     background-color var(--duration-fast) var(--ease-micro);
@@ -957,7 +1033,7 @@ a:hover {
 .form-input:focus {
   outline: none;
   border-color: var(--color-brand-500);
-  box-shadow: 
+  box-shadow:
     0 0 0 3px rgba(56, 113, 255, 0.15),
     var(--shadow-inner-sm);
 }
@@ -979,7 +1055,7 @@ a:hover {
 
 .form-input-error:focus {
   border-color: var(--color-error);
-  box-shadow: 
+  box-shadow:
     0 0 0 3px rgba(239, 68, 68, 0.15),
     var(--shadow-inner-sm);
 }
@@ -1007,7 +1083,6 @@ a:hover {
   color: var(--color-error);
 }
 
-/* ── Select Styling ── */
 .form-select {
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
@@ -1018,92 +1093,7 @@ a:hover {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   UTILITY CLASSES
-   ═══════════════════════════════════════════════════════════════ */
-
-.utility-grid {
-  display: grid;
-  gap: 0.75rem;
-}
-
-/* ── Line Clamp ── */
-.line-clamp-1 {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
-}
-
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  overflow: hidden;
-}
-
-.line-clamp-3 {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-}
-
-.line-clamp-4 {
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4;
-  overflow: hidden;
-}
-
-.truncate-2-lines {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-/* ── Typing Cursor ── */
-.typing-cursor::after {
-  content: '|';
-  animation: blink 1s infinite;
-  color: var(--color-brand-500);
-  margin-left: 2px;
-}
-
-/* ── Editorial Frame ── */
-.editorial-frame {
-  position: relative;
-  overflow: hidden;
-}
-
-/* ── Status Indicators ── */
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-.status-dot-success { background-color: var(--color-success); }
-.status-dot-warning { background-color: var(--color-warning); }
-.status-dot-error { background-color: var(--color-error); }
-.status-dot-info { background-color: var(--color-info); }
-
-.status-pulse {
-  position: relative;
-}
-
-.status-pulse::before {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: inherit;
-  opacity: 0.4;
-  animation: pulse-ring 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   BENTO GRID SYSTEM (2026)
+   BENTO GRID SYSTEM
    ═══════════════════════════════════════════════════════════════ */
 
 .bento-grid {
@@ -1141,22 +1131,6 @@ a:hover {
 }
 
 /* ═══════════════════════════════════════════════════════════════
-   RESPONSIVE UTILITIES
-   ═══════════════════════════════════════════════════════════════ */
-
-@media (min-width: 640px) {
-  .dashboard-card {
-    padding: 1.5rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .dashboard-card {
-    padding: 1.75rem;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════════
    ACCESSIBILITY: Reduced Motion
    ═══════════════════════════════════════════════════════════════ */
 
@@ -1173,7 +1147,7 @@ a:hover {
   html {
     scroll-behavior: auto;
   }
-  
+
   .animate-float,
   .animate-pulse-soft,
   .animate-bounce-soft {
@@ -1202,7 +1176,7 @@ a:hover {
     box-shadow: none !important;
     border: 1px solid #ccc !important;
   }
-  
+
   .glass,
   .glass-strong,
   .glass-card {
