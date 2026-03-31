@@ -10,8 +10,8 @@ import { ToastProvider } from "@/components/ui/toast-provider";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "Promptory",
-  description: "개인 채널 URL을 기반으로 실행 시스템을 최적화하는 Promptory",
+  title: "프롬프토리 - 맞춤형 Slack Agent Package",
+  description: "Slack에 URL을내면, 진단부터 실행 초안까지 팀 대화 안에서 끝납니다. 홈페이지, 랜딩, 문서 링크를 읽고 비교표, 카피 초안, 보고용 요약까지 이어서 만듭니다.",
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {

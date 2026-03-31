@@ -11,7 +11,7 @@ export default function NotFoundPage() {
         페이지를 찾지 못했습니다.
       </h1>
       <p className="mt-4 text-sm leading-7 text-[var(--slate-600)]">
-        링크가 잘못되었거나 실행 팩이 비공개 처리되었을 수 있습니다.
+        링크가 잘못되었거나 요청하신 페이지를 찾을 수 없습니다.
       </p>
       <Link href="/" className={cn(buttonVariants({ size: "lg" }), "mt-8")}>
         홈으로 돌아가기

@@ -259,6 +259,106 @@ export default function KoreaLocalOpsAgentPage() {
         </div>
       </section>
 
+      {/* What's Included Section */}
+      <section className="py-16">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="text-sm font-semibold text-indigo-600 mb-2">What's included</p>
+            <h2 className="text-2xl font-bold text-slate-950">기본 패키지와 맞춤 세팅 범위</h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <Card variant="strong" className="p-6">
+              <h3 className="font-semibold text-slate-950 mb-4">Included</h3>
+              <ul className="space-y-2 text-sm text-slate-600">
+                {[
+                  "Slack 기본 인터랙션 설계",
+                  "한국 시장 진단 질문 플로우",
+                  "KR/EN summary 출력 포맷",
+                  "HQ action memo 기본 구조",
+                  "기본 App Home 구조",
+                  "초기 운영 가이드",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="text-green-500">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            <Card variant="strong" className="p-6">
+              <h3 className="font-semibold text-slate-950 mb-4">Optional</h3>
+              <ul className="space-y-2 text-sm text-slate-600">
+                {[
+                  "특정 경쟁사 모니터링",
+                  "HQ 보고 주기/템플릿 커스텀",
+                  "KR/EN 출력 비율 조정",
+                  "본사 승인 플로우 연동",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="text-indigo-500">+</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Boundary Section */}
+      <section className="py-16 bg-slate-50">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm font-semibold text-indigo-600 mb-2">Trust boundary</p>
+          <h2 className="text-2xl font-bold text-slate-950">처음엔 가볍게 시작하고, 필요한 만큼만 깊게 갑니다</h2>
+          <p className="mt-4 text-sm text-slate-600 leading-6">
+            초기 진단은 한국 사이트와 공개 채널 중심으로 시작합니다.
+            이후 HQ 보고나 경쟁사 분석이 필요할 때만 깊이를 추가합니다.
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="text-sm font-semibold text-indigo-600 mb-2">FAQ</p>
+            <h2 className="text-2xl font-bold text-slate-950">자주 묻는 질문</h2>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              {
+                q: "어떤 한국 채널을 분석할 수 있나요?",
+                a: "홈페이지, 랜딩 페이지, 블로그, 노션 문서 등 공개 접근 가능한 URL이면 됩니다. 특정 경쟁사를 지정하시면 해당 채널과의 비교도 포함됩니다.",
+              },
+              {
+                q: "KR/EN summary는 동시에 생성되나요?",
+                a: "네, 한국 채널 진단 후 KR summary와 EN executive summary를 한 흐름으로 생성합니다. HQ 보고용과 한국팀 내부용을 모두 준비할 수 있습니다.",
+              },
+              {
+                q: "HQ action memo는 어떤 내용이 들어가나요?",
+                a: "한국 시장 진단 결과, 본사 결정/지원이 필요한 사항, 권장 액션 아이템이 포함됩니다. 본사의 리소스 할당 결정을 돕는 내용 중심으로 정리합니다.",
+              },
+              {
+                q: "경쟁사는 어떤 기준으로 선정하나요?",
+                a: "기본적으로는 동일 카테고리/산업의 주요 한국 플레이어를 기준으로 합니다. 특정 경쟁사를 지정하시면 해당 채널과의 비교를 추가합니다.",
+              },
+              {
+                q: "도입 전 샘플을 볼 수 있나요?",
+                a: "네, 한국 사이트 URL이나 채널 링크를 보내주시면 Korea Local Ops Agent 흐름으로 실제 KR/EN 데모를 보여드립니다. /contact 페이지에서 요청하세요.",
+              },
+            ].map((faq, index) => (
+              <Card key={index} variant="tint" className="p-5">
+                <h3 className="font-semibold text-slate-950">{faq.q}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{faq.a}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA Section */}
       <section className="py-16">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">

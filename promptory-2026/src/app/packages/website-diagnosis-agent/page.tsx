@@ -312,6 +312,14 @@ export default function WebsiteDiagnosisAgentPage() {
                 q: "결과물은 수정할 수 있나요?",
                 a: "네, 생성된 초안은 스레드에서 바로 수정 요청을 할 수 있습니다. '더 간결하게', '더 공식적으로' 등의 피드백을 주시면 반영됩니다.",
               },
+              {
+                q: "저장된 진단은 나중에 다시 볼 수 있나요?",
+                a: "네, 모든 진단과 초안은 App Home에 자동 저장됩니다. 이전 작업을 다시 열어서 수정하거나 이어서 작업할 수 있습니다.",
+              },
+              {
+                q: "맞춤 세팅은 어떤 것을 조정할 수 있나요?",
+                a: "질문 흐름, 출력 형식, 공유 채널, KR/EN 옵션 등을 팀에 맞게 조정합니다. 기본 패키지 구조는 유지하면서 팀의 입력물과 산출물에 맞게 세팅합니다.",
+              },
             ].map((faq, index) => (
               <Card key={index} variant="tint" className="p-5">
                 <h3 className="font-semibold text-slate-950">{faq.q}</h3>

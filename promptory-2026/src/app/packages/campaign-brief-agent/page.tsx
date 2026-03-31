@@ -231,6 +231,105 @@ export default function CampaignBriefAgentPage() {
         </div>
       </section>
 
+      {/* What's Included Section */}
+      <section className="py-16 bg-slate-50">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="text-sm font-semibold text-emerald-600 mb-2">What's included</p>
+            <h2 className="text-2xl font-bold text-slate-950">기본 패키지와 맞춤 세팅 범위</h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            <Card variant="strong" className="p-6">
+              <h3 className="font-semibold text-slate-950 mb-4">Included</h3>
+              <ul className="space-y-2 text-sm text-slate-600">
+                {[
+                  "Slack 기본 인터랙션 설계",
+                  "캠페인 목표별 질문 플로우",
+                  "브리프/카피/액션리스트 출력 포맷",
+                  "기본 App Home 구조",
+                  "초기 운영 가이드",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="text-green-500">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+
+            <Card variant="strong" className="p-6">
+              <h3 className="font-semibold text-slate-950 mb-4">Optional</h3>
+              <ul className="space-y-2 text-sm text-slate-600">
+                {[
+                  "승인 플로우 연동",
+                  "버전 히스토리 관리",
+                  "팀 전용 템플릿 추가",
+                  "후속 자동화 연결",
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    <span className="text-emerald-500">+</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Trust Boundary Section */}
+      <section className="py-16">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-sm font-semibold text-emerald-600 mb-2">Trust boundary</p>
+          <h2 className="text-2xl font-bold text-slate-950">처음엔 가볍게 시작하고, 필요한 만큼만 깊게 갑니다</h2>
+          <p className="mt-4 text-sm text-slate-600 leading-6">
+            초기 진단은 회의 메모와 공개 자료 중심으로 시작합니다.
+            이후 더 정교한 브리프가 필요할 때만 질문과 설정을 추가합니다.
+          </p>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-slate-50">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10">
+            <p className="text-sm font-semibold text-emerald-600 mb-2">FAQ</p>
+            <h2 className="text-2xl font-bold text-slate-950">자주 묻는 질문</h2>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              {
+                q: "어떤 자료를 입력할 수 있나요?",
+                a: "회의 메모, 참고 링크, 노션 문서, 기존 캠페인 자료 등 텍스트 기반 자료면 됩니다. 여러 자료를 한꺼번에 보내주시면 종합해서 분석합니다.",
+              },
+              {
+                q: "브리프 형식은 바꿀 수 있나요?",
+                a: "네, 팀의 브리프 템플릿에 맞게 출력 형식을 맞춤 세팅합니다. 기본 제공되는 형식 외에도 원하는 구조로 조정 가능합니다.",
+              },
+              {
+                q: "생성된 카피는 수정할 수 있나요?",
+                a: "네, Slack 스레드에서 바로 수정 요청을 할 수 있습니다. '더 짧게', '더 공식적으로', '톤 바꿔줘' 등의 피드백을 주시면 반영됩니다.",
+              },
+              {
+                q: "여러 캠페인 버전을 관리할 수 있나요?",
+                a: "네, App Home에서 이전 브리프와 카피 초안을 확인하고 버전별로 비교할 수 있습니다. 승인 플로우 연동도 옵션으로 제공됩니다.",
+              },
+              {
+                q: "도입 전 샘플을 볼 수 있나요?",
+                a: "네, 회의 메모나 참고 자료 예시를 보내주시면 실제 Campaign Brief Agent 흐름으로 데모를 보여드립니다. /contact 페이지에서 요청하세요.",
+              },
+            ].map((faq, index) => (
+              <Card key={index} variant="tint" className="p-5">
+                <h3 className="font-semibold text-slate-950">{faq.q}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{faq.a}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA Section */}
       <section className="py-16 bg-slate-50">
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
