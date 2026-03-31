@@ -1,0 +1,20 @@
+# Experiment data (personal/sensitive)
+experiment_data.json
+*.json.bak
+backup/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Output files
+outreach_messages/
+dashboard.html
+dashboard_data.json
+experiment_export.csv
+
+# OS
+.DS_Store
+Thumbs.db
