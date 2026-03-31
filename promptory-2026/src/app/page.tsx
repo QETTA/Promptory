@@ -1,284 +1,213 @@
-"use client";
+import { ChannelIntakeCard } from "@/components/channel-intake/channel-intake-card";
+import { Hero } from "@/components/marketplace/hero";
+import { ProductCard } from "@/components/marketplace/product-card";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { SetupCallout } from "@/components/ui/setup-callout";
+import { CTAButton } from "@/components/ui/cta-button";
+import { getPublicEnvStatus } from "@/lib/env/public";
+import { getServerEnvStatus } from "@/lib/env/server";
+import { getCategoryLabel } from "@/lib/promptory-display";
+import { getPublishedProducts } from "@/lib/server/products";
 
-import { motion } from "framer-motion";
-import { Button } from "@/components/primitives/Button";
-import { Badge } from "@/components/primitives/Badge";
-import { 
-  ArrowRightIcon, 
-  SparklesIcon, 
-  DocumentTextIcon, 
-  BoltIcon,
-  DevicePhoneMobileIcon,
-  ComputerDesktopIcon
-} from "@heroicons/react/24/outline";
-import Link from "next/link";
+const defaultCategories = ["자동화", "마케팅", "데이터", "운영", "콘텐츠", "세일즈"];
+const demoishPattern = /smoke|draft|test|demo/i;
 
-export default function HomePage() {
+export default async function HomePage() {
+  const publicStatus = getPublicEnvStatus();
+  const serverStatus = getServerEnvStatus();
+  const isReady = publicStatus.hasPublicEnv && serverStatus.hasSupabaseServiceRole;
+  const products = publicStatus.hasPublicEnv ? await getPublishedProducts() : [];
+  const curatedProducts = products.filter(
+    (product) =>
+      !demoishPattern.test(product.title) &&
+      !demoishPattern.test(product.description) &&
+      !(product.seller?.display_name && demoishPattern.test(product.seller.display_name)),
+  );
+  const featured = curatedProducts.slice(0, 3);
+  const categories = Array.from(new Set(curatedProducts.map((product) => product.category))).slice(0, 6);
+  const keywords = Array.from(new Set(curatedProducts.flatMap((product) => product.keywords ?? []))).slice(0, 10);
+  const workboardSteps = [
+    {
+      label: "1. Public Audit",
+      title: "채널 URL 입력",
+      body: "유튜브, 쿠팡, 네이버 블로그 URL 중 하나를 넣고 공개 표면 신호부터 읽습니다.",
+      tone: "accent" as const,
+    },
+    {
+      label: "2. Ask Plan",
+      title: "AI 질문으로 병목 고정",
+      body: "문서처럼 길게 설명하지 않고, 막히는 지점과 목표를 질문 흐름으로 빠르게 고정합니다.",
+    },
+    {
+      label: "3. Apply",
+      title: "스택과 실행 팩 연결",
+      body: "추천 스택, 복붙 초안, 실행 팩, 저장 레일까지 바로 이어집니다.",
+    },
+  ];
+  const aiSignals = [
+    "3개 채널 공개 진단",
+    "질문형 플래닝",
+    "스택 + 실행 팩 추천",
+    "저장 / 주문 / 다운로드",
+  ];
+
   return (
-    <div className="min-h-screen bg-neutral-950">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-neutral-950" />
-        
-        {/* Grid pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
-        
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="flex justify-center mb-8"
-          >
-            <Badge color="ai" size="md">
-              <SparklesIcon className="w-4 h-4" />
-              2026 AI 문장 최적화
-            </Badge>
-          </motion.div>
-          
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-7xl font-bold text-center text-white mb-6 tracking-tight"
-          >
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Promptory
-            </span>
-          </motion.h1>
-          
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl sm:text-2xl text-neutral-400 text-center max-w-3xl mx-auto mb-12"
-          >
-            Studio + Radiant + Pocket + Catalyst
+    <div className="pb-16">
+      {!isReady ? (
+        <div className="mx-auto mb-6 max-w-6xl px-4 pt-6 sm:px-6 lg:px-8">
+          <SetupCallout
+            title="Promptory는 채널 URL 기반 최적화 엔진의 배포 레일 MVP를 함께 점검하는 단계입니다."
+            body="현재는 URL 입력 진입면과 함께, 회원가입, 실행 팩 등록, 주문 생성, 개발용 결제 완료, 라이브러리 다운로드 흐름까지 실제로 확인할 수 있습니다."
+          />
+        </div>
+      ) : null}
+
+      <Hero
+        eyebrow="Promptory Channel Stack Doctor"
+        theme="workspace"
+        tone="light"
+        title={
+          <>
+            URL 하나로 바로 읽히는
             <br />
-            <span className="text-neutral-500">4개 템플릿의 시너지를 활용한 AI 문장 최적화</span>
-          </motion.p>
-          
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Link href="/optimize">
-              <Button size="lg" className="group">
-                최적화 시작하기
-                <ArrowRightIcon className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </Link>
-            <Button variant="secondary" size="lg">
-              문서 보기
-            </Button>
-          </motion.div>
-        </div>
-      </section>
+            채널 운영 진단 작업대
+          </>
+        }
+        body={
+          <>
+            <p>URL을 넣으면 공개 표면을 읽고, Ask 질문으로 병목을 고정한 뒤 자동화 스택과 실행 팩으로 이어집니다.</p>
+          </>
+        }
+        actions={
+          <>
+            <CTAButton href="/optimize" size="lg">
+              URL 넣고 진단 시작
+            </CTAButton>
+            <CTAButton href="/products" variant="outline" size="lg" className="hidden sm:inline-flex">
+              실행 팩 보기
+            </CTAButton>
+          </>
+        }
+        aside={<ChannelIntakeCard />}
+      />
 
-      {/* Features Section */}
-      <section className="py-24 border-t border-neutral-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">핵심 기능</h2>
-            <p className="text-neutral-400">4개 템플릿의 장점을 결합한 최적의 작업 환경</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map((feature, idx) => (
-              <motion.div
-                key={feature.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="p-6 rounded-2xl bg-neutral-900/50 border border-neutral-800 hover:border-neutral-700 transition-colors"
-              >
-                <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${feature.gradient} flex items-center justify-center mb-4`}>
-                  <feature.icon className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="font-semibold text-white mb-2">{feature.name}</h3>
-                <p className="text-sm text-neutral-400">{feature.description}</p>
-                <div className="mt-4 flex flex-wrap gap-1">
-                  {feature.tags.map((tag) => (
-                    <span key={tag} className="text-[10px] px-2 py-1 rounded-full bg-neutral-800 text-neutral-400">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Template Stats */}
-      <section className="py-24 border-t border-neutral-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map((stat, idx) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="text-center"
-              >
-                <div className="text-4xl font-bold text-white mb-2">{stat.value}</div>
-                <div className="text-sm text-neutral-400">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 3-Zone Preview */}
-      <section className="py-24 border-t border-neutral-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <Badge color="ai" className="mb-4">3-Zone Workspace</Badge>
-            <h2 className="text-3xl font-bold text-white mb-4">최적화된 워크스페이스</h2>
-            <p className="text-neutral-400">Studio의 Split-Panel 패턴을 활용한 3단계 구조</p>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <div className="p-6 rounded-2xl bg-neutral-900/50 border border-neutral-800">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-neutral-800 flex items-center justify-center text-xs font-bold text-neutral-400">A</div>
-                <h3 className="font-semibold text-white">Original Context</h3>
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <section className="py-6 sm:py-8">
+          <div className="grid gap-4 lg:grid-cols-[minmax(0,1.25fr)_minmax(300px,0.75fr)]">
+            <Card variant="strong" className="p-5 sm:p-6">
+              <div className="flex flex-wrap items-center gap-2">
+                <Badge>AI Service Flow</Badge>
+                <Badge variant="neutral">2026 UX</Badge>
               </div>
-              <p className="text-sm text-neutral-400 mb-4">원본 문장 타임라인과 선택 인터페이스</p>
-              <div className="space-y-2">
-                <div className="p-3 rounded-lg bg-neutral-800/50 border border-neutral-700">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-neutral-500">1</span>
-                    <div className="h-2 w-20 bg-neutral-700 rounded" />
+              <h2 className="section-title mt-3 text-[var(--slate-950)]">마켓을 먼저 보여주지 않고, 작업 순서를 먼저 보여줍니다</h2>
+              <p className="mt-3 text-sm leading-7 text-[var(--slate-700)]">
+                프롬프토리는 실행 팩 탐색 화면이 아니라 채널을 진단하고 계획을 세우는 AI 작업면처럼 읽혀야 합니다. 첫 화면은
+                입력, 계획, 적용 순서가 바로 보여야 합니다.
+              </p>
+              <div className="mt-5 grid gap-3 md:grid-cols-3">
+                {workboardSteps.map((step, index) => (
+                  <div
+                    key={step.label}
+                    className={`rounded-[1.2rem] border px-4 py-4 ${
+                      index === 0
+                        ? "border-[rgba(34,80,221,0.18)] bg-[linear-gradient(180deg,#ffffff_0%,#eef4ff_100%)] shadow-[0_14px_30px_-24px_rgba(34,80,221,0.28)]"
+                        : "border-[var(--line)] bg-white"
+                    }`}
+                  >
+                    <p className="section-kicker text-[var(--brand-700)]">{step.label}</p>
+                    <p className="mt-2 text-sm font-semibold text-[var(--slate-950)]">{step.title}</p>
+                    <p className="mt-2 text-sm leading-6 text-[var(--slate-600)]">{step.body}</p>
                   </div>
-                </div>
-                <div className="p-3 rounded-lg bg-blue-500/10 border border-blue-500/30">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-blue-400">2</span>
-                    <div className="h-2 w-24 bg-blue-500/50 rounded" />
-                  </div>
-                </div>
-                <div className="p-3 rounded-lg bg-neutral-800/50 border border-neutral-700">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs text-neutral-500">3</span>
-                    <div className="h-2 w-16 bg-neutral-700 rounded" />
-                  </div>
-                </div>
+                ))}
               </div>
-            </div>
-            
-            <div className="p-6 rounded-2xl bg-neutral-900/50 border border-neutral-800">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-neutral-800 flex items-center justify-center text-xs font-bold text-neutral-400">B</div>
-                <h3 className="font-semibold text-white">Result Canvas</h3>
-              </div>
-              <p className="text-sm text-neutral-400 mb-4">Radiant 밀도 + Studio 애니메이션</p>
-              <div className="space-y-3">
-                <div className="p-3 rounded-lg bg-neutral-800/50">
-                  <div className="h-2 w-full bg-neutral-700 rounded mb-2" />
-                  <div className="h-2 w-2/3 bg-neutral-700 rounded" />
-                </div>
-                <div className="p-3 rounded-lg bg-blue-500/10 border border-blue-500/30">
-                  <div className="h-2 w-full bg-blue-500/50 rounded mb-2" />
-                  <div className="h-2 w-3/4 bg-blue-500/30 rounded" />
-                </div>
-                <div className="flex gap-2">
-                  <span className="px-2 py-1 rounded-full bg-blue-500/20 text-[10px] text-blue-400">명확성</span>
-                  <span className="px-2 py-1 rounded-full bg-purple-500/20 text-[10px] text-purple-400">임팩트</span>
-                </div>
-              </div>
-            </div>
-            
-            <div className="p-6 rounded-2xl bg-neutral-900/50 border border-neutral-800">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="w-8 h-8 rounded-lg bg-neutral-800 flex items-center justify-center text-xs font-bold text-neutral-400">C</div>
-                <h3 className="font-semibold text-white">Action Panel</h3>
-              </div>
-              <p className="text-sm text-neutral-400 mb-4">Catalyst + Pocket 하이브리드</p>
-              <div className="space-y-2">
-                <div className="p-3 rounded-lg bg-blue-600 text-center text-sm text-white">
-                  문장 복사하기
-                </div>
-                <div className="p-3 rounded-lg bg-neutral-800 text-center text-sm text-neutral-300">
-                  전체 복사
-                </div>
-                <div className="p-3 rounded-lg bg-amber-500/10 border border-amber-500/30">
-                  <p className="text-xs text-amber-400">⚠️ 브라우저에서 확인하세요</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            </Card>
 
-      {/* Footer */}
-      <footer className="py-12 border-t border-neutral-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center">
-                <span className="text-white font-bold text-sm">P</span>
+            <Card variant="tint" className="p-5 sm:p-6">
+              <p className="section-kicker text-[var(--brand-700)]">Current AI Output</p>
+              <h3 className="mt-2 text-[1.05rem] font-semibold text-[var(--slate-950)]">지금 앱이 바로 보여주는 결과</h3>
+              <div className="mt-4 grid gap-2">
+                {aiSignals.map((signal, index) => (
+                  <div
+                    key={signal}
+                    className="flex items-center justify-between gap-3 rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3 text-sm text-[var(--slate-700)]"
+                  >
+                    <span className="text-xs font-semibold text-[var(--slate-500)]">0{index + 1}</span>
+                    <p className="flex-1 text-right">{signal}</p>
+                  </div>
+                ))}
               </div>
-              <span className="text-neutral-400">Promptory 2026</span>
+              <div className="mt-5 flex flex-wrap gap-2">
+                <CTAButton href="/optimize" size="sm">
+                  진단 작업면 열기
+                </CTAButton>
+                <CTAButton href="/products" variant="outline" size="sm">
+                  실행 팩 보기
+                </CTAButton>
+              </div>
+            </Card>
+          </div>
+        </section>
+
+        <section className="py-6 sm:py-8">
+          <div className="mb-4 flex flex-col gap-3 sm:mb-5 lg:flex-row lg:items-end lg:justify-between">
+            <div className="max-w-3xl">
+              <p className="section-kicker text-[var(--slate-500)]">Execution Rail</p>
+              <h2 className="section-title mt-2 text-[var(--slate-950)]">AI가 정한 다음 액션을 바로 실행 팩으로 넘깁니다</h2>
+              <p className="mt-2 text-sm leading-7 text-[var(--slate-600)]">실행 팩은 홈의 주인공이 아니라, 진단 뒤에 이어지는 적용 레일입니다.</p>
             </div>
-            <div className="flex items-center gap-6 text-sm text-neutral-500">
-              <span>Studio</span>
-              <span>Radiant</span>
-              <span>Pocket</span>
-              <span>Catalyst</span>
+            <CTAButton href="/products" variant="outline" size="sm">
+              전체 실행 팩 보기
+            </CTAButton>
+          </div>
+
+          <div className="mb-4 space-y-3">
+            <div className="flex flex-wrap gap-2">
+              {(categories.length > 0 ? categories : defaultCategories).map((category) => (
+                <CTAButton key={category} href={`/products?category=${encodeURIComponent(category)}`} variant="outline" size="sm">
+                  {getCategoryLabel(category)}
+                </CTAButton>
+              ))}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {(keywords.length > 0 ? keywords : ["AI", "자동화", "블로그", "마케팅", "운영", "콘텐츠"]).map((keyword) => (
+                <CTAButton key={keyword} href={`/products?q=${encodeURIComponent(keyword)}`} variant="outline" size="sm">
+                  {keyword}
+                </CTAButton>
+              ))}
             </div>
           </div>
-          <p className="mt-8 text-center text-xs text-neutral-600">
-            Design System v2026.03.30 | Tailwind Plus Templates
-          </p>
-        </div>
-      </footer>
+
+          {featured.length > 0 ? (
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+              {featured.map((product) => (
+                <ProductCard key={product.id} product={product} variant="compact" />
+              ))}
+            </div>
+          ) : (
+            <Card variant="tint" className="p-5 text-sm leading-7 text-[var(--slate-600)]">
+              아직 공개된 실행 팩이 없습니다. 첫 실행 팩을 등록하면 여기에 바로 노출됩니다.
+            </Card>
+          )}
+        </section>
+
+        <section className="py-6 sm:py-8">
+          <Card variant="tint" className="p-5 sm:p-6">
+            <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_220px] lg:items-end">
+              <div>
+                <p className="section-kicker text-[var(--brand-700)]">Trust Rule</p>
+                <h3 className="mt-2 text-[1.05rem] font-semibold text-[var(--slate-950)]">공개 진단과 연결형 설치는 분리해서 말합니다</h3>
+                <p className="mt-3 text-sm leading-7 text-[var(--slate-700)]">
+                  URL-only 단계에서는 공개 표면만 진단하고, 심화 설치와 운영 연결은 다음 레일에서 다룹니다.
+                </p>
+              </div>
+              <CTAButton href="/optimize" size="lg">
+                공개 진단 시작
+              </CTAButton>
+            </div>
+          </Card>
+        </section>
+      </div>
     </div>
   );
 }
-
-const features = [
-  {
-    name: "Studio Core",
-    description: "Split-Panel (24x), Inspector (11x), List-Tree (21x) 패턴으로 구축된 3단계 워크스페이스",
-    icon: ComputerDesktopIcon,
-    gradient: "from-blue-500 to-cyan-500",
-    tags: ["Split-Panel", "Inspector", "List-Tree"],
-  },
-  {
-    name: "Radiant Density",
-    description: "Bento Grid, Dense Card, Gradient로 모듈 추천 정보의 밀도 극대화",
-    icon: BoltIcon,
-    gradient: "from-purple-500 to-pink-500",
-    tags: ["Bento Grid", "Gradient", "Dense Card"],
-  },
-  {
-    name: "Pocket Mobile",
-    description: "Mobile-first Stack, AppScreen, FAB으로 모바일 네이티브 경험",
-    icon: DevicePhoneMobileIcon,
-    gradient: "from-green-500 to-teal-500",
-    tags: ["Stack Pattern", "Bottom Sheet", "FAB"],
-  },
-  {
-    name: "Catalyst System",
-    description: "Headless UI 기반 Sidebar-Layout, Dialog, Feedback 시스템",
-    icon: DocumentTextIcon,
-    gradient: "from-orange-500 to-red-500",
-    tags: ["Headless UI", "Dark Mode", "Accessible"],
-  },
-];
-
-const stats = [
-  { value: "132", label: "총 파일 수" },
-  { value: "39", label: "Studio 파일" },
-  { value: "35", label: "Radiant 파일" },
-  { value: "58", label: "Pocket+Catalyst" },
-];
