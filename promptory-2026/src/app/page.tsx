@@ -1,247 +1,315 @@
-import { ChannelIntakeCard } from "@/components/channel-intake/channel-intake-card";
-import { Hero } from "@/components/marketplace/hero";
-import { ProductCard } from "@/components/marketplace/product-card";
+import { WebsiteDiagnosisMock } from "@/components/slack/slack-mock";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { SetupCallout } from "@/components/ui/setup-callout";
 import { CTAButton } from "@/components/ui/cta-button";
-import { supportedChannelHeadline } from "@/lib/channel-intake";
-import { getPublicEnvStatus } from "@/lib/env/public";
-import { getServerEnvStatus } from "@/lib/env/server";
-import { getCategoryLabel } from "@/lib/promptory-display";
-import { getPublishedProducts } from "@/lib/server/products";
+import { Metadata } from "next";
 
-const defaultCategories = ["자동화", "마케팅", "데이터", "운영", "콘텐츠", "세일즈"];
-const demoishPattern = /smoke|draft|test|demo/i;
+export const metadata: Metadata = {
+  title: "프롬프토리 - 맞춤형 Slack Agent Package",
+  description: "Slack에 URL을내면, 진단부터 실행 초안까지 팀 대화 안에서 끝납니다. 홈페이지, 랜딩, 문서 링크를 읽고 비교표, 카피 초안, 보고용 요약까지 Slack 안에서 이어서 만듭니다.",
+};
 
-export default async function HomePage() {
-  const publicStatus = getPublicEnvStatus();
-  const serverStatus = getServerEnvStatus();
-  const isReady = publicStatus.hasPublicEnv && serverStatus.hasSupabaseServiceRole;
-  const products = publicStatus.hasPublicEnv ? await getPublishedProducts() : [];
-  const curatedProducts = products.filter(
-    (product) =>
-      !demoishPattern.test(product.title) &&
-      !demoishPattern.test(product.description) &&
-      !(product.seller?.display_name && demoishPattern.test(product.seller.display_name)),
-  );
-  const featured = curatedProducts.slice(0, 3);
-  const categories = Array.from(new Set(curatedProducts.map((product) => product.category))).slice(0, 6);
-  const keywords = Array.from(new Set(curatedProducts.flatMap((product) => product.keywords ?? []))).slice(0, 10);
-  const workboardSteps = [
-    {
-      label: "1. Public Audit",
-      title: "채널 URL 입력",
-      body: `${supportedChannelHeadline} URL 중 하나를 넣고 공개 표면 신호부터 읽습니다.`,
-      tone: "accent" as const,
-    },
-    {
-      label: "2. Ask Plan",
-      title: "Ask 질문으로 병목 고정",
-      body: "문서처럼 길게 설명하지 않고, 막히는 지점과 목표를 질문 흐름으로 빠르게 고정합니다.",
-    },
-    {
-      label: "3. Apply",
-      title: "스택과 실행 팩 연결",
-      body: "추천 스택, 복붙 초안, 실행 팩, 저장 레일까지 바로 이어집니다.",
-    },
-  ];
-  const aiSignals = [
-    "4개 채널 공개 진단",
-    "질문형 플래닝",
-    "결정형 스택 추천",
-    "저장 / 주문 / 다운로드",
-  ];
-
+export default function HomePage() {
   return (
     <div className="pb-16">
-      {!isReady ? (
-        <div className="mx-auto mb-6 max-w-6xl px-4 pt-6 sm:px-6 lg:px-8">
-          <SetupCallout
-            title="Promptory는 채널 URL 기반 최적화 엔진의 배포 레일 MVP를 함께 점검하는 단계입니다."
-            body="현재는 URL 입력 진입면과 함께, 회원가입, 실행 팩 등록, 주문 생성, 개발용 결제 완료, 라이브러리 다운로드 흐름까지 실제로 확인할 수 있습니다."
-          />
-        </div>
-      ) : null}
-
-      <Hero
-        eyebrow="Promptory Channel Stack Doctor"
-        theme="workspace"
-        tone="light"
-        title={
-          <>
-            URL 하나로 바로 읽히는
-            <br />
-            채널 운영 진단 작업대
-          </>
-        }
-        body={
-          <>
-            <p>URL을 넣으면 공개 표면을 읽고, Ask 질문으로 병목을 고정한 뒤 자동화 스택과 실행 팩으로 이어집니다.</p>
-          </>
-        }
-        actions={
-          <>
-            <CTAButton href="/optimize" telemetryEventName="execution_pack_clicked" telemetryPayload={{ href: "/optimize", source: "home_hero" }} size="lg">
-              URL 넣고 진단 시작
-            </CTAButton>
-            <CTAButton
-              href="/products"
-              telemetryEventName="execution_pack_clicked"
-              telemetryPayload={{ href: "/products", source: "home_hero" }}
-              variant="outline"
-              size="lg"
-              className="hidden sm:inline-flex"
-            >
-              실행 팩 보기
-            </CTAButton>
-          </>
-        }
-        aside={<ChannelIntakeCard />}
-      />
-
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <section className="py-6 sm:py-8">
-          <div className="grid gap-4 lg:grid-cols-[minmax(0,1.25fr)_minmax(300px,0.75fr)]">
-            <Card variant="strong" className="p-5 sm:p-6">
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge>AI Service Flow</Badge>
-                <Badge variant="neutral">2026 UX</Badge>
-              </div>
-              <h2 className="section-title mt-3 text-[var(--slate-950)]">마켓을 먼저 보여주지 않고, 작업 순서를 먼저 보여줍니다</h2>
-              <p className="mt-3 text-sm leading-7 text-[var(--slate-700)]">
-                프롬프토리는 실행 팩 탐색 화면이 아니라 채널을 진단하고 계획을 세우는 작업면처럼 읽혀야 합니다. 첫 화면은
-                입력, 계획, 적용 순서가 바로 보여야 합니다.
+      {/* Hero Section */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50/30">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+          <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
+            {/* Left: Text */}
+            <div className="flex flex-col gap-6">
+              <Badge className="w-fit">Custom Slack Agent Package</Badge>
+              <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl">
+                Slack에 URL을내면,
+                <br />
+                <span className="text-blue-600">진단부터 실행 초안까지</span>
+                <br />
+                팀 대화 안에서 끝납니다
+              </h1>
+              <p className="text-base leading-7 text-slate-600 sm:text-lg max-w-xl">
+                프롬프토리는 홈페이지, 랜딩, 문서 링크를 읽고
+                몇 가지 질문으로 목표를 고정한 뒤
+                비교표, 카피 초안, 보고용 요약까지 Slack 안에서 이어서 만듭니다.
               </p>
-              <div className="mt-5 grid gap-3 md:grid-cols-3">
-                {workboardSteps.map((step, index) => (
-                  <div
-                    key={step.label}
-                    className={`rounded-[1.2rem] border px-4 py-4 ${
-                      index === 0
-                        ? "border-[rgba(34,80,221,0.18)] bg-[linear-gradient(180deg,#ffffff_0%,#eef4ff_100%)] shadow-[0_14px_30px_-24px_rgba(34,80,221,0.28)]"
-                        : "border-[var(--line)] bg-white"
-                    }`}
-                  >
-                    <p className="section-kicker text-[var(--brand-700)]">{step.label}</p>
-                    <p className="mt-2 text-sm font-semibold text-[var(--slate-950)]">{step.title}</p>
-                    <p className="mt-2 text-sm leading-6 text-[var(--slate-600)]">{step.body}</p>
-                  </div>
-                ))}
+              <div className="flex flex-wrap gap-3 pt-2">
+                <CTAButton href="/contact" size="lg">
+                  데모 요청하기
+                </CTAButton>
+                <CTAButton href="/demo/slack" variant="outline" size="lg">
+                  샘플 대화 보기
+                </CTAButton>
+              </div>
+              <p className="text-xs text-slate-500 pt-2">
+                맞춤 세팅 · Slack DM/채널/모달 · 저장 후 이어보기
+              </p>
+            </div>
+
+            {/* Right: Slack Mock */}
+            <div className="flex justify-center lg:justify-end">
+              <WebsiteDiagnosisMock />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Target Audience Section */}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="text-sm font-semibold text-blue-600 mb-2">Built for teams with too much to draft</p>
+            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">
+              자료는 많은데, 초안과 비교가 계속 밀리는 팀에게 맞습니다
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {/* Tab 1: Korean B2B SMB */}
+            <Card variant="strong" className="p-6 sm:p-8">
+              <div className="flex flex-col gap-4 h-full">
+                <Badge variant="neutral">한국 B2B 중소기업 팀</Badge>
+                <p className="text-sm leading-7 text-slate-600">
+                  홈페이지와 채널은 있는데
+                  마케팅·기획 인력이 적어서
+                  비교표, 카피 초안, 보고 정리가 자주 밀리는 팀
+                </p>
+                <div className="mt-auto pt-4">
+                  <CTAButton href="/packages" variant="outline" size="sm">
+                    중소기업용 패키지 보기
+                  </CTAButton>
+                </div>
               </div>
             </Card>
 
-            <Card variant="tint" className="p-5 sm:p-6">
-              <p className="section-kicker text-[var(--brand-700)]">Current Product Output</p>
-              <h3 className="mt-2 text-[1.05rem] font-semibold text-[var(--slate-950)]">지금 앱이 바로 보여주는 결과</h3>
-              <div className="mt-4 grid gap-2">
-                {aiSignals.map((signal, index) => (
-                  <div
-                    key={signal}
-                    className="flex items-center justify-between gap-3 rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3 text-sm text-[var(--slate-700)]"
-                  >
-                    <span className="text-xs font-semibold text-[var(--slate-500)]">0{index + 1}</span>
-                    <p className="flex-1 text-right">{signal}</p>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-5 flex flex-wrap gap-2">
-                <CTAButton href="/optimize" telemetryEventName="execution_pack_clicked" telemetryPayload={{ href: "/optimize", source: "home_output" }} size="sm">
-                  진단 작업면 열기
-                </CTAButton>
-                <CTAButton
-                  href="/products"
-                  telemetryEventName="execution_pack_clicked"
-                  telemetryPayload={{ href: "/products", source: "home_output" }}
-                  variant="outline"
-                  size="sm"
-                >
-                  실행 팩 보기
-                </CTAButton>
+            {/* Tab 2: Foreign Company Korea Office */}
+            <Card variant="strong" className="p-6 sm:p-8">
+              <div className="flex flex-col gap-4 h-full">
+                <Badge variant="neutral">외국계 한국지사 팀</Badge>
+                <p className="text-sm leading-7 text-slate-600">
+                  한국 시장용 채널 진단과
+                  본사 공유용 KR/EN 정리를
+                  동시에 빠르게 해야 하는 팀
+                </p>
+                <div className="mt-auto pt-4">
+                  <CTAButton href="/packages/korea-local-ops-agent" variant="outline" size="sm">
+                    외국계 팀용 패키지 보기
+                  </CTAButton>
+                </div>
               </div>
             </Card>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="py-6 sm:py-8">
-          <div className="mb-4 flex flex-col gap-3 sm:mb-5 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-3xl">
-              <p className="section-kicker text-[var(--slate-500)]">Execution Rail</p>
-              <h2 className="section-title mt-2 text-[var(--slate-950)]">진단 결과의 다음 액션을 바로 실행 팩으로 넘깁니다</h2>
-              <p className="mt-2 text-sm leading-7 text-[var(--slate-600)]">실행 팩은 홈의 주인공이 아니라, 진단 뒤에 이어지는 적용 레일입니다.</p>
-            </div>
-            <CTAButton
-              href="/products"
-              telemetryEventName="execution_pack_clicked"
-              telemetryPayload={{ href: "/products", source: "home_execution_rail" }}
-              variant="outline"
-              size="sm"
-            >
-              전체 실행 팩 보기
+      {/* How It Works Section */}
+      <section className="py-16 sm:py-20 bg-slate-50">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="text-sm font-semibold text-blue-600 mb-2">How it works</p>
+            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">
+              설명보다 먼저, Slack 안에서 바로 일합니다
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                step: "01",
+                title: "URL 또는 문서 입력",
+                description: "홈페이지, 랜딩, 문서 링크를 Slack에 붙여 넣습니다",
+              },
+              {
+                step: "02",
+                title: "질문으로 목표 고정",
+                description: "문의, 구매, 콘텐츠, 보고 중 무엇이 급한지 짧게 확인합니다",
+              },
+              {
+                step: "03",
+                title: "실행 초안 생성",
+                description: "비교표, 카피, 브리프, 보고용 요약이 바로 이어집니다",
+              },
+            ].map((item) => (
+              <Card key={item.step} variant="tint" className="p-6">
+                <span className="text-3xl font-bold text-blue-200">{item.step}</span>
+                <h3 className="mt-4 text-lg font-semibold text-slate-950">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{item.description}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Package Lineup Section */}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="text-sm font-semibold text-blue-600 mb-2">Agent packages</p>
+            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">
+              팀의 반복 업무에 맞춰 Slack 에이전트를 패키지로 붙입니다
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
+            {[
+              {
+                title: "Website Diagnosis Agent",
+                description: "사이트 URL을 읽고 핵심 병목, 경쟁사 비교, CTA 초안, 보고용 요약까지 만듭니다",
+                footer: "사이트 진단 · 전환 문구 · 보고 초안",
+                href: "/packages/website-diagnosis-agent",
+              },
+              {
+                title: "Campaign Brief Agent",
+                description: "회의 메모, 링크, 기존 자료를 바탕으로 브리프, 메시지 방향, 액션 리스트를 정리합니다",
+                footer: "브리프 생성 · 카피 초안 · 실행 정리",
+                href: "/packages/campaign-brief-agent",
+              },
+              {
+                title: "Korea Local Ops Agent",
+                description: "한국 채널을 진단하고 KR/EN summary와 HQ 공유용 action memo를 만듭니다",
+                footer: "Korea scan · KR/EN summary · HQ memo",
+                href: "/packages/korea-local-ops-agent",
+              },
+            ].map((pkg) => (
+              <Card key={pkg.title} variant="strong" className="p-6 flex flex-col">
+                <h3 className="text-lg font-semibold text-slate-950">{pkg.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-600 flex-1">{pkg.description}</p>
+                <p className="mt-4 text-xs text-slate-500">{pkg.footer}</p>
+                <div className="mt-4 pt-4 border-t border-slate-100">
+                  <CTAButton href={pkg.href} variant="outline" size="sm" className="w-full">
+                    상세 보기
+                  </CTAButton>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Outputs Section */}
+      <section className="py-16 sm:py-20 bg-slate-50">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="text-sm font-semibold text-blue-600 mb-2">Outputs</p>
+            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">
+              대화가 끝나면 답변이 아니라 실행물이 남습니다
+            </h2>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              "경쟁사 비교표",
+              "전환 문구 초안",
+              "캠페인 브리프",
+              "팀장 보고용 요약",
+              "KR/EN executive summary",
+              "다음 액션 체크리스트",
+            ].map((item) => (
+              <Card key={item} variant="tint" className="p-4 flex items-center gap-3">
+                <div className="w-2 h-2 rounded-full bg-blue-500" />
+                <span className="text-sm font-medium text-slate-700">{item}</span>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Slack Surfaces Section */}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="text-sm font-semibold text-blue-600 mb-2">Slack surfaces</p>
+            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">
+              대화는 메시지에서, 이어보기는 App Home에서, 입력은 모달에서 처리합니다
+            </h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                title: "Slack 메시지",
+                description: "URL 입력, 1차 진단, 빠른 실행 버튼",
+              },
+              {
+                title: "모달",
+                description: "목표, 결과 형식, 언어 옵션 입력",
+              },
+              {
+                title: "스레드",
+                description: "비교표, 초안, 요약 결과 공유",
+              },
+              {
+                title: "App Home",
+                description: "저장한 진단, 최근 작업, 다시 열기",
+              },
+            ].map((surface) => (
+              <Card key={surface.title} variant="tint" className="p-5">
+                <h3 className="font-semibold text-slate-950">{surface.title}</h3>
+                <p className="mt-2 text-sm text-slate-600">{surface.description}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 sm:py-20 bg-slate-50">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="text-sm font-semibold text-blue-600 mb-2">FAQ</p>
+            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">자주 묻는 질문</h2>
+          </div>
+
+          <div className="space-y-4">
+            {[
+              {
+                q: "우리 팀 상황에 맞게 바꿀 수 있나요?",
+                a: "네, 패키지 도입 시 팀의 입력물, 질문 흐름, 출력 형식을 맞춤 세팅합니다. 기본 패키지 구조는 유지하면서 팀에 맞게 조정됩니다.",
+              },
+              {
+                q: "Slack 안에서만 써야 하나요?",
+                a: "주요 흐름은 Slack 안에서 완료됩니다. 결과물은 필요시 웹에서도 확인할 수 있지만, 입력부터 출력까지 Slack에서 이어지는 것이 핵심입니다.",
+              },
+              {
+                q: "결과물은 저장되나요?",
+                a: "네, 모든 진단과 초안은 App Home에 자동 저장됩니다. 이전 작업을 다시 열어서 수정하거나 이어서 작업할 수 있습니다.",
+              },
+              {
+                q: "영어 요약도 가능한가요?",
+                a: "네, Korea Local Ops Agent를 포함한 모든 패키지에서 KR/EN 요약 옵션을 선택할 수 있습니다. HQ 공유용 EN executive summary도 함께 생성됩니다.",
+              },
+              {
+                q: "도입 전에 샘플을 볼 수 있나요?",
+                a: "네, 회사 URL이나 현재 쓰는 자료 예시를 보내주시면 실제 패키지 흐름으로 데모를 보여드립니다. /contact 페이지에서 요청하세요.",
+              },
+            ].map((faq, index) => (
+              <Card key={index} variant="tint" className="p-5">
+                <h3 className="font-semibold text-slate-950">{faq.q}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{faq.a}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Final CTA Section */}
+      <section className="py-16 sm:py-20">
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl lg:text-4xl">
+            우리 팀 Slack에 맞는 에이전트 패키지 데모를 받아보세요
+          </h2>
+          <p className="mt-4 text-base text-slate-600 max-w-2xl mx-auto">
+            회사 사이트나 채널 URL을 보내주시면
+            프롬프토리 방식으로 실제 진단 예시를 보여드립니다
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <CTAButton href="/contact" size="lg">
+              회사 URL 보내기
+            </CTAButton>
+            <CTAButton href="/contact" variant="outline" size="lg">
+              문의하기
             </CTAButton>
           </div>
-
-          <div className="mb-4 space-y-3">
-            <div className="flex flex-wrap gap-2">
-              {(categories.length > 0 ? categories : defaultCategories).map((category) => (
-                <CTAButton
-                  key={category}
-                  href={`/products?category=${encodeURIComponent(category)}`}
-                  telemetryEventName="execution_pack_clicked"
-                  telemetryPayload={{ category, href: `/products?category=${encodeURIComponent(category)}`, source: "home_category" }}
-                  variant="outline"
-                  size="sm"
-                >
-                  {getCategoryLabel(category)}
-                </CTAButton>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {(keywords.length > 0 ? keywords : ["AI", "자동화", "블로그", "마케팅", "운영", "콘텐츠"]).map((keyword) => (
-                <CTAButton
-                  key={keyword}
-                  href={`/products?q=${encodeURIComponent(keyword)}`}
-                  telemetryEventName="execution_pack_clicked"
-                  telemetryPayload={{ href: `/products?q=${encodeURIComponent(keyword)}`, keyword, source: "home_keyword" }}
-                  variant="outline"
-                  size="sm"
-                >
-                  {keyword}
-                </CTAButton>
-              ))}
-            </div>
-          </div>
-
-          {featured.length > 0 ? (
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-              {featured.map((product) => (
-                <ProductCard key={product.id} product={product} variant="compact" />
-              ))}
-            </div>
-          ) : (
-            <Card variant="tint" className="p-5 text-sm leading-7 text-[var(--slate-600)]">
-              아직 공개된 실행 팩이 없습니다. 첫 실행 팩을 등록하면 여기에 바로 노출됩니다.
-            </Card>
-          )}
-        </section>
-
-        <section className="py-6 sm:py-8">
-          <Card variant="tint" className="p-5 sm:p-6">
-            <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_220px] lg:items-end">
-              <div>
-                <p className="section-kicker text-[var(--brand-700)]">Trust Rule</p>
-                <h3 className="mt-2 text-[1.05rem] font-semibold text-[var(--slate-950)]">공개 진단과 연결형 설치는 분리해서 말합니다</h3>
-                <p className="mt-3 text-sm leading-7 text-[var(--slate-700)]">
-                  URL-only 단계에서는 공개 표면만 진단하고, 심화 설치와 운영 연결은 다음 레일에서 다룹니다.
-                </p>
-              </div>
-              <CTAButton href="/optimize" telemetryEventName="execution_pack_clicked" telemetryPayload={{ href: "/optimize", source: "home_trust_rule" }} size="lg">
-                공개 진단 시작
-              </CTAButton>
-            </div>
-          </Card>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -12,29 +12,15 @@ export async function SiteHeader() {
   const profile = user ? await getProfileByUserId(user.id) : null;
   const displayLabel = profile?.display_name?.trim() || user?.email || "로그인 필요";
   const navItems = [
-    { href: "/optimize", label: "진단" },
-    { href: "/products", label: "실행 팩" },
-    { href: "/library", label: "보관함" },
-    ...(user
-      ? [
-          { href: "/orders", label: "주문" },
-          { href: "/seller/products", label: "제작실" },
-        ]
-      : []),
+    { href: "/packages", label: "패키지" },
+    { href: "/demo/slack", label: "데모" },
+    { href: "/contact", label: "문의" },
   ];
-  const mobileNavItems = user
-    ? [
-        { href: "/optimize", label: "진단" },
-        { href: "/products", label: "실행 팩" },
-        { href: "/library", label: "보관함" },
-        { href: "/orders", label: "주문" },
-        { href: "/seller/products", label: "제작실" },
-      ]
-    : [
-        { href: "/optimize", label: "진단" },
-        { href: "/products", label: "실행 팩" },
-        { href: "/library", label: "보관함" },
-      ];
+  const mobileNavItems = [
+    { href: "/packages", label: "패키지" },
+    { href: "/demo/slack", label: "데모" },
+    { href: "/contact", label: "문의" },
+  ];
 
   return (
     <header className="sticky top-0 z-20 border-b border-[var(--line)] bg-[rgba(249,251,255,0.92)] backdrop-blur-xl">

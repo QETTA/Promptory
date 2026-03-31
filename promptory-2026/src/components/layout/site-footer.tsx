@@ -1,23 +1,75 @@
-import { getPaymentsMode } from "@/lib/env/server";
-import { getPaymentsModeSummary } from "@/lib/promptory-display";
+import Link from "next/link";
 import { PromptoryLogo } from "@/components/layout/promptory-logo";
 
 export function SiteFooter() {
-  const paymentsMode = getPaymentsMode();
-  const paymentsMessage = getPaymentsModeSummary(paymentsMode);
+  const footerLinks = [
+    { href: "/packages", label: "패키지" },
+    { href: "/demo/slack", label: "데모" },
+    { href: "/contact", label: "문의" },
+  ];
+
+  const packageLinks = [
+    { href: "/packages/website-diagnosis-agent", label: "Website Diagnosis" },
+    { href: "/packages/campaign-brief-agent", label: "Campaign Brief" },
+    { href: "/packages/korea-local-ops-agent", label: "Korea Local Ops" },
+  ];
 
   return (
-    <footer className="mt-16 border-t border-[var(--line)] bg-[var(--surface-2)]">
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 sm:px-6 lg:grid-cols-[1fr_320px] lg:px-8">
-        <div>
-          <PromptoryLogo />
-          <p className="mt-4 text-[1.4rem] font-semibold text-[var(--slate-950)]">개인 채널 URL 기반 최적화 엔진</p>
-          <p className="mt-3 text-sm leading-7 text-[var(--slate-600)]">
-            Promptory는 개인 채널 URL을 읽고 실행 시스템을 최적화하는 엔진을 지향합니다. 현재 앱에 구현된 구매와 보관함은 결과 전달 레일로 함께 점검합니다.
-          </p>
+    <footer className="mt-16 border-t border-slate-200 bg-slate-50">
+      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {/* Brand */}
+          <div className="lg:col-span-2">
+            <PromptoryLogo />
+            <p className="mt-4 text-lg font-semibold text-slate-950">
+              맞춤형 Slack Agent Package
+            </p>
+            <p className="mt-2 text-sm leading-6 text-slate-600 max-w-sm">
+              Slack에 URL을내면 진단부터 실행 초안까지 팀 대화 안에서 끝납니다. 
+              홈페이지, 랜딩, 문서 링크를 읽고 비교표, 카피 초안, 보고용 요약까지 이어서 만듭니다.
+            </p>
+          </div>
+
+          {/* Navigation */}
+          <div>
+            <h3 className="text-sm font-semibold text-slate-900 mb-3">메뉴</h3>
+            <ul className="space-y-2">
+              {footerLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm text-slate-600 hover:text-slate-900 transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Packages */}
+          <div>
+            <h3 className="text-sm font-semibold text-slate-900 mb-3">패키지</h3>
+            <ul className="space-y-2">
+              {packageLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-sm text-slate-600 hover:text-slate-900 transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
-        <div className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--surface-1)] p-5 text-sm leading-7 text-[var(--slate-600)]">
-          {paymentsMessage}
+
+        {/* Bottom */}
+        <div className="mt-12 pt-8 border-t border-slate-200 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-slate-500">
+            © 2026 Promptory. 맞춤형 Slack Agent Package.
+          </p>
+          <a 
+            href="mailto:hello@promptory.kr" 
+            className="text-xs text-slate-500 hover:text-slate-700 transition-colors"
+          >
+            hello@promptory.kr
+          </a>
         </div>
       </div>
     </footer>
