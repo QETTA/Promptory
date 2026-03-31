@@ -15,8 +15,8 @@ test("product editor checklist blocks publish readiness without a product file",
   });
 
   assert.equal(checklist.publishReady, false);
-  assert.equal(checklist.readinessLabel, "상품 파일 필요");
-  assert.equal(checklist.summary, "공개 전환 전 실제 상품 파일이 필요합니다.");
+  assert.equal(checklist.readinessLabel, "실행 팩 파일 필요");
+  assert.equal(checklist.summary, "공개 전환 전 실제 실행 팩 파일이 필요합니다.");
 });
 
 test("product editor checklist marks ready listings as publishable", () => {
@@ -69,8 +69,8 @@ test("product editor checklist keeps the publish label even when quality copy st
 });
 
 test("seller readiness helpers use the same labels and summaries as the editor", () => {
-  assert.equal(getSellerReadinessLabel({ hasProductFile: false, hasThumbnail: false }), "상품 파일 필요");
-  assert.equal(getSellerReadinessSummary({ hasProductFile: false, hasThumbnail: false }), "공개 전환 전 실제 상품 파일이 필요합니다.");
+  assert.equal(getSellerReadinessLabel({ hasProductFile: false, hasThumbnail: false }), "실행 팩 파일 필요");
+  assert.equal(getSellerReadinessSummary({ hasProductFile: false, hasThumbnail: false }), "공개 전환 전 실제 실행 팩 파일이 필요합니다.");
 
   assert.equal(getSellerReadinessLabel({ hasProductFile: true, hasThumbnail: false }), "공개 가능 · 썸네일 추천");
   assert.equal(

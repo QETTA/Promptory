@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
+import { trackClientTelemetryEvent } from "@/lib/telemetry/client";
 
 function getDownloadErrorMessage(status: number, fallback?: string) {
   if (status === 401) {
@@ -40,6 +41,13 @@ export function DownloadButton({ orderId }: { orderId: string }) {
       if (!popup) {
         throw new Error("파일 창을 열지 못했습니다. 브라우저 팝업 차단 설정을 확인해 주세요.");
       }
+
+      trackClientTelemetryEvent({
+        name: "download_started",
+        payload: {
+          orderId,
+        },
+      });
 
       popup.location.replace(payload.url);
     } catch (downloadError) {

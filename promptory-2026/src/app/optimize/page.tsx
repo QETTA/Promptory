@@ -13,15 +13,16 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { CTAButton } from "@/components/ui/cta-button";
 import { buildLoginHref } from "@/lib/auth-redirect";
-import { parseChannelInput } from "@/lib/channel-intake";
+import { parseChannelInput, supportedChannelCatalog, supportedChannelHeadline } from "@/lib/channel-intake";
 import { buildChannelSnapshot } from "@/lib/channel-snapshot";
+import { resolveOptimizationEngine } from "@/lib/optimization-engine/index";
 import { buildOptimizationRunQueryString, trimOptimizationSummaryNote } from "@/lib/optimization-history";
-import { getOptimizeRailPlan } from "@/lib/optimize-rail";
-import { buildOptimizationBriefSummary, parseOptimizationBrief } from "@/lib/optimization-brief";
+import { parseOptimizationBrief } from "@/lib/optimization-brief";
 import { getOptionalUser } from "@/lib/server/auth";
+import { getChannelSurfaceSnapshot } from "@/lib/server/channel-surface-snapshot";
 import { getSavedOptimizationRuns } from "@/lib/server/optimization-runs";
-import { canAutoReadChannelSurface, readChannelSurface } from "@/lib/server/channel-surface-read";
 import { getPublishedProducts } from "@/lib/server/products";
+import { trackServerEvent } from "@/lib/server/telemetry";
 
 function getUrlParam(params: { url?: string | string[] } | undefined) {
   const raw = params?.url;
@@ -47,22 +48,23 @@ export default async function OptimizePage({
   const activeAsk = Array.isArray(params.ask) ? params.ask[0] : params.ask;
   const parsed = rawUrl ? parseChannelInput(rawUrl) : null;
   const snapshot = parsed?.ok ? buildChannelSnapshot(parsed) : null;
-  const surface = parsed?.ok && canAutoReadChannelSurface(parsed) ? await readChannelSurface(parsed) : null;
   const brief = parseOptimizationBrief(params);
-  const summary = parsed?.ok && snapshot && brief.hasAnyInput ? buildOptimizationBriefSummary({ brief, parsed, snapshot, surface }) : null;
   const queryString = buildOptimizationRunQueryString(params);
   const user = await getOptionalUser();
+  const surfaceSnapshot = parsed?.ok ? await getChannelSurfaceSnapshot(parsed) : null;
+  const engineResult = parsed?.ok && snapshot
+    ? resolveOptimizationEngine({
+        brief,
+        parsed,
+        signedIn: Boolean(user),
+        snapshot,
+        surfaceSnapshot,
+      })
+    : null;
+  const summary = engineResult?.summary ?? null;
+  const railPlan = engineResult?.railPlan ?? null;
+  const surface = engineResult?.surface ?? surfaceSnapshot?.read ?? null;
   const savedRuns = user ? await getSavedOptimizationRuns(user.id, summary ? 3 : 6) : [];
-  const railPlan =
-    summary && parsed?.ok
-      ? getOptimizeRailPlan({
-          brief,
-          kind: parsed.kind,
-          kindLabel: parsed.kindLabel,
-          moduleTitles: summary.recommendedModules.map((module) => module.title),
-          signedIn: Boolean(user),
-        })
-      : null;
   const railProducts = railPlan ? await getPublishedProducts({ category: railPlan.category, sort: "interest", limit: 3 }) : [];
   const isReady = snapshot?.readyLabel === "다음 단계 진행 가능";
   const needsManualReview = snapshot?.readyLabel === "수동 확인 권장";
@@ -160,6 +162,10 @@ export default async function OptimizePage({
   const rightRailCards = summary
     ? [
         {
+          title: "엔진 모드",
+          body: engineResult?.engineMode === "provider_backed" ? "provider-backed" : "deterministic",
+        },
+        {
           title: "현재 모드",
           body: brief.isComplete ? "질문 완료" : "질문 진행 중",
         },
@@ -173,6 +179,26 @@ export default async function OptimizePage({
         },
       ]
     : modeSignals.map((item) => ({ title: item.label, body: `${item.value} · ${item.body}` }));
+
+  if (parsed?.ok && brief.hasAnyInput) {
+    await trackServerEvent(brief.isComplete ? "ask_completed" : "ask_started", {
+      channelKind: parsed.kind,
+      normalizedUrl: parsed.normalizedUrl,
+      queryString,
+    });
+  }
+
+  if (engineResult && railPlan) {
+    await trackServerEvent("recommendation_generated", {
+      channelKind: parsed?.ok ? parsed.kind : null,
+      engineMode: engineResult.engineMode,
+      engineVersion: engineResult.engineVersion,
+      queryString,
+      railCategory: railPlan.category,
+      recommendationPayloadHash: engineResult.recommendationPayloadHash,
+      surfaceStatus: surface?.status ?? null,
+    });
+  }
 
   return (
     <div className="pb-16">
@@ -204,7 +230,7 @@ export default async function OptimizePage({
             </>
           ) : (
             <>
-              <p>유튜브, 쿠팡, 네이버 블로그 URL 중 하나를 넣고 공개 표면 신호부터 시작하세요.</p>
+              <p>{supportedChannelHeadline} URL 중 하나를 넣고 공개 표면 신호부터 시작하세요.</p>
             </>
           )
         }
@@ -215,10 +241,10 @@ export default async function OptimizePage({
         {!parsed ? (
           <div className="grid gap-4 lg:grid-cols-[minmax(0,1.2fr)_minmax(300px,0.8fr)]">
             <Card variant="strong" className="p-5 sm:p-6">
-              <p className="section-kicker text-[var(--brand-700)]">AI Workflow</p>
+              <p className="section-kicker text-[var(--brand-700)]">Workflow</p>
               <h2 className="section-title mt-2 text-[var(--slate-950)]">이 화면은 문서가 아니라 단일 작업면이어야 합니다</h2>
               <p className="mt-3 text-sm leading-7 text-[var(--slate-700)]">
-                URL을 넣고, AI가 질문을 던지고, 결과를 스택과 실행 팩으로 연결하는 흐름만 먼저 보여줍니다.
+                URL을 넣고, 공개 표면과 Ask 답변을 묶어 결정형 진단을 만든 뒤 결과를 스택과 실행 팩으로 연결합니다.
               </p>
               <div className="mt-5 grid gap-3 md:grid-cols-3">
                 {stackStoryItems.map((item, index) => (
@@ -241,23 +267,10 @@ export default async function OptimizePage({
             <Card variant="tint" className="p-5 sm:p-6">
               <p className="section-kicker text-[var(--brand-700)]">Supported Channels</p>
               <div className="mt-4 grid gap-3">
-              {[
-                {
-                  title: "YouTube",
-                  body: "영상 제목, 설명, 고정 댓글, 채널 톤을 함께 보고 콘텐츠 반응과 전환 흐름을 정리합니다.",
-                },
-                {
-                  title: "Naver Blog",
-                  body: "제목, 도입부, 발행 리듬, 말미 CTA 구조를 기준으로 검색형 콘텐츠 흐름을 읽습니다.",
-                },
-                {
-                  title: "쿠팡",
-                  body: "상품명, 대표 혜택, 신뢰 정보, 구매 CTA 순서를 기준으로 판매형 표면을 진단합니다.",
-                },
-              ].map((item) => (
-                <div key={item.title} className="rounded-[1rem] border border-[var(--line)] bg-white px-4 py-4">
-                  <p className="text-base font-semibold text-[var(--slate-950)]">{item.title}</p>
-                  <p className="mt-2 text-sm leading-6 text-[var(--slate-700)]">{item.body}</p>
+              {supportedChannelCatalog.map((item) => (
+                <div key={item.kind} className="rounded-[1rem] border border-[var(--line)] bg-white px-4 py-4">
+                  <p className="text-base font-semibold text-[var(--slate-950)]">{item.label}</p>
+                  <p className="mt-2 text-sm leading-6 text-[var(--slate-700)]">{item.summary}</p>
                 </div>
               ))}
               </div>
@@ -288,11 +301,17 @@ export default async function OptimizePage({
                       <SaveOptimizationRunButton
                         channelKind={parsed.kind}
                         channelLabel={parsed.kindLabel}
+                        engineMode={engineResult?.engineMode}
+                        engineVersion={engineResult?.engineVersion}
+                        evidenceSignals={engineResult?.rationale.evidence.map((item) => item.detail)}
                         focusTitle={summary.recommendedModules[0]?.title}
+                        normalizedUrl={parsed.normalizedUrl}
                         queryString={queryString}
+                        rationaleSummary={engineResult?.rationale.summary}
                         rawUrl={rawUrl}
                         recommendedCategory={railPlan?.category}
                         size="sm"
+                        surfaceReadStatus={surface?.status}
                         summaryNote={saveSummaryNote}
                       />
                     ) : (
@@ -302,7 +321,13 @@ export default async function OptimizePage({
                     )
                   ) : null}
 
-                  <CTAButton href="/products" variant="outline" size="sm">
+                  <CTAButton
+                    href="/products"
+                    telemetryEventName="execution_pack_clicked"
+                    telemetryPayload={{ href: "/products", source: "optimize_summary" }}
+                    variant="outline"
+                    size="sm"
+                  >
                     실행 팩 보기
                   </CTAButton>
                 </div>
@@ -382,17 +407,23 @@ export default async function OptimizePage({
                                   : `${parsed.kindLabel} 진단 결과를 저장합니다`}
                               </h3>
                               <p className="mt-3 text-sm leading-7 text-[var(--slate-700)]">
-                                URL, 질문 답변, 추천 스택 축을 함께 저장해 같은 계정에서 바로 복귀할 수 있게 합니다.
+                                URL, 질문 답변, 엔진 판단 근거를 함께 저장해 같은 계정에서 바로 복귀할 수 있게 합니다.
                               </p>
                             </div>
                             <SaveOptimizationRunButton
                               channelKind={parsed.kind}
                               channelLabel={parsed.kindLabel}
+                              engineMode={engineResult?.engineMode}
+                              engineVersion={engineResult?.engineVersion}
+                              evidenceSignals={engineResult?.rationale.evidence.map((item) => item.detail)}
                               focusTitle={summary.recommendedModules[0]?.title}
+                              normalizedUrl={parsed.normalizedUrl}
                               queryString={queryString}
+                              rationaleSummary={engineResult?.rationale.summary}
                               rawUrl={rawUrl}
                               recommendedCategory={railPlan?.category}
                               size="sm"
+                              surfaceReadStatus={surface?.status}
                               summaryNote={saveSummaryNote}
                             />
                           </div>

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { buildLoginHref } from "@/lib/auth-redirect";
 import { cn } from "@/lib/cn";
+import { trackClientTelemetryEvent } from "@/lib/telemetry/client";
 
 export function PurchaseButton({
   className,
@@ -56,6 +57,15 @@ export function PurchaseButton({
       if (!response.ok || !payload.orderId) {
         throw new Error(payload.error ?? "주문을 만들지 못했습니다.");
       }
+
+      trackClientTelemetryEvent({
+        name: "execution_pack_clicked",
+        payload: {
+          orderId: payload.orderId,
+          productId,
+          redirectTo,
+        },
+      });
 
       router.push(`/checkout/${payload.orderId}`);
       router.refresh();

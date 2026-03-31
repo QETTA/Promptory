@@ -163,7 +163,7 @@ test("unavailable coupang product read uses product-specific notes", async () =>
     const surface = await readChannelSurface(parsed);
     assert.equal(surface.status, "unavailable");
     assert.equal(surface.notes.some((note) => note.includes("스토어 쪽")), false);
-    assert.match(surface.notes[0] ?? "", /쿠팡 공개 상품 화면/);
+    assert.match(surface.notes[0] ?? "", /쿠팡 공개 판매 화면/);
     assert.match(surface.notes[1] ?? "", /구매 직전|브라우저/);
   } finally {
     globalThis.fetch = originalFetch;

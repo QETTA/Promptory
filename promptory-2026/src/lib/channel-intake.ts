@@ -23,12 +23,44 @@ export type ParsedChannelInputSuccess = Extract<ParsedChannelInput, { ok: true }
 
 const explicitBlogHosts = new Set(["blog.naver.com", "brunch.co.kr", "velog.io"]);
 
-export const supportedChannelExamples = [
-  { label: "YouTube 채널", url: "https://www.youtube.com/@yourchannel" },
-  { label: "네이버 블로그", url: "https://blog.naver.com/yourbrand" },
-  { label: "쿠팡 스토어", url: "https://store.coupang.com/vp/vendors/A000123" },
-  { label: "스마트스토어", url: "https://smartstore.naver.com/yourbrand" },
+export const supportedChannelCatalog = [
+  {
+    kind: "youtube",
+    label: "YouTube",
+    fullLabel: "YouTube 채널",
+    summary: "영상 제목, 설명, 고정 댓글, 채널 톤을 함께 보고 콘텐츠 반응과 전환 흐름을 정리합니다.",
+    url: "https://www.youtube.com/@yourchannel",
+  },
+  {
+    kind: "blog",
+    label: "Naver Blog",
+    fullLabel: "네이버 블로그",
+    summary: "제목, 도입부, 발행 리듬, 말미 CTA 구조를 기준으로 검색형 콘텐츠 흐름을 읽습니다.",
+    url: "https://blog.naver.com/yourbrand",
+  },
+  {
+    kind: "coupang",
+    label: "Coupang",
+    fullLabel: "쿠팡 스토어",
+    summary: "상품명, 대표 혜택, 신뢰 정보, 구매 CTA 순서를 기준으로 판매형 표면을 진단합니다.",
+    url: "https://store.coupang.com/vp/vendors/A000123",
+  },
+  {
+    kind: "smartstore",
+    label: "Smartstore",
+    fullLabel: "스마트스토어",
+    summary: "스토어 첫인상, 대표 상품 카드, 후기/신뢰 영역을 기준으로 상점형 전환 흐름을 점검합니다.",
+    url: "https://smartstore.naver.com/yourbrand",
+  },
 ] as const;
+
+export const supportedChannelExamples = supportedChannelCatalog.map(({ fullLabel: label, url }) => ({ label, url })) as readonly {
+  label: string;
+  url: string;
+}[];
+
+export const supportedChannelCount = supportedChannelCatalog.length;
+export const supportedChannelHeadline = supportedChannelCatalog.map((item) => item.label).join(" · ");
 
 function normalizeInput(raw: string) {
   const trimmed = raw.trim();

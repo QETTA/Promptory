@@ -109,10 +109,21 @@ export function ChannelResultStack({
             </div>
           </div>
           <div className="grid gap-2">
-            <CTAButton href={railPlan.primaryHref} size="lg">
+            <CTAButton
+              href={railPlan.primaryHref}
+              telemetryEventName="execution_pack_clicked"
+              telemetryPayload={{ href: railPlan.primaryHref, railCategory: railPlan.category, railLabel: "primary" }}
+              size="lg"
+            >
               {railPlan.primaryLabel}
             </CTAButton>
-            <CTAButton href={railPlan.secondaryHref} variant="outline" size="lg">
+            <CTAButton
+              href={railPlan.secondaryHref}
+              telemetryEventName="execution_pack_clicked"
+              telemetryPayload={{ href: railPlan.secondaryHref, railCategory: railPlan.category, railLabel: "secondary" }}
+              variant="outline"
+              size="lg"
+            >
               {railPlan.secondaryLabel}
             </CTAButton>
           </div>

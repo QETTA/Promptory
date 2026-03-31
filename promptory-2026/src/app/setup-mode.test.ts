@@ -90,7 +90,7 @@ test("product create api returns 503 guidance when seller write runtime is missi
 
     assert.equal(response.status, 503);
     assert.deepEqual(await response.json(), {
-      error: "상품 등록에는 공개 Supabase 설정과 SUPABASE_SERVICE_ROLE_KEY가 필요합니다. /setup에서 연결 상태를 확인해 주세요.",
+      error: "실행 팩 등록에는 공개 Supabase 설정과 SUPABASE_SERVICE_ROLE_KEY가 필요합니다. /setup에서 연결 상태를 확인해 주세요.",
     });
   });
 });

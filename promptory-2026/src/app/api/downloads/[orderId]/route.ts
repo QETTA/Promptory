@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { hasDownloadRuntime } from "@/lib/env/runtime";
 import { jsonError } from "@/lib/http";
 import { DownloadAccessError, createDownloadUrl } from "@/lib/server/downloads";
+import { trackServerEvent } from "@/lib/server/telemetry";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export async function GET(
@@ -29,6 +30,10 @@ export async function GET(
 
   try {
     const url = await createDownloadUrl(orderId, user.id);
+    await trackServerEvent("download_started", {
+      orderId,
+      userId: user.id,
+    });
     return NextResponse.json({ ok: true, url });
   } catch (error) {
     if (error instanceof DownloadAccessError) {

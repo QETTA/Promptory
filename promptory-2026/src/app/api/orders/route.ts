@@ -4,6 +4,7 @@ import { hasSellerWriteRuntime } from "@/lib/env/runtime";
 import { jsonError } from "@/lib/http";
 import { createOrder } from "@/lib/server/orders";
 import { getProductById } from "@/lib/server/products";
+import { trackServerEvent } from "@/lib/server/telemetry";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { createOrderSchema } from "@/lib/validations/order";
 
@@ -43,6 +44,13 @@ export async function POST(request: Request) {
     buyerId: user.id,
     productId: product.id,
     sellerId: product.seller_id,
+  });
+
+  await trackServerEvent("order_created", {
+    orderId: order.id,
+    paymentMode: order.payment_provider,
+    productId: product.id,
+    userId: user.id,
   });
 
   return NextResponse.json({ ok: true, orderId: order.id, status: order.status });

@@ -5,6 +5,7 @@ import { getPaymentsMode } from "@/lib/env/server";
 import { requireUser } from "@/lib/server/auth";
 import { getOrderForBuyer } from "@/lib/server/orders";
 import { confirmPromptoryPayment } from "@/lib/server/payments";
+import { trackServerEvent } from "@/lib/server/telemetry";
 import { confirmPaymentSchema } from "@/lib/validations/order";
 
 export default async function PaymentSuccessPage({
@@ -59,6 +60,13 @@ export default async function PaymentSuccessPage({
       if (!order || order.status !== "paid") {
         throw new Error("개발용 결제 완료 상태를 확인하지 못했습니다.");
       }
+
+      await trackServerEvent("payment_confirmed", {
+        orderId: order.id,
+        paymentMode,
+        productId: order.product_id,
+        userId: user.id,
+      });
 
       return (
         <PaymentStateLayout
@@ -118,6 +126,13 @@ export default async function PaymentSuccessPage({
       buyerId: user.id,
       orderId: parsedConfirmation.data.orderId,
       paymentKey: parsedConfirmation.data.paymentKey,
+    });
+
+    await trackServerEvent("payment_confirmed", {
+      orderId: parsedConfirmation.data.orderId,
+      paymentMode,
+      productId: result.product?.id ?? null,
+      userId: user.id,
     });
 
     return (

@@ -1,11 +1,20 @@
+"use client";
+
 import Link from "next/link";
+import type { FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/cn";
-import { supportedChannelExamples } from "@/lib/channel-intake";
+import {
+  supportedChannelCatalog,
+  supportedChannelCount,
+  supportedChannelExamples,
+  supportedChannelHeadline,
+} from "@/lib/channel-intake";
 import { chipClass } from "@/lib/promptory-theme";
+import { trackClientTelemetryEvent } from "@/lib/telemetry/client";
 
 export function ChannelIntakeCard({
   action = "/optimize",
@@ -20,6 +29,20 @@ export function ChannelIntakeCard({
   defaultValue?: string;
   title?: string;
 }) {
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    const formData = new FormData(event.currentTarget);
+    const url = formData.get("url");
+
+    trackClientTelemetryEvent({
+      name: "channel_url_submitted",
+      payload: {
+        action,
+        hasValue: typeof url === "string" && url.trim().length > 0,
+        url: typeof url === "string" ? url.trim().slice(0, 240) : null,
+      },
+    });
+  }
+
   return (
     <Card variant="heroBright" className={cn("overflow-hidden p-4 sm:p-5", className)}>
       <div className="rounded-[1.5rem] border border-[rgba(34,80,221,0.12)] bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(242,247,255,0.98)_100%)] p-4 shadow-[0_20px_40px_-30px_rgba(34,80,221,0.26)]">
@@ -29,24 +52,24 @@ export function ChannelIntakeCard({
             <h2 className="mt-2 text-[1.25rem] font-semibold tracking-tight text-[var(--slate-950)]">{title}</h2>
           </div>
           <div className="rounded-full border border-[rgba(34,80,221,0.12)] bg-white px-3 py-1 text-[11px] font-semibold text-[var(--brand-700)]">
-            3채널 지원
+            {supportedChannelCount}채널 지원
           </div>
         </div>
         <p className="mt-3 text-sm leading-6 text-[var(--slate-600)]">{body}</p>
 
-        <div className="mt-4 grid gap-2 sm:grid-cols-3">
-          {["YouTube", "Coupang", "Naver Blog"].map((label) => (
+        <div className="mt-4 grid gap-2 sm:grid-cols-2">
+          {supportedChannelCatalog.map((channel) => (
             <div
-              key={label}
+              key={channel.kind}
               className="rounded-[1rem] border border-[rgba(148,163,184,0.16)] bg-white/86 px-3 py-2 text-xs font-semibold text-[var(--slate-700)] shadow-[0_10px_20px_-22px_rgba(15,23,42,0.22)]"
             >
-              {label}
+              {channel.label}
             </div>
           ))}
         </div>
       </div>
 
-      <form action={action} className="mt-4 grid gap-3">
+      <form action={action} className="mt-4 grid gap-3" onSubmit={handleSubmit}>
         <div className="rounded-[1.4rem] border border-[var(--line-strong)] bg-white p-2 shadow-[0_18px_36px_-28px_rgba(15,23,42,0.18)]">
           <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_132px]">
             <Input
@@ -68,14 +91,14 @@ export function ChannelIntakeCard({
         </div>
         <div className="flex items-center justify-between rounded-[1.1rem] border border-[var(--line)] bg-[rgba(248,250,252,0.9)] px-4 py-3 text-xs text-[var(--slate-600)]">
           <span className="font-semibold text-[var(--slate-700)]">입력 즉시</span>
-          <span>채널 판별 → 공개 스캔 → Ask 준비</span>
+          <span>채널 판별 → 공개 스냅샷 → Ask 준비</span>
         </div>
       </form>
 
       <div className="mt-4 grid gap-2">
         {[
           "1. URL과 채널 종류를 분류합니다.",
-          "2. 공개 표면을 읽을 위치를 정리합니다.",
+          "2. 공개 표면을 읽을 위치와 한계를 정리합니다.",
           "3. Ask 질문으로 병목을 고정합니다.",
         ].map((line) => (
           <div key={line} className="rounded-[1.05rem] border border-[var(--line)] bg-[var(--surface-2)] px-3 py-2.5 text-sm leading-6 text-[var(--slate-700)]">
@@ -100,7 +123,7 @@ export function ChannelIntakeCard({
       </div>
 
       <Card variant="tint" className="mt-4 rounded-[1.25rem] p-4 text-sm leading-6 text-[var(--slate-700)]">
-        지금은 주소 확인, 채널 판별, 공개 진단 시작까지 연결돼 있습니다.
+        지금은 {supportedChannelHeadline}까지 공개 표면 확인, 질문 준비, 저장 레일이 연결돼 있습니다.
       </Card>
     </Card>
   );

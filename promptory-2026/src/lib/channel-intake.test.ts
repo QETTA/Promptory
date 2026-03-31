@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { parseChannelInput } from "@/lib/channel-intake";
+import { parseChannelInput, supportedChannelCount, supportedChannelHeadline } from "@/lib/channel-intake";
 
 test("channel intake normalizes missing protocol and detects youtube", () => {
   const parsed = parseChannelInput("youtube.com/@promptory");
@@ -23,6 +23,19 @@ test("channel intake detects blog channels", () => {
   if (parsed.ok) {
     assert.equal(parsed.kind, "blog");
     assert.equal(parsed.supportLabel, "지원 채널");
+  }
+});
+
+test("channel intake detects smartstore and keeps four-channel truth in one place", () => {
+  const parsed = parseChannelInput("https://smartstore.naver.com/promptory");
+
+  assert.equal(supportedChannelCount, 4);
+  assert.match(supportedChannelHeadline, /Smartstore/);
+  assert.equal(parsed.ok, true);
+
+  if (parsed.ok) {
+    assert.equal(parsed.kind, "smartstore");
+    assert.equal(parsed.supported, true);
   }
 });
 

@@ -56,10 +56,16 @@ export async function getSavedOptimizationRuns(userId: string, limit = 6): Promi
 export async function saveOptimizationRun(params: {
   channelKind: string;
   channelLabel: string;
+  engineMode?: string | null;
+  engineVersion?: string | null;
+  evidenceSignals?: string[] | null;
   focusTitle?: string | null;
+  normalizedUrl?: string | null;
   queryString: string;
+  rationaleSummary?: string | null;
   rawUrl?: string | null;
   recommendedCategory?: string | null;
+  surfaceReadStatus?: string | null;
   summaryNote?: string | null;
   userId: string;
 }): Promise<OptimizationRunRow> {
@@ -74,10 +80,16 @@ export async function saveOptimizationRun(params: {
   const payload = {
     channel_kind: params.channelKind.trim(),
     channel_label: params.channelLabel.trim(),
+    engine_mode: params.engineMode?.trim() || null,
+    engine_version: params.engineVersion?.trim() || null,
+    evidence_signals: params.evidenceSignals?.filter(Boolean) ?? [],
     focus_title: params.focusTitle?.trim() || null,
+    normalized_url: params.normalizedUrl?.trim() || rawUrl,
     query_string: normalizedQueryString,
+    rationale_summary: trimOptimizationSummaryNote(params.rationaleSummary),
     raw_url: rawUrl,
     recommended_category: params.recommendedCategory?.trim() || null,
+    surface_read_status: params.surfaceReadStatus?.trim() || null,
     state_key: normalizedQueryString,
     summary_note: trimOptimizationSummaryNote(params.summaryNote),
     title: buildOptimizationRunTitle({

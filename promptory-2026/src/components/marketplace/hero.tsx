@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { supportedChannelHeadline } from "@/lib/channel-intake";
 import { cn } from "@/lib/cn";
 import { fullBleedHeroClass, heroToneClass } from "@/lib/promptory-theme";
 
@@ -68,7 +69,7 @@ export function Hero({
           {!isDark ? (
             <div className="mt-6 grid gap-2 sm:grid-cols-3">
               {[
-                ["URL 입력", "유튜브 · 쿠팡 · 네이버 블로그"],
+                ["URL 입력", supportedChannelHeadline],
                 ["Ask 진단", "병목과 목표를 먼저 고정"],
                 ["실행 연결", "추천 스택을 바로 적용"],
               ].map(([label, value]) => (

@@ -8,7 +8,9 @@
     "prebuild": "node -e \"try { require('node:fs').rmSync('.next', { recursive: true, force: true }); } catch {}\"",
     "build": "next build",
     "check:supabase": "node scripts/check-supabase.mjs",
+    "check:all": "npm run typecheck && npm run test:unit && npm run test:smoke && npm run build",
     "sync:storage": "node scripts/sync-storage-buckets.mjs",
+    "test:smoke": "node --import tsx --test src/app/setup-mode.test.ts src/app/api/events/route.test.ts src/lib/optimization-engine/index.test.ts",
     "typecheck": "tsc --noEmit",
     "test:unit": "node --import tsx --test src/**/*.test.ts src/**/*.test.tsx"
   },

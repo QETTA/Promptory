@@ -5,28 +5,41 @@ import { useTransition } from "react";
 
 import { Button, type ButtonProps } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast-provider";
+import { trackClientTelemetryEvent } from "@/lib/telemetry/client";
 
 type SaveOptimizationRunButtonProps = {
   channelKind: string;
   channelLabel: string;
+  engineMode?: string | null;
+  engineVersion?: string | null;
+  evidenceSignals?: string[] | null;
   focusTitle?: string | null;
   label?: string;
+  normalizedUrl?: string | null;
   queryString: string;
+  rationaleSummary?: string | null;
   rawUrl: string;
   recommendedCategory?: string | null;
   successDescription?: string;
+  surfaceReadStatus?: string | null;
   summaryNote?: string | null;
 } & Omit<ButtonProps, "onClick">;
 
 export function SaveOptimizationRunButton({
   channelKind,
   channelLabel,
+  engineMode,
+  engineVersion,
+  evidenceSignals,
   focusTitle,
   label = "현재 진단 저장",
+  normalizedUrl,
   queryString,
+  rationaleSummary,
   rawUrl,
   recommendedCategory,
   successDescription = "같은 계정으로 /optimize와 보관함에서 다시 열 수 있게 저장했습니다.",
+  surfaceReadStatus,
   summaryNote,
   ...props
 }: SaveOptimizationRunButtonProps) {
@@ -40,10 +53,16 @@ export function SaveOptimizationRunButton({
         body: JSON.stringify({
           channelKind,
           channelLabel,
+          engineMode,
+          engineVersion,
+          evidenceSignals,
           focusTitle,
+          normalizedUrl,
           queryString,
+          rationaleSummary,
           rawUrl,
           recommendedCategory,
+          surfaceReadStatus,
           summaryNote,
         }),
         headers: {
@@ -62,6 +81,17 @@ export function SaveOptimizationRunButton({
         title: "진단을 저장했습니다",
         description: successDescription,
         tone: "success",
+      });
+      trackClientTelemetryEvent({
+        name: "optimization_run_saved",
+        payload: {
+          channelKind,
+          engineMode,
+          engineVersion,
+          normalizedUrl: normalizedUrl ?? rawUrl,
+          queryString,
+          recommendedCategory: recommendedCategory ?? null,
+        },
       });
       startTransition(() => {
         router.refresh();

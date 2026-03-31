@@ -92,7 +92,13 @@ export function ProductCard({ actionMode = "detail", matchNote, product, variant
           </div>
           {purchaseRail ? (
             <div className="grid gap-2">
-              <CTAButton href={`/products/${product.slug}`} variant="outline" size={compact ? "sm" : "default"}>
+              <CTAButton
+                href={`/products/${product.slug}`}
+                telemetryEventName="execution_pack_clicked"
+                telemetryPayload={{ productId: product.id, rail: "detail", slug: product.slug }}
+                variant="outline"
+                size={compact ? "sm" : "default"}
+              >
                 연결 흐름 보기
               </CTAButton>
               <PurchaseButton
@@ -104,7 +110,12 @@ export function ProductCard({ actionMode = "detail", matchNote, product, variant
               />
             </div>
           ) : (
-            <CTAButton href={`/products/${product.slug}`} size={compact ? "sm" : "default"}>
+            <CTAButton
+              href={`/products/${product.slug}`}
+              telemetryEventName="execution_pack_clicked"
+              telemetryPayload={{ productId: product.id, rail: "detail", slug: product.slug }}
+              size={compact ? "sm" : "default"}
+            >
               연결 흐름 보기
             </CTAButton>
           )}

@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { SetupCallout } from "@/components/ui/setup-callout";
 import { CTAButton } from "@/components/ui/cta-button";
+import { supportedChannelHeadline } from "@/lib/channel-intake";
 import { getPublicEnvStatus } from "@/lib/env/public";
 import { getServerEnvStatus } from "@/lib/env/server";
 import { getCategoryLabel } from "@/lib/promptory-display";
@@ -31,12 +32,12 @@ export default async function HomePage() {
     {
       label: "1. Public Audit",
       title: "채널 URL 입력",
-      body: "유튜브, 쿠팡, 네이버 블로그 URL 중 하나를 넣고 공개 표면 신호부터 읽습니다.",
+      body: `${supportedChannelHeadline} URL 중 하나를 넣고 공개 표면 신호부터 읽습니다.`,
       tone: "accent" as const,
     },
     {
       label: "2. Ask Plan",
-      title: "AI 질문으로 병목 고정",
+      title: "Ask 질문으로 병목 고정",
       body: "문서처럼 길게 설명하지 않고, 막히는 지점과 목표를 질문 흐름으로 빠르게 고정합니다.",
     },
     {
@@ -46,9 +47,9 @@ export default async function HomePage() {
     },
   ];
   const aiSignals = [
-    "3개 채널 공개 진단",
+    "4개 채널 공개 진단",
     "질문형 플래닝",
-    "스택 + 실행 팩 추천",
+    "결정형 스택 추천",
     "저장 / 주문 / 다운로드",
   ];
 
@@ -81,10 +82,17 @@ export default async function HomePage() {
         }
         actions={
           <>
-            <CTAButton href="/optimize" size="lg">
+            <CTAButton href="/optimize" telemetryEventName="execution_pack_clicked" telemetryPayload={{ href: "/optimize", source: "home_hero" }} size="lg">
               URL 넣고 진단 시작
             </CTAButton>
-            <CTAButton href="/products" variant="outline" size="lg" className="hidden sm:inline-flex">
+            <CTAButton
+              href="/products"
+              telemetryEventName="execution_pack_clicked"
+              telemetryPayload={{ href: "/products", source: "home_hero" }}
+              variant="outline"
+              size="lg"
+              className="hidden sm:inline-flex"
+            >
               실행 팩 보기
             </CTAButton>
           </>
@@ -102,7 +110,7 @@ export default async function HomePage() {
               </div>
               <h2 className="section-title mt-3 text-[var(--slate-950)]">마켓을 먼저 보여주지 않고, 작업 순서를 먼저 보여줍니다</h2>
               <p className="mt-3 text-sm leading-7 text-[var(--slate-700)]">
-                프롬프토리는 실행 팩 탐색 화면이 아니라 채널을 진단하고 계획을 세우는 AI 작업면처럼 읽혀야 합니다. 첫 화면은
+                프롬프토리는 실행 팩 탐색 화면이 아니라 채널을 진단하고 계획을 세우는 작업면처럼 읽혀야 합니다. 첫 화면은
                 입력, 계획, 적용 순서가 바로 보여야 합니다.
               </p>
               <div className="mt-5 grid gap-3 md:grid-cols-3">
@@ -124,7 +132,7 @@ export default async function HomePage() {
             </Card>
 
             <Card variant="tint" className="p-5 sm:p-6">
-              <p className="section-kicker text-[var(--brand-700)]">Current AI Output</p>
+              <p className="section-kicker text-[var(--brand-700)]">Current Product Output</p>
               <h3 className="mt-2 text-[1.05rem] font-semibold text-[var(--slate-950)]">지금 앱이 바로 보여주는 결과</h3>
               <div className="mt-4 grid gap-2">
                 {aiSignals.map((signal, index) => (
@@ -138,10 +146,16 @@ export default async function HomePage() {
                 ))}
               </div>
               <div className="mt-5 flex flex-wrap gap-2">
-                <CTAButton href="/optimize" size="sm">
+                <CTAButton href="/optimize" telemetryEventName="execution_pack_clicked" telemetryPayload={{ href: "/optimize", source: "home_output" }} size="sm">
                   진단 작업면 열기
                 </CTAButton>
-                <CTAButton href="/products" variant="outline" size="sm">
+                <CTAButton
+                  href="/products"
+                  telemetryEventName="execution_pack_clicked"
+                  telemetryPayload={{ href: "/products", source: "home_output" }}
+                  variant="outline"
+                  size="sm"
+                >
                   실행 팩 보기
                 </CTAButton>
               </div>
@@ -153,10 +167,16 @@ export default async function HomePage() {
           <div className="mb-4 flex flex-col gap-3 sm:mb-5 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-3xl">
               <p className="section-kicker text-[var(--slate-500)]">Execution Rail</p>
-              <h2 className="section-title mt-2 text-[var(--slate-950)]">AI가 정한 다음 액션을 바로 실행 팩으로 넘깁니다</h2>
+              <h2 className="section-title mt-2 text-[var(--slate-950)]">진단 결과의 다음 액션을 바로 실행 팩으로 넘깁니다</h2>
               <p className="mt-2 text-sm leading-7 text-[var(--slate-600)]">실행 팩은 홈의 주인공이 아니라, 진단 뒤에 이어지는 적용 레일입니다.</p>
             </div>
-            <CTAButton href="/products" variant="outline" size="sm">
+            <CTAButton
+              href="/products"
+              telemetryEventName="execution_pack_clicked"
+              telemetryPayload={{ href: "/products", source: "home_execution_rail" }}
+              variant="outline"
+              size="sm"
+            >
               전체 실행 팩 보기
             </CTAButton>
           </div>
@@ -164,14 +184,28 @@ export default async function HomePage() {
           <div className="mb-4 space-y-3">
             <div className="flex flex-wrap gap-2">
               {(categories.length > 0 ? categories : defaultCategories).map((category) => (
-                <CTAButton key={category} href={`/products?category=${encodeURIComponent(category)}`} variant="outline" size="sm">
+                <CTAButton
+                  key={category}
+                  href={`/products?category=${encodeURIComponent(category)}`}
+                  telemetryEventName="execution_pack_clicked"
+                  telemetryPayload={{ category, href: `/products?category=${encodeURIComponent(category)}`, source: "home_category" }}
+                  variant="outline"
+                  size="sm"
+                >
                   {getCategoryLabel(category)}
                 </CTAButton>
               ))}
             </div>
             <div className="flex flex-wrap gap-2">
               {(keywords.length > 0 ? keywords : ["AI", "자동화", "블로그", "마케팅", "운영", "콘텐츠"]).map((keyword) => (
-                <CTAButton key={keyword} href={`/products?q=${encodeURIComponent(keyword)}`} variant="outline" size="sm">
+                <CTAButton
+                  key={keyword}
+                  href={`/products?q=${encodeURIComponent(keyword)}`}
+                  telemetryEventName="execution_pack_clicked"
+                  telemetryPayload={{ href: `/products?q=${encodeURIComponent(keyword)}`, keyword, source: "home_keyword" }}
+                  variant="outline"
+                  size="sm"
+                >
                   {keyword}
                 </CTAButton>
               ))}
@@ -201,7 +235,7 @@ export default async function HomePage() {
                   URL-only 단계에서는 공개 표면만 진단하고, 심화 설치와 운영 연결은 다음 레일에서 다룹니다.
                 </p>
               </div>
-              <CTAButton href="/optimize" size="lg">
+              <CTAButton href="/optimize" telemetryEventName="execution_pack_clicked" telemetryPayload={{ href: "/optimize", source: "home_trust_rule" }} size="lg">
                 공개 진단 시작
               </CTAButton>
             </div>

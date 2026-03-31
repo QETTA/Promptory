@@ -3,6 +3,7 @@ import { NextResponse } from "next/server";
 import { hasAuthRuntime } from "@/lib/env/runtime";
 import { jsonError } from "@/lib/http";
 import { OptimizationRunsTableMissingError, saveOptimizationRun } from "@/lib/server/optimization-runs";
+import { trackServerEvent } from "@/lib/server/telemetry";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { saveOptimizationRunSchema } from "@/lib/validations/optimization-run";
 
@@ -30,6 +31,16 @@ export async function POST(request: Request) {
   try {
     const run = await saveOptimizationRun({
       ...parsed.data,
+      userId: user.id,
+    });
+
+    await trackServerEvent("optimization_run_saved", {
+      channelKind: parsed.data.channelKind,
+      engineMode: parsed.data.engineMode ?? null,
+      engineVersion: parsed.data.engineVersion ?? null,
+      normalizedUrl: parsed.data.normalizedUrl || parsed.data.rawUrl,
+      queryString: parsed.data.queryString,
+      recommendedCategory: parsed.data.recommendedCategory ?? null,
       userId: user.id,
     });
 
