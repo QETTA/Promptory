@@ -40,11 +40,11 @@ export default function HomePage() {
                 비교표, 카피 초안, 보고용 요약까지 Slack 안에서 이어서 만듭니다.
               </p>
               <div className="flex flex-wrap gap-3 pt-2 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-                <CTAButton href="/contact" size="lg" className="btn-shine hover:scale-105 transition-transform">
-                  데모 요청하기
+                <CTAButton href="/pricing" size="lg" className="btn-shine hover:scale-105 transition-transform">
+                  가격 보기
                 </CTAButton>
-                <CTAButton href="/demo/slack" variant="outline" size="lg" className="hover-lift">
-                  샘플 대화 보기
+                <CTAButton href="/contact" variant="outline" size="lg" className="hover-lift">
+                  데모 요청하기
                 </CTAButton>
               </div>
               <p className="text-xs text-slate-500 pt-2 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
@@ -351,11 +351,11 @@ export default function HomePage() {
               프롬프토리 방식으로 실제 진단 예시를 보여드립니다
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <CTAButton href="/contact" size="lg" className="btn-shine hover:scale-105 transition-transform">
-                회사 URL 보내기
+              <CTAButton href="/pricing" size="lg" className="btn-shine hover:scale-105 transition-transform">
+                가격 보기
               </CTAButton>
-              <CTAButton href="/contact" variant="outline" size="lg" className="hover-lift">
-                문의하기
+              <CTAButton href="/contact?type=quick_audit" variant="outline" size="lg" className="hover-lift">
+                무료 Quick Audit 받기
               </CTAButton>
             </div>
           </AnimatedSection>

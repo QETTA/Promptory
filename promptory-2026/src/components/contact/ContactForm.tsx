@@ -7,8 +7,15 @@ import { useTransition } from "react";
 import { contactFormSchema, type ContactFormInput } from "@/lib/contact-schema";
 import { teamTypeOptions, painPointOptions } from "@/lib/contact-options";
 import { submitContactRequest } from "@/app/contact/actions";
+import { Badge } from "@/components/ui/badge";
 
-export function ContactForm() {
+interface ContactFormProps {
+  inquiryType?: string;
+  packageSlug?: string;
+  planType?: string;
+}
+
+export function ContactForm({ inquiryType = "demo", packageSlug, planType }: ContactFormProps) {
   const [isPending, startTransition] = useTransition();
   const [serverError, setServerError] = useState<string | null>(null);
 
@@ -33,6 +40,8 @@ export function ContactForm() {
 
   const selectedPainPoints = watch("painPoints") || [];
   const selectedTeamType = watch("teamType");
+  const [selectedCompanySize, setSelectedCompanySize] = useState<string>("");
+  const [selectedTimeline, setSelectedTimeline] = useState<string>("");
 
   const togglePainPoint = (value: string) => {
     const current = selectedPainPoints;
@@ -52,6 +61,12 @@ export function ContactForm() {
     formData.append("companyUrl", data.companyUrl);
     data.painPoints.forEach((p) => formData.append("painPoints", p));
     if (data.contextNote) formData.append("contextNote", data.contextNote);
+    // Add inquiry metadata
+    formData.append("inquiryType", inquiryType);
+    if (packageSlug) formData.append("packageSlug", packageSlug);
+    if (planType) formData.append("planType", planType);
+    if (selectedCompanySize) formData.append("companySize", selectedCompanySize);
+    if (selectedTimeline) formData.append("timeline", selectedTimeline);
 
     startTransition(async () => {
       const result = await submitContactRequest(formData);
@@ -66,6 +81,23 @@ export function ContactForm() {
       onSubmit={handleSubmit(onSubmit)}
       className="rounded-3xl border border-zinc-200 bg-white p-8"
     >
+      {/* Inquiry Type Badge */}
+      <div className="flex flex-wrap gap-2">
+        <Badge variant="default">
+          {inquiryType === "quick_audit" ? "Quick Audit" : inquiryType === "package" ? "패키지 문의" : "데모 요청"}
+        </Badge>
+        {packageSlug && (
+          <Badge variant="neutral">
+            {packageSlug}
+          </Badge>
+        )}
+        {planType && (
+          <Badge variant="neutral">
+            {planType === "growth" ? "Growth" : "Core"}
+          </Badge>
+        )}
+      </div>
+
       <div className="grid gap-6">
         {/* 팀 이름 */}
         <div>
@@ -197,6 +229,74 @@ export function ContactForm() {
           )}
         </fieldset>
 
+        {/* 회사 규모 */}
+        <fieldset>
+          <legend className="mb-3 block text-sm font-medium text-zinc-900">
+            회사 규모
+          </legend>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              { value: "20-50", label: "20~50명" },
+              { value: "50-100", label: "50~100명" },
+              { value: "100-200", label: "100~200명" },
+              { value: "200+", label: "200명 이상" },
+            ].map((option) => (
+              <label
+                key={option.value}
+                className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm transition-colors ${
+                  selectedCompanySize === option.value
+                    ? "border-zinc-950 bg-zinc-50 text-zinc-950"
+                    : "border-zinc-300 text-zinc-800 hover:border-zinc-400"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="companySize"
+                  value={option.value}
+                  checked={selectedCompanySize === option.value}
+                  onChange={() => setSelectedCompanySize(option.value)}
+                  className="h-4 w-4 accent-zinc-950"
+                />
+                {option.label}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        {/* 도입 희망 시기 */}
+        <fieldset>
+          <legend className="mb-3 block text-sm font-medium text-zinc-900">
+            도입 희망 시기
+          </legend>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              { value: "immediate", label: "가능한 빨리 (2주 이내)" },
+              { value: "1month", label: "1개월 이내" },
+              { value: "3months", label: "3개월 이내" },
+              { value: "considering", label: "검토 중 (시기 미정)" },
+            ].map((option) => (
+              <label
+                key={option.value}
+                className={`flex cursor-pointer items-center gap-3 rounded-2xl border px-4 py-3 text-sm transition-colors ${
+                  selectedTimeline === option.value
+                    ? "border-zinc-950 bg-zinc-50 text-zinc-950"
+                    : "border-zinc-300 text-zinc-800 hover:border-zinc-400"
+                }`}
+              >
+                <input
+                  type="radio"
+                  name="timeline"
+                  value={option.value}
+                  checked={selectedTimeline === option.value}
+                  onChange={() => setSelectedTimeline(option.value)}
+                  className="h-4 w-4 accent-zinc-950"
+                />
+                {option.label}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
         {/* 상황 설명 */}
         <div>
           <label className="mb-2 block text-sm font-medium text-zinc-900">
@@ -205,7 +305,14 @@ export function ContactForm() {
           <textarea
             {...register("contextNote")}
             rows={6}
-            placeholder={`예:
+            placeholder={inquiryType === "quick_audit" 
+              ? `예:
+홈페이지: https://company-site.com
+가장 급한 목표: 문의 전환 개선
+현재 병목: 방문은 있는데 문의가 적음
+
+Quick Audit로 확인하고 싶은 부분을 알려주세요.` 
+              : `예:
 홈페이지는 있는데 문의 전환이 약합니다.
 대표 보고용으로 경쟁사 비교와 CTA 초안이 같이 필요합니다.
 Slack 안에서 바로 공유할 수 있는 흐름이면 좋겠습니다.`}

@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { CTAButton } from "@/components/ui/cta-button";
 import { AnimatedSection } from "@/components/ui/animated-section";
 import { Metadata } from "next";
+import { PriceBadge } from "@/components/ui/price-badge";
 
 export const metadata: Metadata = {
   title: "패키지 목록 - 프롬프토리",
@@ -19,6 +20,8 @@ const packages = [
     teamType: "중소기업 팀",
     color: "blue",
     icon: "🔍",
+    price: "₩79만/월",
+    setupPrice: "세팅비 ₩300~500만",
   },
   {
     slug: "campaign-brief-agent",
@@ -29,6 +32,8 @@ const packages = [
     teamType: "중소기업 팀",
     color: "emerald",
     icon: "📋",
+    price: "₩79만/월",
+    setupPrice: "세팅비 ₩300~500만",
   },
   {
     slug: "korea-local-ops-agent",
@@ -39,6 +44,8 @@ const packages = [
     teamType: "외국계 한국지사",
     color: "indigo",
     icon: "🌏",
+    price: "₩79만/월",
+    setupPrice: "세팅비 ₩300~500만",
   },
 ];
 
@@ -121,7 +128,13 @@ export default function PackagesPage() {
                     <h2 className="text-lg font-semibold text-slate-950">{pkg.title}</h2>
                   </div>
                   <p className="mt-3 text-sm leading-6 text-slate-600 flex-1">{pkg.description}</p>
-                  <p className="mt-4 text-xs text-slate-500">{pkg.footer}</p>
+                  
+                  {/* Price Badge */}
+                  <div className="mt-4">
+                    <PriceBadge price={pkg.price} setupPrice={pkg.setupPrice} />
+                  </div>
+                  
+                  <p className="mt-3 text-xs text-slate-500">{pkg.footer}</p>
                   <div className="mt-4 pt-4 border-t border-slate-100 space-y-2">
                     <CTAButton 
                       href={`/packages/${pkg.slug}`} 
@@ -130,6 +143,16 @@ export default function PackagesPage() {
                       className="w-full hover:scale-[1.02] transition-transform"
                     >
                       상세 보기
+                    </CTAButton>
+                    <CTAButton 
+                      href={`/contact?type=package&slug=${pkg.slug}`}
+                      variant="default"
+                      size="sm"
+                      className="w-full bg-slate-950 hover:bg-slate-800 btn-shine"
+                      telemetryEventName="package_estimate_clicked"
+                      telemetryPayload={{ package: pkg.slug }}
+                    >
+                      견적 요청하기
                     </CTAButton>
                   </div>
                   <p className="mt-3 text-[10px] text-slate-400 text-center">

@@ -2,6 +2,7 @@ import { CampaignBriefMock } from "@/components/slack/slack-mock";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CTAButton } from "@/components/ui/cta-button";
+import { PriceBadge } from "@/components/ui/price-badge";
 import { AnimatedSection, Accordion } from "@/components/ui/animated-section";
 import { Metadata } from "next";
 
@@ -60,16 +61,27 @@ export default function CampaignBriefAgentPage() {
                 캠페인 방향을 정리한 뒤
                 핵심 메시지, 카피 초안, 액션 리스트까지 Slack 안에서 이어서 만듭니다
               </p>
+              {/* Pricing Info */}
+              <div className="mt-4 p-4 bg-white/60 rounded-2xl border border-slate-200/60">
+                <PriceBadge price="₩79만/월" setupPrice="세팅비 ₩300~500만 (일회성)" />
+              </div>
+
               <div className="flex flex-wrap gap-3 pt-2">
-                <CTAButton href="/contact" size="lg" className="btn-shine hover:scale-105 transition-transform bg-emerald-600 hover:bg-emerald-700">
-                  데모 요청하기
+                <CTAButton 
+                  href="/contact?type=package&slug=campaign-brief-agent" 
+                  size="lg" 
+                  className="btn-shine hover:scale-105 transition-transform bg-emerald-600 hover:bg-emerald-700"
+                  telemetryEventName="package_estimate_clicked"
+                  telemetryPayload={{ package: "campaign-brief-agent", location: "hero" }}
+                >
+                  견적 요청하기
                 </CTAButton>
                 <CTAButton href="/demo/slack" variant="outline" size="lg" className="hover-lift border-emerald-200 hover:bg-emerald-50">
                   샘플 대화 보기
                 </CTAButton>
               </div>
               <p className="text-xs text-slate-500 pt-2">
-                Slack DM · 모달 · App Home · 맞춤 세팅
+                Slack DM · 모달 · App Home · 맞춤 세팅 · Core Package 기준
               </p>
             </AnimatedSection>
             
@@ -391,11 +403,24 @@ export default function CampaignBriefAgentPage() {
               실제 Campaign Brief Agent 흐름으로 데모를 보여드립니다
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <CTAButton href="/contact" size="lg" className="btn-shine hover:scale-105 transition-transform bg-emerald-600 hover:bg-emerald-700">
-                데모 요청하기
+              <CTAButton 
+                href="/contact?type=quick_audit" 
+                size="lg" 
+                className="btn-shine hover:scale-105 transition-transform bg-emerald-600 hover:bg-emerald-700"
+                telemetryEventName="quick_audit_clicked"
+                telemetryPayload={{ location: "package_detail_bottom" }}
+              >
+                무료 Quick Audit 받기
               </CTAButton>
-              <CTAButton href="/contact" variant="outline" size="lg" className="hover-lift border-emerald-200 hover:bg-emerald-50">
-                샘플 보내기
+              <CTAButton 
+                href="/contact?type=package&slug=campaign-brief-agent" 
+                variant="outline" 
+                size="lg" 
+                className="hover-lift border-emerald-200 hover:bg-emerald-50"
+                telemetryEventName="package_estimate_clicked"
+                telemetryPayload={{ package: "campaign-brief-agent", location: "bottom" }}
+              >
+                견적 요청하기
               </CTAButton>
             </div>
           </AnimatedSection>

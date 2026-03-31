@@ -1,13 +1,53 @@
 import { Metadata } from "next";
 import { ContactForm } from "@/components/contact/ContactForm";
 
+interface ContactPageProps {
+  searchParams: {
+    type?: string;
+    slug?: string;
+    plan?: string;
+  };
+}
+
 export const metadata: Metadata = {
   title: "데모 요청 - 프롬프토리",
   description:
     "회사 사이트 URL이나 현재 쓰는 자료 예시를 보내주시면, 프롬프토리 방식으로 실제 대화 흐름과 결과 예시를 준비해 드립니다.",
 };
 
-export default function ContactPage() {
+export default function ContactPage({ searchParams }: ContactPageProps) {
+  const inquiryType = searchParams.type || "demo";
+  const packageSlug = searchParams.slug || "";
+  const planType = searchParams.plan || "";
+
+  const getHeroContent = () => {
+    switch (inquiryType) {
+      case "quick_audit":
+        return {
+          title: "Quick Audit 신청",
+          subtitle: "회사 URL 기반 진단",
+          description: "회사 사이트나 채널 URL을 보내주시면 핵심 병목과 개선 방향을 진단해 드립니다.",
+          badge: "Quick Audit Pack · ₩4.9~9.9만",
+        };
+      case "package":
+        return {
+          title: planType === "growth" ? "Growth Package 문의" : planType === "core" ? "Core Package 문의" : "패키지 견적 문의",
+          subtitle: "맞춤형 Slack Agent",
+          description: "팀 규모와 필요한 에이전트 조합에 맞는 견적을 준비해 드립니다.",
+          badge: packageSlug ? `${packageSlug} · Core Package 기준` : "Core Package · ₩79만/월",
+        };
+      default:
+        return {
+          title: "데모 요청",
+          subtitle: "우리 팀 기준으로 먼저 보여드릴게요",
+          description: "회사 사이트 URL이나 현재 쓰는 자료 예시를 보내주시면, 프롬프토리 방식으로 실제 대화 흐름과 결과 예시를 준비해 드립니다.",
+          badge: "Free Demo",
+        };
+    }
+  };
+
+  const hero = getHeroContent();
+
   return (
     <main className="bg-white text-zinc-950">
       {/* Hero Section */}
@@ -16,19 +56,18 @@ export default function ContactPage() {
           {/* Left: Copy */}
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-500">
-              Demo request
+              {hero.badge}
             </p>
             <h1 className="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl">
-              우리 팀 Slack 기준으로
-              <br />
-              먼저 보여드릴게요
+              {hero.title}
             </h1>
             <p className="mt-6 text-lg leading-8 text-zinc-600">
-              회사 사이트 URL이나 현재 쓰는 자료 예시를 보내주시면,
-              프롬프토리 방식으로 실제 대화 흐름과 결과 예시를 준비해 드립니다.
+              {hero.description}
             </p>
             <p className="mt-4 text-sm text-zinc-500">
-              홈페이지 진단 · 브리프 초안 · KR/EN 요약 · Slack 흐름 기준
+              {inquiryType === "quick_audit" 
+                ? "사이트 진단 · 경쟁사 비교 · CTA 초안 · 보고용 요약"
+                : "홈페이지 진단 · 브리프 초안 · KR/EN 요약 · Slack 흐름 기준"}
             </p>
           </div>
 
@@ -62,7 +101,11 @@ export default function ContactPage() {
       {/* Main Content: Form + Sidebar */}
       <section className="mx-auto grid max-w-7xl gap-10 px-6 py-16 lg:grid-cols-[1fr_340px] lg:px-8">
         {/* Left: Form */}
-        <ContactForm />
+        <ContactForm 
+          inquiryType={inquiryType} 
+          packageSlug={packageSlug}
+          planType={planType}
+        />
 
         {/* Right: Process Panel */}
         <aside className="space-y-6 lg:sticky lg:top-8 lg:self-start">
