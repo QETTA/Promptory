@@ -5,12 +5,10 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   // ─────────────────────────────────────────────────────────────
-  // Cloudflare Pages + @cloudflare/next-on-pages 호환 설정
+  // Cloudflare Pages Static Export 설정
   // ─────────────────────────────────────────────────────────────
-  // Edge Runtime 사용 시 아래 주석 해제
-  // experimental: {
-  //   runtime: "edge",
-  // },
+  output: "export",
+  distDir: "dist",
 
   // 이미지 최적화: Cloudflare Images 또는 unoptimized 사용
   images: {

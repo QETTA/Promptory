@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 
+// Cloudflare Pages Static Export 설정
+export const dynamic = "force-static";
+
 import { getPublicEnvStatus } from "@/lib/env/public";
 import { jsonError } from "@/lib/http";
 import { getPromptoryCheckoutCapability } from "@/lib/payments-capability";
