@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 
+// Cloudflare Pages Static Export 설정
+export const dynamic = "force-static";
+
 import { hasAuthRuntime } from "@/lib/env/runtime";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 

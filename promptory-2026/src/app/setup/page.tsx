@@ -133,7 +133,7 @@ export default function SetupPage() {
               {statusRows.map((row) => (
                 <div
                   key={row.label}
-                  className="flex items-center justify-between rounded-[1rem] bg-[var(--surface-2)] px-4 py-3"
+                  className="flex items-center justify-between rounded-xl bg-[var(--surface-2)] px-4 py-3"
                 >
                   <span className="text-sm text-[var(--slate-700)]">{row.label}</span>
                   <span className="text-sm font-semibold text-[var(--slate-950)]">
@@ -150,7 +150,7 @@ export default function SetupPage() {
               <p>1. `NEXT_PUBLIC_APP_URL`, Supabase URL, anon key, service role key를 먼저 채웁니다.</p>
               <p>2. `PAYMENTS_MODE=dev_stub`로 두고 회원가입, 상품 공개, 주문, success, library 흐름을 확인합니다.</p>
               <p>3. 로컬에서 확인 가능한 구매 후 흐름이 안정적이면 Toss 키를 넣고 `PAYMENTS_MODE=toss`로 전환합니다.</p>
-              <p className="rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3">
+              <p className="rounded-xl border border-[var(--line)] bg-white px-4 py-3">
                 Toss 키가 없으면 실결제는 미검증 상태가 정상입니다. 현재 로컬 기준 진실은 dev_stub 구매 후 흐름 검증입니다.
               </p>
             </div>
@@ -176,7 +176,7 @@ export default function SetupPage() {
             <h2 className="text-xl font-semibold text-[var(--slate-950)]">바로 실행할 커맨드</h2>
             <div className="mt-5 grid gap-4 border-t border-[var(--line)] pt-5 sm:grid-cols-2">
               {quickCommands.map((item) => (
-                <div key={item.command} className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--surface-2)] p-4">
+                <div key={item.command} className="rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] p-4">
                   <p className="text-sm font-semibold text-[var(--slate-950)]">{item.title}</p>
                   <p className="mt-3 rounded-xl bg-[var(--slate-950)] px-3 py-2 font-mono text-xs text-white">
                     {item.command}
@@ -210,7 +210,7 @@ export default function SetupPage() {
                   <p className="mt-2 text-sm leading-7 text-[var(--slate-600)]">{row.description}</p>
                 </div>
               ))}
-              <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] px-4 py-4 text-sm leading-7 text-[var(--slate-700)]">
+              <div className="rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-4 text-sm leading-7 text-[var(--slate-700)]">
                 <p>먼저 dev_stub으로 구매 후 흐름을 끝까지 확인한 뒤 Toss 키를 넣는 편이 가장 안전합니다.</p>
                 <p>실결제 전환 뒤에는 같은 흐름을 다시 확인해 success / fail 복귀와 라이브러리 연결을 재검증하면 됩니다.</p>
               </div>

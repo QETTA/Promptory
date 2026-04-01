@@ -43,14 +43,14 @@ export default async function SignupPage({
           />
           <div className="mx-auto grid max-w-6xl gap-6 px-4 py-7 sm:px-6 sm:py-8 lg:grid-cols-[minmax(0,1fr)_420px] lg:px-8">
             <div className="grid gap-4 self-start sm:grid-cols-2 lg:grid-cols-1">
-              <Card variant="tint" className="rounded-[1.5rem] p-5">
+              <Card variant="tint" className="rounded-3xl p-5">
                 <p className="section-kicker text-[var(--slate-500)]">진단 저장</p>
                 <p className="mt-2 text-[1.05rem] font-semibold text-[var(--slate-950)]">URL 진단과 추천 흐름을 계정에 보관합니다</p>
                 <p className="mt-3 text-sm leading-7 text-[var(--slate-700)]">
                   계정을 만든 뒤 메일 인증만 마치면 저장한 진단과 추천 스택 흐름을 같은 작업공간에서 다시 열 수 있습니다.
                 </p>
               </Card>
-              <Card variant="default" className="rounded-[1.5rem] p-5">
+              <Card variant="default" className="rounded-3xl p-5">
                 <p className="section-kicker text-[var(--slate-500)]">결과 전달 레일</p>
                 <p className="mt-2 text-[1.05rem] font-semibold text-[var(--slate-950)]">구매와 보관, 제작실도 같은 계정으로 연결합니다</p>
                 <p className="mt-3 text-sm leading-7 text-[var(--slate-700)]">

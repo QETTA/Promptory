@@ -115,7 +115,7 @@ export default function DemoSlackPage() {
       <section className="border-b border-[var(--line)] py-8">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection>
-            <div className="flex flex-wrap justify-center gap-2">
+            <div className="flex flex-wrap justify-center gap-2 sm:flex-nowrap">
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
@@ -153,7 +153,7 @@ export default function DemoSlackPage() {
             <AnimatedSection direction="right" delay={0.2} className="space-y-6">
               <div>
                 <Badge className={cn("mb-3", activeToneClass, "ui-accent-fill")}>{content.badge}</Badge>
-                <h2 className="section-title text-[var(--slate-950)]">{content.title}</h2>
+                <h2 className="section-title text-[var(--slate-950)] break-keep">{content.title}</h2>
                 <p className="mt-3 text-sm leading-6 text-[var(--slate-600)]">
                   {content.description}
                 </p>
@@ -211,7 +211,7 @@ export default function DemoSlackPage() {
               title="실제로 우리 팀 Slack에서 체험해보세요"
               body="데모 요청하시면 회사 URL 기준으로 실제 패키지 흐름을 보여드립니다."
             />
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3 px-2 sm:px-0">
               <CTAButton href="/contact" size="lg" className="btn-shine hover:scale-105 transition-transform">
                 데모 요청하기
               </CTAButton>

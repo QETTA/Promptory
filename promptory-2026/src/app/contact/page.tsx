@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { Card } from "@/components/ui/card";
+import { PageContainer } from "@/components/ui/page-container";
 
 interface ContactPageProps {
   searchParams: {
@@ -71,6 +72,13 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
           description: "팀 규모와 필요한 에이전트 조합에 맞는 견적을 준비해 드립니다.",
           badge: packageSlug ? `${packageSlug} · Core Package 기준` : "Core Package · ₩79만/월",
         };
+      case "upsell":
+        return {
+          title: "Core Package 도입 상담",
+          subtitle: "매주 자동 진단과 초안 생성",
+          description: "Quick Audit으로 확인하신 결과를 매주 자동으로 받아보고, 팀 Slack에서 바로 실행 초안까지 이어가세요.",
+          badge: "Core Package · 구축 300만 + 월 79만",
+        };
       default:
         return {
           title: "데모 요청",
@@ -87,14 +95,14 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
     <main className="bg-[var(--surface-1)] text-[var(--slate-950)]">
       {/* Hero Section */}
       <section className="border-b border-[var(--line)]">
-        <div className="mx-auto grid max-w-7xl gap-10 px-6 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:px-8 lg:py-24">
+        <PageContainer size="wide" padding="default" className="grid gap-10 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
           {/* Left: Copy */}
           <div className="max-w-2xl">
             <p className="section-kicker text-[var(--brand-700)]">
               {hero.badge}
             </p>
             <p className="mt-4 text-sm font-medium text-[var(--slate-500)]">{hero.subtitle}</p>
-            <h1 className="poster-title mt-3 text-[var(--slate-950)]">
+            <h1 className="poster-title mt-3 text-[var(--slate-950)] break-keep">
               {hero.title}
             </h1>
             <p className="body-copy-xl mt-6 text-[var(--slate-600)]">
@@ -108,7 +116,7 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
           </div>
 
           {/* Right: Trust Box */}
-          <Card variant="tint" className="rounded-[2rem] p-8 lg:self-start">
+          <Card variant="tint" className="rounded-3xl p-8 lg:self-start">
             <h2 className="text-xl font-semibold text-[var(--slate-950)]">
               이런 정보를 보내주시면 더 정확하게 준비합니다
             </h2>
@@ -121,11 +129,11 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
               ))}
             </ul>
           </Card>
-        </div>
+        </PageContainer>
       </section>
 
       {/* Main Content: Form + Sidebar */}
-      <section className="mx-auto grid max-w-7xl gap-10 px-6 py-16 lg:grid-cols-[1fr_340px] lg:px-8">
+      <PageContainer size="wide" padding="default" className="grid gap-10 py-16 lg:grid-cols-[1fr_340px]">
         {/* Left: Form */}
         <ContactForm 
           inquiryType={inquiryType} 
@@ -135,7 +143,7 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
 
         {/* Right: Process Panel */}
         <aside className="space-y-6 lg:sticky lg:top-8 lg:self-start">
-          <Card variant="default" className="rounded-[2rem] p-8">
+          <Card variant="default" className="rounded-3xl p-8">
             <p className="section-kicker text-[var(--slate-500)]">
               What happens next
             </p>
@@ -164,11 +172,11 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
             </p>
           </Card>
         </aside>
-      </section>
+      </PageContainer>
 
       {/* FAQ Section */}
       <section className="border-t border-[var(--line)] bg-[var(--surface-2)]">
-        <div className="mx-auto max-w-4xl px-6 py-16 lg:px-8">
+        <PageContainer size="narrow" padding="default">
           <div className="text-center">
             <p className="section-kicker text-[var(--slate-500)]">
               FAQ
@@ -180,7 +188,7 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {faqItems.map((item) => (
-              <Card key={item.question} variant="default" className="rounded-[1.5rem] p-6">
+              <Card key={item.question} variant="default" className="rounded-3xl p-6">
                 <h3 className="font-semibold text-[var(--slate-950)]">{item.question}</h3>
                 <p className="mt-2 text-sm leading-6 text-[var(--slate-600)]">
                   {item.answer}
@@ -188,7 +196,7 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
               </Card>
             ))}
           </div>
-        </div>
+        </PageContainer>
       </section>
     </main>
   );

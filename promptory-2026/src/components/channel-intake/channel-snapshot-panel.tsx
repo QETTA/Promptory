@@ -62,15 +62,15 @@ export function ChannelSnapshotPanel({ snapshot }: { snapshot: ChannelSnapshot }
           </div>
 
           <div className="mt-5 grid gap-3 sm:grid-cols-3">
-            <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
+            <div className="rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
               <p className="section-kicker text-[var(--slate-500)]">Host</p>
               <p className="mt-1 text-sm font-semibold text-[var(--slate-950)]">{snapshot.hostLabel}</p>
             </div>
-            <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
+            <div className="rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
               <p className="section-kicker text-[var(--slate-500)]">{snapshot.pathLabel}</p>
               <p className="mt-1 truncate text-sm font-semibold text-[var(--slate-950)]">{snapshot.pathValue}</p>
             </div>
-            <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
+            <div className="rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
               <p className="section-kicker text-[var(--slate-500)]">{snapshot.identifierLabel}</p>
               <p className="mt-1 truncate text-sm font-semibold text-[var(--slate-950)]">
                 {snapshot.identifier ?? "추가 확인 필요"}
@@ -78,7 +78,7 @@ export function ChannelSnapshotPanel({ snapshot }: { snapshot: ChannelSnapshot }
             </div>
           </div>
 
-          <div className="mt-5 rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3">
+          <div className="mt-5 rounded-2xl border border-[var(--line)] bg-white px-4 py-3">
             <p className="section-kicker text-[var(--slate-500)]">Normalized URL</p>
             <p className="mt-1 break-all text-sm leading-6 text-[var(--slate-700)]">{snapshot.normalizedUrl}</p>
           </div>
@@ -91,7 +91,7 @@ export function ChannelSnapshotPanel({ snapshot }: { snapshot: ChannelSnapshot }
           </h3>
           <p className="mt-3 text-sm leading-6 text-[var(--slate-700)]">{snapshot.confidenceReason}</p>
 
-          <div className="mt-4 rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3">
+          <div className="mt-4 rounded-2xl border border-[var(--line)] bg-white px-4 py-3">
             <p className="section-kicker text-[var(--slate-500)]">Next Surface</p>
             <p className="mt-1 text-sm leading-6 text-[var(--slate-800)]">{snapshot.surfaceHint}</p>
           </div>
@@ -100,7 +100,7 @@ export function ChannelSnapshotPanel({ snapshot }: { snapshot: ChannelSnapshot }
             {snapshot.checks.slice(0, 2).map((check) => (
               <div
                 key={check.label}
-                className="flex items-center justify-between gap-3 rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3"
+                className="flex items-center justify-between gap-3 rounded-2xl border border-[var(--line)] bg-white px-4 py-3"
               >
                 <p className="text-sm font-medium text-[var(--slate-800)]">{check.label}</p>
               <span
@@ -120,7 +120,7 @@ export function ChannelSnapshotPanel({ snapshot }: { snapshot: ChannelSnapshot }
         {snapshot.checks.map((check) => (
           <div
             key={check.label}
-            className="rounded-[1.1rem] border border-[var(--line)] bg-[var(--surface-1)] px-4 py-4"
+            className="rounded-2xl border border-[var(--line)] bg-[var(--surface-1)] px-4 py-4"
           >
             <div className="flex items-center justify-between gap-3">
               <p className="text-sm font-semibold text-[var(--slate-950)]">{check.label}</p>

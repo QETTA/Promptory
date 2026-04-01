@@ -2,8 +2,12 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CTAButton } from "@/components/ui/cta-button";
 import { AnimatedSection } from "@/components/ui/animated-section";
+import { PageContainer } from "@/components/ui/page-container";
+import { heroSection, layouts, gradients } from "@/components/ui/patterns";
 import { Metadata } from "next";
 import { PriceBadge } from "@/components/ui/price-badge";
+import { Search, ClipboardList, Globe2 } from "@/components/ui/icons";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "패키지 목록 - 프롬프토리",
@@ -19,7 +23,7 @@ const packages = [
     useCase: "사이트 진단",
     teamType: "중소기업 팀",
     color: "blue",
-    icon: "🔍",
+    icon: Search,
     price: "₩79만/월",
     setupPrice: "세팅비 ₩300~500만",
   },
@@ -31,7 +35,7 @@ const packages = [
     useCase: "브리프 생성",
     teamType: "중소기업 팀",
     color: "emerald",
-    icon: "📋",
+    icon: ClipboardList,
     price: "₩79만/월",
     setupPrice: "세팅비 ₩300~500만",
   },
@@ -43,7 +47,7 @@ const packages = [
     useCase: "보고 정리",
     teamType: "외국계 한국지사",
     color: "indigo",
-    icon: "🌏",
+    icon: Globe2,
     price: "₩79만/월",
     setupPrice: "세팅비 ₩300~500만",
   },
@@ -65,11 +69,11 @@ export default function PackagesPage() {
   return (
     <div className="pb-16">
       {/* Hero */}
-      <section className="bg-gradient-to-br from-slate-50 via-brand-50/20 to-indigo-50/10 py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <section className={cn(gradients.hero, layouts.section)}>
+        <PageContainer>
           <AnimatedSection className="mx-auto max-w-3xl text-center">
             <p className="section-kicker mb-2 text-[var(--brand-600)]">Slack Agent Packages</p>
-            <h1 className="poster-title text-[var(--slate-950)]">
+            <h1 className="poster-title text-[var(--slate-950)] break-keep">
               반복되는 진단, 비교, 초안 작업을
               <br />
               <span className="gradient-text">패키지로 붙입니다</span>
@@ -79,12 +83,12 @@ export default function PackagesPage() {
               팀의 실무 흐름에 맞춘 Slack agent 패키지를 제안합니다
             </p>
           </AnimatedSection>
-        </div>
+        </PageContainer>
       </section>
 
       {/* Filters */}
       <section className="pb-8">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <PageContainer>
           <AnimatedSection delay={0.2}>
             <div className="flex flex-wrap gap-6">
               <div>
@@ -109,22 +113,24 @@ export default function PackagesPage() {
               </div>
             </div>
           </AnimatedSection>
-        </div>
+        </PageContainer>
       </section>
 
       {/* Package Cards */}
       <section className="py-8">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <PageContainer>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {packages.map((pkg, index) => (
               <AnimatedSection key={pkg.slug} delay={index * 0.1}>
                 <Card variant="strong" className="p-6 flex flex-col card-hover h-full group">
                   <div className="flex flex-wrap gap-2 mb-3">
-                    <Badge variant="default" className="text-[10px]">{pkg.useCase}</Badge>
-                    <Badge variant="neutral" className="text-[10px]">{pkg.teamType}</Badge>
+                    <Badge variant="default" className="text-xs">{pkg.useCase}</Badge>
+                    <Badge variant="neutral" className="text-xs">{pkg.teamType}</Badge>
                   </div>
                   <div className="flex items-center gap-3 mb-3">
-                    <span className="text-3xl group-hover:scale-110 transition-transform">{pkg.icon}</span>
+                    <span className="text-3xl group-hover:scale-110 transition-transform text-[var(--brand-600)]">
+                      <pkg.icon className="w-8 h-8" />
+                    </span>
                     <h2 className="text-lg font-semibold text-[var(--slate-950)]">{pkg.title}</h2>
                   </div>
                   <p className="mt-3 flex-1 text-sm leading-6 text-[var(--slate-600)]">{pkg.description}</p>
@@ -161,12 +167,12 @@ export default function PackagesPage() {
               </AnimatedSection>
             ))}
           </div>
-        </div>
+        </PageContainer>
       </section>
 
       {/* Bottom CTA */}
       <section className="py-16">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <PageContainer size="narrow">
           <AnimatedSection delay={0.3}>
             <Card variant="tint" className="p-8 card-hover">
               <h2 className="text-xl font-bold text-[var(--slate-950)]">
@@ -182,7 +188,7 @@ export default function PackagesPage() {
               </div>
             </Card>
           </AnimatedSection>
-        </div>
+        </PageContainer>
       </section>
     </div>
   );

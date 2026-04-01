@@ -1,5 +1,8 @@
 import { NextResponse } from "next/server";
 
+// Cloudflare Pages Static Export 설정
+export const dynamic = "force-static";
+
 import { getPaymentsMode } from "@/lib/env/server";
 import { hasPaymentsRuntime } from "@/lib/env/runtime";
 import { jsonError } from "@/lib/http";

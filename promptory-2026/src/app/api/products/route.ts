@@ -2,6 +2,9 @@ import { randomUUID } from "node:crypto";
 
 import { NextResponse } from "next/server";
 
+// Cloudflare Pages Static Export 설정
+export const dynamic = "force-static";
+
 import { hasSellerWriteRuntime } from "@/lib/env/runtime";
 import { jsonError } from "@/lib/http";
 import { canPublishProduct } from "@/lib/product-editor";
