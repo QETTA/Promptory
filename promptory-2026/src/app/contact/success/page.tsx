@@ -60,7 +60,7 @@ export default function ContactSuccessPage({ searchParams }: Props) {
         {/* Status Cards */}
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {steps.map((step, index) => (
-            <Card key={step.title} variant={index === steps.length - 1 ? "strong" : "tint"} className="rounded-[2rem] p-8 text-left">
+            <Card key={step.title} variant={index === steps.length - 1 ? "strong" : "tint"} className="rounded-[var(--radius-4xl)] p-8 text-left">
               <div className={`mb-4 ${index === steps.length - 1 ? "ui-step-marker" : "ui-step-marker-muted"}`}>
                 {index + 1}
               </div>

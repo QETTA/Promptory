@@ -40,7 +40,7 @@ export function ChannelResultStack({
           </div>
 
           <div className="grid gap-3 lg:grid-cols-3">
-            <div className="rounded-[1rem] border border-[var(--line)] bg-white px-4 py-4">
+            <div className="rounded-xl border border-[var(--line)] bg-white px-4 py-4">
               <p className="text-xs font-semibold text-[var(--slate-500)]">Diagnosis</p>
               <div className="mt-3 grid gap-3">
                 {summary.diagnosisCards.slice(0, 3).map((card) => (
@@ -55,7 +55,7 @@ export function ChannelResultStack({
               </div>
             </div>
 
-            <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] px-4 py-4">
+            <div className="rounded-xl border border-[var(--line)] bg-[var(--surface-1)] px-4 py-4">
               <p className="text-xs font-semibold text-[var(--slate-500)]">Recommended Stack</p>
               <div className="mt-3 grid gap-3">
                 {summary.recommendedModules.slice(0, 4).map((module) => (
@@ -67,7 +67,7 @@ export function ChannelResultStack({
               </div>
             </div>
 
-            <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] px-4 py-4">
+            <div className="rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-4">
               <p className="text-xs font-semibold text-[var(--slate-500)]">Apply Draft</p>
               <div className="mt-3 grid gap-3">
                 {summary.copyDrafts.slice(0, 2).map((draft) => (
@@ -131,7 +131,7 @@ export function ChannelResultStack({
       </Card>
 
       {railProducts.length > 0 ? (
-        <details className="group rounded-[1.25rem] border border-[var(--line)] bg-[var(--surface-1)] px-5 py-4">
+        <details className="group rounded-2xl border border-[var(--line)] bg-[var(--surface-1)] px-5 py-4">
           <summary className="cursor-pointer list-none text-sm font-semibold text-[var(--slate-950)]">
             관련 실행 팩 {railProducts.length}개 보기
           </summary>

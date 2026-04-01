@@ -3,7 +3,10 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { CTAButton } from "@/components/ui/cta-button";
 import { AnimatedSection, StaggerContainer, FadeIn } from "@/components/ui/animated-section";
+import { PageContainer, PageSection } from "@/components/ui/page-container";
+import { heroSection, layouts, gradients, animations, delays, withDelay } from "@/components/ui/patterns";
 import { Metadata } from "next";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "프롬프토리 - 맞춤형 Slack Agent Package",
@@ -14,65 +17,63 @@ export default function HomePage() {
   return (
     <div className="pb-16">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-blue-50/20 to-indigo-50/20">
+      <PageSection className={heroSection.container}>
         {/* Animated background elements */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className={heroSection.decoration}>
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-200/20 rounded-full blur-3xl animate-pulse-soft" />
           <div className="absolute top-20 -left-20 w-60 h-60 bg-indigo-200/20 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "1s" }} />
           <div className="absolute bottom-20 right-20 w-40 h-40 bg-emerald-200/20 rounded-full blur-3xl animate-pulse-soft" style={{ animationDelay: "2s" }} />
         </div>
-        
-        <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
-          <div className="grid gap-12 lg:grid-cols-2 lg:gap-8 items-center">
+
+        <PageContainer className={cn("py-12 sm:py-16 lg:py-28", heroSection.content.replace(layouts.centered, ""))}>
+          <div className="grid gap-10 lg:grid-cols-2 lg:gap-8 items-center">
             {/* Left: Text */}
-            <AnimatedSection direction="left" className="flex flex-col gap-6">
-              <Badge className="w-fit animate-fade-in-up">Custom Slack Agent Package</Badge>
-              <h1 className="text-3xl font-bold tracking-tight text-slate-950 sm:text-4xl lg:text-5xl animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-                Slack에 URL을내면,
+            <AnimatedSection direction="left" className="flex flex-col gap-5">
+              <Badge className={cn("w-fit", animations.fadeInUp)}>Custom Slack Agent Package</Badge>
+              <h1 className={cn("text-[1.75rem] font-bold leading-snug tracking-tight text-slate-950 sm:text-4xl lg:text-5xl word-break-keep", withDelay("fadeInUp", 1))}>
+                Slack에 URL을 내면,
                 <br />
-                <span className="gradient-text">진단부터 실행 초안까지</span>
-                <br />
-                팀 대화 안에서 끝납니다
+                <span className="gradient-text">진단부터 실행 초안까지</span>&#8203;
+                <br className="hidden sm:block" />
+                <span className="sm:hidden"> </span>팀 대화 안에서 끝납니다
               </h1>
-              <p className="text-base leading-7 text-slate-600 sm:text-lg max-w-xl animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-                프롬프토리는 홈페이지, 랜딩, 문서 링크를 읽고
-                몇 가지 질문으로 목표를 고정한 뒤
-                비교표, 카피 초안, 보고용 요약까지 Slack 안에서 이어서 만듭니다.
+              <p className={cn("text-sm leading-7 text-slate-600 sm:text-base max-w-xl", withDelay("fadeInUp", 2))}>
+                프롬프토리는 홈페이지, 랜딩, 문서 링크를 읽고 몇 가지 질문으로 목표를 고정한 뒤 비교표, 카피 초안, 보고용 요약까지 Slack 안에서 이어서 만듭니다.
               </p>
-              <div className="flex flex-wrap gap-3 pt-2 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-                <CTAButton href="/pricing" size="lg" className="btn-shine hover:scale-105 transition-transform">
+              <div className={cn("flex flex-col sm:flex-row gap-3 pt-2", withDelay("fadeInUp", 3))}>
+                <CTAButton href="/pricing" size="lg" className="btn-shine hover:scale-105 transition-transform w-full sm:w-auto justify-center">
                   가격 보기
                 </CTAButton>
-                <CTAButton href="/contact" variant="outline" size="lg" className="hover-lift">
+                <CTAButton href="/contact" variant="outline" size="lg" className="hover-lift w-full sm:w-auto justify-center">
                   데모 요청하기
                 </CTAButton>
               </div>
-              <p className="text-xs text-slate-500 pt-2 animate-fade-in-up" style={{ animationDelay: "0.4s" }}>
+              <p className={cn("text-xs text-slate-500 pt-1", withDelay("fadeInUp", 4))}>
                 맞춤 세팅 · Slack DM/채널/모달 · 저장 후 이어보기
               </p>
             </AnimatedSection>
 
             {/* Right: Slack Mock */}
             <AnimatedSection direction="right" delay={0.3} className="flex justify-center lg:justify-end">
-              <div className="animate-float" style={{ animationDuration: "4s" }}>
+              <div className="animate-float w-full max-w-sm mx-auto lg:max-w-none" style={{ animationDuration: "4s" }}>
                 <WebsiteDiagnosisMock />
               </div>
             </AnimatedSection>
           </div>
-        </div>
-      </section>
+        </PageContainer>
+      </PageSection>
 
       {/* Target Audience Section */}
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12">
-            <p className="text-sm font-semibold text-blue-600 mb-2">Built for teams with too much to draft</p>
-            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">
+      <PageSection className={layouts.section}>
+        <PageContainer>
+          <AnimatedSection className="text-center mb-10">
+            <span className="inline-block text-xs font-semibold tracking-wider text-blue-600 uppercase mb-3 px-3 py-1 bg-blue-50 rounded-full">Built for teams with too much to draft</span>
+            <h2 className="text-xl font-bold text-slate-950 sm:text-2xl lg:text-3xl mt-2 break-keep">
               자료는 많은데, 초안과 비교가 계속 밀리는 팀에게 맞습니다
             </h2>
           </AnimatedSection>
 
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className={cn(layouts.cardGrid, "md:grid-cols-2")}>
             <AnimatedSection delay={0.1}>
               <Card variant="strong" className="p-6 sm:p-8 card-hover h-full">
                 <div className="flex flex-col gap-4 h-full">
@@ -109,15 +110,15 @@ export default function HomePage() {
               </Card>
             </AnimatedSection>
           </div>
-        </div>
-      </section>
+        </PageContainer>
+      </PageSection>
 
       {/* How It Works Section */}
-      <section className="py-16 sm:py-20 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12">
-            <p className="text-sm font-semibold text-blue-600 mb-2">How it works</p>
-            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">
+      <PageSection className="py-14 sm:py-20 bg-slate-50">
+        <PageContainer>
+          <AnimatedSection className="text-center mb-10">
+            <span className="inline-block text-xs font-semibold tracking-wider text-blue-600 uppercase mb-3 px-3 py-1 bg-blue-50 rounded-full">How it works</span>
+            <h2 className="text-xl font-bold text-slate-950 sm:text-2xl lg:text-3xl mt-2 break-keep">
               설명보다 먼저, Slack 안에서 바로 일합니다
             </h2>
           </AnimatedSection>
@@ -155,15 +156,15 @@ export default function HomePage() {
               </AnimatedSection>
             ))}
           </div>
-        </div>
-      </section>
+        </PageContainer>
+      </PageSection>
 
       {/* Package Lineup Section */}
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12">
-            <p className="text-sm font-semibold text-blue-600 mb-2">Agent packages</p>
-            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">
+      <PageSection className="py-14 sm:py-20">
+        <PageContainer>
+          <AnimatedSection className="text-center mb-10">
+            <span className="inline-block text-xs font-semibold tracking-wider text-blue-600 uppercase mb-3 px-3 py-1 bg-blue-50 rounded-full">Agent packages</span>
+            <h2 className="text-xl font-bold text-slate-950 sm:text-2xl lg:text-3xl mt-2 break-keep">
               팀의 반복 업무에 맞춰 Slack 에이전트를 패키지로 붙입니다
             </h2>
           </AnimatedSection>
@@ -217,15 +218,15 @@ export default function HomePage() {
               </AnimatedSection>
             ))}
           </div>
-        </div>
-      </section>
+        </PageContainer>
+      </PageSection>
 
       {/* Outputs Section */}
-      <section className="py-16 sm:py-20 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12">
-            <p className="text-sm font-semibold text-blue-600 mb-2">Outputs</p>
-            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">
+      <PageSection className="py-14 sm:py-20 bg-slate-50">
+        <PageContainer>
+          <AnimatedSection className="text-center mb-10">
+            <span className="inline-block text-xs font-semibold tracking-wider text-blue-600 uppercase mb-3 px-3 py-1 bg-blue-50 rounded-full">Outputs</span>
+            <h2 className="text-xl font-bold text-slate-950 sm:text-2xl lg:text-3xl mt-2 break-keep">
               대화가 끝나면 답변이 아니라 실행물이 남습니다
             </h2>
           </AnimatedSection>
@@ -248,20 +249,20 @@ export default function HomePage() {
               </AnimatedSection>
             ))}
           </div>
-        </div>
-      </section>
+        </PageContainer>
+      </PageSection>
 
       {/* Slack Surfaces Section */}
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12">
-            <p className="text-sm font-semibold text-blue-600 mb-2">Slack surfaces</p>
-            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">
+      <PageSection className="py-14 sm:py-20">
+        <PageContainer>
+          <AnimatedSection className="text-center mb-10">
+            <span className="inline-block text-xs font-semibold tracking-wider text-blue-600 uppercase mb-3 px-3 py-1 bg-blue-50 rounded-full">Slack surfaces</span>
+            <h2 className="text-xl font-bold text-slate-950 sm:text-2xl lg:text-3xl mt-2 break-keep">
               대화는 메시지에서, 이어보기는 App Home에서, 입력은 모달에서 처리합니다
             </h2>
           </AnimatedSection>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-4 grid-cols-2 lg:grid-cols-4">
             {[
               {
                 title: "Slack 메시지",
@@ -293,15 +294,15 @@ export default function HomePage() {
               </AnimatedSection>
             ))}
           </div>
-        </div>
-      </section>
+        </PageContainer>
+      </PageSection>
 
       {/* FAQ Section */}
-      <section className="py-16 sm:py-20 bg-slate-50">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="text-center mb-12">
-            <p className="text-sm font-semibold text-blue-600 mb-2">FAQ</p>
-            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl">자주 묻는 질문</h2>
+      <PageSection className="py-14 sm:py-20 bg-slate-50">
+        <PageContainer size="narrow">
+          <AnimatedSection className="text-center mb-10">
+            <span className="inline-block text-xs font-semibold tracking-wider text-blue-600 uppercase mb-3 px-3 py-1 bg-blue-50 rounded-full">FAQ</span>
+            <h2 className="text-xl font-bold text-slate-950 sm:text-2xl lg:text-3xl mt-2">자주 묻는 질문</h2>
           </AnimatedSection>
 
           <div className="space-y-4">
@@ -335,32 +336,31 @@ export default function HomePage() {
               </AnimatedSection>
             ))}
           </div>
-        </div>
-      </section>
+        </PageContainer>
+      </PageSection>
 
       {/* Final CTA Section */}
-      <section className="py-16 sm:py-20 relative overflow-hidden">
+      <PageSection className="py-14 sm:py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-slate-50 to-indigo-50/50" />
-        <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
+        <PageContainer size="narrow" className="relative text-center">
           <AnimatedSection>
-            <h2 className="text-2xl font-bold text-slate-950 sm:text-3xl lg:text-4xl">
+            <h2 className="text-xl font-bold text-slate-950 sm:text-2xl lg:text-3xl break-keep">
               우리 팀 Slack에 맞는 에이전트 패키지 데모를 받아보세요
             </h2>
-            <p className="mt-4 text-base text-slate-600 max-w-2xl mx-auto">
-              회사 사이트나 채널 URL을 보내주시면
-              프롬프토리 방식으로 실제 진단 예시를 보여드립니다
+            <p className="mt-4 text-sm text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              회사 사이트나 채널 URL을 보내주시면 프롬프토리 방식으로 실제 진단 예시를 보여드립니다
             </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <CTAButton href="/pricing" size="lg" className="btn-shine hover:scale-105 transition-transform">
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3 px-4 sm:px-0">
+              <CTAButton href="/pricing" size="lg" className="btn-shine hover:scale-105 transition-transform w-full sm:w-auto justify-center">
                 가격 보기
               </CTAButton>
-              <CTAButton href="/contact?type=quick_audit" variant="outline" size="lg" className="hover-lift">
+              <CTAButton href="/contact?type=quick_audit" variant="outline" size="lg" className="hover-lift w-full sm:w-auto justify-center">
                 무료 Quick Audit 받기
               </CTAButton>
             </div>
           </AnimatedSection>
-        </div>
-      </section>
+        </PageContainer>
+      </PageSection>
     </div>
   );
 }

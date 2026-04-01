@@ -138,7 +138,7 @@ export default async function SellerProductsPage({
                 const readinessSummary = getSellerReadinessSummary({ hasProductFile: hasFile, hasThumbnail });
 
                 return (
-                  <div key={product.id} className="rounded-[1.25rem] border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
+                  <div key={product.id} className="rounded-2xl border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
                     <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_220px]">
                       <div className="space-y-3">
                         <div className="flex flex-wrap gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-[var(--slate-500)]">

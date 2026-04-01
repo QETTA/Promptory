@@ -1,5 +1,14 @@
 import { NextResponse } from "next/server";
 
+// Cloudflare Pages Static Export 설정
+export const dynamic = "force-static";
+export const dynamicParams = false;
+
+// Static export를 위한 dummy params 생성
+export function generateStaticParams() {
+  return [{ orderId: "placeholder" }];
+}
+
 import { hasDownloadRuntime } from "@/lib/env/runtime";
 import { jsonError } from "@/lib/http";
 import { DownloadAccessError, createDownloadUrl } from "@/lib/server/downloads";

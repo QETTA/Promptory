@@ -37,7 +37,7 @@ export function ChannelDiagnosisPreview({
 
         <div className="mt-5 grid gap-3 md:grid-cols-3">
           {summary.diagnosisCards.map((card) => (
-            <div key={card.title} className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] px-4 py-4">
+            <div key={card.title} className="rounded-xl border border-[var(--line)] bg-[var(--surface-1)] px-4 py-4">
               <p className="section-kicker text-[var(--slate-500)]">{card.title}</p>
               {card.emphasis ? (
                 <p className="mt-2 text-base font-semibold text-[var(--slate-950)]">{card.emphasis}</p>
@@ -79,19 +79,19 @@ export function ChannelDiagnosisPreview({
           <p className="section-kicker text-[var(--slate-500)]">Public Surface Match</p>
           <div className="mt-3 grid gap-3 text-sm leading-6 text-[var(--slate-700)]">
             {surfaceHeadline ? (
-              <div className="rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3">
+              <div className="rounded-xl border border-[var(--line)] bg-white px-4 py-3">
                 <p className="text-xs font-semibold text-[var(--slate-500)]">Headline</p>
                 <p className="mt-1">{surfaceHeadline}</p>
               </div>
             ) : null}
             {surfaceDescription ? (
-              <div className="rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3">
+              <div className="rounded-xl border border-[var(--line)] bg-white px-4 py-3">
                 <p className="text-xs font-semibold text-[var(--slate-500)]">Description</p>
                 <p className="mt-1">{surfaceDescription}</p>
               </div>
             ) : null}
             {surfaceSignals.length > 0 ? (
-              <div className="rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3">
+              <div className="rounded-xl border border-[var(--line)] bg-white px-4 py-3">
                 <p className="text-xs font-semibold text-[var(--slate-500)]">Action Signal</p>
                 <p className="mt-1">{surfaceSignals.join(", ")}</p>
               </div>

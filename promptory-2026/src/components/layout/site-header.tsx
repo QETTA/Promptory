@@ -16,11 +16,6 @@ export async function SiteHeader() {
     { href: "/demo/slack", label: "데모" },
     { href: "/contact", label: "문의" },
   ];
-  const mobileNavItems = [
-    { href: "/packages", label: "패키지" },
-    { href: "/demo/slack", label: "데모" },
-    { href: "/contact", label: "문의" },
-  ];
 
   return (
     <header className="sticky top-0 z-[1100] border-b border-[var(--line)] bg-white/85 shadow-[var(--shadow-sm)] backdrop-blur-xl backdrop-saturate-[180%]">
@@ -72,7 +67,7 @@ export async function SiteHeader() {
       {/* Mobile nav */}
       <div className="border-t border-[var(--line)] bg-white/70 backdrop-blur-lg lg:hidden">
         <div className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 py-2.5 sm:px-6">
-          <PrimaryNav items={mobileNavItems} mobile />
+          <PrimaryNav items={navItems} mobile />
         </div>
       </div>
     </header>

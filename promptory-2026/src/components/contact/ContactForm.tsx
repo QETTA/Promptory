@@ -88,12 +88,12 @@ export function ContactForm({ inquiryType = "demo", packageSlug, planType }: Con
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="ui-panel-elevated rounded-[2rem] p-8"
+      className="ui-panel-elevated rounded-[var(--radius-4xl)] p-8"
     >
       {/* Inquiry Type Badge */}
       <div className="flex flex-wrap gap-2">
         <Badge variant="default">
-          {inquiryType === "quick_audit" ? "Quick Audit" : inquiryType === "package" ? "패키지 문의" : "데모 요청"}
+          {inquiryType === "quick_audit" ? "Quick Audit" : inquiryType === "package" ? "패키지 문의" : inquiryType === "upsell" ? "Core Package 상담" : "데모 요청"}
         </Badge>
         {packageSlug && (
           <Badge variant="neutral">
@@ -297,14 +297,21 @@ export function ContactForm({ inquiryType = "demo", packageSlug, planType }: Con
             id="contextNote"
             {...register("contextNote")}
             rows={6}
-            placeholder={inquiryType === "quick_audit" 
+            placeholder={inquiryType === "quick_audit"
               ? `예:
 홈페이지: https://company-site.com
 가장 급한 목표: 문의 전환 개선
 현재 병목: 방문은 있는데 문의가 적음
 
-Quick Audit로 확인하고 싶은 부분을 알려주세요.` 
-              : `예:
+Quick Audit로 확인하고 싶은 부분을 알려주세요.`
+              : inquiryType === "upsell"
+                ? `예:
+홈페이지: https://company-site.com
+지금 Quick Audit으로 본 결과를 매주 자동으로 받고 싶습니다.
+팀 Slack에서 바로 실행 초안까지 이어가고 싶어요.
+
+도입 희망 시기와 팀 규모도 알려주세요.`
+                : `예:
 홈페이지는 있는데 문의 전환이 약합니다.
 대표 보고용으로 경쟁사 비교와 CTA 초안이 같이 필요합니다.
 Slack 안에서 바로 공유할 수 있는 흐름이면 좋겠습니다.`}
@@ -353,12 +360,20 @@ Slack 안에서 바로 공유할 수 있는 흐름이면 좋겠습니다.`}
                 </svg>
                 전송 중...
               </>
+            ) : inquiryType === "quick_audit" ? (
+              "Quick Audit 신청하기"
+            ) : inquiryType === "package" || inquiryType === "upsell" ? (
+              "패키지 도입 상담 신청"
             ) : (
               "우리 팀 기준 데모 요청하기"
             )}
           </Button>
           <p className="mt-3 text-sm text-[var(--slate-500)]">
-            보내주신 내용으로 Slack 대화 흐름과 결과 예시를 준비합니다
+            {inquiryType === "quick_audit"
+              ? "보내주신 URL로 2영업일 내 진단 결과를 전달합니다"
+              : inquiryType === "package" || inquiryType === "upsell"
+                ? "팀 상황에 맞는 견적과 도입 일정을 함께 보내드립니다"
+                : "보내주신 내용으로 Slack 대화 흐름과 결과 예시를 준비합니다"}
           </p>
         </div>
       </div>

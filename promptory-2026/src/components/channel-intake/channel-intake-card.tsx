@@ -71,7 +71,7 @@ export function ChannelIntakeCard({
       </div>
 
       <form action={action} className="mt-4 grid gap-3" onSubmit={handleSubmit}>
-        <div className="ui-panel-elevated rounded-[1.4rem] p-2">
+        <div className="ui-panel-elevated rounded-3xl p-2">
           <div className="grid gap-2 sm:grid-cols-[minmax(0,1fr)_132px]">
             <Input
               type="text"
@@ -90,7 +90,7 @@ export function ChannelIntakeCard({
             </Button>
           </div>
         </div>
-        <div className="ui-panel-muted flex items-center justify-between rounded-[1.1rem] bg-[rgba(248,250,252,0.9)] px-4 py-3 text-xs text-[var(--slate-600)]">
+        <div className="ui-panel-muted flex items-center justify-between rounded-2xl bg-[rgba(248,250,252,0.9)] px-4 py-3 text-xs text-[var(--slate-600)]">
           <span className="font-semibold text-[var(--slate-700)]">입력 즉시</span>
           <span>채널 판별 → 공개 스냅샷 → Ask 준비</span>
         </div>
@@ -102,7 +102,7 @@ export function ChannelIntakeCard({
           "2. 공개 표면을 읽을 위치와 한계를 정리합니다.",
           "3. Ask 질문으로 병목을 고정합니다.",
         ].map((line) => (
-          <div key={line} className="ui-panel-muted rounded-[1.05rem] px-3 py-2.5 text-sm leading-6 text-[var(--slate-700)]">
+          <div key={line} className="ui-panel-muted rounded-2xl px-3 py-2.5 text-sm leading-6 text-[var(--slate-700)]">
             {line}
           </div>
         ))}
@@ -123,7 +123,7 @@ export function ChannelIntakeCard({
         </div>
       </div>
 
-      <Card variant="tint" className="mt-4 rounded-[1.25rem] p-4 text-sm leading-6 text-[var(--slate-700)]">
+      <Card variant="tint" className="mt-4 rounded-2xl p-4 text-sm leading-6 text-[var(--slate-700)]">
         지금은 {supportedChannelHeadline}까지 공개 표면 확인, 질문 준비, 저장 레일이 연결돼 있습니다.
       </Card>
     </Card>

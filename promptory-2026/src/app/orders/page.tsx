@@ -4,12 +4,13 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { SetupCallout } from "@/components/ui/setup-callout";
 import { CTAButton } from "@/components/ui/cta-button";
 import { DashboardCard } from "@/components/ui/dashboard-card";
+import { PageContainer } from "@/components/ui/page-container";
+import { OrderCard } from "@/components/ui/order-card";
 import { formatKrw } from "@/lib/currency";
 import { getPublicEnvStatus } from "@/lib/env/public";
 import { getPaymentsMode, getServerEnvStatus } from "@/lib/env/server";
 import { formatDate } from "@/lib/format";
 import { getPromptoryCheckoutCapability } from "@/lib/payments-capability";
-import { getCategoryLabel, getOrderStatusLabel } from "@/lib/promptory-display";
 import { requireUser } from "@/lib/server/auth";
 import { getBuyerOrders } from "@/lib/server/orders";
 
@@ -34,12 +35,12 @@ export default async function OrdersPage({
 
   if (!publicStatus.hasPublicEnv) {
     return (
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+      <PageContainer>
         <SetupCallout
           title="주문 내역을 보려면 공개 Supabase 연결이 필요합니다."
           body="주문 내역 조회에는 공개 환경 변수가 필요합니다. 먼저 /setup에서 연결 상태를 확인해 주세요."
         />
-      </div>
+      </PageContainer>
     );
   }
 
@@ -75,9 +76,13 @@ export default async function OrdersPage({
         }
       />
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <PageContainer>
         {created === "1" ? (
-          <div className="mt-6 rounded-[1rem] border border-[var(--brand-300)] bg-[var(--brand-50)] p-4 text-sm leading-6 text-[var(--brand-700)]">
+          <div 
+            className="mt-6 rounded-2xl border border-[var(--brand-300)] bg-[var(--brand-50)] p-4 text-sm leading-6 text-[var(--brand-700)]"
+            role="status"
+            aria-live="polite"
+          >
             주문이 생성되었습니다. {orderId ? `주문 번호 ${orderId} · ` : ""}
             {paymentMode === "toss"
               ? "이제 checkout에서 결제를 진행하면 됩니다."
@@ -110,41 +115,19 @@ export default async function OrdersPage({
               ctaLabel="실행 팩 둘러보기"
             />
           ) : pendingOrders.length === 0 ? (
-            <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] p-5 text-sm leading-7 text-[var(--slate-600)]">
+            <div className="rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] p-5 text-sm leading-7 text-[var(--slate-600)]">
               지금 바로 처리할 결제 대기 주문은 없습니다.
             </div>
           ) : (
-            <div className="grid gap-4">
+            <div className="grid gap-4" role="list" aria-label="결제 대기 주문 목록">
               {pendingOrders.map((order) => (
-                <div key={order.id} className="rounded-[1rem] border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
-                  <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_220px]">
-                    <div>
-                      <div className="flex flex-wrap gap-2 text-xs font-medium text-[var(--slate-500)]">
-                        <span>{paymentMode === "toss" ? "결제 대기" : "구매 흐름 확인"}</span>
-                        <span>·</span>
-                        <span>{getCategoryLabel(order.product?.category ?? "실행 팩")}</span>
-                      </div>
-                      <h2 className="mt-2 text-[1.15rem] font-semibold text-[var(--slate-950)]">
-                        {order.product?.title ?? "실행 팩 정보를 찾을 수 없습니다."}
-                      </h2>
-                      <p className="mt-2 text-sm leading-6 text-[var(--slate-600)]">
-                        {formatKrw(order.amount_krw)} · 주문일 {formatDate(order.created_at)}
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-3 lg:items-end">
-                      {canOpenCheckout ? (
-                        <CTAButton href={`/checkout/${order.id}`} size="default">
-                          {paymentMode === "dev_stub" ? "checkout 열기" : "결제 진행하기"}
-                        </CTAButton>
-                      ) : null}
-                      {order.product?.slug ? (
-                        <CTAButton href={`/products/${order.product.slug}`} variant="outline" size="sm">
-                          실행 팩 보기
-                        </CTAButton>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
+                <OrderCard
+                  key={order.id}
+                  order={order}
+                  paymentMode={paymentMode}
+                  canCheckout={canOpenCheckout}
+                  variant="pending"
+                />
               ))}
             </div>
           )}
@@ -152,37 +135,19 @@ export default async function OrdersPage({
 
         {historyOrders.length > 0 ? (
           <Section eyebrow="주문 기록" title="지난 주문 기록" className="pt-0">
-            <div className="grid gap-4">
+            <div className="grid gap-4" role="list" aria-label="지난 주문 목록">
               {historyOrders.map((order) => (
-                <div key={order.id} className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] p-5">
-                  <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_200px]">
-                    <div>
-                      <div className="flex flex-wrap gap-2 text-xs font-medium text-[var(--slate-500)]">
-                        <span>{getOrderStatusLabel(order.status)}</span>
-                        <span>·</span>
-                        <span>{getCategoryLabel(order.product?.category ?? "실행 팩")}</span>
-                      </div>
-                      <h2 className="mt-2 text-[1.1rem] font-semibold text-[var(--slate-950)]">
-                        {order.product?.title ?? "실행 팩 정보를 찾을 수 없습니다."}
-                      </h2>
-                      <p className="mt-2 text-sm leading-6 text-[var(--slate-600)]">
-                        {formatKrw(order.amount_krw)} · 주문일 {formatDate(order.created_at)}
-                      </p>
-                    </div>
-                    <div className="flex flex-col gap-3 lg:items-end">
-                      {order.product?.slug ? (
-                        <CTAButton href={`/products/${order.product.slug}`} variant="outline" size="sm">
-                          실행 팩 보기
-                        </CTAButton>
-                      ) : null}
-                    </div>
-                  </div>
-                </div>
+                <OrderCard
+                  key={order.id}
+                  order={order}
+                  paymentMode={paymentMode}
+                  variant="history"
+                />
               ))}
             </div>
           </Section>
         ) : null}
-      </div>
+      </PageContainer>
     </div>
   );
 }

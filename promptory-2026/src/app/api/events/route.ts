@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
+// Cloudflare Pages Static Export 설정
+export const dynamic = "force-static";
+
 import { trackServerEvent } from "@/lib/server/telemetry";
 import { promptoryEventNames } from "@/lib/telemetry/contracts";
 

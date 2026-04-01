@@ -1,0 +1,56 @@
+# Cloudflare Pages + Workers 배포 설정
+# Promptory - Channel Optimization Engine
+# @opennextjs/cloudflare 사용 (Next.js 16 지원)
+
+name = "promptory"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+
+# @opennextjs/cloudflare 빌드 결과물 디렉토리
+main = ".open-next/worker.js"
+assets = { directory = ".open-next/assets", binding = "ASSETS" }
+
+# ─────────────────────────────────────────────
+# Environment Variables (non-secret)
+# ─────────────────────────────────────────────
+[vars]
+NEXT_PUBLIC_APP_URL = "https://promptory.pages.dev"
+PAYMENTS_MODE = "dev_stub"
+CF_ACCESS_TEAM_DOMAIN = "lider-yohan.cloudflareaccess.com"
+
+# ─────────────────────────────────────────────
+# Production environment
+# ─────────────────────────────────────────────
+[env.production]
+name = "promptory"
+
+[env.production.vars]
+NEXT_PUBLIC_APP_URL = "https://promptory.pages.dev"
+PAYMENTS_MODE = "production"
+CF_ACCESS_TEAM_DOMAIN = "lider-yohan.cloudflareaccess.com"
+
+# ─────────────────────────────────────────────
+# Preview / Staging environment
+# ─────────────────────────────────────────────
+[env.preview]
+name = "promptory-preview"
+
+[env.preview.vars]
+NEXT_PUBLIC_APP_URL = "https://preview.promptory.pages.dev"
+PAYMENTS_MODE = "dev_stub"
+CF_ACCESS_TEAM_DOMAIN = "lider-yohan.cloudflareaccess.com"
+
+# ─────────────────────────────────────────────
+# KV Namespaces (필요 시 활성화)
+# ─────────────────────────────────────────────
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = ""
+# preview_id = ""
+
+# ─────────────────────────────────────────────
+# R2 Buckets (파일 저장 필요 시 활성화)
+# ─────────────────────────────────────────────
+# [[r2_buckets]]
+# binding = "ASSETS"
+# bucket_name = "promptory-assets"
