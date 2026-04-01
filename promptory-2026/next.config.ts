@@ -5,10 +5,11 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 
   // ─────────────────────────────────────────────────────────────
-  // Cloudflare Pages Static Export 설정
+  // Cloudflare Pages Static Export 설정 (배포 시에만 활성화)
   // ─────────────────────────────────────────────────────────────
-  output: "export",
-  distDir: "dist",
+  // output: "export",
+  // distDir: "dist",
+  distDir: ".next",
 
   // 이미지 최적화: Cloudflare Images 또는 unoptimized 사용
   images: {
