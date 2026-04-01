@@ -16,7 +16,7 @@ export function ChannelSurfaceReadPanel({ surface }: { surface: ChannelSurfaceRe
       </div>
 
       <div className="mt-5 grid gap-3 md:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)]">
-        <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] px-4 py-4">
+        <div className="rounded-xl border border-[var(--line)] bg-[var(--surface-1)] px-4 py-4">
           <p className="text-xs font-semibold text-[var(--slate-500)]">Headline</p>
           <p className="mt-2 text-base font-semibold text-[var(--slate-950)]">
             {surface.headline ?? "아직 뚜렷한 제목을 읽지 못했습니다."}
@@ -26,7 +26,7 @@ export function ChannelSurfaceReadPanel({ surface }: { surface: ChannelSurfaceRe
           </p>
         </div>
 
-        <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] px-4 py-4">
+        <div className="rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-4">
           <p className="text-xs font-semibold text-[var(--slate-500)]">Action Signals</p>
           <div className="mt-3 grid gap-2 text-sm leading-6 text-[var(--slate-700)]">
             {surface.actionSignals.length > 0 ? (
@@ -45,7 +45,7 @@ export function ChannelSurfaceReadPanel({ surface }: { surface: ChannelSurfaceRe
       </div>
 
       <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] px-4 py-3">
+        <div className="rounded-xl border border-[var(--line)] bg-[var(--surface-1)] px-4 py-3">
           <p className="text-xs font-semibold text-[var(--slate-500)]">Notes</p>
           <div className="mt-2 grid gap-2 text-sm leading-6 text-[var(--slate-700)]">
             {surface.notes.map((note) => (
@@ -55,7 +55,7 @@ export function ChannelSurfaceReadPanel({ surface }: { surface: ChannelSurfaceRe
         </div>
 
         {surface.browserFollowupNeeded ? (
-          <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
+          <div className="rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
             <p className="text-xs font-semibold text-[var(--brand-700)]">Browser Follow-up</p>
             <p className="mt-2 text-sm leading-6 text-[var(--slate-700)]">
               {surface.browserFollowupReason ?? "지금 바로 보이는 정보만으로는 실제 첫 화면과 펼침 뒤 문장까지 다 확인하기 어렵습니다."}

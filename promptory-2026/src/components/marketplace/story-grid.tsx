@@ -34,7 +34,7 @@ export function StoryGrid({
           {item.points?.length ? (
             <ul className="mt-3 grid gap-1.5">
               {item.points.map((point) => (
-                <li key={point} className="rounded-[0.95rem] border border-[rgba(148,163,184,0.14)] bg-[var(--surface-1)] px-3 py-2 text-sm leading-6 text-[var(--slate-600)]">
+                <li key={point} className="rounded-xl border border-[rgba(148,163,184,0.14)] bg-[var(--surface-1)] px-3 py-2 text-sm leading-6 text-[var(--slate-600)]">
                   {point}
                 </li>
               ))}

@@ -3,7 +3,10 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CTAButton } from "@/components/ui/cta-button";
 import { AnimatedSection } from "@/components/ui/animated-section";
-import { Check } from "lucide-react";
+import { PageContainer, PageSection } from "@/components/ui/page-container";
+import { gradients, layouts } from "@/components/ui/patterns";
+import { Check } from "@/components/ui/icons";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "가격 안내 - 프롬프토리",
@@ -119,27 +122,23 @@ export default function PricingPage() {
   return (
     <div className="pb-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-slate-50 via-brand-50/20 to-indigo-50/10 py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <PageSection className={cn(gradients.hero, layouts.section)}>
+        <PageContainer>
           <AnimatedSection className="mx-auto max-w-3xl text-center">
             <Badge className="mb-4">Transparent Pricing</Badge>
-            <h1 className="poster-title text-[var(--slate-950)]">
-              팀 규모와 필요에 맞는
-              <br />
-              <span className="gradient-text">맞춤형 패키지</span>
+            <h1 className="poster-title text-[var(--slate-950)] break-keep">
+              팀 규모와 필요에 맞는<span className="gradient-text"> 맞춤형 패키지</span>
             </h1>
             <p className="body-copy-xl mt-4 text-[var(--slate-600)]">
-              Quick Audit으로 시작해서 Core Package로 확장하세요.
-              <br />
-              투명한 가격, 확실한 가치.
+              Quick Audit으로 시작해서 Core Package로 확장하세요. 투명한 가격, 확실한 가치.
             </p>
           </AnimatedSection>
-        </div>
-      </section>
+        </PageContainer>
+      </PageSection>
 
       {/* Pricing Cards */}
-      <section className="py-12 sm:py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <PageSection className="py-12 sm:py-16">
+        <PageContainer size="wide">
           <div className="grid gap-6 lg:grid-cols-3 items-stretch">
             {tiers.map((tier, index) => (
               <AnimatedSection key={tier.name} delay={index * 0.1} className="h-full">
@@ -212,12 +211,12 @@ export default function PricingPage() {
               </AnimatedSection>
             ))}
           </div>
-        </div>
-      </section>
+        </PageContainer>
+      </PageSection>
 
       {/* Add-ons Section */}
-      <section className="py-12 sm:py-16 bg-slate-50">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <PageSection className="py-12 sm:py-16 bg-slate-50">
+        <PageContainer>
           <AnimatedSection className="text-center mb-10">
             <h2 className="section-title text-[var(--slate-950)]">Add-on Packages</h2>
             <p className="mt-2 text-sm text-[var(--slate-600)]">
@@ -236,12 +235,12 @@ export default function PricingPage() {
               </AnimatedSection>
             ))}
           </div>
-        </div>
-      </section>
+        </PageContainer>
+      </PageSection>
 
       {/* Revenue Funnel Explanation */}
-      <section className="py-12 sm:py-16">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <PageSection className="py-12 sm:py-16">
+        <PageContainer size="narrow">
           <AnimatedSection className="text-center mb-10">
             <h2 className="section-title text-[var(--slate-950)]">도입 흐름</h2>
             <p className="mt-2 text-sm text-[var(--slate-600)]">
@@ -272,7 +271,7 @@ export default function PricingPage() {
             ].map((item, index) => (
               <AnimatedSection key={item.step} delay={index * 0.15}>
                 <Card variant="strong" className="p-5 text-center card-hover">
-                  <span className="text-2xl font-bold text-brand-200">{item.step}</span>
+                  <span className="text-2xl font-bold text-[var(--brand-200)]">{item.step}</span>
                   <h3 className="mt-2 font-semibold text-[var(--slate-950)]">{item.title}</h3>
                   <p className="mt-1 text-sm text-[var(--slate-600)]">{item.desc}</p>
                   <p className="mt-2 text-xs font-medium text-[var(--brand-600)]">{item.price}</p>
@@ -280,12 +279,12 @@ export default function PricingPage() {
               </AnimatedSection>
             ))}
           </div>
-        </div>
-      </section>
+        </PageContainer>
+      </PageSection>
 
       {/* FAQ Section */}
-      <section className="py-12 sm:py-16 bg-slate-50">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+      <PageSection className="py-12 sm:py-16 bg-slate-50">
+        <PageContainer size="narrow">
           <AnimatedSection className="text-center mb-10">
             <h2 className="section-title text-[var(--slate-950)]">자주 묻는 질문</h2>
           </AnimatedSection>
@@ -300,46 +299,46 @@ export default function PricingPage() {
               </AnimatedSection>
             ))}
           </div>
-        </div>
-      </section>
+        </PageContainer>
+      </PageSection>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-50/50 via-slate-50 to-indigo-50/50" />
-        <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-          <AnimatedSection>
-            <h2 className="section-title text-[var(--slate-950)] sm:text-3xl">
-              아직 어떤 패키지가 적합한지 unsure하신가요?
-            </h2>
-            <p className="body-copy-lg mx-auto mt-4 max-w-2xl text-[var(--slate-600)]">
-              Quick Audit으로 시작해서 직접 경험해보세요.
-              <br />
-              회사 URL만으로 진단 예시를 무료로 받아보실 수 있습니다.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <CTAButton
-                href="/contact?type=quick_audit"
-                size="lg"
-                className="btn-shine hover:scale-105 transition-transform"
-                telemetryEventName="pricing_bottom_cta_clicked"
-                telemetryPayload={{ type: "quick_audit" }}
-              >
-                무료 Quick Audit 받기
-              </CTAButton>
-              <CTAButton
-                href="/contact?type=demo"
-                variant="outline"
-                size="lg"
-                className="hover-lift"
-                telemetryEventName="pricing_bottom_cta_clicked"
-                telemetryPayload={{ type: "demo" }}
-              >
-                전체 데모 요청
-              </CTAButton>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+      <PageSection className={cn(layouts.section, "relative overflow-hidden")}>
+        <div className={cn("absolute inset-0", gradients.pricing)} />
+        <PageContainer className="relative" size="narrow">
+          <div className="text-center">
+            <AnimatedSection>
+              <h2 className="section-title text-[var(--slate-950)] break-keep">
+                아직 어떤 패키지가 적합한지 망설이고 계신가요?
+              </h2>
+              <p className="body-copy-lg mx-auto mt-4 max-w-2xl text-[var(--slate-600)]">
+                Quick Audit으로 시작해서 직접 경험해보세요. 회사 URL만으로 진단 예시를 무료로 받아보실 수 있습니다.
+              </p>
+              <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3 px-2 sm:px-0">
+                <CTAButton
+                  href="/contact?type=quick_audit"
+                  size="lg"
+                  className="btn-shine hover:scale-105 transition-transform w-full sm:w-auto justify-center"
+                  telemetryEventName="pricing_bottom_cta_clicked"
+                  telemetryPayload={{ type: "quick_audit" }}
+                >
+                  무료 Quick Audit 받기
+                </CTAButton>
+                <CTAButton
+                  href="/contact?type=demo"
+                  variant="outline"
+                  size="lg"
+                  className="hover-lift w-full sm:w-auto justify-center"
+                  telemetryEventName="pricing_bottom_cta_clicked"
+                  telemetryPayload={{ type: "demo" }}
+                >
+                  전체 데모 요청
+                </CTAButton>
+              </div>
+            </AnimatedSection>
+          </div>
+        </PageContainer>
+      </PageSection>
     </div>
   );
 }

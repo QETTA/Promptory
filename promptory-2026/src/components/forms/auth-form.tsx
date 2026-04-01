@@ -164,9 +164,9 @@ export function AuthForm({ mode, redirectTo }: AuthFormProps) {
 
   if (mode === "signup" && pendingVerificationEmail) {
     return (
-      <Card variant="strong" className="mx-auto w-full max-w-md rounded-[1.75rem] p-6 sm:p-7">
+      <Card variant="strong" className="mx-auto w-full max-w-md rounded-3xl p-6 sm:p-7">
         <p className="section-kicker text-[var(--slate-500)]">Email verification</p>
-        <h2 className="mt-2 text-[1.9rem] font-semibold tracking-tight text-[var(--slate-950)]">
+        <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[var(--slate-950)]">
           이메일 인증을
           <br />
           완료해 주세요
@@ -191,11 +191,11 @@ export function AuthForm({ mode, redirectTo }: AuthFormProps) {
   }
 
   return (
-    <Card variant="strong" className="mx-auto w-full max-w-md rounded-[1.75rem] p-6 sm:p-7">
+    <Card variant="strong" className="mx-auto w-full max-w-md rounded-3xl p-6 sm:p-7">
       <p className="section-kicker text-[var(--slate-500)]">
         {mode === "login" ? "로그인" : "계정 만들기"}
       </p>
-      <h2 className="mt-2 text-[1.9rem] font-semibold tracking-tight text-[var(--slate-950)]">
+      <h2 className="mt-2 text-3xl font-semibold tracking-tight text-[var(--slate-950)]">
         {mode === "login" ? "내 작업으로 돌아가기" : "진단과 작업공간 열기"}
       </h2>
       <p className="mt-3 text-sm leading-7 text-[var(--slate-600)]">
@@ -204,7 +204,7 @@ export function AuthForm({ mode, redirectTo }: AuthFormProps) {
           : "계정을 만들면 인증 메일로 안전하게 시작하고, URL 진단 저장과 결과 전달 흐름을 같은 계정으로 관리할 수 있습니다."}
       </p>
 
-      <div className="mt-5 rounded-[1.2rem] border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-6 text-[var(--slate-700)]">
+      <div className="mt-5 rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-6 text-[var(--slate-700)]">
         {mode === "login"
           ? "빠르게 확인하려면 로그인 후 저장한 진단, 주문 상태, 라이브러리, 제작실 작업으로 바로 이동하면 됩니다."
           : "회원가입 뒤 메일 인증을 마치면 채널 진단 저장, 주문 확인, 라이브러리 복귀까지 같은 흐름으로 이어집니다."}

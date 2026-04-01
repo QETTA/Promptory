@@ -69,14 +69,14 @@ export function PaymentStateLayout({
       />
 
       <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="rounded-[1.25rem] border border-[var(--line-strong)] bg-[var(--surface-1)] p-5 sm:p-6">
+        <div className="rounded-2xl border border-[var(--line-strong)] bg-[var(--surface-1)] p-5 sm:p-6">
           <div className="grid gap-5 sm:grid-cols-2">
-            <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] p-4">
+            <div className="rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] p-4">
               <p className="section-kicker text-[var(--slate-500)]">현재 상황</p>
               <p className="mt-2 text-sm leading-7 text-[var(--slate-700)]">{body}</p>
               {detail ? <p className="mt-2 text-sm leading-7 text-[var(--slate-600)]">{detail}</p> : null}
             </div>
-            <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] p-4">
+            <div className="rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] p-4">
               <p className="section-kicker text-[var(--slate-500)]">{isError ? "다음 단계" : "바로 이어서 하기"}</p>
               <p className="mt-2 text-sm leading-7 text-[var(--slate-700)]">{usabilityCopy}</p>
             </div>

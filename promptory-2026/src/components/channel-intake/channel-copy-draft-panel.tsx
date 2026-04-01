@@ -42,7 +42,7 @@ export function ChannelCopyDraftPanel({
 
       <div className="grid gap-4 xl:grid-cols-3">
         {summary.copyDrafts.map((draft) => (
-          <div key={draft.title} className="rounded-[1.15rem] border border-[var(--line)] bg-[var(--surface-1)] p-4">
+          <div key={draft.title} className="rounded-2xl border border-[var(--line)] bg-[var(--surface-1)] p-4">
             <div className="flex items-start justify-between gap-3">
               <div>
                 <p className="section-kicker text-[var(--slate-500)]">{draft.title}</p>
@@ -51,7 +51,7 @@ export function ChannelCopyDraftPanel({
             </div>
 
             <div className="mt-4 grid gap-3">
-              <div className="rounded-[1rem] border border-[var(--line)] bg-white px-4 py-3">
+              <div className="rounded-xl border border-[var(--line)] bg-white px-4 py-3">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-xs font-semibold text-[var(--brand-700)]">A Draft</p>
                   <CopyActionButton
@@ -67,7 +67,7 @@ export function ChannelCopyDraftPanel({
               </div>
 
               {draft.alternateDraft ? (
-                <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
+                <div className="rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
                   <div className="flex items-center justify-between gap-3">
                     <p className="text-xs font-semibold text-[var(--brand-700)]">B Draft</p>
                     <CopyActionButton

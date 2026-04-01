@@ -1,0 +1,59 @@
+# Cloudflare Pages + Workers 배포 설정
+# Promptory - Channel Optimization Engine
+# Domain: lider-yohan.cloudflareaccess.com
+
+name = "promptory"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = "dist"
+
+# ─────────────────────────────────────────────
+# Environment Variables (non-secret)
+# ─────────────────────────────────────────────
+[vars]
+NEXT_PUBLIC_APP_URL = "https://promptory.lider-yohan.cloudflareaccess.com"
+PAYMENTS_MODE = "dev_stub"
+
+# ─────────────────────────────────────────────
+# Cloudflare Access JWT 검증 설정
+# Cloudflare Access는 모든 요청에 CF_Authorization 헤더(JWT)를 주입합니다.
+# 공개 키 URL: https://lider-yohan.cloudflareaccess.com/cdn-cgi/access/certs
+# AUD (audience tag): 각 Access Application의 Client ID
+# ─────────────────────────────────────────────
+[vars.CF_ACCESS_TEAM_DOMAIN]
+default = "lider-yohan.cloudflareaccess.com"
+
+# ─────────────────────────────────────────────
+# Production environment
+# ─────────────────────────────────────────────
+[env.production]
+name = "promptory"
+
+[env.production.vars]
+NEXT_PUBLIC_APP_URL = "https://promptory.pages.dev"
+PAYMENTS_MODE = "production"
+
+# ─────────────────────────────────────────────
+# Preview / Staging environment
+# ─────────────────────────────────────────────
+[env.preview]
+name = "promptory-preview"
+
+[env.preview.vars]
+NEXT_PUBLIC_APP_URL = "https://promptory-preview.pages.dev"
+PAYMENTS_MODE = "dev_stub"
+
+# ─────────────────────────────────────────────
+# KV Namespaces (필요 시 활성화)
+# ─────────────────────────────────────────────
+# [[kv_namespaces]]
+# binding = "CACHE"
+# id = ""
+# preview_id = ""
+
+# ─────────────────────────────────────────────
+# R2 Buckets (파일 저장 필요 시 활성화)
+# ─────────────────────────────────────────────
+# [[r2_buckets]]
+# binding = "ASSETS"
+# bucket_name = "promptory-assets"

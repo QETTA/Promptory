@@ -21,7 +21,7 @@ export function AccordionItem({
   return (
     <div
       className={cn(
-        "overflow-hidden rounded-[1.25rem] border border-[var(--line)] bg-[var(--surface-1)] transition-all duration-300",
+        "overflow-hidden rounded-2xl border border-[var(--line)] bg-[var(--surface-1)] transition-all duration-300",
         isOpen && "border-[var(--line-strong)] shadow-[var(--shadow-lg)]",
         className
       )}

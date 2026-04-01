@@ -14,23 +14,46 @@ const badgeVariants = cva(
         neutral: "ui-badge-neutral",
         success: "ui-badge-success",
         warning: "ui-badge-warning",
+        info: "ui-badge-info",
+      },
+      size: {
+        default: "ui-badge-size-default",
+        sm: "ui-badge-size-sm",
+        lg: "ui-badge-size-lg",
       },
     },
     defaultVariants: {
       variant: "default",
+      size: "default",
     },
   },
 );
 
 export interface BadgeProps
   extends HTMLAttributes<HTMLSpanElement>,
-    VariantProps<typeof badgeVariants> {}
+    VariantProps<typeof badgeVariants> {
+  /** Accessible label for screen readers */
+  "aria-label"?: string;
+}
 
-export function Badge({ className, variant, ...props }: BadgeProps) {
+export function Badge({ 
+  className, 
+  variant, 
+  size,
+  "aria-label": ariaLabel,
+  children,
+  ...props 
+}: BadgeProps) {
+  // Auto-generate aria-label from children if not provided
+  const label = ariaLabel || (typeof children === "string" ? children : undefined);
+  
   return (
     <span
-      className={cn(badgeVariants({ variant }), className)}
+      className={cn(badgeVariants({ variant, size }), className)}
+      aria-label={label}
       {...props}
-    />
+    >
+      {children}
+    </span>
   );
 }

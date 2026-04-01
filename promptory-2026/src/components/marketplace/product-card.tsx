@@ -29,7 +29,7 @@ export function ProductCard({ actionMode = "detail", matchNote, product, variant
   return (
     <article
       className={cn(
-        "ui-card-default flex h-full flex-col overflow-hidden rounded-[1.35rem]",
+        "ui-card-default flex h-full flex-col overflow-hidden rounded-2xl",
         compact ? "p-3.5" : "p-4 sm:p-5",
       )}
     >
@@ -50,7 +50,7 @@ export function ProductCard({ actionMode = "detail", matchNote, product, variant
           src={product.thumbnail_url}
           alt={product.title}
           className={cn(
-            "mt-4 w-full rounded-[0.8rem] border border-[var(--line)] object-cover",
+            "mt-4 w-full rounded-xl border border-[var(--line)] object-cover",
             compact ? "aspect-[16/9]" : "aspect-[16/10]",
           )}
         />
@@ -61,21 +61,21 @@ export function ProductCard({ actionMode = "detail", matchNote, product, variant
         <Link href={`/products/${product.slug}`} className="text-[1.08rem] font-semibold leading-6 text-[var(--slate-950)]">
           {product.title}
         </Link>
-        <p className="mt-2 rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] px-3 py-2.5 text-sm leading-6 text-[var(--slate-800)]">
+        <p className="mt-2 rounded-2xl border border-[var(--line)] bg-[var(--surface-2)] px-3 py-2.5 text-sm leading-6 text-[var(--slate-800)]">
           {preview}
         </p>
         <p className={cn("mt-3 text-sm leading-6 text-[var(--slate-600)]", compact ? "line-clamp-2" : "line-clamp-2")}>
           {product.description}
         </p>
         {matchNote ? (
-          <div className="mt-3 rounded-[0.9rem] border border-[var(--brand-200)] bg-[var(--brand-50)] px-3 py-3 text-sm leading-6 text-[var(--brand-800)]">
+          <div className="mt-3 rounded-xl border border-[var(--brand-200)] bg-[var(--brand-50)] px-3 py-3 text-sm leading-6 text-[var(--brand-800)]">
             {matchNote}
           </div>
         ) : null}
 
         <div className="mt-4 grid gap-2 border-t border-[var(--line)] pt-3.5 text-sm leading-6 text-[var(--slate-600)]">
-          <div className="rounded-[0.95rem] border border-[var(--line)] bg-white px-3 py-2">판매자 {sellerName}</div>
-          <div className="rounded-[0.95rem] border border-[var(--line)] bg-white px-3 py-2">업데이트 {formatDate(product.updated_at)}</div>
+          <div className="rounded-xl border border-[var(--line)] bg-white px-3 py-2">판매자 {sellerName}</div>
+          <div className="rounded-xl border border-[var(--line)] bg-white px-3 py-2">업데이트 {formatDate(product.updated_at)}</div>
         </div>
 
         <div
