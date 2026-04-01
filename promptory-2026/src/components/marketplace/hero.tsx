@@ -53,7 +53,7 @@ export function Hero({
             "max-w-3xl",
             isDark
               ? ""
-              : "ui-card-hero-bright rounded-[1.9rem] px-5 py-5 sm:px-7 sm:py-7",
+              : "ui-card-hero-bright rounded-3xl px-5 py-5 sm:px-7 sm:py-7",
           )}
         >
           {eyebrow ? (
@@ -75,7 +75,7 @@ export function Hero({
               ].map(([label, value]) => (
                 <div
                   key={label}
-                  className="ui-card-default rounded-[1rem] px-4 py-3"
+                  className="ui-card-default rounded-2xl px-4 py-3"
                 >
                   <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[var(--slate-500)]">{label}</p>
                   <p className="mt-2 text-sm font-semibold text-[var(--slate-950)]">{value}</p>
@@ -87,7 +87,7 @@ export function Hero({
         {aside ? (
           <div className="relative lg:pt-2">
             {!isDark ? (
-              <div className="pointer-events-none absolute inset-x-4 top-5 -bottom-5 rounded-[2rem] bg-[linear-gradient(180deg,rgba(201,219,255,0.24),rgba(255,255,255,0))] blur-2xl" />
+              <div className="pointer-events-none absolute inset-x-4 top-5 -bottom-5 rounded-3xl bg-[linear-gradient(180deg,rgba(201,219,255,0.24),rgba(255,255,255,0))] blur-2xl" />
             ) : null}
             <div className="relative">{aside}</div>
           </div>

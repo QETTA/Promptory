@@ -7,6 +7,10 @@
     "dev:webpack": "next dev --webpack",
     "prebuild": "node -e \"try { require('node:fs').rmSync('.next', { recursive: true, force: true }); } catch {}\"",
     "build": "next build",
+    "build:cf": "npx @cloudflare/next-on-pages",
+    "deploy:cf": "npm run build:cf && wrangler pages deploy .vercel/output/static --project-name=promptory",
+    "deploy:cf:preview": "npm run build:cf && wrangler pages deploy .vercel/output/static --project-name=promptory --branch=preview",
+    "cf:types": "wrangler types",
     "check:supabase": "node scripts/check-supabase.mjs",
     "check:all": "npm run typecheck && npm run test:unit && npm run test:smoke && npm run build",
     "sync:storage": "node scripts/sync-storage-buckets.mjs",
@@ -21,6 +25,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@radix-ui/react-slot": "^1.2.4",
     "@supabase/ssr": "^0.9.0",
     "@supabase/supabase-js": "^2.99.2",
     "class-variance-authority": "^0.7.1",
@@ -35,6 +40,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.16",
     "@playwright/test": "^1.58.2",
     "@tailwindcss/forms": "^0.5.11",
     "@tailwindcss/postcss": "^4.2.2",
@@ -44,6 +50,7 @@
     "playwright": "^1.58.2",
     "postcss": "^8.5.3",
     "tsx": "^4.20.6",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "wrangler": "^4.79.0"
   }
 }

@@ -85,7 +85,7 @@ export default async function ProductDetailPage({
           </div>
         }
         aside={
-          <div className="rounded-[1rem] border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
+          <div className="rounded-xl border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
             <p className="section-kicker text-[var(--slate-500)]">보조 레일</p>
             <p className="mt-3 text-[2rem] font-semibold tracking-tight text-[var(--slate-950)]">{formatKrw(product.price_krw)}</p>
             <div className="mt-4 grid gap-2 text-sm leading-6 text-[var(--slate-600)]">
@@ -105,7 +105,7 @@ export default async function ProductDetailPage({
           <Section eyebrow="기대 결과" title="이걸로 할 수 있는 것" className="border-b border-[var(--line)]">
             <div className="grid gap-3">
               {product.preview_points.map((point) => (
-                <div key={point} className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] px-4 py-3 text-sm leading-7 text-[var(--slate-700)]">
+                <div key={point} className="rounded-xl border border-[var(--line)] bg-[var(--surface-1)] px-4 py-3 text-sm leading-7 text-[var(--slate-700)]">
                   {point}
                 </div>
               ))}
@@ -115,7 +115,7 @@ export default async function ProductDetailPage({
           <Section eyebrow="구성 항목" title="구매하면 받는 것" className="border-b border-[var(--line)]">
             <div className="grid gap-3 md:grid-cols-2">
               {includedItems.map((item) => (
-                <div key={item} className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] px-4 py-3 text-sm leading-7 text-[var(--slate-700)]">
+                <div key={item} className="rounded-xl border border-[var(--line)] bg-[var(--surface-1)] px-4 py-3 text-sm leading-7 text-[var(--slate-700)]">
                   {item}
                 </div>
               ))}
@@ -130,7 +130,7 @@ export default async function ProductDetailPage({
           <Section eyebrow="설치 순서" title="설치 방법" className="border-b border-[var(--line)]">
             <div className="grid gap-3">
               {usageSteps.map((step, index) => (
-                <div key={step} className="grid gap-3 rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] p-4 sm:grid-cols-[32px_1fr]">
+                <div key={step} className="grid gap-3 rounded-xl border border-[var(--line)] bg-[var(--surface-1)] p-4 sm:grid-cols-[32px_1fr]">
                   <p className="text-lg font-semibold text-[var(--brand-700)]">{index + 1}</p>
                   <p className="text-sm leading-7 text-[var(--slate-700)]">{step}</p>
                 </div>
@@ -140,7 +140,7 @@ export default async function ProductDetailPage({
 
           <Section eyebrow="적합한 경우" title="누구에게 적합한지" className="border-b border-[var(--line)]">
             <div className="grid gap-4 md:grid-cols-2">
-              <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] p-4">
+              <div className="rounded-xl border border-[var(--line)] bg-[var(--surface-1)] p-4">
                 <p className="section-kicker text-[var(--slate-500)]">잘 맞는 경우</p>
                 <div className="mt-3 grid gap-2 text-sm leading-7 text-[var(--slate-700)]">
                   {goodFit.map((item) => (
@@ -149,7 +149,7 @@ export default async function ProductDetailPage({
                   <p>{audience[0]}</p>
                 </div>
               </div>
-              <div className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] p-4">
+              <div className="rounded-xl border border-[var(--line)] bg-[var(--surface-1)] p-4">
                 <p className="section-kicker text-[var(--slate-500)]">아직 맞지 않는 경우</p>
                 <div className="mt-3 grid gap-2 text-sm leading-7 text-[var(--slate-700)]">
                   {notYetFit.map((item) => (
@@ -163,7 +163,7 @@ export default async function ProductDetailPage({
           <Section eyebrow="미리보기" title="미리보기와 예시">
             <div className="grid gap-3 md:grid-cols-2">
               {resultExample.map((line) => (
-                <div key={line} className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-7 text-[var(--slate-700)]">
+                <div key={line} className="rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-7 text-[var(--slate-700)]">
                   {line}
                 </div>
               ))}
@@ -178,7 +178,7 @@ export default async function ProductDetailPage({
         </div>
 
         <aside className="lg:sticky lg:top-24 lg:self-start">
-          <div id="buy-box" className="rounded-[1.25rem] border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
+          <div id="buy-box" className="rounded-2xl border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
             <p className="section-kicker text-[var(--slate-500)]">결과 전달 레일</p>
             <h2 className="mt-3 text-[1.4rem] font-semibold text-[var(--slate-950)]">{product.title}</h2>
             <p className="mt-2 text-sm leading-6 text-[var(--slate-600)]">{outcomeHeadline}</p>

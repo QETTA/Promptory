@@ -360,7 +360,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
       </form>
 
       <div className="space-y-5 xl:sticky xl:top-24 xl:self-start">
-        <div className="ui-panel-elevated overflow-hidden rounded-[1.4rem]">
+        <div className="ui-panel-elevated overflow-hidden rounded-3xl">
           <div className="border-b border-[var(--line)] bg-[linear-gradient(180deg,#f8fbff_0%,#ffffff_100%)] px-5 py-5">
             <p className="section-kicker text-[var(--brand-700)]">Readiness</p>
             <div className="mt-3 flex items-start justify-between gap-3">
@@ -373,14 +373,14 @@ export function ProductForm({ mode, product }: ProductFormProps) {
           </div>
 
           <div className="px-5 py-5">
-            <div className={cn("rounded-[1rem] border px-4 py-3 text-sm leading-7", readinessAccentClass)}>
+            <div className={cn("rounded-xl border px-4 py-3 text-sm leading-7", readinessAccentClass)}>
               {checklist.ruleText}
             </div>
             <div className="mt-4 grid gap-2 text-sm leading-6 text-[var(--slate-600)]">
               {checklist.items.map((item) => (
                 <div
                   key={item.id}
-                  className={cn("rounded-[0.95rem] border px-3 py-3", 
+                  className={cn("rounded-xl border px-3 py-3", 
                     item.done
                       ? "border-emerald-200 bg-emerald-50/70 text-emerald-800"
                       : item.tone === "required"
@@ -437,7 +437,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
                   </div>
                 ))
               ) : (
-                <div className="rounded-[0.9rem] border border-dashed border-[var(--line-strong)] bg-[var(--surface-2)] px-3 py-4 text-sm leading-6 text-[var(--slate-500)]">
+                <div className="rounded-xl border border-dashed border-[var(--line-strong)] bg-[var(--surface-2)] px-3 py-4 text-sm leading-6 text-[var(--slate-500)]">
                   미리보기 포인트를 3개 이상 적으면 구매 전에 보이는 핵심 가치가 더 빨리 정리됩니다.
                 </div>
               )}
@@ -456,7 +456,7 @@ export function ProductForm({ mode, product }: ProductFormProps) {
           </div>
         </div>
 
-        <div className="ui-panel-muted rounded-[1.25rem] bg-[linear-gradient(180deg,#fbfdff_0%,#f4f8ff_100%)] p-5">
+        <div className="ui-panel-muted rounded-2xl bg-[linear-gradient(180deg,#fbfdff_0%,#f4f8ff_100%)] p-5">
           <p className="section-kicker text-[var(--slate-500)]">Release Notes</p>
           <div className="mt-3 grid gap-2 text-sm leading-7 text-[var(--slate-700)]">
             <p>공개 전환의 필수 조건은 실제 실행 팩 파일입니다.</p>
@@ -468,3 +468,6 @@ export function ProductForm({ mode, product }: ProductFormProps) {
     </div>
   );
 }
+
+
+

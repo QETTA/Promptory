@@ -116,7 +116,7 @@ export default function ProposalPage() {
   return (
     <div className="min-h-screen bg-[var(--surface-2)] py-8 print:bg-[var(--surface-1)] print:py-0">
       <div className="mx-auto mb-4 max-w-[210mm] px-4 print:hidden">
-        <Card variant="default" className="rounded-[1.5rem] p-6">
+        <Card variant="default" className="rounded-3xl p-6">
           <h1 className="section-title text-[var(--slate-950)]">프롬프토리 제안서 생성기</h1>
           <div className="mt-4 grid gap-4 md:grid-cols-2">
             <div>

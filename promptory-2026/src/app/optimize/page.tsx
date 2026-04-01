@@ -9,6 +9,8 @@ import { ChannelSurfaceReadPanel } from "@/components/channel-intake/channel-sur
 import { OptimizationBriefBuilder } from "@/components/channel-intake/optimization-brief-builder";
 import { SaveOptimizationRunButton } from "@/components/channel-intake/save-optimization-run-button";
 import { Hero } from "@/components/marketplace/hero";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { CTAButton } from "@/components/ui/cta-button";
 import { buildLoginHref } from "@/lib/auth-redirect";
@@ -353,7 +355,55 @@ export default async function OptimizePage({
                   />
                 ) : null}
 
-                <details className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--surface-1)] px-5 py-4">
+                {/* Upsell CTA - Core Package Promotion */}
+                {summary && railPlan ? (
+                  <Card variant="heroBright" className="p-6 overflow-hidden relative">
+                    {/* Background decoration */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-[var(--brand-200)]/20 rounded-full blur-2xl -mr-10 -mt-10" />
+                    <div className="absolute bottom-0 left-0 w-24 h-24 bg-[var(--brand-100)]/30 rounded-full blur-2xl -ml-8 -mb-8" />
+
+                    <div className="relative">
+                      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                        <div className="space-y-2">
+                          <Badge className="bg-[var(--brand-600)]">이 진단을 매주 자동으로 받으시려면?</Badge>
+                          <h3 className="text-lg font-semibold text-[var(--slate-950)]">
+                            Core Package로 매주 자동 진단과 초안을 받아보세요
+                          </h3>
+                          <p className="text-sm text-[var(--slate-600)] leading-6">
+                            지금 Quick Audit으로 본 결과를 매주 자동으로 받고,
+                            <br className="hidden sm:block" />
+                            팀 Slack에서 바로 실행 초안까지 이어가세요
+                          </p>
+                          <div className="flex flex-wrap items-center gap-2 text-sm">
+                            <span className="font-semibold text-[var(--brand-600)]">구축 300~500만원</span>
+                            <span className="text-[var(--slate-400)]">+</span>
+                            <span className="font-semibold text-[var(--brand-600)]">월 79~99만원</span>
+                            <span className="text-[var(--slate-500)] text-xs ml-2">(세팅 2주 · Slack 연동 · 무제한 진단)</span>
+                          </div>
+                        </div>
+                        <div className="flex flex-col sm:flex-row gap-3 lg:flex-shrink-0">
+                          <CTAButton
+                            href="/contact?type=upsell&from=optimize"
+                            telemetryEventName="optimize_upsell_clicked"
+                            telemetryPayload={{ from: "optimize_result", package: "core" }}
+                            className="btn-shine whitespace-nowrap"
+                          >
+                            패키지 도입 상담
+                          </CTAButton>
+                          <CTAButton
+                            href="/pricing"
+                            variant="outline"
+                            className="whitespace-nowrap"
+                          >
+                            가격 자세히 보기
+                          </CTAButton>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                ) : null}
+
+                <details className="rounded-2xl border border-[var(--line)] bg-[var(--surface-1)] px-5 py-4">
                   <summary className="cursor-pointer list-none text-sm font-semibold text-[var(--slate-950)]">
                     Advanced readouts
                   </summary>
@@ -396,7 +446,7 @@ export default async function OptimizePage({
                           <div className="flex flex-col gap-4">
                             <div>
                               <p className="section-kicker text-[var(--brand-700)]">현재 진단 저장</p>
-                              <h3 className="mt-2 text-[1.1rem] font-semibold text-[var(--slate-950)]">
+                              <h3 className="mt-2 text-lg font-semibold text-[var(--slate-950)]">
                                 {summary.recommendedModules[0]?.title
                                   ? `${summary.recommendedModules[0].title} 축으로 다시 열 수 있게 저장합니다`
                                   : `${parsed.kindLabel} 진단 결과를 저장합니다`}
@@ -428,7 +478,7 @@ export default async function OptimizePage({
                           <div className="flex flex-col gap-4">
                             <div>
                               <p className="section-kicker text-[var(--brand-700)]">로그인 후 저장</p>
-                              <h3 className="mt-2 text-[1.1rem] font-semibold text-[var(--slate-950)]">
+                              <h3 className="mt-2 text-lg font-semibold text-[var(--slate-950)]">
                                 현재 진단을 계정에 보관하려면 로그인이 필요합니다
                               </h3>
                               <p className="mt-3 text-sm leading-7 text-[var(--slate-700)]">

@@ -308,7 +308,7 @@ export function OptimizationBriefBuilder({
             <input type="hidden" name="tone" value={brief.tone ?? ""} />
             <input type="hidden" name="conversion" value={brief.conversion ?? ""} />
 
-            <div className="ui-panel-elevated rounded-[1.1rem] p-4 sm:p-5">
+            <div className="ui-panel-elevated rounded-2xl p-4 sm:p-5">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <p className="section-kicker text-[var(--brand-700)]">{activeStep.label}</p>
@@ -372,7 +372,7 @@ export function OptimizationBriefBuilder({
               ))}
             </div>
 
-            <div className="ui-panel-elevated rounded-[1rem] p-4">
+            <div className="ui-panel-elevated rounded-2xl p-4">
               <Label htmlFor="constraint">Constraint Note</Label>
               <Textarea
                 id="constraint"
@@ -445,7 +445,7 @@ export function OptimizationBriefBuilder({
 
         <div className="mt-4 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {summary.recommendedModules.map((module, index) => (
-            <div key={module.title} className="ui-panel-elevated rounded-[1.1rem] p-4">
+            <div key={module.title} className="ui-panel-elevated rounded-2xl p-4">
               <div className="flex items-center justify-between gap-3">
                 <p className="text-sm font-semibold text-[var(--slate-950)]">{module.title}</p>
                 <Badge variant="neutral" className="bg-white px-2 py-1 text-[11px] font-medium">

@@ -47,7 +47,7 @@ export function ChannelBrowserReviewPanel({
       </div>
 
       {summary.browserMemoTemplate ? (
-        <div className="mt-4 rounded-[1rem] border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-6 text-[var(--slate-950)] whitespace-pre-wrap">
+        <div className="mt-4 rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3 text-sm leading-6 text-[var(--slate-950)] whitespace-pre-wrap">
           {summary.browserMemoTemplate}
         </div>
       ) : null}
@@ -55,7 +55,7 @@ export function ChannelBrowserReviewPanel({
       {summary.browserExecutionSteps.length > 0 ? (
         <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {summary.browserExecutionSteps.map((step) => (
-            <div key={step.title} className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] px-4 py-3">
+            <div key={step.title} className="rounded-xl border border-[var(--line)] bg-[var(--surface-1)] px-4 py-3">
               <p className="text-xs font-semibold text-[var(--slate-500)]">{step.title}</p>
               {step.emphasis ? <p className="mt-2 text-sm font-semibold text-[var(--slate-950)]">{step.emphasis}</p> : null}
               <p className="mt-2 text-sm leading-6 text-[var(--slate-700)]">{step.body}</p>
@@ -66,7 +66,7 @@ export function ChannelBrowserReviewPanel({
 
       <div className="mt-4 grid gap-3 md:grid-cols-3">
         {summary.browserReviewCards.map((card) => (
-          <div key={card.title} className="rounded-[1rem] border border-[var(--line)] bg-[var(--surface-1)] px-4 py-4">
+          <div key={card.title} className="rounded-xl border border-[var(--line)] bg-[var(--surface-1)] px-4 py-4">
             <p className="text-xs font-semibold text-[var(--slate-500)]">{card.title}</p>
             {card.emphasis ? <p className="mt-2 text-sm font-semibold text-[var(--slate-950)]">{card.emphasis}</p> : null}
             <p className="mt-2 text-sm leading-6 text-[var(--slate-700)]">{card.body}</p>

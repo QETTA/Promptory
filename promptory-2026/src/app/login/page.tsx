@@ -41,14 +41,14 @@ export default async function LoginPage({
           />
           <div className="mx-auto grid max-w-6xl gap-6 px-4 py-7 sm:px-6 sm:py-8 lg:grid-cols-[minmax(0,1fr)_420px] lg:px-8">
             <div className="grid gap-4 self-start sm:grid-cols-2 lg:grid-cols-1">
-              <Card variant="tint" className="rounded-[1.5rem] p-5">
+              <Card variant="tint" className="rounded-3xl p-5">
                 <p className="section-kicker text-[var(--slate-500)]">다시 열기</p>
                 <p className="mt-2 text-[1.05rem] font-semibold text-[var(--slate-950)]">같은 계정으로 진단과 실행 흐름을 이어갑니다</p>
                 <p className="mt-3 text-sm leading-7 text-[var(--slate-700)]">
                   저장한 진단, 주문 상태 확인, 라이브러리 복귀, 셀러 상품 관리가 모두 같은 진입점에서 이어집니다.
                 </p>
               </Card>
-              <Card variant="default" className="rounded-[1.5rem] p-5">
+              <Card variant="default" className="rounded-3xl p-5">
                 <p className="section-kicker text-[var(--slate-500)]">왜 로그인하나요</p>
                 <p className="mt-2 text-[1.05rem] font-semibold text-[var(--slate-950)]">진단 기록과 구매 권한을 계정 기준으로 연결합니다</p>
                 <p className="mt-3 text-sm leading-7 text-[var(--slate-700)]">

@@ -15,6 +15,7 @@ export const promptoryEventNames = [
   "order_created",
   "payment_confirmed",
   "download_started",
+  "optimize_upsell_clicked",
 ] as const;
 
 export type PromptoryEventName = (typeof promptoryEventNames)[number];

@@ -6,9 +6,10 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { SetupCallout } from "@/components/ui/setup-callout";
 import { CTAButton } from "@/components/ui/cta-button";
 import { DashboardCard } from "@/components/ui/dashboard-card";
+import { PageContainer } from "@/components/ui/page-container";
+import { DownloadCard } from "@/components/ui/download-card";
 import { getPublicEnvStatus } from "@/lib/env/public";
 import { getServerEnvStatus } from "@/lib/env/server";
-import { formatDate } from "@/lib/format";
 import { requireUser } from "@/lib/server/auth";
 import { getSavedOptimizationRuns } from "@/lib/server/optimization-runs";
 import { getPaidLibrary } from "@/lib/server/orders";
@@ -19,12 +20,12 @@ export default async function LibraryPage() {
 
   if (!publicStatus.hasPublicEnv) {
     return (
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+      <PageContainer>
         <SetupCallout
           title="라이브러리를 보려면 Supabase 연결이 필요합니다"
           body="로그인과 구매 내역 조회에는 공개 Supabase 환경 변수가 필요합니다. 먼저 /setup에서 환경 상태를 확인해 주세요."
         />
-      </div>
+      </PageContainer>
     );
   }
 
@@ -42,7 +43,7 @@ export default async function LibraryPage() {
         title="저장한 진단과 결과를 다시 여는 공간"
         body="Promptory 보관함은 먼저 저장한 URL 진단을 다시 열고, 필요할 때 구매한 실행 팩과 다운로드를 이어서 확인하는 작업 공간입니다."
         aside={
-          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
             <DashboardCard caption="저장한 진단" value={savedRuns.length} />
             <DashboardCard caption="보관된 실행 팩" value={library.length} />
             <DashboardCard caption="즉시 실행 가능" value={readyDownloads.length} />
@@ -51,7 +52,7 @@ export default async function LibraryPage() {
         }
       />
 
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <PageContainer>
         <Section
           eyebrow="저장한 진단"
           title="저장한 진단을 먼저 다시 엽니다"
@@ -63,7 +64,7 @@ export default async function LibraryPage() {
           }
         >
           {savedRuns.length > 0 ? (
-            <div className="grid gap-4 md:grid-cols-2">
+            <div className="grid gap-4 md:grid-cols-2" role="list" aria-label="저장한 진단 목록">
               {savedRuns.map((run) => (
                 <OptimizationRunCard key={run.id} run={run} />
               ))}
@@ -113,29 +114,9 @@ export default async function LibraryPage() {
 
         {readyDownloads.length > 0 ? (
           <Section eyebrow="즉시 실행 가능" title="바로 열 수 있는 실행 팩" className="pt-0">
-            <div className="grid gap-4">
+            <div className="grid gap-4" role="list" aria-label="다운로드 가능한 실행 팩 목록">
               {readyDownloads.map((order) => (
-                <div key={order.id} className="rounded-[1.25rem] border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
-                  <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-                    <div className="space-y-2">
-                      <p className="text-[1.1rem] font-semibold text-[var(--slate-950)]">{order.product?.title}</p>
-                      <p className="text-sm leading-6 text-[var(--slate-600)]">
-                        주문일 {formatDate(order.created_at)} · 업데이트 {order.product ? formatDate(order.product.updated_at) : "-"}
-                      </p>
-                      <p className="text-sm leading-6 text-[var(--slate-700)]">
-                        가이드를 다시 보고, 실행 파일을 받아 바로 시작할 수 있습니다.
-                      </p>
-                    </div>
-                    <div className="flex w-full flex-col gap-3 lg:w-[220px]">
-                      <DownloadButton orderId={order.id} />
-                      {order.product?.slug ? (
-                        <CTAButton href={`/products/${order.product.slug}`} variant="outline">
-                        실행 팩 보기
-                      </CTAButton>
-                    ) : null}
-                  </div>
-                  </div>
-                </div>
+                <DownloadCard key={order.id} order={order} variant="ready" />
               ))}
             </div>
           </Section>
@@ -143,26 +124,14 @@ export default async function LibraryPage() {
 
         {waitingDownloads.length > 0 ? (
           <Section eyebrow="파일 준비 중" title="파일 준비를 기다리는 실행 팩" className="pt-0">
-            <div className="grid gap-4">
+            <div className="grid gap-4" role="list" aria-label="파일 준비 중인 실행 팩 목록">
               {waitingDownloads.map((order) => (
-                <div key={order.id} className="rounded-[1.25rem] border border-[var(--line)] bg-[var(--surface-2)] p-5">
-                  <p className="text-[1.1rem] font-semibold text-[var(--slate-950)]">{order.product?.title}</p>
-                  <p className="mt-2 text-sm leading-6 text-[var(--slate-600)]">
-                    주문일 {formatDate(order.created_at)} · 판매자가 실행 파일을 아직 올리지 않았습니다.
-                  </p>
-                  {order.product?.slug ? (
-                    <div className="mt-4">
-                      <CTAButton href={`/products/${order.product.slug}`} variant="outline">
-                        실행 팩 다시 보기
-                      </CTAButton>
-                    </div>
-                  ) : null}
-                </div>
+                <DownloadCard key={order.id} order={order} variant="waiting" />
               ))}
             </div>
           </Section>
         ) : null}
-      </div>
+      </PageContainer>
     </div>
   );
 }

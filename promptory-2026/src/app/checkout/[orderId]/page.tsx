@@ -87,7 +87,7 @@ export default async function CheckoutPage({
 
     return (
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
-        <div className="rounded-[1.25rem] border border-[var(--line-strong)] bg-[var(--surface-1)] p-6">
+        <div className="rounded-2xl border border-[var(--line-strong)] bg-[var(--surface-1)] p-6">
           <h1 className="section-title text-[var(--slate-950)]">같은 주문으로는 다시 결제할 수 없습니다.</h1>
           <p className="mt-4 text-sm leading-7 text-[var(--slate-600)]">
             실패하거나 종료된 주문은 다시 열지 않습니다. 실행 팩 상세에서 새 주문을 만들거나 주문 내역으로 돌아가 상태를 확인해 주세요.
@@ -118,7 +118,7 @@ export default async function CheckoutPage({
       />
 
       <div className="mx-auto grid max-w-4xl gap-5 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:px-8">
-        <section className="rounded-[1.25rem] border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
+        <section className="rounded-2xl border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
           <p className="section-kicker text-[var(--slate-500)]">실행 팩 요약</p>
           <h1 className="mt-3 text-[1.4rem] font-semibold text-[var(--slate-950)]">{order.product?.title ?? "실행 팩 정보 없음"}</h1>
           <div className="mt-4 grid gap-2 text-sm leading-7 text-[var(--slate-700)]">
@@ -132,7 +132,7 @@ export default async function CheckoutPage({
           </div>
         </section>
 
-        <aside className="rounded-[1.25rem] border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
+        <aside className="rounded-2xl border border-[var(--line-strong)] bg-[var(--surface-1)] p-5">
           <p className="section-kicker text-[var(--slate-500)]">결제 금액</p>
           <p className="mt-3 text-[2rem] font-semibold tracking-tight text-[var(--slate-950)]">{formatKrw(order.amount_krw)}</p>
           <div className="mt-4 grid gap-2 border-t border-[var(--line)] pt-4 text-sm leading-6 text-[var(--slate-700)]">
