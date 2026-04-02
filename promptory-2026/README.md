@@ -40,9 +40,10 @@ Open:
 npm.cmd run dev
 npm.cmd run typecheck
 npm.cmd run build
+npm.cmd run verify:routes
+npm.cmd run check:all
 npm.cmd run check:supabase
 npm.cmd run sync:storage
-node scripts/t08-verify-routes.mjs
 ```
 
 ## Environment
@@ -89,4 +90,4 @@ The app can still render some surfaces without full server wiring, but auth, ord
 - route-grouped pages under `src/app/(marketing)`, `src/app/(auth)`, `src/app/(legacy-commerce)`, `src/app/(internal-tools)`, and `src/app/(console)` are canonical
 - `/packages/[slug]` is the only package detail entrypoint; static package detail pages should stay deleted
 - the Slack runtime scaffold remains isolated under `apps/slack-runtime/`
-- after large route merges, run `node scripts/t08-verify-routes.mjs` before typecheck/build
+- after large route merges, run `npm.cmd run verify:routes` before typecheck/build

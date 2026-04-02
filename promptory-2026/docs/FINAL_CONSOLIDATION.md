@@ -56,7 +56,7 @@ Legacy package slugs can still redirect for compatibility, but static detail pag
 Run the repository consolidation check:
 
 ```powershell
-node scripts/t08-verify-routes.mjs
+npm.cmd run verify:routes
 ```
 
 Then run the normal verification sequence:
@@ -66,6 +66,12 @@ npm.cmd run typecheck
 npm.cmd run test:unit
 npm.cmd run test:smoke
 npm.cmd run build
+```
+
+Or run the combined gate:
+
+```powershell
+npm.cmd run check:all
 ```
 
 ## Guardrails to preserve
