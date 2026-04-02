@@ -97,11 +97,28 @@ function readParam(value: string | string[] | undefined) {
   return Array.isArray(value) ? value[0] ?? "" : value ?? "";
 }
 
+function normalizeInquiryType(type: string, plan: string) {
+  if (type !== "package") {
+    return type;
+  }
+
+  switch (plan) {
+    case "starter":
+    case "department":
+    case "private":
+    case "enterprise":
+      return plan;
+    default:
+      return type;
+  }
+}
+
 export default async function ContactPage({ searchParams }: ContactPageProps) {
   const params = (await searchParams) ?? {};
-  const inquiryType = readParam(params.type) || "demo";
+  const rawInquiryType = readParam(params.type) || "demo";
   const packageSlug = readParam(params.slug);
   const planType = readParam(params.plan) || readParam(params.track);
+  const inquiryType = normalizeInquiryType(rawInquiryType, planType);
   const hero = resolveHero(inquiryType, planType, packageSlug);
 
   return (

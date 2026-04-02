@@ -20,6 +20,20 @@ test("contact page reflects starter query context from async searchParams", asyn
   assert.match(html, /Starter/);
 });
 
+test("contact page treats package starter inquiries as starter context", async () => {
+  const html = renderToStaticMarkup(
+    await ContactPage({
+      searchParams: Promise.resolve({
+        type: "package",
+        plan: "starter",
+      }),
+    }),
+  );
+
+  assert.match(html, /한 부서 · 한 workflow 파일럿 범위를 같이 자릅니다/);
+  assert.match(html, /Starter 파일럿/);
+});
+
 test("contact success page reflects team name from async searchParams", async () => {
   const html = renderToStaticMarkup(
     await ContactSuccessPage({
