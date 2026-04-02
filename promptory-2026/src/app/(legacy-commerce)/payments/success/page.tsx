@@ -15,12 +15,12 @@ export default async function PaymentSuccessPage({
 }) {
   if (!hasPaymentsRuntime()) {
     return (
-      <div className="mx-auto max-w-4xl px-5 py-12 lg:px-8">
+      <main className="mx-auto max-w-4xl px-5 py-12 lg:px-8">
         <SetupCallout
           title="결제 승인 페이지를 열려면 Promptory 연결이 먼저 필요합니다."
           body="결제 승인에는 공개 Supabase env와 SUPABASE_SERVICE_ROLE_KEY가 필요합니다."
         />
-      </div>
+      </main>
     );
   }
 
