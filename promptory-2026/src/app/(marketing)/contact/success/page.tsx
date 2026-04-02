@@ -10,13 +10,18 @@ export const metadata: Metadata = {
 };
 
 type Props = {
-  searchParams?: {
-    team?: string;
-  };
+  searchParams?: Promise<{
+    team?: string | string[];
+  }>;
 };
 
-export default function ContactSuccessPage({ searchParams }: Props) {
-  const team = searchParams?.team ?? "팀";
+function readTeamParam(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] ?? "팀" : value ?? "팀";
+}
+
+export default async function ContactSuccessPage({ searchParams }: Props) {
+  const params = (await searchParams) ?? {};
+  const team = readTeamParam(params.team);
   const steps = [
     { body: "보내주신 URL과 업무 맥락을 검토합니다.", title: "입력 확인" },
     { body: "질문, 결과물, 공유 흐름을 귀사 상황 기준으로 맞춥니다.", title: "데모 흐름 준비" },

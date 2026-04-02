@@ -9,12 +9,12 @@ import {
 } from "@/lib/core-marketing-content";
 
 interface ContactPageProps {
-  searchParams: {
-    type?: string;
-    slug?: string;
-    plan?: string;
-    track?: string;
-  };
+  searchParams?: Promise<{
+    type?: string | string[];
+    slug?: string | string[];
+    plan?: string | string[];
+    track?: string | string[];
+  }>;
 }
 
 export const metadata: Metadata = {
@@ -93,10 +93,15 @@ function resolveHero(type: string, plan: string, slug: string) {
   }
 }
 
-export default function ContactPage({ searchParams }: ContactPageProps) {
-  const inquiryType = searchParams.type || "demo";
-  const packageSlug = searchParams.slug || "";
-  const planType = searchParams.plan || searchParams.track || "";
+function readParam(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] ?? "" : value ?? "";
+}
+
+export default async function ContactPage({ searchParams }: ContactPageProps) {
+  const params = (await searchParams) ?? {};
+  const inquiryType = readParam(params.type) || "demo";
+  const packageSlug = readParam(params.slug);
+  const planType = readParam(params.plan) || readParam(params.track);
   const hero = resolveHero(inquiryType, planType, packageSlug);
 
   return (
