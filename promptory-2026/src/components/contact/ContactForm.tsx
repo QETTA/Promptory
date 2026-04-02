@@ -16,9 +16,9 @@ import { contactFormSchema, type ContactFormInput } from "@/lib/contact-schema";
 
 
 const inquiryLabelMap: Record<string, string> = {
-  quick_audit: "Legacy Audit",
+  quick_audit: "Public Audit Demo",
   package: "패키지 문의",
-  upsell: "확장 상담",
+  upsell: "Pack 확장 상담",
   starter: "Starter 파일럿",
   department: "Department 상담",
   private: "Private 배포 상담",
@@ -38,11 +38,11 @@ function getContextPlaceholder(inquiryType: string) {
   switch (inquiryType) {
     case "quick_audit":
       return `예:
-홈페이지: https://company-site.com
-가장 급한 목표: 문의 전환 개선
-현재 병목: 방문은 있는데 문의가 적음
+공개 진단 URL: https://company-site.com
+현재 가장 막히는 흐름: 문의 triage / 권한 요청 / 승인 요청
+데모 이후 이어보고 싶은 범위: Starter 파일럿
 
-Quick Audit로 확인하고 싶은 부분을 알려주세요.`;
+public audit 데모에서 확인하고 싶은 부분을 알려주세요.`;
     case "starter":
     case "pilot":
       return `예:

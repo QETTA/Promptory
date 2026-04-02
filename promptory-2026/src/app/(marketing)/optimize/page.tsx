@@ -369,7 +369,7 @@ export default async function OptimizePage({
                   />
                 ) : null}
 
-                {/* Upsell CTA - Core Package Promotion */}
+                {/* Starter CTA - Convert the demo wedge into a scoped pilot */}
                 {summary && railPlan ? (
                   <Card variant="heroBright" className="p-6 overflow-hidden relative">
                     {/* Background decoration */}
@@ -381,35 +381,37 @@ export default async function OptimizePage({
                         <div className="space-y-2">
                           <Badge className="bg-[var(--brand-600)]">이 진단을 매주 자동으로 받으시려면?</Badge>
                           <h3 className="text-lg font-semibold text-[var(--slate-950)]">
-                            Core Package로 매주 자동 진단과 초안을 받아보세요
+                            Starter package로 첫 workflow 파일럿을 시작하세요
                           </h3>
                           <p className="text-sm text-[var(--slate-600)] leading-6">
-                            지금 Quick Audit으로 본 결과를 매주 자동으로 받고,
+                            지금 공개 진단에서 본 병목을 기준으로,
                             <br className="hidden sm:block" />
-                            팀 Slack에서 바로 실행 초안까지 이어가세요
+                            한 부서 · 한 workflow · 2~3 connector 범위로 proof pilot을 설계합니다.
                           </p>
                           <div className="flex flex-wrap items-center gap-2 text-sm">
-                            <span className="font-semibold text-[var(--brand-600)]">구축 300~500만원</span>
-                            <span className="text-[var(--slate-400)]">+</span>
-                            <span className="font-semibold text-[var(--brand-600)]">월 79~99만원</span>
-                            <span className="text-[var(--slate-500)] text-xs ml-2">(세팅 2주 · Slack 연동 · 무제한 진단)</span>
+                            <span className="font-semibold text-[var(--brand-600)]">Slack intake</span>
+                            <span className="text-[var(--slate-400)]">·</span>
+                            <span className="font-semibold text-[var(--brand-600)]">approval card</span>
+                            <span className="text-[var(--slate-400)]">·</span>
+                            <span className="font-semibold text-[var(--brand-600)]">system reflection proof</span>
+                            <span className="text-[var(--slate-500)] text-xs ml-2">(4~6주 범위의 small-scope MVP)</span>
                           </div>
                         </div>
                         <div className="flex flex-col sm:flex-row gap-3 lg:flex-shrink-0">
                           <CTAButton
-                            href="/contact?type=upsell&from=optimize"
+                            href="/contact?type=starter&plan=starter"
                             telemetryEventName="optimize_upsell_clicked"
-                            telemetryPayload={{ from: "optimize_result", package: "core" }}
+                            telemetryPayload={{ from: "optimize_result", package: "starter" }}
                             className="btn-shine whitespace-nowrap"
                           >
-                            패키지 도입 상담
+                            Starter 파일럿 상담
                           </CTAButton>
                           <CTAButton
-                            href="/pricing"
+                            href="/packages/starter"
                             variant="outline"
                             className="whitespace-nowrap"
                           >
-                            가격 자세히 보기
+                            Starter 구성 보기
                           </CTAButton>
                         </div>
                       </div>

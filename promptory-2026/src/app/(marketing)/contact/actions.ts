@@ -3,6 +3,11 @@
 import { redirect } from "next/navigation";
 import { contactFormSchema } from "@/lib/contact-schema";
 
+function readOptionalField(formData: FormData, key: string) {
+  const value = formData.get(key);
+  return typeof value === "string" ? value : "";
+}
+
 export async function submitContactRequest(formData: FormData) {
   const raw = {
     teamName: String(formData.get("teamName") ?? ""),
@@ -22,6 +27,14 @@ export async function submitContactRequest(formData: FormData) {
     };
   }
 
+  const submissionContext = {
+    inquiryType: readOptionalField(formData, "inquiryType"),
+    packageSlug: readOptionalField(formData, "packageSlug"),
+    planType: readOptionalField(formData, "planType"),
+    companySize: readOptionalField(formData, "companySize"),
+    timeline: readOptionalField(formData, "timeline"),
+  };
+
   // TODO: Implement actual submission logic
   // Options:
   // 1) Send to internal Slack channel via Incoming Webhook
@@ -37,6 +50,7 @@ export async function submitContactRequest(formData: FormData) {
     companyUrl: parsed.data.companyUrl,
     painPoints: parsed.data.painPoints,
     contextNote: parsed.data.contextNote,
+    ...submissionContext,
   });
 
   redirect(
