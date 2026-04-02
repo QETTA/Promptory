@@ -19,46 +19,49 @@ const accentToneClass: Record<DemoTone, string> = {
 };
 
 const tabs = [
-  { id: "website", label: "Website Diagnosis", tone: "brand" },
-  { id: "campaign", label: "Campaign Brief", tone: "emerald" },
-  { id: "korea", label: "Korea Local Ops", tone: "indigo" },
+  { id: "website", label: "Deal Desk", tone: "brand" },
+  { id: "campaign", label: "People Ops", tone: "emerald" },
+  { id: "korea", label: "IT Access", tone: "indigo" },
 ] as const satisfies readonly { id: DemoTabId; label: string; tone: DemoTone }[];
 
 const tabContent = {
   website: {
-    badge: "Website Diagnosis Agent",
+    badge: "Deal Desk Approval Pack",
     tone: "brand",
-    title: "사이트 진단에서 실행 초안까지",
-    description: "URL을 입력하면 1차 병목 진단이 바로 나옵니다. 목표를 확인한 뒤 경쟁사 비교, CTA 초안, 보고용 요약 중 선택해서 이어갑니다.",
+    title: "할인 요청에서 승인과 CRM 반영까지",
+    description:
+      "영업팀이 Slack 스레드에서 예외 할인을 요청하면, 근거 확인과 approval card, 후속 시스템 반영까지 한 흐름으로 이어지는 데모입니다.",
     steps: [
-      { step: "1", text: "URL 입력 → 사이트 분석 시작" },
-      { step: "2", text: "1차 병목 진단 수신" },
-      { step: "3", text: "목표 확인 (문의/구매/콘텐츠)" },
-      { step: "4", text: "실행 버튼 선택 → 결과 생성" },
+      { step: "1", text: "할인 / 조건 예외 요청 접수" },
+      { step: "2", text: "정책·CRM·유사 사례 확인" },
+      { step: "3", text: "approval card에서 승인 / 반려" },
+      { step: "4", text: "결과 회신 및 CRM 반영" },
     ],
   },
   campaign: {
-    badge: "Campaign Brief Agent",
+    badge: "People Ops Request Pack",
     tone: "emerald",
-    title: "회의에서 브리프까지",
-    description: "회의 메모와 참고 자료를 입력하면 캠페인 방향을 정리하고 브리프, 메시지, 카피 초안까지 이어서 만듭니다.",
+    title: "직원 요청에서 승인과 실행까지",
+    description:
+      "출장, 계정 생성, 장비 요청 같은 반복 People Ops 흐름을 Slack intake와 approval, 결과 회신 중심으로 보여주는 데모입니다.",
     steps: [
-      { step: "1", text: "회의 메모/링크 입력" },
-      { step: "2", text: "캠페인 방향 및 메시지 우선순위 분석" },
-      { step: "3", text: "목표 확인 (리드/구매/인지)" },
-      { step: "4", text: "브리프/카피/보고 선택 → 결과 생성" },
+      { step: "1", text: "직원 요청 접수" },
+      { step: "2", text: "정책과 현재 상태 확인" },
+      { step: "3", text: "팀장 / 운영자 approval" },
+      { step: "4", text: "HRIS / IAM / 티켓 반영" },
     ],
   },
   korea: {
-    badge: "Korea Local Ops Agent",
+    badge: "IT Access & Security Pack",
     tone: "indigo",
-    title: "한국 채널과 HQ 공유",
-    description: "한국 사이트 URL을 입력하면 한국 시장용 진단과 KR/EN summary, HQ action memo를 한 흐름으로 생성합니다.",
+    title: "권한 요청에서 만료일과 audit까지",
+    description:
+      "접근 권한 요청을 Slack에서 받고, 정책 확인과 approval, 만료일 부여, audit log까지 이어지는 guardrail 중심 흐름을 보여줍니다.",
     steps: [
-      { step: "1", text: "한국 사이트/채널 URL 입력" },
-      { step: "2", text: "한국 시장 진단 및 경쟁사 스캔" },
-      { step: "3", text: "KR/EN 옵션 및 HQ 보고 방식 선택" },
-      { step: "4", text: "KR/EN summary 및 action memo 생성" },
+      { step: "1", text: "권한 요청 접수" },
+      { step: "2", text: "정책 / 현재 권한 / 영향 범위 확인" },
+      { step: "3", text: "approval 및 만료일 설정" },
+      { step: "4", text: "IAM / ITSM 반영과 audit 기록" },
     ],
   },
 } as const satisfies Record<DemoTabId, { badge: string; tone: DemoTone; title: string; description: string; steps: readonly { step: string; text: string }[] }>;
@@ -105,7 +108,7 @@ export default function DemoSlackPage() {
             <SectionHeading
               eyebrow="Slack Agent Demo"
               title="Slack 안에서 어떻게 작동하는지 보여드립니다"
-              body="패키지별로 Slack에서 URL을 입력했을 때의 대화 흐름을 확인하세요. 실제 화면은 더 많은 인터랙션을 포함합니다."
+              body="action pack별로 Slack에서 요청을 받고, 근거를 모으고, 승인 후 실행까지 이어지는 흐름을 확인하세요. 실제 화면은 더 많은 인터랙션을 포함합니다."
             />
           </AnimatedSection>
         </div>
@@ -209,7 +212,7 @@ export default function DemoSlackPage() {
           <AnimatedSection>
             <SectionHeading
               title="실제로 우리 팀 Slack에서 체험해보세요"
-              body="데모 요청하시면 회사 URL 기준으로 실제 패키지 흐름을 보여드립니다."
+              body="데모 요청하시면 우리 팀의 first workflow 기준으로 실제 request-to-resolution 흐름을 보여드립니다."
             />
             <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3 px-2 sm:px-0">
               <CTAButton href="/contact" size="lg" className="btn-shine hover:scale-105 transition-transform">
