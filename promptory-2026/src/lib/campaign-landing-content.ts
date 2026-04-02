@@ -124,7 +124,7 @@ function buildDescription(label: string, solution: SolutionPack | null, industry
   }
 
   if (solution) {
-    return `이 landing은 ${solution.summary}를 30초 안에 이해시키고, 바로 pilot 또는 department 상담으로 이어지게 만드는 용도입니다.`;
+    return `${solution.summary} 이 landing은 그 흐름을 30초 안에 이해시키고, 바로 pilot 또는 department 상담으로 이어지게 만드는 용도입니다.`;
   }
 
   if (industry) {

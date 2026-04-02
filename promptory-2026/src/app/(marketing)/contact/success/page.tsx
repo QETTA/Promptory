@@ -4,9 +4,9 @@ import { Card } from "@/components/ui/card";
 import { CTAButton } from "@/components/ui/cta-button";
 
 export const metadata: Metadata = {
-  title: "데모 요청 완료 - 프롬프토리",
+  title: "문의 접수 완료 - 프롬프토리",
   description:
-    "보내주신 URL과 상황 설명을 기준으로, 귀사 팀 흐름에 맞는 Slack 대화 예시와 결과물 방향을 준비합니다.",
+    "보내주신 팀 맥락과 요청 유형을 기준으로, 파일럿 범위와 다음 단계 제안을 준비합니다.",
 };
 
 type Props = {
@@ -24,8 +24,8 @@ export default async function ContactSuccessPage({ searchParams }: Props) {
   const team = readTeamParam(params.team);
   const steps = [
     { body: "보내주신 URL과 업무 맥락을 검토합니다.", title: "입력 확인" },
-    { body: "질문, 결과물, 공유 흐름을 귀사 상황 기준으로 맞춥니다.", title: "데모 흐름 준비" },
-    { body: "실제 Slack 대화처럼 읽히는 데모 예시를 전달합니다.", title: "예시 전달" },
+    { body: "첫 workflow, 승인 구조, 핵심 connector 범위를 귀사 상황 기준으로 정리합니다.", title: "파일럿 범위 준비" },
+    { body: "상담에 바로 쓸 수 있는 next-step과 추천 pack 방향을 전달합니다.", title: "다음 단계 제안" },
   ];
 
   return (
@@ -53,13 +53,13 @@ export default async function ContactSuccessPage({ searchParams }: Props) {
         </p>
 
         <h1 className="poster-title mt-4 text-[var(--slate-950)]">
-          데모 요청을 받았습니다
+          문의를 접수했습니다
         </h1>
 
         <p className="body-copy-xl mx-auto mt-6 max-w-2xl text-[var(--slate-600)]">
           {team} 기준으로 보내주신 URL과 상황 설명을 바탕으로,
           <br className="hidden sm:block" />
-          Slack 대화 흐름과 결과물 예시를 준비합니다.
+          첫 파일럿 범위와 다음 단계 제안을 준비합니다.
         </p>
 
         {/* Status Cards */}

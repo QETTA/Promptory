@@ -10,6 +10,8 @@ test("campaign landing content resolves solution-oriented slugs to department CT
   assert.equal(content.industrySlug, null);
   assert.equal(content.primaryCta.href, "/contact?type=department&slug=deal-desk&plan=department");
   assert.match(content.title, /Deal Desk/);
+  assert.doesNotMatch(content.description, /입니다\.를/);
+  assert.match(content.description, /이 landing은 그 흐름을 30초 안에 이해시키고/);
 });
 
 test("campaign landing content resolves mixed slugs to industry + solution context", () => {
