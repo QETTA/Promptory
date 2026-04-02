@@ -12,7 +12,7 @@
     "sync:storage": "node scripts/sync-storage-buckets.mjs",
     "test:smoke": "node --import tsx --test src/app/setup-mode.test.ts src/app/api/events/route.test.ts src/lib/optimization-engine/index.test.ts",
     "typecheck": "node scripts/ensure-next-routes-shim.mjs && tsc --noEmit",
-    "test:unit": "node --import tsx --test src/**/*.test.ts src/**/*.test.tsx",
+    "test:unit": "node --import tsx --test src/**/*.test.ts src/**/*.test.tsx apps/**/*.test.ts",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:debug": "playwright test --debug",

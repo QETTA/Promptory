@@ -9,6 +9,10 @@ type QueueRecord = {
 export class MockApprovalQueue {
   private readonly records = new Map<string, QueueRecord>();
 
+  clear() {
+    this.records.clear();
+  }
+
   enqueue(snapshot: RequestWorkflowSnapshot) {
     this.records.set(snapshot.request.id, { snapshot });
     return snapshot.approval;
@@ -30,6 +34,10 @@ export class MockApprovalQueue {
       throw new Error(`Unknown request: ${requestId}`);
     }
 
+    if (record.snapshot.approval.state !== "pending") {
+      throw new Error(`Request ${requestId} has already been ${record.snapshot.approval.state}`);
+    }
+
     record.snapshot.approvalState = decision.decision;
     record.snapshot.approval = {
       ...record.snapshot.approval,
@@ -47,7 +55,7 @@ export class MockApprovalQueue {
   summarizeForHome() {
     const all = [...this.records.values()];
     return {
-      openRequests: all.length,
+      openRequests: all.filter((record) => record.snapshot.approval.state === "pending").length,
       pendingApprovals: all.filter((record) => record.snapshot.approval.state === "pending").length,
       completedRequests: all.filter((record) => record.decision?.decision === "approved").length,
     };
