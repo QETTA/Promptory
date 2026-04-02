@@ -23,6 +23,7 @@ export function SiteFooter() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
+                      prefetch={false}
                       className="inline-block py-1 text-sm text-[var(--slate-500)] transition-colors duration-150 hover:text-[var(--brand-700)]"
                     >
                       {link.label}

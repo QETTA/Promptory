@@ -36,6 +36,7 @@ export function PrimaryNav({
           <Link
             key={item.href}
             href={item.href}
+            prefetch={false}
             aria-current={isActive ? "page" : undefined}
             className={cn(
               mobile
