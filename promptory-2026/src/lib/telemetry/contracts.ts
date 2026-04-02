@@ -12,6 +12,7 @@ export const promptoryEventNames = [
   "pricing_cta_clicked",
   "pricing_bottom_cta_clicked",
   "optimize_upsell_clicked",
+  "contact_request_submitted",
   "optimization_run_saved",
   "order_created",
   "payment_confirmed",

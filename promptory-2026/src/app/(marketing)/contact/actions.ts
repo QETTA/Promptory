@@ -1,7 +1,9 @@
 "use server";
 
 import { redirect } from "next/navigation";
+
 import { contactFormSchema } from "@/lib/contact-schema";
+import { trackServerEvent } from "@/lib/server/telemetry";
 
 function readOptionalField(formData: FormData, key: string) {
   const value = formData.get(key);
@@ -35,22 +37,16 @@ export async function submitContactRequest(formData: FormData) {
     timeline: readOptionalField(formData, "timeline"),
   };
 
-  // TODO: Implement actual submission logic
-  // Options:
-  // 1) Send to internal Slack channel via Incoming Webhook
-  // 2) Save to Supabase/Database
-  // 3) Send email via Resend/AWS SES
-  // 4) Create Notion page via API
-
-  console.log("[Demo Request]", {
-    teamName: parsed.data.teamName,
-    contactName: parsed.data.contactName,
-    email: parsed.data.email,
+  await trackServerEvent("contact_request_submitted", {
+    inquiryType: submissionContext.inquiryType || "unknown",
+    packageSlug: submissionContext.packageSlug || null,
+    planType: submissionContext.planType || null,
     teamType: parsed.data.teamType,
-    companyUrl: parsed.data.companyUrl,
-    painPoints: parsed.data.painPoints,
-    contextNote: parsed.data.contextNote,
-    ...submissionContext,
+    companySize: submissionContext.companySize || null,
+    timeline: submissionContext.timeline || null,
+    painPointCount: parsed.data.painPoints.length,
+    hasContextNote: parsed.data.contextNote ? "true" : "false",
+    hasCompanyUrl: parsed.data.companyUrl ? "true" : "false",
   });
 
   redirect(
