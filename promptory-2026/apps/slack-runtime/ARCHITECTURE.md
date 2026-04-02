@@ -46,7 +46,7 @@
 
 ## Why this stays isolated
 
-The current repo is still centered on a Next.js app.  
+The current repo is still centered on a Next.js app.
 This scaffold stays under `apps/slack-runtime` so later work can either:
 
 - keep it in the same repo as a runtime package

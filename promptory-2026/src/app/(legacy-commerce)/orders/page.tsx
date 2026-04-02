@@ -78,7 +78,7 @@ export default async function OrdersPage({
 
       <PageContainer>
         {created === "1" ? (
-          <div 
+          <div
             className="mt-6 rounded-2xl border border-[var(--brand-300)] bg-[var(--brand-50)] p-4 text-sm leading-6 text-[var(--brand-700)]"
             role="status"
             aria-live="polite"

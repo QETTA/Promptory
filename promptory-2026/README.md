@@ -12,6 +12,7 @@ The current product direction is:
 Business and product guardrails live in:
 
 - `docs/BUSINESS_PRODUCT_FOUNDATION.md`
+- `docs/FINAL_CONSOLIDATION.md`
 
 ## Stack
 
@@ -41,6 +42,7 @@ npm.cmd run typecheck
 npm.cmd run build
 npm.cmd run check:supabase
 npm.cmd run sync:storage
+node scripts/t08-verify-routes.mjs
 ```
 
 ## Environment
@@ -81,3 +83,10 @@ The app can still render some surfaces without full server wiring, but auth, ord
 - center the story on request-to-resolution packs and safe pilot rollout
 - keep marketing and console surfaces visually distinct but brand-consistent
 - keep legacy commerce routes out of the primary navigation
+
+## Consolidation guardrails
+
+- route-grouped pages under `src/app/(marketing)`, `src/app/(auth)`, `src/app/(legacy-commerce)`, `src/app/(internal-tools)`, and `src/app/(console)` are canonical
+- `/packages/[slug]` is the only package detail entrypoint; static package detail pages should stay deleted
+- the Slack runtime scaffold remains isolated under `apps/slack-runtime/`
+- after large route merges, run `node scripts/t08-verify-routes.mjs` before typecheck/build
