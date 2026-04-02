@@ -5,40 +5,31 @@ import { PrimaryNav } from "@/components/layout/primary-nav";
 import { PromptoryLogo } from "@/components/layout/promptory-logo";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
+import { marketingNavItems } from "@/lib/marketing-ia";
 import { getOptionalUser, getProfileByUserId } from "@/lib/server/auth";
 
 export async function SiteHeader() {
   const user = await getOptionalUser();
   const profile = user ? await getProfileByUserId(user.id) : null;
   const displayLabel = profile?.display_name?.trim() || user?.email || "로그인 필요";
-  const navItems = [
-    { href: "/packages", label: "패키지" },
-    { href: "/demo/slack", label: "데모" },
-    { href: "/contact", label: "문의" },
-  ];
-  const mobileNavItems = [
-    { href: "/packages", label: "패키지" },
-    { href: "/demo/slack", label: "데모" },
-    { href: "/contact", label: "문의" },
-  ];
 
   return (
     <header className="sticky top-0 z-[1100] border-b border-[var(--line)] bg-white/85 shadow-[var(--shadow-sm)] backdrop-blur-xl backdrop-saturate-[180%]">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-2.5 sm:gap-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-2.5 sm:gap-4 sm:px-6 lg:px-8">
         <Link href="/" className="shrink-0 transition-transform duration-100 active:scale-[0.96]">
           <PromptoryLogo compactOnMobile showTaglineOnMobile={false} />
         </Link>
 
-        <nav className="hidden items-center gap-5 lg:flex">
-          <PrimaryNav items={navItems} />
+        <nav className="hidden items-center gap-4 xl:flex">
+          <PrimaryNav items={marketingNavItems} />
         </nav>
 
         <div className="flex items-center gap-1.5 sm:gap-2">
           <Link
-            href="/setup"
+            href="/contact"
             className="hidden h-8 items-center rounded-full px-3 text-[0.8rem] font-medium text-[var(--slate-500)] transition-all duration-150 hover:bg-[var(--surface-2)] hover:text-[var(--slate-900)] md:inline-flex active:scale-[0.96]"
           >
-            설정
+            문의
           </Link>
           {user ? (
             <>
@@ -60,7 +51,7 @@ export async function SiteHeader() {
                 href="/signup"
                 className={cn(
                   buttonVariants({ size: "sm" }),
-                  "h-8 rounded-full px-3.5 text-[0.8rem] sm:h-8 sm:px-3 sm:text-[0.84rem] relative overflow-hidden before:absolute before:top-0 before:left-[-100%] before:w-full before:h-full before:bg-gradient-to-r before:from-transparent before:via-white/40 before:to-transparent before:transition-all before:duration-500 hover:before:left-full",
+                  "relative h-8 overflow-hidden rounded-full px-3.5 text-[0.8rem] before:absolute before:left-[-100%] before:top-0 before:h-full before:w-full before:bg-gradient-to-r before:from-transparent before:via-white/40 before:to-transparent before:transition-all before:duration-500 hover:before:left-full sm:h-8 sm:px-3 sm:text-[0.84rem]",
                 )}
               >
                 회원가입
@@ -69,10 +60,9 @@ export async function SiteHeader() {
           )}
         </div>
       </div>
-      {/* Mobile nav */}
-      <div className="border-t border-[var(--line)] bg-white/70 backdrop-blur-lg lg:hidden">
-        <div className="mx-auto flex max-w-6xl gap-2 overflow-x-auto px-4 py-2.5 sm:px-6">
-          <PrimaryNav items={mobileNavItems} mobile />
+      <div className="border-t border-[var(--line)] bg-white/70 backdrop-blur-lg xl:hidden">
+        <div className="mx-auto flex max-w-7xl gap-2 overflow-x-auto px-4 py-2.5 sm:px-6">
+          <PrimaryNav items={marketingNavItems} mobile />
         </div>
       </div>
     </header>

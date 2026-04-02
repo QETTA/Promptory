@@ -5,9 +5,9 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { POST as loginRoute } from "@/app/api/auth/login/route";
 import { GET as downloadRoute } from "@/app/api/downloads/[orderId]/route";
 import { POST as createProductRoute } from "@/app/api/products/route";
-import LoginPage from "@/app/login/page";
-import PaymentSuccessPage from "@/app/payments/success/page";
-import SellerProductsPage from "@/app/seller/products/page";
+import LoginPage from "@/app/(auth)/login/page";
+import PaymentSuccessPage from "@/app/(legacy-commerce)/payments/success/page";
+import SellerProductsPage from "@/app/(legacy-commerce)/seller/products/page";
 
 const requiredEnvKeys = [
   "NEXT_PUBLIC_APP_URL",
