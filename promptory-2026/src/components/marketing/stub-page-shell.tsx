@@ -3,7 +3,12 @@ import type { ReactNode } from "react";
 import { SectionHeading } from "@/components/marketing/SectionHeading";
 import { Card } from "@/components/ui/card";
 import { CTAButton } from "@/components/ui/cta-button";
-import type { StubSection } from "@/lib/marketing-stubs";
+
+export type StubSection = {
+  title: string;
+  body: string;
+  points?: string[];
+};
 
 type LinkCta = {
   href: string;

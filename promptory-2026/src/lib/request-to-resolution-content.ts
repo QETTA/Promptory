@@ -487,6 +487,15 @@ export const marketingFooterGroups = [
     title: "Resources",
     links: marketingFooterResourceLinks,
   },
+  {
+    title: "Quick starts",
+    links: [
+      { href: "/packages/starter", label: "Starter" },
+      { href: "/solutions/deal-desk", label: "Deal Desk" },
+      { href: "/industries/saas-it", label: "SaaS / IT" },
+      { href: "/education/diagnostic", label: "Diagnostic" },
+    ],
+  },
 ] as const;
 
 export const packageTiers = [
@@ -559,6 +568,110 @@ export const packageTiers = [
   fit: string;
   features: readonly string[];
 }>;
+
+export type PackageTier = (typeof packageTiers)[number];
+export type PackageTierSlug = PackageTier["slug"];
+
+export const packageTierMap = Object.fromEntries(
+  packageTiers.map((tier) => [tier.slug, tier]),
+) as Record<PackageTierSlug, PackageTier>;
+
+export const packageTierDetails: Record<
+  PackageTierSlug,
+  {
+    eyebrow: string;
+    title: string;
+    description: string;
+    fitSignals: readonly string[];
+    scopeNotes: readonly string[];
+    successNote: string;
+    primaryCta: { href: string; label: string };
+    secondaryCta: { href: string; label: string };
+  }
+> = {
+  starter: {
+    eyebrow: "Fast proof",
+    title: "한 부서, 한 workflow, 세 개 안팎의 도구로 proof를 만드는 시작점",
+    description:
+      "Starter는 범용 agent를 넓게 여는 단계가 아니라, approval-driven request-to-resolution workflow 하나를 4~6주 안에 닫아보는 패키지입니다.",
+    fitSignals: [
+      "반복량이 높고 승인 병목이 분명한 요청 유형이 이미 보일 때",
+      "Slack 안에서 요청 접수와 approval card를 먼저 검증하고 싶을 때",
+      "CRM, Jira, IAM 같은 핵심 시스템 2~3개만 연결해도 proof가 나는 팀일 때",
+    ],
+    scopeNotes: [
+      "single department champion + approver owner 기준으로 scope를 자릅니다.",
+      "read 자동화와 write preview/confirm을 기본 가드레일로 둡니다.",
+      "주간 ops review에서 failed case와 approval lead time을 함께 봅니다.",
+    ],
+    successNote: "좋은 Starter는 기능 수보다 time-to-resolution과 approval turnaround 개선이 먼저 보입니다.",
+    primaryCta: { href: "/contact?type=starter&plan=starter", label: "Starter 상담 요청" },
+    secondaryCta: { href: "/pilot", label: "파일럿 범위 보기" },
+  },
+  department: {
+    eyebrow: "Operational rollout",
+    title: "검증된 흐름을 2~3개 pack으로 묶어 부서 운영 레벨로 올립니다",
+    description:
+      "Department는 하나의 proof를 넘어서, 같은 buyer와 approval owner 아래에서 action pack 두세 개를 운영 리포트와 함께 굴리는 상용 레벨입니다.",
+    fitSignals: [
+      "첫 workflow proof 이후 비슷한 승인·예외 흐름을 추가하고 싶을 때",
+      "ops dashboard, failed-case replay, policy tuning이 필요해질 때",
+      "부서 책임자가 KPI와 운영 cadence를 같이 보길 원할 때",
+    ],
+    scopeNotes: [
+      "pack은 buyer와 승인 경로가 비슷한 흐름끼리 묶습니다.",
+      "console KPI, connector 상태, policy tuning이 운영 루틴에 들어옵니다.",
+      "교육형 funnel이 아니라 실제 부서 운영 pack으로 범위를 고정합니다.",
+    ],
+    successNote: "Department 단계부터는 action pack 수보다 운영 리포트와 approval consistency가 더 중요해집니다.",
+    primaryCta: { href: "/contact?type=department&plan=department", label: "Department 상담 요청" },
+    secondaryCta: { href: "/solutions", label: "부서형 pack 보기" },
+  },
+  private: {
+    eyebrow: "Private deployment",
+    title: "보안 요구와 connector boundary를 맞춘 private deployment 레일",
+    description:
+      "Private는 customer environment deployment, delegated access, audit export, custom connector rail까지 같이 설계해야 하는 보안·배포 강화 레벨입니다.",
+    fitSignals: [
+      "배포 위치와 데이터 경계를 먼저 맞춰야 구매 검토가 열릴 때",
+      "approval, expiry, delegated token 같은 guardrail이 필수일 때",
+      "custom connector나 customer-specific runtime boundary가 필요한 팀일 때",
+    ],
+    scopeNotes: [
+      "read / write / admin action을 같은 권한 규칙으로 다루지 않습니다.",
+      "audit와 trace를 분리 기록해 운영 시야와 감사 시야를 같이 유지합니다.",
+      "runtime은 marketing/console과 분리된 별도 execution rail로 봅니다.",
+    ],
+    successNote: "좋은 Private 설계는 connector를 많이 붙이는 것이 아니라 boundary와 approval 규칙을 명확히 하는 것입니다.",
+    primaryCta: { href: "/contact?type=private&plan=private", label: "Private 상담 요청" },
+    secondaryCta: { href: "/security", label: "보안 원칙 보기" },
+  },
+  enterprise: {
+    eyebrow: "Cross-department orchestration",
+    title: "멀티 부서, exec briefing, 고급 approval routing까지 포함하는 확장 레벨",
+    description:
+      "Enterprise는 여러 부서의 pack을 포트폴리오처럼 운영하고, exec reporting과 고급 approval routing을 함께 보는 orchestration 단계입니다.",
+    fitSignals: [
+      "부서 여러 곳에서 request-to-resolution pack을 묶어 운영하려 할 때",
+      "exec briefing과 portfolio KPI를 같이 관리해야 할 때",
+      "정책, 운영, 배포, connector ownership이 여러 팀에 걸쳐 있을 때",
+    ],
+    scopeNotes: [
+      "부서별 pack은 유지하되 운영 대시보드와 approval policy를 상위 레이어에서 봅니다.",
+      "exec reporting과 ROI review가 정기 cadence로 들어옵니다.",
+      "runtime, console, audit boundary를 먼저 정리한 뒤 scale 합니다.",
+    ],
+    successNote: "Enterprise 단계에서는 기능 확장보다 policy consistency와 cross-team handoff가 더 큰 성공 변수입니다.",
+    primaryCta: { href: "/contact?type=enterprise&plan=enterprise", label: "Enterprise 상담 요청" },
+    secondaryCta: { href: "/architecture", label: "아키텍처 보기" },
+  },
+};
+
+export const legacyPackageRedirectMap = {
+  "website-diagnosis-agent": "/packages",
+  "campaign-brief-agent": "/packages",
+  "korea-local-ops-agent": "/packages",
+} as const satisfies Record<string, string>;
 
 export const pricingPrinciples = [
   {

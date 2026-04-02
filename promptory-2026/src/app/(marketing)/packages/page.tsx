@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { CTAButton } from "@/components/ui/cta-button";
 import { PageContainer, PageSection } from "@/components/ui/page-container";
 import { gradients } from "@/components/ui/patterns";
+import { packageTiers } from "@/lib/request-to-resolution-content";
 
 export const metadata: Metadata = {
   title: "Product - Promptory",
@@ -26,29 +27,6 @@ const productPillars = [
   {
     title: "Action-ready",
     body: "정책 확인에서 끝나지 않고 Jira, CRM, IAM, ERP 같은 시스템 반영까지 한 흐름으로 닫습니다.",
-  },
-];
-
-const tiers = [
-  {
-    name: "Starter",
-    summary: "빠른 파일럿 검증용",
-    points: ["한 부서", "한 workflow", "기본 approval template", "빠른 런칭"],
-  },
-  {
-    name: "Department",
-    summary: "본격적인 운영 도입용",
-    points: ["2~3개 action pack", "운영 리포트", "기본 정책 관리", "주간 기술 지원"],
-  },
-  {
-    name: "Private",
-    summary: "보안·확장성 중심",
-    points: ["고객사 전용 배포", "커넥터 확장", "보안 감사 대응", "SLA 논의"],
-  },
-  {
-    name: "Enterprise",
-    summary: "전사 실행 레이어",
-    points: ["멀티 부서", "고급 승인 workflow", "exec briefing", "전담 KPI 운영"],
   },
 ];
 
@@ -111,18 +89,27 @@ export default function PackagesPage() {
             className="mb-10"
           />
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {tiers.map((tier, index) => (
+            {packageTiers.map((tier, index) => (
               <AnimatedSection key={tier.name} delay={index * 0.08}>
                 <Card variant={tier.name === "Department" ? "heroBright" : "strong"} className="h-full p-6">
                   <Badge variant={tier.name === "Department" ? "default" : "neutral"} className="w-fit">
-                    {tier.summary}
+                    {tier.badge}
                   </Badge>
                   <h2 className="mt-4 text-xl font-semibold text-[var(--slate-950)]">{tier.name}</h2>
+                  <p className="mt-3 text-sm leading-7 text-[var(--slate-600)]">{tier.summary}</p>
+                  <p className="mt-4 text-xs font-semibold uppercase tracking-[0.14em] text-[var(--slate-500)]">
+                    {tier.fit}
+                  </p>
                   <ul className="mt-5 space-y-3 text-sm leading-7 text-[var(--slate-600)]">
-                    {tier.points.map((point) => (
+                    {tier.features.map((point) => (
                       <li key={point}>• {point}</li>
                     ))}
                   </ul>
+                  <div className="mt-6">
+                    <CTAButton href={`/packages/${tier.slug}`} variant="outline" className="w-full">
+                      {tier.name} 상세 보기
+                    </CTAButton>
+                  </div>
                 </Card>
               </AnimatedSection>
             ))}

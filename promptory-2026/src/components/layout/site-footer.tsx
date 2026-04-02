@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { PromptoryLogo } from "@/components/layout/promptory-logo";
-import { marketingFooterGroups } from "@/lib/marketing-ia";
+import { marketingFooterGroups } from "@/lib/request-to-resolution-content";
 
 export function SiteFooter() {
   return (

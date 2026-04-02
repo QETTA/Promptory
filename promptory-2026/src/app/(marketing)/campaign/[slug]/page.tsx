@@ -1,7 +1,21 @@
 import type { Metadata } from "next";
 
 import { StubPageShell } from "@/components/marketing/stub-page-shell";
-import { buildMetadata, humanizeSlug } from "@/lib/marketing-stubs";
+
+function humanizeSlug(slug: string) {
+  return slug
+    .split("-")
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function buildMetadata(title: string, description: string): Metadata {
+  return {
+    title: `${title} — Promptory`,
+    description,
+  };
+}
 
 export async function generateMetadata({
   params,

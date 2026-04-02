@@ -2,6 +2,9 @@
 
 This folder is a scaffold-only implementation of Promptory's Slack runtime.
 
+See also:
+- `apps/slack-runtime/ARCHITECTURE.md`
+
 What is included:
 - request intake contracts for Slack surfaces
 - normalization and workflow planning types
@@ -16,6 +19,7 @@ What is intentionally not included:
 - real MCP clients
 - real Jira, CRM, IAM, HRIS, ERP, or ITSM integration
 - environment variables or secrets
+- root `package.json` changes
 
 How this connects to the web app later:
 - `NormalizedRequest` should map to the request rows shown in the web console.

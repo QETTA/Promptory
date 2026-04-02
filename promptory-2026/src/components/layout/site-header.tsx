@@ -5,7 +5,7 @@ import { PrimaryNav } from "@/components/layout/primary-nav";
 import { PromptoryLogo } from "@/components/layout/promptory-logo";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/cn";
-import { marketingNavItems } from "@/lib/marketing-ia";
+import { marketingNavItems } from "@/lib/request-to-resolution-content";
 import { getOptionalUser, getProfileByUserId } from "@/lib/server/auth";
 
 export async function SiteHeader() {
