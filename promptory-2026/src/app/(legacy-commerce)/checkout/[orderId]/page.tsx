@@ -27,45 +27,45 @@ export default async function CheckoutPage({
 
   if (checkoutCapability.blockReason === "missing_public_env" || checkoutCapability.blockReason === "missing_service_role") {
     return (
-      <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         <SetupCallout
           title="결제를 시작하려면 환경설정이 더 필요합니다."
           body="결제 테스트를 하려면 공개 앱 URL과 Supabase 서버 키가 모두 설정되어야 합니다. 먼저 /setup에서 미설정 항목을 확인하세요."
         />
-      </div>
+      </main>
     );
   }
 
   if (checkoutCapability.blockReason === "payments_disabled") {
     return (
-      <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         <SetupCallout
           title="지금은 결제 단계가 비활성화되어 있습니다."
           body="현재는 결제 없이 실행 팩 탐색과 주문 생성 흐름까지만 열려 있습니다. 구매 후 흐름을 검증하려면 PAYMENTS_MODE를 dev_stub로 바꿔 주세요."
         />
-      </div>
+      </main>
     );
   }
 
   if (checkoutCapability.blockReason === "missing_toss_secret") {
     return (
-      <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         <SetupCallout
           title="토스 결제를 시작하려면 환경설정이 더 필요합니다."
           body="toss 모드에서는 TOSS_SECRET_KEY가 필요합니다. 사업자 등록 전에는 dev_stub 모드로 전체 흐름을 먼저 검증할 수 있습니다."
         />
-      </div>
+      </main>
     );
   }
 
   if (checkoutCapability.blockReason === "missing_toss_client_key") {
     return (
-      <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
         <SetupCallout
           title="토스 결제창을 열려면 공개 클라이언트 키가 필요합니다."
           body="toss 모드에서는 NEXT_PUBLIC_TOSS_CLIENT_KEY와 TOSS_SECRET_KEY를 함께 설정해야 합니다. 지금은 dev_stub 모드로 흐름을 먼저 검증할 수 있습니다."
         />
-      </div>
+      </main>
     );
   }
 
@@ -86,7 +86,7 @@ export default async function CheckoutPage({
     const productHref = order.product?.slug ? `/products/${order.product.slug}` : "/products";
 
     return (
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="rounded-2xl border border-[var(--line-strong)] bg-[var(--surface-1)] p-6">
           <h1 className="section-title text-[var(--slate-950)]">같은 주문으로는 다시 결제할 수 없습니다.</h1>
           <p className="mt-4 text-sm leading-7 text-[var(--slate-600)]">
@@ -99,12 +99,12 @@ export default async function CheckoutPage({
             </CTAButton>
           </div>
         </div>
-      </div>
+      </main>
     );
   }
 
   return (
-    <div className="pb-16">
+    <main className="pb-16">
       <Hero
         eyebrow="결제"
         theme="payment"
@@ -155,6 +155,6 @@ export default async function CheckoutPage({
           </div>
         </aside>
       </div>
-    </div>
+    </main>
   );
 }

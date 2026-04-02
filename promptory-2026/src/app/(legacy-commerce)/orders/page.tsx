@@ -35,12 +35,14 @@ export default async function OrdersPage({
 
   if (!publicStatus.hasPublicEnv) {
     return (
-      <PageContainer>
-        <SetupCallout
-          title="주문 내역을 보려면 공개 Supabase 연결이 필요합니다."
-          body="주문 내역 조회에는 공개 환경 변수가 필요합니다. 먼저 /setup에서 연결 상태를 확인해 주세요."
-        />
-      </PageContainer>
+      <main>
+        <PageContainer>
+          <SetupCallout
+            title="주문 내역을 보려면 공개 Supabase 연결이 필요합니다."
+            body="주문 내역 조회에는 공개 환경 변수가 필요합니다. 먼저 /setup에서 연결 상태를 확인해 주세요."
+          />
+        </PageContainer>
+      </main>
     );
   }
 
@@ -52,7 +54,7 @@ export default async function OrdersPage({
   const canOpenCheckout = checkoutCapability.canCheckout;
 
   return (
-    <div className="pb-16">
+    <main className="pb-16">
       <Hero
         eyebrow="주문"
         theme="orders"
@@ -148,6 +150,6 @@ export default async function OrdersPage({
           </Section>
         ) : null}
       </PageContainer>
-    </div>
+    </main>
   );
 }

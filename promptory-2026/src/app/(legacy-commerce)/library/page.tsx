@@ -20,12 +20,14 @@ export default async function LibraryPage() {
 
   if (!publicStatus.hasPublicEnv) {
     return (
-      <PageContainer>
-        <SetupCallout
-          title="라이브러리를 보려면 Supabase 연결이 필요합니다"
-          body="로그인과 구매 내역 조회에는 공개 Supabase 환경 변수가 필요합니다. 먼저 /setup에서 환경 상태를 확인해 주세요."
-        />
-      </PageContainer>
+      <main>
+        <PageContainer>
+          <SetupCallout
+            title="라이브러리를 보려면 Supabase 연결이 필요합니다"
+            body="로그인과 구매 내역 조회에는 공개 Supabase 환경 변수가 필요합니다. 먼저 /setup에서 환경 상태를 확인해 주세요."
+          />
+        </PageContainer>
+      </main>
     );
   }
 
@@ -36,7 +38,7 @@ export default async function LibraryPage() {
   const waitingDownloads = library.filter((order) => !order.product?.file_path);
 
   return (
-    <div className="pb-16">
+    <main className="pb-16">
       <Hero
         eyebrow="저장한 작업공간"
         theme="library"
@@ -132,6 +134,6 @@ export default async function LibraryPage() {
           </Section>
         ) : null}
       </PageContainer>
-    </div>
+    </main>
   );
 }
