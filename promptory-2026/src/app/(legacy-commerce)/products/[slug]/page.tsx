@@ -35,12 +35,12 @@ export default async function ProductDetailPage({
 
   if (!publicStatus.hasPublicEnv) {
     return (
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
         <SetupCallout
           title="실행 팩 상세를 보려면 공개 Supabase 연결이 필요합니다."
           body="아직 공개 환경 변수가 비어 있어 실제 상품 데이터를 불러오지 못하고 있습니다. /setup에서 공개 환경 설정을 먼저 확인해 주세요."
         />
-      </div>
+      </main>
     );
   }
 
@@ -65,7 +65,7 @@ export default async function ProductDetailPage({
   const relatedProducts = await getRelatedPublishedProducts(product.id, product.category, 3);
 
   return (
-    <div className="pb-16">
+    <main className="pb-16">
       <Hero
         eyebrow="실행 팩 상세"
         theme="detail"
@@ -221,6 +221,6 @@ export default async function ProductDetailPage({
           </Section>
         </div>
       ) : null}
-    </div>
+    </main>
   );
 }

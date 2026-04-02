@@ -92,7 +92,7 @@ export default async function ProductsPage({
   ];
 
   return (
-    <div className="pb-16">
+    <main className="pb-16">
       <Hero
         eyebrow="Promptory Execution Pack Rail"
         theme="catalog"
@@ -218,6 +218,6 @@ export default async function ProductsPage({
           )}
         </Section>
       </div>
-    </div>
+    </main>
   );
 }
