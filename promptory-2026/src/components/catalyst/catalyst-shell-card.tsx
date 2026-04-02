@@ -27,7 +27,7 @@ export function CatalystShellCard({
       {title || description || actions ? (
         <header className="mb-5 flex flex-wrap items-start justify-between gap-4 border-b border-[var(--line)] pb-4">
           <div className="space-y-1">
-            {title ? <h3 className="text-lg font-semibold text-[var(--ink-primary)]">{title}</h3> : null}
+            {title ? <h2 className="text-lg font-semibold text-[var(--ink-primary)]">{title}</h2> : null}
             {description ? <p className="text-sm text-[var(--ink-secondary)]">{description}</p> : null}
           </div>
           {actions ? <div className="flex items-center gap-2">{actions}</div> : null}

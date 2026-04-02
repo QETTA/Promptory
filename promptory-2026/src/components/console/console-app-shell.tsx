@@ -143,9 +143,10 @@ function ConsoleTopbar() {
         <CatalystBadge tone="success">Slack UI + Agent + MCP</CatalystBadge>
         <Link
           href="/pilot"
+          style={{ color: "#ffffff" }}
           className={cn(
             "inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold transition",
-            "bg-[var(--slate-950)] text-white hover:bg-[var(--slate-900)]",
+            "bg-[var(--slate-950)] text-white hover:bg-[var(--slate-900)] hover:text-white focus-visible:text-white",
           )}
         >
           pilot page

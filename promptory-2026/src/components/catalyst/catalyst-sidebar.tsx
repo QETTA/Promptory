@@ -66,7 +66,7 @@ export function CatalystSidebarItem({
     <Link
       href={href}
       className={cn(
-        "flex items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium transition",
+        "flex min-h-11 items-center gap-3 rounded-2xl px-3 py-2.5 text-sm font-medium leading-5 transition",
         current
           ? "bg-white text-[var(--slate-950)] shadow-[var(--shadow-sm)]"
           : "text-white/72 hover:bg-white/10 hover:text-white",

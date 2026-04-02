@@ -36,13 +36,16 @@ export function ConsoleLinkButton({
   tone?: "primary" | "secondary";
   className?: string;
 }) {
+  const isPrimary = tone === "primary";
+
   return (
     <Link
       href={href}
+      style={isPrimary ? { color: "#ffffff" } : undefined}
       className={cn(
         "inline-flex h-10 items-center justify-center rounded-xl px-4 text-sm font-semibold transition",
-        tone === "primary"
-          ? "bg-[var(--slate-950)] text-white hover:bg-[var(--slate-900)]"
+        isPrimary
+          ? "bg-[var(--slate-950)] text-white hover:bg-[var(--slate-900)] hover:text-white focus-visible:text-white"
           : "bg-white text-[var(--ink-primary)] ring-1 ring-[var(--line)] hover:bg-[var(--surface-2)]",
         className,
       )}

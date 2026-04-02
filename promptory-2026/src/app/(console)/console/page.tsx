@@ -46,7 +46,7 @@ export default function ConsoleDashboardPage() {
         <ConsoleInsightCard
           title="최근 요청"
           description="Slack App Home / Assistant thread / approval card 흐름을 mock data로 보여주는 목록입니다."
-          actions={<ConsoleLinkButton href="/console/requests" tone="secondary">전체 보기</ConsoleLinkButton>}
+          actions={<ConsoleLinkButton href="/console/requests" tone="secondary">요청 queue 보기</ConsoleLinkButton>}
         >
           <ConsoleRequestsTable rows={consoleRequests.slice(0, 4)} />
         </ConsoleInsightCard>
