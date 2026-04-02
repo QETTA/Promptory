@@ -129,7 +129,7 @@ export default function ProposalPage() {
   const nextStepNumber = "04";
 
   return (
-    <div className="min-h-screen bg-[var(--surface-2)] py-8 print:bg-[var(--surface-1)] print:py-0">
+    <main className="min-h-screen bg-[var(--surface-2)] py-8 print:bg-[var(--surface-1)] print:py-0">
       <div className="mx-auto mb-4 max-w-[210mm] px-4 print:hidden">
         <Card variant="default" className="rounded-3xl p-6">
           <h1 className="section-title text-[var(--slate-950)]">프롬프토리 제안서 생성기</h1>
@@ -317,13 +317,13 @@ export default function ProposalPage() {
                 <p className="text-xs text-[var(--slate-500)]">contact@promptory.ai</p>
               </div>
               <div className="text-right">
-                <p className="text-xs text-[var(--slate-400)]">본 문서는 견적 제안 목적으로 작성되었습니다.</p>
-                <p className="text-xs text-[var(--slate-400)]">유효 기한: {validUntil}</p>
+                <p className="text-xs text-[var(--slate-600)]">본 문서는 견적 제안 목적으로 작성되었습니다.</p>
+                <p className="text-xs text-[var(--slate-600)]">유효 기한: {validUntil}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

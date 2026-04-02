@@ -100,7 +100,7 @@ export default function SetupPage() {
   ];
 
   return (
-    <div className="pb-16">
+    <main className="pb-16">
       <Hero
         eyebrow="설정"
         title="Promptory 연결 상태와 다음 점검 순서를 한 번에 봅니다"
@@ -227,6 +227,6 @@ export default function SetupPage() {
           </div>
         </Card>
       </div>
-    </div>
+    </main>
   );
 }

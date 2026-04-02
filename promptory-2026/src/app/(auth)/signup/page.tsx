@@ -25,7 +25,7 @@ export default async function SignupPage({
   const canShowSignup = publicStatus.hasPublicEnv;
 
   return (
-    <div className="pb-16">
+    <main className="pb-16">
       {!canShowSignup ? (
         <div className="mx-auto max-w-5xl px-5 py-12 lg:px-8">
           <SetupCallout
@@ -64,6 +64,6 @@ export default async function SignupPage({
           </div>
         </>
       )}
-    </div>
+    </main>
   );
 }

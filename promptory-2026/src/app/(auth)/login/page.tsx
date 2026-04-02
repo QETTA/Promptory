@@ -23,7 +23,7 @@ export default async function LoginPage({
   }
 
   return (
-    <div className="pb-16">
+    <main className="pb-16">
       {!publicStatus.hasPublicEnv ? (
         <div className="mx-auto max-w-5xl px-5 py-12 lg:px-8">
           <SetupCallout
@@ -62,6 +62,6 @@ export default async function LoginPage({
           </div>
         </>
       )}
-    </div>
+    </main>
   );
 }
