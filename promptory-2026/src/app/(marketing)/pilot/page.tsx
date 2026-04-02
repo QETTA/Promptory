@@ -32,7 +32,7 @@ export default function PilotPage() {
         description="좋은 파일럿은 기능 데모가 아니라, 한 부서의 반복 예외 처리 흐름을 끝까지 닫는 것입니다. 한 부서, 한 요청 유형, 세 개 도구로 시작하면 실패 확률이 가장 낮습니다."
         actions={(
           <>
-            <CTAButton href="/contact?type=package&plan=starter" size="lg">2주 파일럿 범위 논의</CTAButton>
+            <CTAButton href="/contact?type=starter&plan=starter" size="lg">2주 파일럿 범위 논의</CTAButton>
             <CTAButton href="/pricing" variant="outline" size="lg">패키지 보기</CTAButton>
           </>
         )}
@@ -123,7 +123,7 @@ export default function PilotPage() {
           body="Starter 패키지는 MVP가 아닙니다. Starter는 챔피언과 승인자를 설득하고, 운영 숫자를 남기고, 다음 부서 확장의 근거를 만드는 범위입니다."
           actions={(
             <>
-              <CTAButton href="/contact?type=package&plan=starter">파일럿 신청</CTAButton>
+              <CTAButton href="/contact?type=starter&plan=starter">파일럿 신청</CTAButton>
               <CTAButton href="/security" variant="outline">보안 원칙 보기</CTAButton>
             </>
           )}

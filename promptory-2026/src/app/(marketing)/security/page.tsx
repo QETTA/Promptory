@@ -34,7 +34,7 @@ export default function SecurityPage() {
         actions={(
           <>
             <CTAButton href="/architecture" size="lg">아키텍처 보기</CTAButton>
-            <CTAButton href="/contact?type=package&plan=private" variant="outline" size="lg">보안 범위 문의</CTAButton>
+            <CTAButton href="/contact?type=private&plan=private" variant="outline" size="lg">보안 범위 문의</CTAButton>
           </>
         )}
         aside={
@@ -133,7 +133,7 @@ export default function SecurityPage() {
           actions={(
             <>
               <CTAButton href="/pilot">파일럿 설계 보기</CTAButton>
-              <CTAButton href="/contact?type=package&plan=private" variant="outline">보안 미팅 요청</CTAButton>
+              <CTAButton href="/contact?type=private&plan=private" variant="outline">보안 미팅 요청</CTAButton>
             </>
           )}
         />

@@ -33,7 +33,7 @@ export default function ArchitecturePage() {
         actions={(
           <>
             <CTAButton href="/security" size="lg">보안 원칙 보기</CTAButton>
-            <CTAButton href="/contact?type=package&plan=starter" variant="outline" size="lg">구조 상담</CTAButton>
+            <CTAButton href="/contact?type=starter&plan=starter" variant="outline" size="lg">구조 상담</CTAButton>
           </>
         )}
         aside={<LayerRail items={architectureLayers.slice(0, 4)} />}
@@ -116,7 +116,7 @@ export default function ArchitecturePage() {
           actions={(
             <>
               <CTAButton href="/pilot">MVP 범위 보기</CTAButton>
-              <CTAButton href="/contact?type=package&plan=starter" variant="outline">아키텍처 상담</CTAButton>
+              <CTAButton href="/contact?type=starter&plan=starter" variant="outline">아키텍처 상담</CTAButton>
             </>
           )}
         />

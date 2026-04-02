@@ -44,7 +44,7 @@ export default function PackagesPage() {
             </h1>
             <p className="body-copy-xl mx-auto mt-4 max-w-3xl text-[var(--slate-600)]">
               Promptory는 Slack 안에서 요청을 받고, 근거를 찾고, 승인 받고, 시스템에 실제로
-              반영하는 request-to-resolution package를 만듭니다. 단순 검색봇이 아니라 실행형
+              반영하는 request-to-resolution package를 만듭니다. 답변형 도구가 아니라 실행형
               workflow를 파는 제품입니다.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">

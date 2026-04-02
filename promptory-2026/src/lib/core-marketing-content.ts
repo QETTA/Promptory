@@ -176,7 +176,7 @@ export const securityRoleCards = [
 export const contactFitSignals = [
   "Slack을 이미 쓰고 있고 요청·승인·보고 병목이 분명한 팀",
   "People Ops, Sales Ops, IT Ops처럼 반복 예외가 많은 부서",
-  "검색봇이 아니라 실제 시스템 반영까지 닫히는 구조가 필요한 팀",
+  "답변에서 끝나지 않고 실제 시스템 반영까지 닫히는 구조가 필요한 팀",
 ] as const;
 
 export const contactPreparationChecklist = [

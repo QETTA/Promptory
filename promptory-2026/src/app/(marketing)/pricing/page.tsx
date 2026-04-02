@@ -40,7 +40,7 @@ export default function PricingPage() {
         description="검색과 요약은 번들될 수 있지만, 승인·실행·연결·운영은 패키지화할 수 있습니다. Promptory는 부서형 action pack과 private deployment를 중심으로 가격을 설계합니다."
         actions={(
           <>
-            <CTAButton href="/contact?type=package&plan=department" size="lg">패키지 상담</CTAButton>
+            <CTAButton href="/contact?type=department&plan=department" size="lg">패키지 상담</CTAButton>
             <CTAButton href="/pilot" variant="outline" size="lg">파일럿 범위 보기</CTAButton>
           </>
         )}
@@ -140,8 +140,8 @@ export default function PricingPage() {
           body="초기에는 한 부서의 request-to-resolution 흐름 하나만 닫고, 성과가 보이면 2~3개 action pack으로 확장하는 방식이 가장 매출 확률이 높습니다."
           actions={
             <>
-              <CTAButton href="/contact?type=package&plan=starter">Starter 범위 문의</CTAButton>
-              <CTAButton href="/contact?type=package&plan=department" variant="outline">Department 상담</CTAButton>
+              <CTAButton href="/contact?type=starter&plan=starter">Starter 범위 문의</CTAButton>
+              <CTAButton href="/contact?type=department&plan=department" variant="outline">Department 상담</CTAButton>
             </>
           }
         />
