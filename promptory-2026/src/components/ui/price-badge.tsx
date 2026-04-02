@@ -16,7 +16,7 @@ export function PriceBadge({ price, setupPrice, className }: PriceBadgeProps) {
         )}
       </div>
       <p className="body-copy-xs text-[var(--slate-400)]">
-        Core Package 기준 (Add-on 별도)
+        Starter / Department 기준 (deployment · connector scope 별도)
       </p>
     </div>
   );
