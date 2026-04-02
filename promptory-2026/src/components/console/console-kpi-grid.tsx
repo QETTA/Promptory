@@ -1,5 +1,5 @@
 import { CatalystStatCard } from "@/components/console/template-foundation";
-import type { ConsoleStat } from "@/lib/console/mock-data";
+import type { ConsoleStat } from "@/lib/console/types";
 
 export function ConsoleKpiGrid({ stats }: { stats: ConsoleStat[] }) {
   return (

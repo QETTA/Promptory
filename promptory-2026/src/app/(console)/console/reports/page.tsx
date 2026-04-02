@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { CatalystPageHeader, CatalystShellCard } from "@/components/console/template-foundation";
 import { ConsoleBulletList, ConsoleLinkButton } from "@/components/console/console-primitives";
-import { consoleReports } from "@/lib/console/mock-data";
+import { consoleReports } from "@/lib/console/dashboard-data";
 
 export const metadata: Metadata = {
   title: "Reports — Promptory Console",

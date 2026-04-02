@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { ReactNode } from "react";
 
 import { CatalystBadge, CatalystShellCard } from "@/components/console/template-foundation";
-import type { ConsoleTone } from "@/lib/console/mock-data";
+import type { ConsoleTone } from "@/lib/console/types";
 import { cn } from "@/lib/cn";
 
 const timelineStateClasses = {

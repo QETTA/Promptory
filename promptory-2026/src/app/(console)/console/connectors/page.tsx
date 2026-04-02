@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { CatalystDataTable, CatalystPageHeader, CatalystShellCard } from "@/components/console/template-foundation";
 import { ConsoleBulletList, ConsoleLinkButton, ConsoleToneBadge } from "@/components/console/console-primitives";
-import { consoleConnectors } from "@/lib/console/mock-data";
+import { consoleConnectors } from "@/lib/console/governance-data";
 
 export const metadata: Metadata = {
   title: "Connectors — Promptory Console",

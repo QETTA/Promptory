@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { CatalystDataTable } from "@/components/console/template-foundation";
-import type { ConsoleRequestRecord } from "@/lib/console/mock-data";
+import type { ConsoleRequestRecord } from "@/lib/console/types";
 
 import { ConsoleToneBadge } from "./console-primitives";
 

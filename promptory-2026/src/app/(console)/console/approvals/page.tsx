@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { CatalystDataTable, CatalystPageHeader, CatalystShellCard } from "@/components/console/template-foundation";
 import { ConsoleBulletList, ConsoleLinkButton, ConsoleToneBadge } from "@/components/console/console-primitives";
-import { consoleApprovals } from "@/lib/console/mock-data";
+import { consoleApprovals } from "@/lib/console/approval-data";
 
 export const metadata: Metadata = {
   title: "Approvals — Promptory Console",

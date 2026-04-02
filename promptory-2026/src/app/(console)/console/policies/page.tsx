@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { CatalystPageHeader, CatalystShellCard } from "@/components/console/template-foundation";
 import { ConsoleBulletList, ConsoleLinkButton, ConsoleToneBadge } from "@/components/console/console-primitives";
-import { consolePolicies } from "@/lib/console/mock-data";
+import { consolePolicies } from "@/lib/console/governance-data";
 
 export const metadata: Metadata = {
   title: "Policies — Promptory Console",

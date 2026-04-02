@@ -12,15 +12,11 @@ import {
   ConsoleLinkButton,
   ConsoleToneBadge,
 } from "@/components/console/console-primitives";
-import {
-  consoleApprovals,
-  consoleConnectors,
-  consoleDashboardStats,
-  consoleHighlights,
-  consoleReports,
-  consoleRequests,
-  consoleRuns,
-} from "@/lib/console/mock-data";
+import { consoleApprovals } from "@/lib/console/approval-data";
+import { consoleDashboardStats, consoleHighlights, consoleReports } from "@/lib/console/dashboard-data";
+import { consoleConnectors } from "@/lib/console/governance-data";
+import { consoleRequests } from "@/lib/console/request-data";
+import { consoleRuns } from "@/lib/console/run-data";
 
 export const metadata: Metadata = {
   title: "Console — Promptory",

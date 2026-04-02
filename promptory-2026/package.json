@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "dev:webpack": "next dev --webpack",
-    "prebuild": "node -e \"try { require('node:fs').rmSync('.next', { recursive: true, force: true }); } catch {}\"",
+    "clean:next": "node -e \"try { require('node:fs').rmSync('.next', { recursive: true, force: true }); } catch {}\"",
     "build": "next build",
     "check:supabase": "node scripts/check-supabase.mjs",
     "verify:routes": "node scripts/t08-verify-routes.mjs",

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import { CatalystDataTable, CatalystPageHeader, CatalystShellCard } from "@/components/console/template-foundation";
 import { ConsoleBulletList, ConsoleLinkButton, ConsoleToneBadge } from "@/components/console/console-primitives";
-import { consoleRuns } from "@/lib/console/mock-data";
+import { consoleRuns } from "@/lib/console/run-data";
 
 export const metadata: Metadata = {
   title: "Runs — Promptory Console",

@@ -10,11 +10,9 @@ import {
   ConsoleTimeline,
   ConsoleToneBadge,
 } from "@/components/console/console-primitives";
-import {
-  getApprovalsForRequest,
-  getConsoleRequestById,
-  getRunsForRequest,
-} from "@/lib/console/mock-data";
+import { getApprovalsForRequest } from "@/lib/console/approval-data";
+import { getConsoleRequestById } from "@/lib/console/request-data";
+import { getRunsForRequest } from "@/lib/console/run-data";
 
 export async function generateMetadata({
   params,

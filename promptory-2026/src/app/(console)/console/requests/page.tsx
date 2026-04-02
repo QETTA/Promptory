@@ -7,7 +7,7 @@ import {
   ConsoleLinkButton,
   ConsoleToneBadge,
 } from "@/components/console/console-primitives";
-import { consoleRequests } from "@/lib/console/mock-data";
+import { consoleRequests } from "@/lib/console/request-data";
 
 export const metadata: Metadata = {
   title: "Requests — Promptory Console",
