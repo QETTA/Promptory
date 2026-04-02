@@ -36,11 +36,12 @@ export function PrimaryNav({
           <Link
             key={item.href}
             href={item.href}
+            prefetch={false}
             aria-current={isActive ? "page" : undefined}
             className={cn(
               mobile
-                ? "shrink-0 rounded-full border px-3.5 py-1.5 text-[0.8rem] font-medium shadow-sm transition-all duration-300"
-                : "relative text-sm font-medium transition-all duration-300",
+                ? "shrink-0 whitespace-nowrap rounded-full border px-3.5 py-1.5 text-[0.8rem] font-medium shadow-sm transition-all duration-300"
+                : "relative whitespace-nowrap px-1 py-1 text-[0.82rem] font-medium transition-all duration-300 xl:text-[0.9rem]",
               mobile
                 ? isActive
                   ? "border-[var(--brand-600)] bg-[var(--brand-600)] text-white shadow-[var(--shadow-md)]"
@@ -48,15 +49,15 @@ export function PrimaryNav({
                 : isActive
                   ? "text-[var(--slate-900)]"
                   : "text-[var(--slate-600)] hover:text-[var(--slate-900)]",
-              !mobile && "py-1 px-1 hover:-translate-y-0.5 hover:shadow-sm"
+              !mobile && "hover:-translate-y-0.5 hover:shadow-sm"
             )}
+            title={item.label}
           >
-            {/* Active indicator for desktop */}
             {!mobile && (
               <span
                 className={cn(
                   "absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-[var(--brand-500)] transition-all duration-300",
-                  isActive ? "opacity-100 scale-x-100" : "opacity-0 scale-x-0"
+                  isActive ? "scale-x-100 opacity-100" : "scale-x-0 opacity-0"
                 )}
               />
             )}

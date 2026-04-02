@@ -25,7 +25,7 @@ export function SetupBanner() {
         <p className="hidden leading-5 sm:block">
           운영 전 점검 모드입니다. {getPaymentsModeSummary(serverStatus.paymentMode)}
         </p>
-        <Link href="/setup" className="text-[0.78rem] font-semibold text-[var(--brand-700)] underline underline-offset-4">
+        <Link href="/setup" prefetch={false} className="text-[0.78rem] font-semibold text-[var(--brand-700)] underline underline-offset-4">
           점검 보기
         </Link>
       </div>

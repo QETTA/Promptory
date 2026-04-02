@@ -1,18 +1,20 @@
 import { z } from "zod";
 
 export const teamTypeValues = [
-  "sme-b2b",
-  "foreign-korea-branch",
+  "sales-ops",
+  "people-ops",
+  "it-ops",
+  "finance-procurement",
   "other",
 ] as const;
 
 export const workPainValues = [
-  "website-diagnosis",
-  "competitor-scan",
-  "conversion-copy",
-  "campaign-brief",
-  "internal-summary",
-  "kr-en-summary",
+  "deal-desk-approval",
+  "access-request",
+  "people-request",
+  "procurement-request",
+  "incident-handoff",
+  "reporting-ops",
   "other",
 ] as const;
 

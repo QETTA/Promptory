@@ -1,16 +1,18 @@
 # Promptory 2026
 
-Promptory is the `Channel Stack Doctor` web app inside the existing `QETTA/Promptory` repository.
+Promptory is a request-to-resolution product for internal Slack agents.
 
 The current product direction is:
 
-- `URL -> public audit -> ask plan -> result stack -> execution pack rail`
-- primary surfaces: `/` and `/optimize`
-- support rails: `/products`, `/library`, `/orders`, `/seller/products`
+- `Slack request intake -> evidence -> approval -> system reflection`
+- primary public surfaces: `/`, `/pricing`, `/solutions`, `/industries`, `/education`, `/security`, `/pilot`
+- internal operator surface: `/console`
+- legacy commerce rails remain isolated and are no longer the main product story
 
 Business and product guardrails live in:
 
 - `docs/BUSINESS_PRODUCT_FOUNDATION.md`
+- `docs/FINAL_CONSOLIDATION.md`
 
 ## Stack
 
@@ -30,7 +32,7 @@ npm.cmd run dev
 Open:
 
 - `http://127.0.0.1:3000`
-- `http://127.0.0.1:3000/optimize`
+- `http://127.0.0.1:3000/console`
 
 ## Important scripts
 
@@ -38,6 +40,8 @@ Open:
 npm.cmd run dev
 npm.cmd run typecheck
 npm.cmd run build
+npm.cmd run verify:routes
+npm.cmd run check:all
 npm.cmd run check:supabase
 npm.cmd run sync:storage
 ```
@@ -55,15 +59,19 @@ The app can still render some surfaces without full server wiring, but auth, ord
 ## Main directories
 
 - `src/app/`
-  - route entry points
-- `src/components/channel-intake/`
-  - optimize workspace blocks
-- `src/components/marketplace/`
-  - shared product and payment rail surfaces
+  - marketing, auth, console, legacy-commerce, and internal-tools route groups
+- `apps/slack-runtime/`
+  - Slack runtime scaffold contracts, mocks, and handlers
+- `src/components/marketing/`
+  - public marketing sections and templates
+- `src/components/console/`
+  - console shell and mock operator surfaces
+- `src/components/brand/`
+  - Promptory-owned wrapper layer for borrowed templates
 - `src/components/ui/`
   - tokenized primitives
 - `src/lib/`
-  - product logic, optimization logic, auth helpers, display and theme helpers
+  - product logic, auth helpers, marketing content, console mock data, and theme helpers
 - `src/lib/server/`
   - server-side auth, products, orders, payments, downloads, optimization run persistence
 - `supabase/schema.sql`
@@ -71,8 +79,15 @@ The app can still render some surfaces without full server wiring, but auth, ord
 
 ## Current UX rules
 
-- treat Promptory as an AI work surface, not a generic marketplace
-- keep `/optimize` as the product core
-- use short operational copy
-- keep mobile sections compressed
-- connect recommendations to execution packs instead of leaving them as analysis-only output
+- treat Promptory as an approval-driven internal app, not a generic search bot
+- keep `/optimize` as a public demo wedge, not the product core
+- center the story on request-to-resolution packs and safe pilot rollout
+- keep marketing and console surfaces visually distinct but brand-consistent
+- keep legacy commerce routes out of the primary navigation
+
+## Consolidation guardrails
+
+- route-grouped pages under `src/app/(marketing)`, `src/app/(auth)`, `src/app/(legacy-commerce)`, `src/app/(internal-tools)`, and `src/app/(console)` are canonical
+- `/packages/[slug]` is the only package detail entrypoint; static package detail pages should stay deleted
+- the Slack runtime scaffold remains isolated under `apps/slack-runtime/`
+- after large route merges, run `npm.cmd run verify:routes` before typecheck/build

@@ -1,31 +1,35 @@
 export const teamTypeLabels = {
-  "sme-b2b": "한국 B2B 중소기업 팀",
-  "foreign-korea-branch": "외국계 한국지사 팀",
+  "sales-ops": "Sales Ops / Revenue Ops",
+  "people-ops": "People Ops / HR Ops",
+  "it-ops": "IT Ops / Access Ops",
+  "finance-procurement": "Finance / Procurement",
   other: "기타",
 } as const;
 
 export const painPointLabels = {
-  "website-diagnosis": "사이트/랜딩 진단",
-  "competitor-scan": "경쟁사 비교",
-  "conversion-copy": "전환 문구 초안",
-  "campaign-brief": "캠페인 브리프 정리",
-  "internal-summary": "팀장/대표 보고용 요약",
-  "kr-en-summary": "KR/EN summary",
+  "deal-desk-approval": "할인 / 예외 승인 요청",
+  "access-request": "계정 / 권한 요청",
+  "people-request": "온보딩 / 휴가 / 인사 요청",
+  "procurement-request": "구매 / 결재 요청",
+  "incident-handoff": "운영 이슈 / 핸드오프",
+  "reporting-ops": "주간 보고 / 운영 요약",
   other: "기타",
 } as const;
 
 export const teamTypeOptions = [
-  { value: "sme-b2b", label: "한국 B2B 중소기업 팀" },
-  { value: "foreign-korea-branch", label: "외국계 한국지사 팀" },
+  { value: "sales-ops", label: "Sales Ops / Revenue Ops" },
+  { value: "people-ops", label: "People Ops / HR Ops" },
+  { value: "it-ops", label: "IT Ops / Access Ops" },
+  { value: "finance-procurement", label: "Finance / Procurement" },
   { value: "other", label: "기타" },
 ] as const;
 
 export const painPointOptions = [
-  { value: "website-diagnosis", label: "사이트/랜딩 진단" },
-  { value: "competitor-scan", label: "경쟁사 비교" },
-  { value: "conversion-copy", label: "전환 문구 초안" },
-  { value: "campaign-brief", label: "캠페인 브리프 정리" },
-  { value: "internal-summary", label: "팀장/대표 보고용 요약" },
-  { value: "kr-en-summary", label: "KR/EN summary" },
+  { value: "deal-desk-approval", label: "할인 / 예외 승인 요청" },
+  { value: "access-request", label: "계정 / 권한 요청" },
+  { value: "people-request", label: "온보딩 / 휴가 / 인사 요청" },
+  { value: "procurement-request", label: "구매 / 결재 요청" },
+  { value: "incident-handoff", label: "운영 이슈 / 핸드오프" },
+  { value: "reporting-ops", label: "주간 보고 / 운영 요약" },
   { value: "other", label: "기타" },
 ] as const;

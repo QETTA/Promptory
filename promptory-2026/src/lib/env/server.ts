@@ -1,19 +1,31 @@
-import { z } from "zod";
+export type PaymentsMode = "disabled" | "dev_stub" | "toss";
 
-const paymentsModeSchema = z.enum(["disabled", "dev_stub", "toss"]);
+type SupabaseServerEnv = {
+  SUPABASE_SERVICE_ROLE_KEY: string;
+};
 
-const supabaseServerEnvSchema = z.object({
-  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
-});
+type TossServerEnv = {
+  TOSS_SECRET_KEY: string;
+};
 
-const tossServerEnvSchema = z.object({
-  TOSS_SECRET_KEY: z.string().min(1),
-});
+const allowedPaymentsModes: PaymentsMode[] = ["disabled", "dev_stub", "toss"];
 
-export type PaymentsMode = z.infer<typeof paymentsModeSchema>;
+function requireNonEmpty(name: string, value: string | undefined) {
+  if (!value || value.trim().length === 0) {
+    throw new Error(`${name} is required.`);
+  }
 
-export function getPaymentsMode() {
-  return paymentsModeSchema.parse(process.env.PAYMENTS_MODE ?? "dev_stub");
+  return value;
+}
+
+export function getPaymentsMode(): PaymentsMode {
+  const paymentMode = process.env.PAYMENTS_MODE ?? "dev_stub";
+
+  if (allowedPaymentsModes.includes(paymentMode as PaymentsMode)) {
+    return paymentMode as PaymentsMode;
+  }
+
+  throw new Error(`PAYMENTS_MODE must be one of ${allowedPaymentsModes.join(", ")}.`);
 }
 
 export function getServerEnvStatus() {
@@ -26,14 +38,17 @@ export function getServerEnvStatus() {
   };
 }
 
-export function getSupabaseServerEnv() {
-  return supabaseServerEnvSchema.parse({
-    SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
-  });
+export function getSupabaseServerEnv(): SupabaseServerEnv {
+  return {
+    SUPABASE_SERVICE_ROLE_KEY: requireNonEmpty(
+      "SUPABASE_SERVICE_ROLE_KEY",
+      process.env.SUPABASE_SERVICE_ROLE_KEY,
+    ),
+  };
 }
 
-export function getTossServerEnv() {
-  return tossServerEnvSchema.parse({
-    TOSS_SECRET_KEY: process.env.TOSS_SECRET_KEY,
-  });
+export function getTossServerEnv(): TossServerEnv {
+  return {
+    TOSS_SECRET_KEY: requireNonEmpty("TOSS_SECRET_KEY", process.env.TOSS_SECRET_KEY),
+  };
 }

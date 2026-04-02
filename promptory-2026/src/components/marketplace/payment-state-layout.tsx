@@ -37,7 +37,7 @@ export function PaymentStateLayout({
     : "구매한 실행형 시스템이 계정에 연결되었습니다. 라이브러리에서 바로 다시 열거나 다운로드 가능 여부를 확인할 수 있습니다.";
 
   return (
-    <div className="pb-16">
+    <main className="pb-16">
       <Hero
         eyebrow={eyebrow}
         theme="payment"
@@ -110,6 +110,6 @@ export function PaymentStateLayout({
           로 돌아가 현재 상태를 다시 확인할 수 있습니다.
         </div>
       </div>
-    </div>
+    </main>
   );
 }

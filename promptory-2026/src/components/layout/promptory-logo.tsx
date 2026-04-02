@@ -58,7 +58,7 @@ export function PromptoryLogo({
               !showTaglineOnMobile ? "hidden sm:block" : null,
             )}
           >
-            CHANNEL OPTIMIZATION ENGINE
+            REQUEST-TO-RESOLUTION
           </div>
         ) : null}
       </div>
